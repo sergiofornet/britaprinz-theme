@@ -100,6 +100,15 @@ function britaprinz_disable_comments_admin_menu() {
 	remove_menu_page( 'edit-comments.php' );
 }
 
+/**
+ * Remove comments page in admin bar.
+ */
+function britaprinz_disable_admin_bar_comments() {
+    global $wp_admin_bar;
+    $wp_admin_bar->remove_menu( 'comments' );
+}
+add_action( 'wp_before_admin_bar_render', 'britaprinz_disable_admin_bar_comments' );
+
 
 /**
  * Redirect any user trying to access comments page.
