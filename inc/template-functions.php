@@ -191,20 +191,39 @@ function britaprinz_stop_guessing( $url ) {
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 
+
 /**
  * Disable access to author pages
  */
 add_action( 'template_redirect', 'britaprinz_disable_author_page');
 
 function britaprinz_disable_author_page() {
-
-    global $wp_query;
-
+	
+	global $wp_query;
+	
     if ( is_author() ) {
-
-        // show a 404 page
+		
+		// show a 404 page
         $wp_query->set_404();
 		status_header( 404 );
-
+		
     }
 }
+
+
+/**
+ * Modify default queries
+ */
+add_action( 'pre_get_posts', 'britaprinz_modify_queries' ); 
+
+function britaprinz_modify_queries( $query ){
+	if( is_post_type_archive( 'award' ) ) {
+		$query->set( 'order', 'DESC' );
+		$query->set( 'orderby', 'title' );
+	}
+
+	if( is_post_type_archive( 'artwork' ) ) {
+		$query->set( 'order', 'ASC' );
+		$query->set( 'orderby', 'title' );
+	}
+};
