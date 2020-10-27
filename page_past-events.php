@@ -33,7 +33,7 @@ get_header();
 				),
 			);
 
-			get_template_part( 'template-parts/content', 'page-exhibition', $args );
+			get_template_part( 'template-parts/content', 'page-events', $args );
 
 		endwhile; // End of the loop.
 		?>
