@@ -56,4 +56,5 @@
 			);
 			?>
 		</nav><!-- #site-navigation -->
+		<?php get_search_form(); ?>
 	</header><!-- #masthead -->
