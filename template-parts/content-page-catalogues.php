@@ -35,9 +35,9 @@
 					<?php 
 					the_title( sprintf(
 						'<a href="%s" title="%s" target="_blank" rel="noopener noreferrer">',
-						esc_url( carbon_get_post_meta( $post->ID, 'bp_award_catalogue' ) ),
+						esc_url( wp_get_attachment_url( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) ),
 						esc_html( get_the_title() )
-					), '</a>'); 
+					), '</a>');
 					?>
 					
 				</li>

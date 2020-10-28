@@ -48,7 +48,7 @@
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_mentions' ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_selected' ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_edition' ) ); ?></p>
-			<p><a href="<?php echo esc_url( carbon_get_the_post_meta( 'bp_award_catalogue' ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Catálogo', 'britaprinz-theme' ); ?></a></p>
+			<p><a href="<?php echo esc_url( wp_get_attachment_url( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Catálogo', 'britaprinz-theme' ); ?></a></p>
 
 		<?php endif;?>
 		
