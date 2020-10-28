@@ -32,8 +32,24 @@
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_copy' ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_paper' ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_size' ) ); ?></p>
-			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_loan' ) ?  'true' : 'false' ); ?></p>
-			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_sale' ) ?  'true' : 'false' ); ?></p>
+			<?php 
+			if ( carbon_get_the_post_meta( 'bp_artwork_loan' ) ) : 
+				?>
+
+				<p><?php esc_html_e( 'Disponible para préstamo', 'britaprinz_theme' ); ?></p>
+
+				<?php
+			endif;
+			?>
+			<?php 
+			if ( carbon_get_the_post_meta( 'bp_artwork_sale' ) ) : 
+				?>
+
+				<p><?php esc_html_e( 'Disponible para venta', 'britaprinz_theme' ); ?></p>
+
+				<?php
+			endif;
+			?>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_info' ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_condition' ) ); ?></p>
 			<div>
