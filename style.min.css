@@ -93,14 +93,14 @@ select{border:1px solid #ccc}
 textarea{width:100%}
 .main-navigation{display:block;width:100%}
 .main-navigation ul{display:none;list-style:none;margin:0;padding-left:0}
-.main-navigation ul ul{-webkit-box-shadow:0 3px 3px rgba(0,0,0,0.2);box-shadow:0 3px 3px rgba(0,0,0,0.2);float:left;position:absolute;top:100%;left:-999em;z-index:99999}
-.main-navigation ul ul ul{left:-999em;top:0}
+.main-navigation ul ul{-webkit-box-shadow:0 3px 3px rgba(0,0,0,0.2);box-shadow:0 3px 3px rgba(0,0,0,0.2);-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap}
+.main-navigation ul ul ul{top:0}
 .main-navigation ul ul li:hover>ul,.main-navigation ul ul li.focus>ul{display:block;left:auto}
 .main-navigation ul ul a{width:200px}
 .main-navigation ul li:hover>ul,.main-navigation ul li.focus>ul{left:auto}
 .main-navigation li{position:relative}
 .main-navigation a{display:block;text-decoration:none}
-.menu-toggle,.main-navigation.toggled ul{display:block}
+.menu-toggle,.main-navigation.toggled ul{display:-webkit-box;display:-ms-flexbox;display:flex}
 .site-main .comment-navigation,.site-main .posts-navigation,.site-main .post-navigation{margin:0 0 1.5em}
 .comment-navigation .nav-links,.posts-navigation .nav-links,.post-navigation .nav-links{display:-webkit-box;display:-ms-flexbox;display:flex}
 .comment-navigation .nav-previous,.posts-navigation .nav-previous,.post-navigation .nav-previous{-webkit-box-flex:1;-ms-flex:1 0 50%;flex:1 0 50%}
@@ -139,6 +139,5 @@ textarea{width:100%}
 .alignleft{float:left;margin-right:1.5em;margin-bottom:1.5em}
 .alignright{float:right;margin-left:1.5em;margin-bottom:1.5em}
 .aligncenter{clear:both;display:block;margin-left:auto;margin-right:auto;margin-bottom:1.5em}
-@media screen and (min-width:37.5em){.menu-toggle{display:none}
-.main-navigation ul{display:-webkit-box;display:-ms-flexbox;display:flex}
+@media screen and (min-width:37.5em){.main-navigation ul{display:none}
 }
