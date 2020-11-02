@@ -36,7 +36,7 @@
 			if ( carbon_get_the_post_meta( 'bp_artwork_loan' ) ) : 
 				?>
 
-				<p><?php esc_html_e( 'Disponible para préstamo', 'britaprinz_theme' ); ?></p>
+				<p><?php esc_html_e( 'Disponible para préstamo', 'britaprinz-theme' ); ?></p>
 
 				<?php
 			endif;
@@ -45,7 +45,7 @@
 			if ( carbon_get_the_post_meta( 'bp_artwork_sale' ) ) : 
 				?>
 
-				<p><?php esc_html_e( 'Disponible para venta', 'britaprinz_theme' ); ?></p>
+				<p><?php esc_html_e( 'Disponible para venta', 'britaprinz-theme' ); ?></p>
 
 				<?php
 			endif;
