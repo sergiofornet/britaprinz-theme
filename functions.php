@@ -178,3 +178,129 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+function artworks_endpoint() {
+	register_rest_route( 'artworks/', 'featured', array(
+		'methods'	=> WP_REST_Server::READABLE,
+		'callback'	=> 'get_artworks',
+	) ); 
+}
+
+
+add_action( 'rest_api_init', 'artworks_endpoint' );
+
+function get_artworks( $request ) {
+	$args = array(
+		'post_type'			=> 'artwork',
+		'posts_per_page'	=> -1,
+		'orderby'			=> 'name',
+		// 'tax_query'			=> array(
+		// 	array (
+		// 		'taxonomy'			=> 'artist',
+		// 		'field'				=> 'slug',
+		// 		// 'terms'				=> 'artista',
+		// 		)
+		// 	),
+		);
+		
+		$query = new WP_Query( $args );
+
+		return $query->posts;
+	}
+
+
+function artworks_rest_fields() {
+	register_rest_field( 'artwork', 'artwork_image_src', array(
+		'get_callback'		=> 'bp_rest_image',
+		'update_callback'	=> null,
+		'schema'			=> null,
+	) );
+
+	register_rest_field( 'artwork', 'artwork_image_gallery', array(
+		'get_callback'		=> 'bp_rest_gallery',
+		'update_callback'	=> null,
+		'schema'			=> null,
+	) );
+
+	register_rest_field( 'artwork', 'artwork_techniques', array(
+		'get_callback'		=> 'bp_rest_techniques',
+		'update_callback'	=> null,
+		'schema'			=> null,
+	) );
+
+	register_rest_field( 'artwork', 'artwork_loan', array(
+		'get_callback'		=> 'bp_rest_loan',
+		'update_callback'	=> null,
+		'schema'			=> null,
+	) );
+
+	register_rest_field( 'artwork', 'artwork_sale', array(
+		'get_callback'		=> 'bp_rest_sale',
+		'update_callback'	=> null,
+		'schema'			=> null,
+	) );
+}
+add_action( 'rest_api_init', 'artworks_rest_fields' );
+
+function bp_rest_image( $object, $field_name, $request ) {
+	$image = wp_get_attachment_image( $object['featured_media'], 'full' );
+	return $image;
+}
+
+function bp_rest_gallery( $object, $field_name, $request ) {
+	$gallery_ids = carbon_get_post_meta( $object['id'], 'bp_artwork_gallery' );
+	$gallery = [];
+	foreach ( $gallery_ids as $id ) {
+		$gallery[] = ( wp_get_attachment_image( $id, 'thumbnail' ) );
+	}
+
+	return $gallery;
+}
+
+function bp_rest_techniques( $object, $field_name, $request ) {
+	$techniques = carbon_get_post_meta( $object['id'], 'bp_artwork_technique' );
+	$featured_techniques = [];
+	$other_techniques =  '';
+	foreach ( $techniques as $technique_item ) {
+		foreach ( $technique_item['bp_artwork_technique_list'] as $technique ) {
+			
+			$featured_techniques[] = [esc_html( get_the_title( $technique['id'] ) ), esc_url( get_permalink( $technique['id'] ) )];
+		}
+		
+		$other_techniques = $technique_item['bp_artwork_technique_other'] ? 
+			esc_html( $technique_item['bp_artwork_technique_other'] ) : '';
+	}
+	return array(
+		'featured_techniques' => $featured_techniques,
+		'other_techniques' => $other_techniques,
+	);
+}
+
+function bp_rest_loan( $object, $field_name, $request ) {
+	$loan = carbon_get_post_meta( $object['id'], 'bp_artwork_loan' );
+	if ( $loan ) {
+		$loan_string = __( 'Disponible para préstamo', 'britaprinz-theme' );
+		return $loan_string;
+	}
+}
+
+function bp_rest_sale( $object, $field_name, $request ) {
+	$sale = carbon_get_post_meta( $object['id'], 'bp_artwork_sale' );
+	if ($sale) {
+		$sale_string = __( 'Disponible para venta', 'britaprinz-theme' );
+		return $sale_string;
+	}
+}
+	
+function bp_load_scripts() {
+	if ( is_post_type_archive( 'artwork' ) ) {
+		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri('assets/js/ajax.js'), array( 'wp-polyfill' ), BRITAPRINZ_THEME_VERSION, true );
+	
+		wp_localize_script( 'britaprinz-ajax', 'ajax_var', array(
+			'artworkUrl'	=> rest_url( '/wp/v2/artwork?artist=' ),
+			'artistUrl'		=> rest_url( '/wp/v2/artist' ),
+			'nonce'	=> wp_create_nonce( 'wp_rest' ),
+			'lang'	=> ICL_LANGUAGE_CODE,
+			) );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'bp_load_scripts' );
