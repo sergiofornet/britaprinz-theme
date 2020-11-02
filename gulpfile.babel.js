@@ -87,7 +87,7 @@ const browsersync = done => {
 		proxy: config.projectURL,
 		open: config.browserAutoOpen,
 		injectChanges: config.injectChanges,
-		watchEvents: [ 'change', 'add', 'unlink', 'addDir', 'unlinkDir' ]
+		watchEvents: [ 'change', 'add', 'unlink', 'addDir', 'unlinkDir' ],
 	});
 	done();
 };
@@ -121,7 +121,7 @@ gulp.task( 'styles', () => {
 			sass({
 				errLogToConsole: config.errLogToConsole,
 				outputStyle: config.outputStyle,
-				precision: config.precision
+				precision: config.precision,
 			})
 		)
 		.on( 'error', sass.logError )
@@ -167,7 +167,7 @@ gulp.task( 'stylesRTL', () => {
 			sass({
 				errLogToConsole: config.errLogToConsole,
 				outputStyle: config.outputStyle,
-				precision: config.precision
+				precision: config.precision,
 			})
 		)
 		.on( 'error', sass.logError )
@@ -212,10 +212,10 @@ gulp.task( 'vendorsJS', () => {
 					[
 						'@babel/preset-env', // Preset to compile your modern JS to ES5.
 						{
-							targets: { browsers: config.BROWSERS_LIST } // Target browser list to support.
-						}
-					]
-				]
+							targets: { browsers: config.BROWSERS_LIST }, // Target browser list to support.
+						},
+					],
+				],
 			})
 		)
 		.pipe( remember( config.jsVendorSRC ) ) // Bring all files back to stream.
@@ -225,7 +225,7 @@ gulp.task( 'vendorsJS', () => {
 		.pipe(
 			rename({
 				basename: config.jsVendorFile,
-				suffix: '.min'
+				suffix: '.min',
 			})
 		)
 		.pipe( uglify() )
@@ -255,10 +255,10 @@ gulp.task( 'customJS', () => {
 					[
 						'@babel/preset-env', // Preset to compile your modern JS to ES5.
 						{
-							targets: { browsers: config.BROWSERS_LIST } // Target browser list to support.
-						}
-					]
-				]
+							targets: { browsers: config.BROWSERS_LIST }, // Target browser list to support.
+						},
+					],
+				],
 			})
 		)
 		.pipe( remember( config.jsCustomSRC ) ) // Bring all files back to stream.
@@ -268,13 +268,56 @@ gulp.task( 'customJS', () => {
 		.pipe(
 			rename({
 				basename: config.jsCustomFile,
-				suffix: '.min'
+				suffix: '.min',
 			})
 		)
 		.pipe( uglify() )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe( gulp.dest( config.jsCustomDestination ) )
 		.pipe( notify({ message: '\n\n✅  ===> CUSTOM JS — completed!\n', onLast: true }) );
+});
+
+/**
+ * Task: `JS`.
+ *
+ * Concatenate and uglify custom JS scripts.
+ *
+ * This task does the following:
+ *     1. Gets the source folder for JS custom files
+ *     2. Concatenates all the files and generates custom.js
+ *     3. Renames the JS file with suffix .min.js
+ *     4. Uglifes/Minifies the JS file and generates custom.min.js
+ */
+gulp.task( 'JS', () => {
+	return gulp
+		.src( config.jsSRC, { since: gulp.lastRun( 'JS' ) }) // Only run on changed files.
+		.pipe( plumber( errorHandler ) )
+		.pipe(
+			babel({
+				presets: [
+					[
+						'@babel/preset-env', // Preset to compile your modern JS to ES5.
+						{
+							targets: { browsers: config.BROWSERS_LIST }, // Target browser list to support.
+						},
+					],
+				],
+			})
+		)
+		.pipe( remember( config.jsSRC ) ) // Bring all files back to stream.
+		.pipe( concat( config.jsFile + '.js' ) )
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( gulp.dest( config.jsDestination ) )
+		.pipe(
+			rename({
+				basename: config.jsFile,
+				suffix: '.min',
+			})
+		)
+		.pipe( uglify() )
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( gulp.dest( config.jsDestination ) )
+		.pipe( notify({ message: '\n\n✅  ===> JS — completed!\n', onLast: true }) );
 });
 
 /**
@@ -300,11 +343,11 @@ gulp.task( 'images', () => {
 			cache(
 				imagemin([
 					imagemin.gifsicle({ interlaced: true }),
-					imagemin.jpegtran({ progressive: true }),
+					imagemin.mozjpeg({ quality: 90, progressive: true }),
 					imagemin.optipng({ optimizationLevel: 3 }), // 0-7 low-high.
 					imagemin.svgo({
-						plugins: [ { removeViewBox: true }, { cleanupIDs: false } ]
-					})
+						plugins: [ { removeViewBox: true }, { cleanupIDs: false } ],
+					}),
 				])
 			)
 		)
@@ -341,7 +384,7 @@ gulp.task( 'translate', () => {
 				package: config.packageName,
 				bugReport: config.bugReport,
 				lastTranslator: config.lastTranslator,
-				team: config.team
+				team: config.team,
 			})
 		)
 		.pipe( gulp.dest( config.translationDestination + '/' + config.translationFile ) )
@@ -355,11 +398,12 @@ gulp.task( 'translate', () => {
  */
 gulp.task(
 	'default',
-	gulp.parallel( 'styles', 'vendorsJS', 'customJS', 'images', browsersync, () => {
+	gulp.parallel( 'styles', 'vendorsJS', 'customJS', 'JS', 'images', browsersync, () => {
 		gulp.watch( config.watchPhp, reload ); // Reload on PHP file changes.
 		gulp.watch( config.watchStyles, gulp.parallel( 'styles' ) ); // Reload on SCSS file changes.
 		gulp.watch( config.watchJsVendor, gulp.series( 'vendorsJS', reload ) ); // Reload on vendorsJS file changes.
 		gulp.watch( config.watchJsCustom, gulp.series( 'customJS', reload ) ); // Reload on customJS file changes.
+		gulp.watch( config.watchJs, gulp.series( 'JS', reload ) ); // Reload on customJS file changes.
 		gulp.watch( config.imgSRC, gulp.series( 'images', reload ) ); // Reload on customJS file changes.
 	})
 );

@@ -4,7 +4,7 @@
  * 1. Edit the variables as per your project requirements.
  * 2. In paths you can add <<glob or array of globs>>.
  *
- * @package WPGulp
+ * @package
  */
 
 module.exports = {
@@ -32,6 +32,11 @@ module.exports = {
 	jsCustomDestination: './assets/js/', // Path to place the compiled JS custom scripts file.
 	jsCustomFile: 'custom', // Compiled JS custom file name. Default set to custom i.e. custom.js.
 
+	// JS Custom options.
+	jsSRC: './assets/js/ajax/*.js', // Path to JS custom scripts folder.
+	jsDestination: './assets/js/', // Path to place the compiled JS custom scripts file.
+	jsFile: 'ajax', // Compiled JS custom file name. Default set to custom i.e. custom.js.
+
 	// Images options.
 	imgSRC: './assets/img/raw/**/*', // Source folder of images which should be optimized and watched. You can also specify types e.g. raw/**.{png,jpg,gif} in the glob.
 	imgDST: './assets/img/', // Destination folder of optimized images. Must be different from the imagesSRC folder.
@@ -40,6 +45,7 @@ module.exports = {
 	watchStyles: './assets/scss/**/*.scss', // Path to all *.scss files inside css folder and inside them.
 	watchJsVendor: './assets/js/vendor/*.js', // Path to all vendor JS files.
 	watchJsCustom: './assets/js/custom/*.js', // Path to all custom JS files.
+	watchJs: './assets/js/ajax/*.js', // Path to all custom JS files.
 	watchPhp: './**/*.php', // Path to all PHP files.
 
 	// Translation options.
@@ -64,6 +70,6 @@ module.exports = {
 		'last 2 Safari versions',
 		'last 2 iOS versions',
 		'last 2 Edge versions',
-		'last 2 Opera versions'
-	]
+		'last 2 Opera versions',
+	],
 };
