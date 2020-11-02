@@ -50,14 +50,13 @@ get_header();
 						foreach ( $artists_query->get_terms() as $term ) :
 							?>
 
-								<p>
-									<a class="artist__link" href="<?php echo esc_url( get_term_link($term->term_id) ); ?>" data-artist="<?php echo esc_attr( $term->term_id ); ?>">
+								<div class="artist">
+									<button class="artist__link"  data-artist="<?php echo esc_attr( $term->term_id ); ?>">
 
 										<?php echo esc_html( $term->name ); ?>
 
-									</a>
-								</p>
-								<p><?php echo esc_html( $term->description ); ?></p>
+									</button>
+								</div>
 
 							<?php
 						endforeach;
