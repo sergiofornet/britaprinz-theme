@@ -13,13 +13,16 @@
 					'X-WP-Nonce': ajax_var.nonce,
 				} );
 
+				const lang = ajax_var.lang ? `${ajax_var.lang}/` : '';
+				
 				const artist = event.target.dataset.artist;
 				const artworksUrl = ajax_var.artworkUrl + artist + `&order=asc&orderby=slug`;
 				const artistUrl = `${ ajax_var.artistUrl }/${ artist }`;
-
-				const fixedArtworksUrl = `${ artworksUrl.slice( 0, artworksUrl.indexOf( 'wp-json' ) ) }${ ajax_var.lang }${ artworksUrl.slice( artworksUrl.indexOf( '/wp-json' ) ) }`;
-
-				const fixedArtistUrl = `${ artistUrl.slice( 0, artistUrl.indexOf( 'wp-json' ) ) }${ ajax_var.lang }${ artistUrl.slice( artistUrl.indexOf( '/wp-json' ) ) }`;
+				
+				const fixedArtworksUrl = `${ artworksUrl.slice( 0, artworksUrl.indexOf( 'wp-json' ) ) }${ lang }${ artworksUrl.slice( artworksUrl.indexOf( 'wp-json' ) ) }`;
+				
+				const fixedArtistUrl = `${ artistUrl.slice( 0, artistUrl.indexOf( 'wp-json' ) ) }${ lang }${ artistUrl.slice( artistUrl.indexOf( 'wp-json' ) ) }`;
+				console.log(fixedArtistUrl, fixedArtworksUrl);
 
 				asyncFetch( fixedArtworksUrl, {
 					method: 'get',

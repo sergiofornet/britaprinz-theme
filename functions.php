@@ -299,7 +299,7 @@ function bp_load_scripts() {
 			'artworkUrl'	=> rest_url( '/wp/v2/artwork?artist=' ),
 			'artistUrl'		=> rest_url( '/wp/v2/artist' ),
 			'nonce'	=> wp_create_nonce( 'wp_rest' ),
-			'lang'	=> ICL_LANGUAGE_CODE,
+			'lang'	=> defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : '',
 			) );
 	}
 }

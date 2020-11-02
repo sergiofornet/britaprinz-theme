@@ -16,11 +16,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           'Content-Type': 'applications/json',
           'X-WP-Nonce': ajax_var.nonce
         });
+        var lang = ajax_var.lang ? "".concat(ajax_var.lang, "/") : '';
         var artist = event.target.dataset.artist;
         var artworksUrl = ajax_var.artworkUrl + artist + "&order=asc&orderby=slug";
         var artistUrl = "".concat(ajax_var.artistUrl, "/").concat(artist);
-        var fixedArtworksUrl = "".concat(artworksUrl.slice(0, artworksUrl.indexOf('wp-json'))).concat(ajax_var.lang).concat(artworksUrl.slice(artworksUrl.indexOf('/wp-json')));
-        var fixedArtistUrl = "".concat(artistUrl.slice(0, artistUrl.indexOf('wp-json'))).concat(ajax_var.lang).concat(artistUrl.slice(artistUrl.indexOf('/wp-json')));
+        var fixedArtworksUrl = "".concat(artworksUrl.slice(0, artworksUrl.indexOf('wp-json'))).concat(lang).concat(artworksUrl.slice(artworksUrl.indexOf('wp-json')));
+        var fixedArtistUrl = "".concat(artistUrl.slice(0, artistUrl.indexOf('wp-json'))).concat(lang).concat(artistUrl.slice(artistUrl.indexOf('wp-json')));
+        console.log(fixedArtistUrl, fixedArtworksUrl);
         asyncFetch(fixedArtworksUrl, {
           method: 'get',
           headers: headers,
