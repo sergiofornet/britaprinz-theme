@@ -3,102 +3,131 @@
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 (function () {
+  var _ajax_var = ajax_var,
+      nonce = _ajax_var.nonce;
+  var _ajax_var2 = ajax_var,
+      lang = _ajax_var2.lang,
+      searchUrl = _ajax_var2.searchUrl;
+  lang = lang ? "".concat(lang, "/") : '';
+  searchUrl = "".concat(searchUrl.slice(0, searchUrl.indexOf('wp-json'))).concat(lang).concat(searchUrl.slice(searchUrl.indexOf('wp-json')));
+  var headers = new Headers({
+    'Content-Type': 'applications/json',
+    'X-WP-Nonce': nonce
+  });
+  var fetchOptions = {
+    method: 'get',
+    headers: headers,
+    credentials: 'same-origin'
+  };
+  var searchInput = document.querySelector('.artist-search');
+  var artistsContainer = document.querySelector('.artists__container');
   var artworksContainer = document.querySelector('.artworks__container');
-  var artists = document.querySelectorAll('.artist__link');
+  var artworkGallery = document.querySelector('.artwork__gallery');
 
-  if (artists) {
-    artists.forEach(function (artist) {
-      artist.addEventListener('click', function (event) {
-        event.preventDefault();
-        artworksContainer.innerHTML = ''; // empty artworks container
+  var artistArtworks = function artistArtworks(event, ajax, target, options) {
+    event.preventDefault();
+    var artist = event.target.dataset.artist;
+    var artworksUrl = ajax.artworkUrl + artist + '&order=asc&orderby=slug';
+    var artistUrl = "".concat(ajax.artistUrl, "/").concat(artist);
+    var fixedArtworksUrl = "".concat(artworksUrl.slice(0, artworksUrl.indexOf('wp-json'))).concat(lang).concat(artworksUrl.slice(artworksUrl.indexOf('wp-json')));
+    var fixedArtistUrl = "".concat(artistUrl.slice(0, artistUrl.indexOf('wp-json'))).concat(lang).concat(artistUrl.slice(artistUrl.indexOf('wp-json')));
+    target.innerHTML = ''; // empty artworks container
 
-        var headers = new Headers({
-          'Content-Type': 'applications/json',
-          'X-WP-Nonce': ajax_var.nonce
-        });
-        var lang = ajax_var.lang ? "".concat(ajax_var.lang, "/") : '';
-        var artist = event.target.dataset.artist;
-        var artworksUrl = ajax_var.artworkUrl + artist + "&order=asc&orderby=slug";
-        var artistUrl = "".concat(ajax_var.artistUrl, "/").concat(artist);
-        var fixedArtworksUrl = "".concat(artworksUrl.slice(0, artworksUrl.indexOf('wp-json'))).concat(lang).concat(artworksUrl.slice(artworksUrl.indexOf('wp-json')));
-        var fixedArtistUrl = "".concat(artistUrl.slice(0, artistUrl.indexOf('wp-json'))).concat(lang).concat(artistUrl.slice(artistUrl.indexOf('wp-json')));
-        console.log(fixedArtistUrl, fixedArtworksUrl);
-        asyncFetch(fixedArtworksUrl, {
-          method: 'get',
-          headers: headers,
-          credentials: 'same-origin'
-        }).then(function (json_response) {
-          var html;
-          var artworks = json_response;
-          html = artworksList(artworks);
-          artworksContainer.insertAdjacentHTML('beforeend', html);
-          return json_response;
-        }).then(function (json_response) {
-          var artworkList = document.querySelectorAll('.artwork-list .artwork');
-          artworkList.forEach(function (artwork) {
-            var stuff = artwork.querySelector('.artwork__stuff');
-            var artworkTitle = artwork.querySelector('.artwork__title');
-            artworkTitle.addEventListener('click', function (event) {
-              event.preventDefault();
-              stuff.classList.toggle('visible');
-            });
-          });
-          return json_response;
-        }).then(function (json_response) {
-          var artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a');
-          var artworksGallery = document.querySelector('.artworks__gallery');
-          artworksThumbnails.forEach(function (thumbnail) {
-            thumbnail.addEventListener('click', function (event) {
-              event.preventDefault();
-
-              if (json_response.some(function (item) {
-                return item.id === parseInt(event.currentTarget.dataset.artwork);
-              })) {
-                artworksGallery.innerHTML = json_response.filter(function (item) {
-                  return item.id === parseInt(event.currentTarget.dataset.artwork);
-                })[0].artwork_image_gallery.join('\n');
-              }
-            });
-          });
-        });
-        asyncFetch(fixedArtistUrl, {
-          method: 'get',
-          headers: headers,
-          credentials: 'same-origin'
-        }).then(function (json_response) {
-          var html;
-          var artist = json_response;
-
-          if (_typeof(artist) === 'object') {
-            html = "\n\t\t\t\t\t\t<h2>".concat(artist.name, "</h2>\n\t\t\t\t\t\t<p>").concat(artist.description, "</p>\n\t\t\t\t\t\t");
-          } else {
-            html = artist;
-          }
-
-          artworksContainer.insertAdjacentHTML('afterbegin', html);
+    target.classList.add('loading');
+    asyncFetch(fixedArtworksUrl, options).then(function (jsonResponse) {
+      var html = artworksList(jsonResponse);
+      target.insertAdjacentHTML('beforeend', html);
+      var artworkList = document.querySelectorAll('.artwork-list .artwork');
+      var artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a');
+      artworkList.forEach(function (artwork) {
+        var stuff = artwork.querySelector('.artwork__stuff');
+        var artworkTitle = artwork.querySelector('.artwork__title');
+        artworkTitle.addEventListener('click', function (event) {
+          event.preventDefault();
+          stuff.classList.toggle('visible');
         });
       });
+      artworksThumbnails.forEach(function (thumbnail) {
+        thumbnail.addEventListener('click', function (event) {
+          event.preventDefault();
+
+          if (jsonResponse.some(function (item) {
+            return item.id === parseInt(event.currentTarget.dataset.artwork);
+          })) {
+            artworkGallery.innerHTML = jsonResponse.filter(function (item) {
+              return item.id === parseInt(event.currentTarget.dataset.artwork);
+            })[0].artwork_image_gallery.join('\n');
+          }
+        });
+      });
+    }).then(function () {
+      return target.classList.remove('loading');
     });
-  }
+    asyncFetch(fixedArtistUrl, options).then(function (jsonResponse) {
+      var html;
+      var name = jsonResponse.name,
+          description = jsonResponse.description;
+
+      if (_typeof(jsonResponse) === 'object') {
+        html = "\n\t\t\t\t<h2>".concat(name, "</h2>\n\t\t\t\t<p>").concat(description, "</p>\n\t\t\t\t");
+      } else {
+        html = artist;
+      }
+
+      target.insertAdjacentHTML('afterbegin', html);
+    });
+  };
+
+  var artistsList = function artistsList(url, options, target) {
+    target.classList.add('loading');
+    asyncFetch(url, options).then(function (jsonResponse) {
+      target.innerHTML = '';
+
+      if (Array.isArray(jsonResponse)) {
+        jsonResponse.forEach(function (item) {
+          var button = document.createElement('button');
+          button.dataset.artist = item.term_id;
+          button.classList.add('artist__button');
+          button.classList.add('inactive');
+          button.insertAdjacentText('afterbegin', item.name);
+          button.addEventListener('click', function (event) {
+            artistArtworks(event, ajax_var, artworksContainer, fetchOptions);
+          });
+          target.insertAdjacentElement('beforeend', button);
+        });
+      } else {
+        target.innerHTML = jsonResponse;
+      }
+    }).then(function () {
+      return target.classList.remove('loading');
+    });
+  }; // Show artists on load
+
+
+  artistsList(searchUrl, fetchOptions, artistsContainer); //
+
+  searchInput.addEventListener('keyup', function () {
+    artistsList("".concat(searchUrl, "/").concat(searchInput.value), fetchOptions, artistsContainer);
+  });
 })();
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function artworksList(artworks) {
-  var html = "";
+  var html = '';
 
   if (_typeof(artworks) === 'object') {
-    html += "<ul class=\"artwork-list\">";
+    html += '<ul class="artwork-list">';
     artworks.forEach(function (element) {
       var _element$artwork_tech = element.artwork_techniques,
-          featured_techniques = _element$artwork_tech.featured_techniques,
-          other_techniques = _element$artwork_tech.other_techniques;
-      html += "\n\t\t\t<li class=\"artwork\" key=\"artwork-".concat(element.slug, "\">\n\t\t\t\t<div class=\"artwork__title\"><a href=\"").concat(element.link, "\">").concat(element.title.rendered, "</a></div>\n\t\t\t\t<div class=\"artwork__stuff\">\n\t\t\t\t\t").concat(element.artwork_image_src ? "<div class=\"artwork__thumbnail\"><a href=\"".concat(element.link, "\" data-artwork=\"").concat(element.id, "\">").concat(element.artwork_image_src, "</a></div>") : '', "\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_year, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_condition, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_copy, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_paper, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_size, "</div>\n\t\t\t\t\t").concat(element.artwork_loan ? "<div class=\"artwork__info\">".concat(element.artwork_loan, "</div>") : '', "\n\t\t\t\t\t").concat(element.artwork_sale ? "<div class=\"artwork__info\">".concat(element.artwork_sale, "</div>") : '', "\n\t\t\t\t\t<div class=\"artwork__techniques\">\n\t\t\t\t\t\t").concat(featured_techniques.map(function (technique) {
+          featuredTechniques = _element$artwork_tech.featured_techniques,
+          otherTechniques = _element$artwork_tech.other_techniques;
+      html += "\n\t\t\t<li class=\"artwork\" key=\"artwork-".concat(element.slug, "\">\n\t\t\t\t<div class=\"artwork__title\"><a href=\"").concat(element.link, "\">").concat(element.title.rendered, "</a></div>\n\t\t\t\t<div class=\"artwork__stuff\">\n\t\t\t\t\t").concat(element.artwork_image_src ? "<div class=\"artwork__thumbnail\"><a href=\"".concat(element.link, "\" data-artwork=\"").concat(element.id, "\">").concat(element.artwork_image_src, "</a></div>") : '', "\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_year, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_condition, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_copy, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_paper, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_size, "</div>\n\t\t\t\t\t").concat(element.artwork_loan ? "<div class=\"artwork__info\">".concat(element.artwork_loan, "</div>") : '', "\n\t\t\t\t\t").concat(element.artwork_sale ? "<div class=\"artwork__info\">".concat(element.artwork_sale, "</div>") : '', "\n\t\t\t\t\t<div class=\"artwork__techniques\">\n\t\t\t\t\t\t").concat(featuredTechniques.map(function (technique) {
         return "<a href=\"".concat(technique[1], "\">").concat(technique[0], "</a>");
-      }).join('\n'), "\n\t\t\t\t\t\t").concat(other_techniques && "<span>".concat(other_techniques, "</span>"), "\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_info, "</div>\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t\t");
+      }).join('\n'), "\n\t\t\t\t\t\t").concat(otherTechniques && "<span>".concat(otherTechniques, "</span>"), "\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_info, "</div>\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t\t");
     });
-    html += "</ul>";
+    html += '</ul>';
   } else {
     html = artworks;
   }
@@ -127,28 +156,10 @@ function _asyncFetch() {
 
           case 2:
             response = _context.sent;
-
-            if (!response.ok) {
-              _context.next = 9;
-              break;
-            }
-
-            _context.next = 6;
-            return response.json();
-
-          case 6:
-            _context.t0 = _context.sent;
-            _context.next = 10;
-            break;
-
-          case 9:
-            _context.t0 = 'Nothing found.';
-
-          case 10:
-            responseJSON = _context.t0;
+            responseJSON = response.ok ? response.json() : '';
             return _context.abrupt("return", responseJSON);
 
-          case 12:
+          case 5:
           case "end":
             return _context.stop();
         }

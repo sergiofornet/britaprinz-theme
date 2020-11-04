@@ -1,85 +1,114 @@
 ( function() {
+	const { nonce } = ajax_var;
+	let { lang, searchUrl } = ajax_var;
+	lang = lang ? `${ lang }/` : '';
+	searchUrl = `${ searchUrl.slice( 0, searchUrl.indexOf( 'wp-json' ) ) }${ lang }${ searchUrl.slice( searchUrl.indexOf( 'wp-json' ) ) }`;
+
+	const headers = new Headers( {
+		'Content-Type': 'applications/json',
+		'X-WP-Nonce': nonce,
+	} );
+
+	const fetchOptions = {
+		method: 'get',
+		headers,
+		credentials: 'same-origin',
+	};
+
+	const searchInput = document.querySelector('.artist-search');
+	const artistsContainer = document.querySelector('.artists__container');
 	const artworksContainer = document.querySelector( '.artworks__container' );
-	const artists = document.querySelectorAll( '.artist__link' );
-	if ( artists ) {
-		artists.forEach( ( artist ) => {
-			artist.addEventListener( 'click', ( event ) => {
-				event.preventDefault();
+	const artworkGallery = document.querySelector( '.artwork__gallery' );
 
-				artworksContainer.innerHTML = ''; // empty artworks container
+	const artistArtworks = (event, ajax, target, options) => {
+		event.preventDefault();
 
-				const headers = new Headers( {
-					'Content-Type': 'applications/json',
-					'X-WP-Nonce': ajax_var.nonce,
-				} );
+		const artist = event.target.dataset.artist;
+		const artworksUrl = ajax.artworkUrl + artist + '&order=asc&orderby=slug';
+		const artistUrl = `${ ajax.artistUrl }/${ artist }`;
 
-				const lang = ajax_var.lang ? `${ajax_var.lang}/` : '';
-				
-				const artist = event.target.dataset.artist;
-				const artworksUrl = ajax_var.artworkUrl + artist + `&order=asc&orderby=slug`;
-				const artistUrl = `${ ajax_var.artistUrl }/${ artist }`;
-				
-				const fixedArtworksUrl = `${ artworksUrl.slice( 0, artworksUrl.indexOf( 'wp-json' ) ) }${ lang }${ artworksUrl.slice( artworksUrl.indexOf( 'wp-json' ) ) }`;
-				
-				const fixedArtistUrl = `${ artistUrl.slice( 0, artistUrl.indexOf( 'wp-json' ) ) }${ lang }${ artistUrl.slice( artistUrl.indexOf( 'wp-json' ) ) }`;
-				console.log(fixedArtistUrl, fixedArtworksUrl);
+		const fixedArtworksUrl = `${ artworksUrl.slice( 0, artworksUrl.indexOf( 'wp-json' ) ) }${ lang }${ artworksUrl.slice( artworksUrl.indexOf( 'wp-json' ) ) }`;
 
-				asyncFetch( fixedArtworksUrl, {
-					method: 'get',
-					headers,
-					credentials: 'same-origin',
-				} ).then( ( json_response ) => {
-					let html;
-					const artworks = json_response;
+		const fixedArtistUrl = `${ artistUrl.slice( 0, artistUrl.indexOf( 'wp-json' ) ) }${ lang }${ artistUrl.slice( artistUrl.indexOf( 'wp-json' ) ) }`;
 
-					html = artworksList(artworks);
-					artworksContainer.insertAdjacentHTML( 'beforeend', html );
-					return json_response;
-				} ).then(json_response => {
-					const artworkList = document.querySelectorAll( '.artwork-list .artwork' );
-					artworkList.forEach( ( artwork ) => {
-						const stuff = artwork.querySelector( '.artwork__stuff' );
-						const artworkTitle = artwork.querySelector( '.artwork__title' )
-						artworkTitle.addEventListener( 'click', ( event ) => {
-							event.preventDefault();
-							stuff.classList.toggle( 'visible' );
-						} );
-					} );
-					return json_response;
-				}).then(json_response => {
-					const artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a');
-					const artworksGallery = document.querySelector( '.artworks__gallery' );
+		target.innerHTML = ''; // empty artworks container
 
-					artworksThumbnails.forEach(thumbnail => {
-						thumbnail.addEventListener('click', event => {
-							event.preventDefault();
-							
-							if (json_response.some(item => item.id === parseInt(event.currentTarget.dataset.artwork))) {
-								artworksGallery.innerHTML = json_response.filter(item => item.id === parseInt(event.currentTarget.dataset.artwork))[0].artwork_image_gallery.join('\n');
-							}
-						})
-					})
-				});
+		target.classList.add('loading');
+		asyncFetch( fixedArtworksUrl, options).then( ( jsonResponse ) => {
+			const html = artworksList(jsonResponse);
 
-				asyncFetch( fixedArtistUrl, {
-					method: 'get',
-					headers,
-					credentials: 'same-origin',
-				} ).then( ( json_response ) => {
-					let html;
-					const artist = json_response;
+			target.insertAdjacentHTML( 'beforeend', html );
 
-					if ( typeof artist === 'object' ) {
-						html = `
-						<h2>${ artist.name }</h2>
-						<p>${ artist.description }</p>
-						`;
-					} else {
-						html = artist;
-					}
-					artworksContainer.insertAdjacentHTML( 'afterbegin', html );
+			const artworkList = document.querySelectorAll( '.artwork-list .artwork' );
+			const artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a');
+
+			artworkList.forEach( ( artwork ) => {
+				const stuff = artwork.querySelector( '.artwork__stuff' );
+				const artworkTitle = artwork.querySelector( '.artwork__title' );
+				artworkTitle.addEventListener( 'click', ( event ) => {
+					event.preventDefault();
+					stuff.classList.toggle( 'visible' );
 				} );
 			} );
+
+			artworksThumbnails.forEach((thumbnail) => {
+				thumbnail.addEventListener('click', (event) => {
+					event.preventDefault();
+
+					if (jsonResponse.some((item) => item.id === parseInt(event.currentTarget.dataset.artwork))) {
+						artworkGallery.innerHTML = jsonResponse.filter((item) => item.id === parseInt(event.currentTarget.dataset.artwork))[ 0 ].artwork_image_gallery.join('\n');
+					}
+				});
+			});
+		}).then(() => target.classList.remove('loading'));
+
+		asyncFetch( fixedArtistUrl, options).then( ( jsonResponse ) => {
+			let html;
+			const { name, description } = jsonResponse;
+
+			if ( typeof jsonResponse === 'object' ) {
+				html = `
+				<h2>${ name }</h2>
+				<p>${ description }</p>
+				`;
+			} else {
+				html = artist;
+			}
+			target.insertAdjacentHTML( 'afterbegin', html );
 		} );
-	}
+	};
+
+	const artistsList = (url, options, target) => {
+		target.classList.add('loading');
+		asyncFetch(url, options)
+			.then((jsonResponse) => {
+				target.innerHTML = '';
+
+				if (Array.isArray(jsonResponse)) {
+					jsonResponse.forEach((item) => {
+						const button = document.createElement('button');
+						button.dataset.artist = item.term_id;
+						button.classList.add('artist__button');
+						button.classList.add('inactive');
+						button.insertAdjacentText('afterbegin', item.name);
+
+						button.addEventListener('click', (event) => {
+							artistArtworks(event, ajax_var, artworksContainer, fetchOptions);
+						});
+
+						target.insertAdjacentElement('beforeend', button);
+					});
+				} else {
+					target.innerHTML = jsonResponse;
+				}
+			}).then(() => target.classList.remove('loading'));
+	};
+
+	// Show artists on load
+	artistsList(searchUrl, fetchOptions, artistsContainer);
+
+	//
+	searchInput.addEventListener('keyup', () => {
+		artistsList(`${ searchUrl }/${ searchInput.value }`, fetchOptions, artistsContainer);
+	});
 }() );
