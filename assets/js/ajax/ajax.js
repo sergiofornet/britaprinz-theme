@@ -85,18 +85,31 @@
 				target.innerHTML = '';
 
 				if (Array.isArray(jsonResponse)) {
-					jsonResponse.forEach((item) => {
-						const button = document.createElement('button');
-						button.dataset.artist = item.term_id;
-						button.classList.add('artist__button');
-						button.classList.add('inactive');
-						button.insertAdjacentText('afterbegin', item.name);
+					const initialsSet = new Set(jsonResponse.map((item) => item.order[ 0 ]));
+					const initials = [...initialsSet];
+					initials.forEach((initial) => {
+						const group = document.createElement('div');
+						group.classList.add('artists-group');
+						group.dataset.initial = initial;
+						group.insertAdjacentHTML('afterbegin', `
+							<span class="artists-group__label">${ initial }</span>
+						`);
 
-						button.addEventListener('click', (event) => {
-							artistArtworks(event, ajax_var, artworksContainer, fetchOptions);
+						jsonResponse.filter((item) => item.order[ 0 ] === initial).forEach((item) => {
+							const button = document.createElement('button');
+							button.dataset.artist = item.term_id;
+							button.classList.add('artist__button');
+							button.classList.add('inactive');
+							button.insertAdjacentText('afterbegin', item.name);
+
+							button.addEventListener('click', (event) => {
+								artistArtworks(event, ajax_var, artworksContainer, fetchOptions);
+							});
+
+							group.insertAdjacentElement('beforeend', button);
 						});
 
-						target.insertAdjacentElement('beforeend', button);
+						target.insertAdjacentElement('beforeend', group);
 					});
 				} else {
 					target.innerHTML = jsonResponse;
