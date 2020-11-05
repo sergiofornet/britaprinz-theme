@@ -20,6 +20,14 @@
 	const artworksContainer = document.querySelector( '.artworks__container' );
 	const artworkGallery = document.querySelector( '.artwork__gallery' );
 
+	/**
+	 * Displays info and artworks from the artist on which the user clicked
+	 *
+	 * @param {Event} event - The event which triggers the function
+	 * @param {Object} ajax - data object from PHP
+	 * @param {HTMLElement} target - HTML target element
+	 * @param {Object} options - Request options object
+	 */
 	const artistArtworks = (event, ajax, target, options) => {
 		event.preventDefault();
 
@@ -34,6 +42,8 @@
 		target.innerHTML = ''; // empty artworks container
 
 		target.classList.add('loading');
+
+		// Fetch artworks asynchronously
 		asyncFetch( fixedArtworksUrl, options).then( ( jsonResponse ) => {
 			const html = artworksList(jsonResponse);
 
@@ -42,6 +52,7 @@
 			const artworkList = document.querySelectorAll( '.artwork-list .artwork' );
 			const artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a');
 
+			// Toggles artwork info visibility
 			artworkList.forEach( ( artwork ) => {
 				const stuff = artwork.querySelector( '.artwork__stuff' );
 				const artworkTitle = artwork.querySelector( '.artwork__title' );
@@ -51,6 +62,7 @@
 				} );
 			} );
 
+			// Shows artwork detailed images when thumbnail is clicked
 			artworksThumbnails.forEach((thumbnail) => {
 				thumbnail.addEventListener('click', (event) => {
 					event.preventDefault();
@@ -63,6 +75,7 @@
 			});
 		}).then(() => target.classList.remove('loading'));
 
+		// Fetch artist info asynchronously
 		asyncFetch( fixedArtistUrl, options).then( ( jsonResponse ) => {
 			let html;
 			const { name, description } = jsonResponse;

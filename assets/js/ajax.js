@@ -35,6 +35,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   var artistsContainer = document.querySelector('.artists__container');
   var artworksContainer = document.querySelector('.artworks__container');
   var artworkGallery = document.querySelector('.artwork__gallery');
+  /**
+   * Displays info and artworks from the artist on which the user clicked
+   *
+   * @param {Event} event - The event which triggers the function
+   * @param {Object} ajax - data object from PHP
+   * @param {HTMLElement} target - HTML target element
+   * @param {Object} options - Request options object
+   */
 
   var artistArtworks = function artistArtworks(event, ajax, target, options) {
     event.preventDefault();
@@ -45,12 +53,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     var fixedArtistUrl = "".concat(artistUrl.slice(0, artistUrl.indexOf('wp-json'))).concat(lang).concat(artistUrl.slice(artistUrl.indexOf('wp-json')));
     target.innerHTML = ''; // empty artworks container
 
-    target.classList.add('loading');
+    target.classList.add('loading'); // Fetch artworks asynchronously
+
     asyncFetch(fixedArtworksUrl, options).then(function (jsonResponse) {
       var html = artworksList(jsonResponse);
       target.insertAdjacentHTML('beforeend', html);
       var artworkList = document.querySelectorAll('.artwork-list .artwork');
-      var artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a');
+      var artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a'); // Toggles artwork info visibility
+
       artworkList.forEach(function (artwork) {
         var stuff = artwork.querySelector('.artwork__stuff');
         var artworkTitle = artwork.querySelector('.artwork__title');
@@ -58,7 +68,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           event.preventDefault();
           stuff.classList.toggle('visible');
         });
-      });
+      }); // Shows artwork detailed images when thumbnail is clicked
+
       artworksThumbnails.forEach(function (thumbnail) {
         thumbnail.addEventListener('click', function (event) {
           event.preventDefault();
@@ -75,7 +86,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       });
     }).then(function () {
       return target.classList.remove('loading');
-    });
+    }); // Fetch artist info asynchronously
+
     asyncFetch(fixedArtistUrl, options).then(function (jsonResponse) {
       var html;
       var name = jsonResponse.name,
