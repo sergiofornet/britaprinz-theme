@@ -189,10 +189,6 @@ function artists_endpoint() {
 add_action( 'rest_api_init', 'artists_endpoint' );
 
 function get_artists( $request ) {
-	// if ( empty( $request['id'] ) ) {
-	// 	return;
-	// }
-
 	$search = urldecode( $request['id'] );
 
 	$args = array(
@@ -211,12 +207,24 @@ function get_artists( $request ) {
 	
 	$query = new WP_Term_Query( $args );
 	$terms = $query->terms;
-	// var_dump(empty($terms));
 	
-	if ( !empty( $terms ) ) {
-		return $terms;
+	/**
+	 * Create new terms array with 'bp_artist_order_name' field in it
+	 * seems to work
+	 */ 
+	$updated_terms = [];
+	foreach ( $terms as $term ) {
+		$order = carbon_get_term_meta($term->term_id, 'bp_artist_order_name');
+		$array_term = (array)$term;
+		$array_term['order'] = $order;
+		$object_term = (object)$array_term;
+		array_push( $updated_terms, $object_term );
 	}
-	return new WP_Error( 'no_author', 'Invalid author', array( 'status' => 404 ) );
+	
+	if ( !empty( $updated_terms ) ) {
+		return $updated_terms;
+	}
+	return new WP_Error( 'no_artist', __( 'Artista desconocido', 'britaprinz-theme' ), array( 'status' => 404 ) );
 }
 
 
