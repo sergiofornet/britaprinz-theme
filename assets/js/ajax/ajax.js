@@ -56,17 +56,17 @@
 			artworkList.forEach( ( artwork ) => {
 				const stuff = artwork.querySelector( '.artwork__stuff' );
 				const artworkTitle = artwork.querySelector( '.artwork__title' );
-				artworkTitle.addEventListener( 'click', ( event ) => {
-					event.preventDefault();
+				artworkTitle.addEventListener( 'click', ( artworkEvent ) => {
+					artworkEvent.preventDefault();
 					stuff.classList.toggle( 'visible' );
 				} );
 			} );
 
 			// Shows artwork detailed images when thumbnail is clicked
 			artworksThumbnails.forEach((thumbnail) => {
-				thumbnail.addEventListener('click', (event) => {
-					event.preventDefault();
-					const { artwork } = event.currentTarget.dataset;
+				thumbnail.addEventListener('click', (thumbnailEvent) => {
+					thumbnailEvent.preventDefault();
+					const { artwork } = thumbnailEvent.currentTarget.dataset;
 
 					if (jsonResponse.some((item) => item.id === parseInt(artwork))) {
 						artworkGallery.innerHTML = jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n');

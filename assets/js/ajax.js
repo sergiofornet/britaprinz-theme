@@ -64,16 +64,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       artworkList.forEach(function (artwork) {
         var stuff = artwork.querySelector('.artwork__stuff');
         var artworkTitle = artwork.querySelector('.artwork__title');
-        artworkTitle.addEventListener('click', function (event) {
-          event.preventDefault();
+        artworkTitle.addEventListener('click', function (artworkEvent) {
+          artworkEvent.preventDefault();
           stuff.classList.toggle('visible');
         });
       }); // Shows artwork detailed images when thumbnail is clicked
 
       artworksThumbnails.forEach(function (thumbnail) {
-        thumbnail.addEventListener('click', function (event) {
-          event.preventDefault();
-          var artwork = event.currentTarget.dataset.artwork;
+        thumbnail.addEventListener('click', function (thumbnailEvent) {
+          thumbnailEvent.preventDefault();
+          var artwork = thumbnailEvent.currentTarget.dataset.artwork;
 
           if (jsonResponse.some(function (item) {
             return item.id === parseInt(artwork);
