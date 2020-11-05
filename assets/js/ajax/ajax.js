@@ -23,7 +23,7 @@
 	const artistArtworks = (event, ajax, target, options) => {
 		event.preventDefault();
 
-		const artist = event.target.dataset.artist;
+		const { artist } = event.target.dataset;
 		const artworksUrl = ajax.artworkUrl + artist + '&order=asc&orderby=slug';
 		const artistUrl = `${ ajax.artistUrl }/${ artist }`;
 
@@ -54,9 +54,10 @@
 			artworksThumbnails.forEach((thumbnail) => {
 				thumbnail.addEventListener('click', (event) => {
 					event.preventDefault();
+					const { artwork } = event.currentTarget.dataset;
 
-					if (jsonResponse.some((item) => item.id === parseInt(event.currentTarget.dataset.artwork))) {
-						artworkGallery.innerHTML = jsonResponse.filter((item) => item.id === parseInt(event.currentTarget.dataset.artwork))[ 0 ].artwork_image_gallery.join('\n');
+					if (jsonResponse.some((item) => item.id === parseInt(artwork))) {
+						artworkGallery.innerHTML = jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n');
 					}
 				});
 			});

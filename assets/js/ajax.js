@@ -62,12 +62,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       artworksThumbnails.forEach(function (thumbnail) {
         thumbnail.addEventListener('click', function (event) {
           event.preventDefault();
+          var artwork = event.currentTarget.dataset.artwork;
 
           if (jsonResponse.some(function (item) {
-            return item.id === parseInt(event.currentTarget.dataset.artwork);
+            return item.id === parseInt(artwork);
           })) {
             artworkGallery.innerHTML = jsonResponse.filter(function (item) {
-              return item.id === parseInt(event.currentTarget.dataset.artwork);
+              return item.id === parseInt(artwork);
             })[0].artwork_image_gallery.join('\n');
           }
         });
