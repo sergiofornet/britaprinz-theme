@@ -9,7 +9,7 @@
 
 if ( ! defined( 'BRITAPRINZ_THEME_VERSION' ) ) {
 	// Replace the version number of the theme on each release.
-	define( 'BRITAPRINZ_THEME_VERSION', '0.0.4' );
+	define( 'BRITAPRINZ_THEME_VERSION', '0.0.5' );
 }
 
 if ( ! function_exists( 'britaprinz_theme_setup' ) ) :
