@@ -78,6 +78,13 @@
 		} );
 	};
 
+	/**
+	 * Displays a list of Artists filtered by name
+	 *
+	 * @param {string} url - The REST endpoint url
+	 * @param {Object} options - Request options object
+	 * @param {HTMLElement} target - HTML target element
+	 */
 	const artistsList = (url, options, target) => {
 		target.classList.add('loading');
 		asyncFetch(url, options)
@@ -85,8 +92,11 @@
 				target.innerHTML = '';
 
 				if (Array.isArray(jsonResponse)) {
+					// Create an a array of unique 'order name' initials
 					const initialsSet = new Set(jsonResponse.map((item) => item.order[ 0 ]));
 					const initials = [...initialsSet];
+
+					// Create a group for every initial
 					initials.forEach((initial) => {
 						const group = document.createElement('div');
 						group.classList.add('artists-group');
@@ -95,6 +105,7 @@
 							<span class="artists-group__label">${ initial }</span>
 						`);
 
+						// Group every artist by its initial
 						jsonResponse.filter((item) => item.order[ 0 ] === initial).forEach((item) => {
 							const button = document.createElement('button');
 							button.dataset.artist = item.term_id;
@@ -102,6 +113,7 @@
 							button.classList.add('inactive');
 							button.insertAdjacentText('afterbegin', item.name);
 
+							// Display artist info and its artworks
 							button.addEventListener('click', (event) => {
 								artistArtworks(event, ajax_var, artworksContainer, fetchOptions);
 							});

@@ -89,6 +89,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       target.insertAdjacentHTML('afterbegin', html);
     });
   };
+  /**
+   * Displays a list of Artists filtered by name
+   *
+   * @param {string} url - The REST endpoint url
+   * @param {Object} options - Request options object
+   * @param {HTMLElement} target - HTML target element
+   */
+
 
   var artistsList = function artistsList(url, options, target) {
     target.classList.add('loading');
@@ -96,17 +104,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       target.innerHTML = '';
 
       if (Array.isArray(jsonResponse)) {
+        // Create an a array of unique 'order name' initials
         var initialsSet = new Set(jsonResponse.map(function (item) {
           return item.order[0];
         }));
 
-        var initials = _toConsumableArray(initialsSet);
+        var initials = _toConsumableArray(initialsSet); // Create a group for every initial
+
 
         initials.forEach(function (initial) {
           var group = document.createElement('div');
           group.classList.add('artists-group');
           group.dataset.initial = initial;
-          group.insertAdjacentHTML('afterbegin', "\n\t\t\t\t\t\t\t<span class=\"artists-group__label\">".concat(initial, "</span>\n\t\t\t\t\t\t"));
+          group.insertAdjacentHTML('afterbegin', "\n\t\t\t\t\t\t\t<span class=\"artists-group__label\">".concat(initial, "</span>\n\t\t\t\t\t\t")); // Group every artist by its initial
+
           jsonResponse.filter(function (item) {
             return item.order[0] === initial;
           }).forEach(function (item) {
@@ -114,7 +125,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             button.dataset.artist = item.term_id;
             button.classList.add('artist__button');
             button.classList.add('inactive');
-            button.insertAdjacentText('afterbegin', item.name);
+            button.insertAdjacentText('afterbegin', item.name); // Display artist info and its artworks
+
             button.addEventListener('click', function (event) {
               artistArtworks(event, ajax_var, artworksContainer, fetchOptions);
             });
