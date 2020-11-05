@@ -28,7 +28,22 @@ get_header();
 
 			<input type="text" class="artist-search">
 			<div style="display: grid; grid-template-columns: 1fr 1fr;">
-				<div class="artists__container"></div>
+				<div>
+					<div class="artists__container"></div>
+					<div class="initials__container">
+					
+						<?php
+						foreach( range( 'A', 'Z' ) as $initial) :
+							?>
+							
+							<div><a href=""><?php echo $initial; ?></a></div>
+							
+							<?php
+						endforeach;
+						?>
+
+					</div>
+				</div>
 				<div class="artworks__container"></div>
 			</div>
 			<div class="artwork__gallery"></div>
