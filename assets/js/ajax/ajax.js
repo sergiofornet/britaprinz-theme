@@ -102,16 +102,6 @@
 							</div>`);
 
 						const slider = new Slider(artworkGallery);
-						// console.log(slider);
-						// const autoplay = function(){
-						async function autoplay() {
-							await wait(4000);
-							slider.move();
-							requestAnimationFrame(autoplay);
-						}
-						requestAnimationFrame(autoplay);
-
-						// }
 
 						// slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
 					}
