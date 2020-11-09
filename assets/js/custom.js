@@ -13,8 +13,8 @@ function Slider(slider) {
   this.slides = slider.querySelector('.slides');
   this.slider = slider;
   this.delay = delay;
-  var prevButton = slider.querySelector('.goToPrev');
-  var nextButton = slider.querySelector('.goToNext'); // when this slider is created, run the start slider function
+  var prevButton = slider.querySelector('.previous-slide');
+  var nextButton = slider.querySelector('.next-slide'); // when this slider is created, run the start slider function
 
   this.startSlider();
   this.applyClasses(); // requestAnimationFrame(this.autoplay);

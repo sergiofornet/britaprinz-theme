@@ -97,8 +97,8 @@
 						`));
 						artworkGallery.insertAdjacentHTML('beforeend', `
 							<div class="controls">
-								<button class="goToPrev">← Prev</button>
-								<button class="goToNext">Next →</button>
+								<button class="previous-slide">←</button>
+								<button class="next-slide">→</button>
 							</div>`);
 
 						const slider = new Slider(artworkGallery);

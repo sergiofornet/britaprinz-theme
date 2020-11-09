@@ -7,8 +7,8 @@ function Slider(slider, delay = 4000) {
 	this.slides = slider.querySelector('.slides');
 	this.slider = slider;
 	this.delay = delay;
-	const prevButton = slider.querySelector('.goToPrev');
-	const nextButton = slider.querySelector('.goToNext');
+	const prevButton = slider.querySelector('.previous-slide');
+	const nextButton = slider.querySelector('.next-slide');
 
 	// when this slider is created, run the start slider function
 	this.startSlider();

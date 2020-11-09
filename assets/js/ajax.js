@@ -135,7 +135,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             slides.forEach(function (slide) {
               return slidesContainer.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"slide\">\n\t\t\t\t\t\t\t\t".concat(slide, "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t"));
             });
-            artworkGallery.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"controls\">\n\t\t\t\t\t\t\t\t<button class=\"goToPrev\">\u2190 Prev</button>\n\t\t\t\t\t\t\t\t<button class=\"goToNext\">Next \u2192</button>\n\t\t\t\t\t\t\t</div>");
+            artworkGallery.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"controls\">\n\t\t\t\t\t\t\t\t<button class=\"previous-slide\">\u2190</button>\n\t\t\t\t\t\t\t\t<button class=\"next-slide\">\u2192</button>\n\t\t\t\t\t\t\t</div>");
             var slider = new Slider(artworkGallery);
             requestAnimationFrame(autoplay); // }
             // slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
