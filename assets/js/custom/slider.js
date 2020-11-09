@@ -16,8 +16,8 @@ function Slider(slider, delay = 4000) {
 	// requestAnimationFrame(this.autoplay);
 
 	// Event listeners
-	prevButton.addEventListener('click', () => this.move('back'));
-	nextButton.addEventListener('click', () => this.move());
+	prevButton && prevButton.addEventListener('click', () => this.move('back'));
+	nextButton && nextButton.addEventListener('click', () => this.move());
 }
 
 Slider.prototype.startSlider = function() {
