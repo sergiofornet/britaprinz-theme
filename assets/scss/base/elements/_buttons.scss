@@ -20,6 +20,29 @@ input[type="submit"] {
 		border-color: $color__border-button-focus;
 	}
 
+	// main menu
+	&.menu-toggle {
+		border: none;
+		background: none;
+		color: black;
+		padding: 0;
+		position: relative;
+
+		&::after {
+			content: ">";
+			position: absolute;
+			top: calc(50% - .5em);
+			left: calc(100% + .5em);
+			transition: all .5s ease-in-out;
+			transform: rotate(90deg);
+			transform-origin: center;
+		}
+
+		.toggled &::after {
+			transform: rotate(-90deg);
+		}
+	}
+
 	// artists list
 	&.artist__button {
 		color: black;
