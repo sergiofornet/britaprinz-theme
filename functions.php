@@ -312,12 +312,12 @@ function bp_rest_sale( $object, $field_name, $request ) {
 }
 	
 function bp_load_scripts() {
-	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri('assets/js/vendor.min.js'), array(), BRITAPRINZ_THEME_VERSION, true );
+	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri('assets/js/vendor.min.js'), array( 'wp-polyfill' ), BRITAPRINZ_THEME_VERSION, true );
 
 	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri('assets/js/custom.js'), array(), BRITAPRINZ_THEME_VERSION, true );
 	
 	if ( is_post_type_archive( 'artwork' ) ) {
-		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri('assets/js/ajax.js'), array( 'wp-polyfill' ), BRITAPRINZ_THEME_VERSION, true );
+		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri('assets/js/ajax.js'), array(), BRITAPRINZ_THEME_VERSION, true );
 		
 		wp_localize_script( 'britaprinz-ajax', 'ajax_var', array(
 			'artworkUrl'	=> rest_url( '/wp/v2/artwork?artist=' ),
