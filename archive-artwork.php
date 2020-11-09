@@ -28,15 +28,17 @@ get_header();
 
 			<input type="text" class="artist-search">
 			<div style="display: grid; grid-template-columns: 1fr 1fr;">
-				<div>
-					<div class="artists__container"></div>
+				<div style="display: grid; grid-template-columns: 9fr 1fr; height:100vh">
+					<div class="artists__container" style="height: 100vh; overflow-y: scroll;"></div>
 					<div class="initials__container">
 					
 						<?php
 						foreach( range( 'A', 'Z' ) as $initial) :
 							?>
 							
-							<div><a href=""><?php echo $initial; ?></a></div>
+							<div>
+								<button class="initial-link" data-target="<?php echo esc_attr( $initial ); ?>"><?php echo esc_html( $initial ); ?></button>
+							</div>
 							
 							<?php
 						endforeach;
