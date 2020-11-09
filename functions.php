@@ -215,7 +215,7 @@ function get_artists( $request ) {
 	$updated_terms = [];
 	foreach ( $terms as $term ) {
 		$order = carbon_get_term_meta($term->term_id, 'bp_artist_order_name');
-		$array_term = (array)$term;
+		$array_term = $term->to_array();
 		$array_term['order'] = $order;
 		$object_term = (object)$array_term;
 		array_push( $updated_terms, $object_term );
@@ -270,7 +270,7 @@ function bp_rest_gallery( $object, $field_name, $request ) {
 	$gallery_ids = carbon_get_post_meta( $object['id'], 'bp_artwork_gallery' );
 	$gallery = [];
 	foreach ( $gallery_ids as $id ) {
-		$gallery[] = ( wp_get_attachment_image( $id, 'thumbnail' ) );
+		$gallery[] = ( wp_get_attachment_image( $id, 'full' ) );
 	}
 
 	return $gallery;
@@ -312,9 +312,13 @@ function bp_rest_sale( $object, $field_name, $request ) {
 }
 	
 function bp_load_scripts() {
+	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri('assets/js/vendor.min.js'), array(), BRITAPRINZ_THEME_VERSION, true );
+
+	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri('assets/js/custom.js'), array(), BRITAPRINZ_THEME_VERSION, true );
+	
 	if ( is_post_type_archive( 'artwork' ) ) {
 		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri('assets/js/ajax.js'), array( 'wp-polyfill' ), BRITAPRINZ_THEME_VERSION, true );
-	
+		
 		wp_localize_script( 'britaprinz-ajax', 'ajax_var', array(
 			'artworkUrl'	=> rest_url( '/wp/v2/artwork?artist=' ),
 			'artistUrl'		=> rest_url( '/wp/v2/artist' ),
@@ -322,6 +326,7 @@ function bp_load_scripts() {
 			'nonce'	=> wp_create_nonce( 'wp_rest' ),
 			'lang'	=> defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : '',
 			) );
-	}
+		}
+		
 }
 add_action( 'wp_enqueue_scripts', 'bp_load_scripts' );
