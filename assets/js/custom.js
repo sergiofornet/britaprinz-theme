@@ -20,10 +20,10 @@ function Slider(slider) {
   this.applyClasses(); // requestAnimationFrame(this.autoplay);
   // Event listeners
 
-  prevButton.addEventListener('click', function () {
+  prevButton && prevButton.addEventListener('click', function () {
     return _this.move('back');
   });
-  nextButton.addEventListener('click', function () {
+  nextButton && nextButton.addEventListener('click', function () {
     return _this.move();
   });
 }
@@ -71,3 +71,44 @@ Slider.prototype.move = function (direction) {
 
   this.applyClasses();
 };
+"use strict";
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+(function () {
+  var homeSlider = document.querySelector('.home__slider');
+
+  if (homeSlider) {
+    var autoplay = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return wait(4000);
+
+              case 2:
+                slider.move();
+                requestAnimationFrame(autoplay);
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function autoplay() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    var slider = new Slider(homeSlider);
+    console.log(slider);
+    requestAnimationFrame(autoplay);
+  }
+})();
