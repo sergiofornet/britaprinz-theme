@@ -19,7 +19,7 @@
 	font-size: 100px;
 	font-family: sans-serif;
 	border: 5px solid white;
-	transition: all .75s;
+	transition: all .75s ease-in-out;
 	// transform: translateX(-200%);
 	z-index: 0;
 	opacity: 0;
