@@ -86,8 +86,14 @@ a:hover,a:focus,a:active{color:#191970}
 a:focus{outline:thin dotted}
 a:hover,a:active{outline:0}
 button,input[type="button"],input[type="reset"],input[type="submit"]{border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;background:#e6e6e6;color:rgba(0,0,0,0.8);line-height:1;padding:.6em 1em .4em}
-button:hover,input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover{border-color:#ccc #bbb #aaa}
+button:hover,input[type="button"]:hover,input[type="reset"]:hover,input[type="submit"]:hover{border-color:#ccc #bbb #aaa;cursor:pointer}
 button:active,button:focus,input[type="button"]:active,input[type="button"]:focus,input[type="reset"]:active,input[type="reset"]:focus,input[type="submit"]:active,input[type="submit"]:focus{border-color:#aaa #bbb #bbb}
+button.artist__button,input[type="button"].artist__button,input[type="reset"].artist__button,input[type="submit"].artist__button{color:black;padding:0;background:0;border:0;display:block}
+button.artist__button:hover,input[type="button"].artist__button:hover,input[type="reset"].artist__button:hover,input[type="submit"].artist__button:hover{text-decoration:underline}
+button.initial-link,input[type="button"].initial-link,input[type="reset"].initial-link,input[type="submit"].initial-link{color:black;padding:0;background:0;border:0;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;position:relative}
+button.initial-link:hover,input[type="button"].initial-link:hover,input[type="reset"].initial-link:hover,input[type="submit"].initial-link:hover{color:white}
+button.initial-link::after,input[type="button"].initial-link::after,input[type="reset"].initial-link::after,input[type="submit"].initial-link::after{content:"";position:absolute;background-color:transparent;width:1.5em;height:1.5em;top:calc(50% - .75em);left:calc(50% - .75em);border-radius:50%;z-index:-1}
+button.initial-link:hover::after,input[type="button"].initial-link:hover::after,input[type="reset"].initial-link:hover::after,input[type="submit"].initial-link:hover::after{background-color:black}
 input[type="text"],input[type="email"],input[type="url"],input[type="password"],input[type="search"],input[type="number"],input[type="tel"],input[type="range"],input[type="date"],input[type="month"],input[type="week"],input[type="time"],input[type="datetime"],input[type="datetime-local"],input[type="color"],textarea{color:#666;border:1px solid #ccc;border-radius:3px;padding:3px}
 input[type="text"]:focus,input[type="email"]:focus,input[type="url"]:focus,input[type="password"]:focus,input[type="search"]:focus,input[type="number"]:focus,input[type="tel"]:focus,input[type="range"]:focus,input[type="date"]:focus,input[type="month"]:focus,input[type="week"]:focus,input[type="time"]:focus,input[type="datetime"]:focus,input[type="datetime-local"]:focus,input[type="color"]:focus,textarea:focus{color:#111}
 select{border:1px solid #ccc}

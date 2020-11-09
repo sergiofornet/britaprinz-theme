@@ -12,10 +12,55 @@ input[type="submit"] {
 
 	&:hover {
 		border-color: $color__border-button-hover;
+		cursor: pointer;
 	}
 
 	&:active,
 	&:focus {
 		border-color: $color__border-button-focus;
 	}
+
+	// artists list
+	&.artist__button {
+		color: black;
+		padding: 0;
+		background: none;
+		border: none;
+		display: block;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	// initial lists
+	&.initial-link {
+		color: black;
+		padding: 0;
+		background: none;
+		border: none;
+		transition: all .2s ease-in-out;
+		position: relative;
+
+		&:hover {
+			color: white;
+		}
+
+		&::after{
+			content: "";
+			position: absolute;
+			background-color: transparent;
+			width: 1.5em;
+			height: 1.5em;
+			top: calc(50% - .75em);
+			left: calc(50% - .75em);
+			border-radius: 50%;
+			z-index: -1;
+		}
+
+		&:hover::after{
+			background-color: black;
+		}
+	}
+
 }
