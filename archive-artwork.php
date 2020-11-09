@@ -32,8 +32,8 @@ get_header();
 						foreach( range( 'A', 'Z' ) as $initial) :
 							?>
 							
-							<div>
-								<button class="initial-link" data-target="<?php echo esc_attr( $initial ); ?>"><?php echo esc_html( $initial ); ?></button>
+							<div class="initial">
+								<button class="initial__button" data-target="<?php echo esc_attr( $initial ); ?>"><?php echo esc_html( $initial ); ?></button>
 							</div>
 							
 							<?php

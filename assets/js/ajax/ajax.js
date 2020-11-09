@@ -19,7 +19,7 @@
 	const artistsContainer = document.querySelector('.artists__container');
 	const artworksContainer = document.querySelector( '.artworks__container' );
 	const artworkGallery = document.querySelector( '.artwork__gallery' );
-	const initialsLinks = document.querySelectorAll( '.initial-link' );
+	const initialsLinks = document.querySelectorAll( '.initial__button' );
 
 	initialsLinks.forEach((initial) => {
 		const moveTo = new MoveTo({

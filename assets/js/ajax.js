@@ -35,7 +35,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   var artistsContainer = document.querySelector('.artists__container');
   var artworksContainer = document.querySelector('.artworks__container');
   var artworkGallery = document.querySelector('.artwork__gallery');
-  var initialsLinks = document.querySelectorAll('.initial-link');
+  var initialsLinks = document.querySelectorAll('.initial__button');
   initialsLinks.forEach(function (initial) {
     var moveTo = new MoveTo({
       tolerance: 10,
