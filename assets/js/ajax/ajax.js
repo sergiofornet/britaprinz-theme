@@ -19,6 +19,21 @@
 	const artistsContainer = document.querySelector('.artists__container');
 	const artworksContainer = document.querySelector( '.artworks__container' );
 	const artworkGallery = document.querySelector( '.artwork__gallery' );
+	const initialsLinks = document.querySelectorAll( '.initial-link' );
+
+	initialsLinks.forEach((initial) => {
+		const moveTo = new MoveTo({
+			tolerance: 10,
+			duration: 500,
+			easing: 'easeOutQuart',
+			container: artistsContainer,
+		});
+		initial.addEventListener('click', () => {
+			const { target } = initial.dataset;
+			const scrollTo = document.querySelector(`[data-initial=${ target.toLowerCase() }]`);
+			moveTo.move(scrollTo);
+		});
+	});
 
 	/**
 	 * Displays info and artworks from the artist on which the user clicked
@@ -69,7 +84,36 @@
 					const { artwork } = thumbnailEvent.currentTarget.dataset;
 
 					if (jsonResponse.some((item) => item.id === parseInt(artwork))) {
-						artworkGallery.innerHTML = jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n');
+						// console.log(jsonResponse);
+						artworkGallery.innerHTML = '';
+						const slidesContainer = document.createElement('div');
+						slidesContainer.classList.add('slides');
+						artworkGallery.insertAdjacentElement('afterbegin', slidesContainer);
+						const slides = jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery;
+						slides.forEach((slide) => slidesContainer.insertAdjacentHTML('beforeend', `
+							<div class="slide">
+								${ slide }
+							</div>
+						`));
+						artworkGallery.insertAdjacentHTML('beforeend', `
+							<div class="controls">
+								<button class="goToPrev">← Prev</button>
+								<button class="goToNext">Next →</button>
+							</div>`);
+
+						const slider = new Slider(artworkGallery);
+						// console.log(slider);
+						// const autoplay = function(){
+						async function autoplay() {
+							await wait(4000);
+							slider.move();
+							requestAnimationFrame(autoplay);
+						}
+						requestAnimationFrame(autoplay);
+
+						// }
+
+						// slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
 					}
 				});
 			});
