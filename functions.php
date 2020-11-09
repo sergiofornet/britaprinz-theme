@@ -7,11 +7,6 @@
  * @package Brita_Prinz_Theme
  */
 
-if ( ! defined( 'BRITAPRINZ_THEME_VERSION' ) ) {
-	// Replace the version number of the theme on each release.
-	define( 'BRITAPRINZ_THEME_VERSION', '0.0.7' );
-}
-
 if ( ! function_exists( 'britaprinz_theme_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -103,6 +98,14 @@ if ( ! function_exists( 'britaprinz_theme_setup' ) ) :
 	}
 endif;
 add_action( 'after_setup_theme', 'britaprinz_theme_setup' );
+
+/**
+ * Define theme version
+ */
+if ( ! defined( 'BRITAPRINZ_THEME_VERSION' ) ) {
+	// Replace the version number of the theme on each release.
+	define( 'BRITAPRINZ_THEME_VERSION', wp_get_theme( 'britaprinz-theme' )->version );
+}
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
