@@ -22,14 +22,24 @@
 
 		<div>
 			<div>
-				<div>
+				<div class="home__slider">
+					<div class="slides">
+						<?php 
+						$gallery = carbon_get_the_post_meta('bp_home_gallery');
+						foreach ($gallery as $image) :
+							?>
+
+							<div class="slide">
+
+								<?php echo wp_get_attachment_image( $image, 'full' ); ?>
+							</div>
+
+							<?php
+						endforeach;
+						?>
+
+					</div>
 				
-					<?php 
-					$gallery = carbon_get_the_post_meta('bp_home_gallery');
-					foreach ($gallery as $image) :
-						echo wp_get_attachment_image( $image, 'thumbnail' );
-					endforeach;
-					?>
 				
 				</div>
 				<div>
