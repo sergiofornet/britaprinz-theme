@@ -21,22 +21,22 @@ $contact = carbon_get_theme_option( 'bp_theme_contact' );
 				<?php echo wpautop( esc_html( $contact ) ); ?>
 			
 			</div>
-			<div>
-				<ul>
-
-					<?php 
-						foreach ( $social as $social_item ) :
-							printf( 
-								'<li><a href="%1$s" class="" target="_blank" rel="noopener noreferrer" title="%2$s">%2$s</a></li>', 
-								esc_url( $social_item['bp_theme_social_url'] ),
-								esc_html( $social_item['bp_theme_social_label'] )
-							);
-						endforeach;
-					?>
-
-				</ul>
-			</div>
 		</div><!-- .site-info -->
+		<div class="social-links">
+			<ul>
+
+				<?php 
+					foreach ( $social as $social_item ) :
+						printf( 
+							'<li><a href="%1$s" class="" target="_blank" rel="noopener noreferrer" title="%2$s">%2$s</a></li>', 
+							esc_url( $social_item['bp_theme_social_url'] ),
+							esc_html( $social_item['bp_theme_social_label'] )
+						);
+					endforeach;
+				?>
+
+			</ul>
+		</div><!-- .social-links -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 
