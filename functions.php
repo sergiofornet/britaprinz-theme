@@ -182,9 +182,10 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 function artists_endpoint() {
-	register_rest_route( 'artists/', 'search(?:/(?P<id>([a-zA-Z0-9]|%20)+)+)?', array(
+	register_rest_route( 'artists', '/search(?:/(?P<id>([a-zA-Z0-9]|%20)+)+)?', array(
 		'methods'	=> WP_REST_Server::READABLE,
 		'callback'	=> 'get_artists',
+		'permission_callback' => '__return_true',
 	) ); 
 }
 
