@@ -1,3 +1,9 @@
+/**
+ * Slider prototype definition
+ *
+ * @param {HTMLElement} slider
+ * @param {number} delay
+ */
 function Slider(slider, delay = 4000) {
 	if (! (slider instanceof Element)) {
 		throw new Error('No slider passed in');
