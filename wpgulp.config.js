@@ -28,7 +28,7 @@ module.exports = {
 	jsVendorFile: 'vendor', // Compiled JS vendors file name. Default set to vendors i.e. vendors.js.
 
 	// JS Custom options.
-	jsCustomSRC: './assets/js/custom/*.js', // Path to JS custom scripts folder.
+	jsCustomSRC: './assets/js/custom/**/*.js', // Path to JS custom scripts folder.
 	jsCustomDestination: './assets/js/', // Path to place the compiled JS custom scripts file.
 	jsCustomFile: 'custom', // Compiled JS custom file name. Default set to custom i.e. custom.js.
 
