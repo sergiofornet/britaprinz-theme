@@ -23,7 +23,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   lang = lang ? "".concat(lang, "/") : '';
   searchUrl = "".concat(searchUrl.slice(0, searchUrl.indexOf('wp-json'))).concat(lang).concat(searchUrl.slice(searchUrl.indexOf('wp-json')));
   var headers = new Headers({
-    'Content-Type': 'applications/json',
+    'Content-Type': 'application/json',
     'X-WP-Nonce': nonce
   });
   var fetchOptions = {

@@ -5,7 +5,7 @@
 	searchUrl = `${ searchUrl.slice( 0, searchUrl.indexOf( 'wp-json' ) ) }${ lang }${ searchUrl.slice( searchUrl.indexOf( 'wp-json' ) ) }`;
 
 	const headers = new Headers( {
-		'Content-Type': 'applications/json',
+		'Content-Type': 'application/json',
 		'X-WP-Nonce': nonce,
 	} );
 
