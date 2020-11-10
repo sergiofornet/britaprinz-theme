@@ -42,6 +42,7 @@ const rtlcss = require( 'gulp-rtlcss' ); // Generates RTL stylesheet.
 
 // JS related plugins.
 const concat = require( 'gulp-concat' ); // Concatenates JS files.
+const order = require( 'gulp-order' ); // Orders JS concatenation
 const uglify = require( 'gulp-uglify' ); // Minifies JS files.
 const babel = require( 'gulp-babel' ); // Compiles ESNext to browser compatible JS.
 
@@ -66,8 +67,9 @@ const beep = require( 'beepbeep' );
  * Custom Error Handler.
  *
  * @param Mixed err
+ * @param r
  */
-const errorHandler = r => {
+const errorHandler = (r) => {
 	notify.onError( '\n\n❌  ===> ERROR: <%= error.message %>\n' )( r );
 	beep();
 
@@ -78,11 +80,12 @@ const errorHandler = r => {
  * Task: `browser-sync`.
  *
  * Live Reloads, CSS injections, Localhost tunneling.
+ *
  * @link http://www.browsersync.io/docs/options/
  *
  * @param {Mixed} done Done.
  */
-const browsersync = done => {
+const browsersync = (done) => {
 	browserSync.init({
 		proxy: config.projectURL,
 		open: config.browserAutoOpen,
@@ -93,7 +96,7 @@ const browsersync = done => {
 };
 
 // Helper function to allow browser reload with Gulp 4.
-const reload = done => {
+const reload = (done) => {
 	browserSync.reload();
 	done();
 };
@@ -262,6 +265,10 @@ gulp.task( 'customJS', () => {
 			})
 		)
 		.pipe( remember( config.jsCustomSRC ) ) // Bring all files back to stream.
+		.pipe(order( [
+			'prototypes/*.js',
+			'*.js',
+		] ) )
 		.pipe( concat( config.jsCustomFile + '.js' ) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe( gulp.dest( config.jsCustomDestination ) )
@@ -334,6 +341,7 @@ gulp.task( 'JS', () => {
  * again, do it with the command `gulp images`.
  *
  * Read the following to change these options.
+ *
  * @link https://github.com/sindresorhus/gulp-imagemin
  */
 gulp.task( 'images', () => {
