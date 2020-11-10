@@ -182,9 +182,9 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 function artists_endpoint() {
-	register_rest_route( 'artists', '/search(?:/(?P<id>([a-zA-Z0-9]|%20)+)+)?', array(
+	register_rest_route( 'britaprinz/v1', '/artists/search(?:/(?P<id>([a-zA-Z0-9]|%20)+)+)?', array(
 		'methods'	=> WP_REST_Server::READABLE,
-		'callback'	=> 'get_artists',
+		'callback'	=> 'bp_get_artists',
 		'permission_callback' => '__return_true',
 	) ); 
 }
@@ -192,7 +192,7 @@ function artists_endpoint() {
 
 add_action( 'rest_api_init', 'artists_endpoint' );
 
-function get_artists( $request ) {
+function bp_get_artists( $request ) {
 	$search = urldecode( $request['id'] );
 
 	$args = array(
@@ -232,7 +232,7 @@ function get_artists( $request ) {
 }
 
 
-function artworks_rest_fields() {
+function bp_artworks_rest_fields() {
 	register_rest_field( 'artwork', 'artwork_image_src', array(
 		'get_callback'		=> 'bp_rest_image',
 		'update_callback'	=> null,
@@ -263,7 +263,7 @@ function artworks_rest_fields() {
 		'schema'			=> null,
 	) );
 }
-add_action( 'rest_api_init', 'artworks_rest_fields' );
+add_action( 'rest_api_init', 'bp_artworks_rest_fields' );
 
 function bp_rest_image( $object, $field_name, $request ) {
 	$image = wp_get_attachment_image( $object['featured_media'], 'full' );
@@ -324,11 +324,11 @@ function bp_load_scripts() {
 		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri('assets/js/ajax.js'), array(), BRITAPRINZ_THEME_VERSION, true );
 		
 		wp_localize_script( 'britaprinz-ajax', 'ajax_var', array(
-			'artworkUrl'	=> rest_url( '/wp/v2/artwork?artist=' ),
+			'artworkUrl'	=> rest_url( '/wp/v2/artwork' ),
 			'artistUrl'		=> rest_url( '/wp/v2/artist' ),
-			'searchUrl'	=> rest_url( '/artists/search' ),
+			'searchUrl'	=> rest_url( 'britaprinz/v1/artists/search' ),
 			'nonce'	=> wp_create_nonce( 'wp_rest' ),
-			'lang'	=> defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : '',
+			// 'lang'	=> defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : '',
 			) );
 		}
 		

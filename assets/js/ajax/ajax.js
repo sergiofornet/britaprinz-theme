@@ -1,8 +1,6 @@
 ( function() {
 	const { nonce } = ajax_var;
-	let { lang, searchUrl } = ajax_var;
-	lang = lang ? `${ lang }/` : '';
-	searchUrl = `${ searchUrl.slice( 0, searchUrl.indexOf( 'wp-json' ) ) }${ lang }${ searchUrl.slice( searchUrl.indexOf( 'wp-json' ) ) }`;
+	const { lang, searchUrl } = ajax_var;
 
 	const headers = new Headers( {
 		'Content-Type': 'application/json',
@@ -47,19 +45,16 @@
 		event.preventDefault();
 
 		const { artist } = event.target.dataset;
-		const artworksUrl = ajax.artworkUrl + artist + '&order=asc&orderby=slug';
-		const artistUrl = `${ ajax.artistUrl }/${ artist }`;
 
-		const fixedArtworksUrl = `${ artworksUrl.slice( 0, artworksUrl.indexOf( 'wp-json' ) ) }${ lang }${ artworksUrl.slice( artworksUrl.indexOf( 'wp-json' ) ) }`;
-
-		const fixedArtistUrl = `${ artistUrl.slice( 0, artistUrl.indexOf( 'wp-json' ) ) }${ lang }${ artistUrl.slice( artistUrl.indexOf( 'wp-json' ) ) }`;
+		const artworksUrl = `${ ajax.artworkUrl }?artist=${ artist }&order=asc&orderby=slug`;
+		const artistUrl = `${ ajax.artistUrl }${ artist }`;
 
 		target.innerHTML = ''; // empty artworks container
 
 		target.classList.add('loading');
 
 		// Fetch artworks asynchronously
-		asyncFetch( fixedArtworksUrl, options).then( ( jsonResponse ) => {
+		asyncFetch( artworksUrl, options).then( ( jsonResponse ) => {
 			const html = artworksList(jsonResponse);
 
 			target.insertAdjacentHTML( 'beforeend', html );
@@ -84,7 +79,6 @@
 					const { artwork } = thumbnailEvent.currentTarget.dataset;
 
 					if (jsonResponse.some((item) => item.id === parseInt(artwork))) {
-						// console.log(jsonResponse);
 						artworkGallery.innerHTML = '';
 						const slidesContainer = document.createElement('div');
 						slidesContainer.classList.add('slides');
@@ -110,7 +104,7 @@
 		}).then(() => target.classList.remove('loading'));
 
 		// Fetch artist info asynchronously
-		asyncFetch( fixedArtistUrl, options).then( ( jsonResponse ) => {
+		asyncFetch( artistUrl, options).then( ( jsonResponse ) => {
 			let html;
 			const { name, description } = jsonResponse;
 
@@ -182,6 +176,6 @@
 
 	//
 	searchInput.addEventListener('keyup', () => {
-		artistsList(`${ searchUrl }/${ searchInput.value }`, fetchOptions, artistsContainer);
+		artistsList(`${ searchUrl }${ searchInput.value }`, fetchOptions, artistsContainer);
 	});
 }() );

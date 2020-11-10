@@ -20,8 +20,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   var _ajax_var2 = ajax_var,
       lang = _ajax_var2.lang,
       searchUrl = _ajax_var2.searchUrl;
-  lang = lang ? "".concat(lang, "/") : '';
-  searchUrl = "".concat(searchUrl.slice(0, searchUrl.indexOf('wp-json'))).concat(lang).concat(searchUrl.slice(searchUrl.indexOf('wp-json')));
   var headers = new Headers({
     'Content-Type': 'application/json',
     'X-WP-Nonce': nonce
@@ -61,15 +59,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   var artistArtworks = function artistArtworks(event, ajax, target, options) {
     event.preventDefault();
     var artist = event.target.dataset.artist;
-    var artworksUrl = ajax.artworkUrl + artist + '&order=asc&orderby=slug';
-    var artistUrl = "".concat(ajax.artistUrl, "/").concat(artist);
-    var fixedArtworksUrl = "".concat(artworksUrl.slice(0, artworksUrl.indexOf('wp-json'))).concat(lang).concat(artworksUrl.slice(artworksUrl.indexOf('wp-json')));
-    var fixedArtistUrl = "".concat(artistUrl.slice(0, artistUrl.indexOf('wp-json'))).concat(lang).concat(artistUrl.slice(artistUrl.indexOf('wp-json')));
+    var artworksUrl = "".concat(ajax.artworkUrl, "?artist=").concat(artist, "&order=asc&orderby=slug");
+    var artistUrl = "".concat(ajax.artistUrl).concat(artist);
     target.innerHTML = ''; // empty artworks container
 
     target.classList.add('loading'); // Fetch artworks asynchronously
 
-    asyncFetch(fixedArtworksUrl, options).then(function (jsonResponse) {
+    asyncFetch(artworksUrl, options).then(function (jsonResponse) {
       var html = artworksList(jsonResponse);
       target.insertAdjacentHTML('beforeend', html);
       var artworkList = document.querySelectorAll('.artwork-list .artwork');
@@ -92,7 +88,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           if (jsonResponse.some(function (item) {
             return item.id === parseInt(artwork);
           })) {
-            // console.log(jsonResponse);
             artworkGallery.innerHTML = '';
             var slidesContainer = document.createElement('div');
             slidesContainer.classList.add('slides');
@@ -112,7 +107,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return target.classList.remove('loading');
     }); // Fetch artist info asynchronously
 
-    asyncFetch(fixedArtistUrl, options).then(function (jsonResponse) {
+    asyncFetch(artistUrl, options).then(function (jsonResponse) {
       var html;
       var name = jsonResponse.name,
           description = jsonResponse.description;
@@ -183,7 +178,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   artistsList(searchUrl, fetchOptions, artistsContainer); //
 
   searchInput.addEventListener('keyup', function () {
-    artistsList("".concat(searchUrl, "/").concat(searchInput.value), fetchOptions, artistsContainer);
+    artistsList("".concat(searchUrl).concat(searchInput.value), fetchOptions, artistsContainer);
   });
 })();
 "use strict";
