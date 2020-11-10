@@ -1,9 +1,12 @@
 "use strict";
 
+/**
+ * Slider prototype definition
+ *
+ * @param {HTMLElement} slider
+ */
 function Slider(slider) {
   var _this = this;
-
-  var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 4000;
 
   if (!(slider instanceof Element)) {
     throw new Error('No slider passed in');
@@ -12,7 +15,6 @@ function Slider(slider) {
 
   this.slides = slider.querySelector('.slides');
   this.slider = slider;
-  this.delay = delay;
   var prevButton = slider.querySelector('.previous-slide');
   var nextButton = slider.querySelector('.next-slide'); // when this slider is created, run the start slider function
 
