@@ -1,4 +1,4 @@
-button,
+button:not(.initial__button):not(.menu-toggle),
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
@@ -20,29 +20,6 @@ input[type="submit"] {
 		border-color: $color__border-button-focus;
 	}
 
-	// main menu
-	&.menu-toggle {
-		border: none;
-		background: none;
-		color: black;
-		padding: 0;
-		position: relative;
-
-		&::after {
-			content: ">";
-			position: absolute;
-			top: calc(50% - .5em);
-			left: calc(100% + .5em);
-			transition: all .5s ease-in-out;
-			transform: rotate(90deg);
-			transform-origin: center;
-		}
-
-		.toggled &::after {
-			transform: rotate(-90deg);
-		}
-	}
-
 	// artists list
 	&.artist__button {
 		color: black;
@@ -53,36 +30,6 @@ input[type="submit"] {
 
 		&:hover {
 			text-decoration: underline;
-		}
-	}
-
-	// initial lists
-	&.initial__button {
-		color: black;
-		padding: 0;
-		background: none;
-		border: none;
-		transition: all .2s ease-in-out;
-		position: relative;
-
-		&:hover {
-			color: white;
-		}
-
-		&::after{
-			content: "";
-			position: absolute;
-			background-color: transparent;
-			width: 1.5em;
-			height: 1.5em;
-			top: calc(50% - .75em);
-			left: calc(50% - .75em);
-			border-radius: 50%;
-			z-index: -1;
-		}
-
-		&:hover::after{
-			background-color: black;
 		}
 	}
 

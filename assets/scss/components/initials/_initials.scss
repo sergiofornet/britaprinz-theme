@@ -1,0 +1,46 @@
+.initials__container {
+
+	.initial__button {
+		color: black;
+		padding: 0;
+		background: none;
+		border: none;
+		transition: all .2s ease-in-out;
+		position: relative;
+
+		&::after{
+			content: "";
+			position: absolute;
+			background-color: transparent;
+			width: 1.5em;
+			height: 1.5em;
+			top: calc(50% - .75em);
+			left: calc(50% - .75em);
+			border-radius: 50%;
+			z-index: -1;
+		}
+
+		&:hover {
+			color: white;
+
+			&::after {
+				background-color: black;
+			}
+		}
+
+		&.active {
+			color: white;
+
+			&::after {
+				background-color: black;
+			}
+
+			&:hover {
+				filter: invert(100%);
+			}
+		}
+
+
+	}
+
+}
