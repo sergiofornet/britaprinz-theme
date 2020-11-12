@@ -31,9 +31,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   };
   var searchInput = document.querySelector('.artist-search');
   var artistsContainer = document.querySelector('.artists__container');
+  var groupObserver = new IntersectionObserver(initialsCallback, {
+    rootMargin: '0px 0px -85% 0px',
+    root: artistsContainer,
+    threshold: 0.5
+  });
   var artworksContainer = document.querySelector('.artworks__container');
   var artworkGallery = document.querySelector('.artwork__gallery');
-  var initialsLinks = document.querySelectorAll('.initial__button');
+  var initialsLinks = document.querySelectorAll('.initial__button'); // Scroll to selected initial group on click
+
   initialsLinks.forEach(function (initial) {
     var moveTo = new MoveTo({
       tolerance: 10,
@@ -48,6 +54,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
   });
   /**
+   * Callback function for groupObserver observer
+   * Highlights the intersecting group's initial on initials container
+   *
+   * @param {Array} entries - Array of intersection entries
+   */
+
+  function initialsCallback(entries) {
+    entries.forEach(function (entry) {
+      var initial = document.querySelector(".initial__button[data-target*=".concat(entry.target.dataset.initial, "]"));
+
+      if (entry.intersectionRatio >= 0.5) {
+        initial.classList.add('active');
+      } else {
+        initial.classList.remove('active');
+      }
+    });
+  }
+  /**
    * Displays info and artworks from the artist on which the user clicked
    *
    * @param {Event} event - The event which triggers the function
@@ -55,6 +79,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
    * @param {HTMLElement} target - HTML target element
    * @param {Object} options - Request options object
    */
+
 
   var artistArtworks = function artistArtworks(event, ajax, target, options) {
     event.preventDefault();
@@ -165,6 +190,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             group.insertAdjacentElement('beforeend', button);
           });
           target.insertAdjacentElement('beforeend', group);
+          groupObserver.observe(group);
         });
       } else {
         target.innerHTML = jsonResponse;
@@ -175,7 +201,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }; // Show artists on load
 
 
-  artistsList(searchUrl, fetchOptions, artistsContainer); //
+  artistsList(searchUrl, fetchOptions, artistsContainer); // Filter artists by input value
 
   searchInput.addEventListener('keyup', function () {
     artistsList("".concat(searchUrl).concat(searchInput.value), fetchOptions, artistsContainer);

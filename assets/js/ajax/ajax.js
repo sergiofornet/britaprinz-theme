@@ -15,10 +15,18 @@
 
 	const searchInput = document.querySelector('.artist-search');
 	const artistsContainer = document.querySelector('.artists__container');
+
+	const groupObserver = new IntersectionObserver(initialsCallback, {
+		rootMargin: '0px 0px -85% 0px',
+		root: artistsContainer,
+		threshold: 0.5,
+	});
+
 	const artworksContainer = document.querySelector( '.artworks__container' );
 	const artworkGallery = document.querySelector( '.artwork__gallery' );
 	const initialsLinks = document.querySelectorAll( '.initial__button' );
 
+	// Scroll to selected initial group on click
 	initialsLinks.forEach((initial) => {
 		const moveTo = new MoveTo({
 			tolerance: 10,
@@ -32,6 +40,23 @@
 			moveTo.move(scrollTo);
 		});
 	});
+
+	/**
+	 * Callback function for groupObserver observer
+	 * Highlights the intersecting group's initial on initials container
+	 *
+	 * @param {Array} entries - Array of intersection entries
+	 */
+	function initialsCallback (entries) {
+		entries.forEach((entry) => {
+			const initial = document.querySelector(`.initial__button[data-target*=${ entry.target.dataset.initial }]`);
+			if (entry.intersectionRatio >= 0.5) {
+				initial.classList.add('active');
+			} else {
+				initial.classList.remove('active');
+			}
+		});
+	}
 
 	/**
 	 * Displays info and artworks from the artist on which the user clicked
@@ -164,6 +189,7 @@
 						});
 
 						target.insertAdjacentElement('beforeend', group);
+						groupObserver.observe(group);
 					});
 				} else {
 					target.innerHTML = jsonResponse;
@@ -174,7 +200,7 @@
 	// Show artists on load
 	artistsList(searchUrl, fetchOptions, artistsContainer);
 
-	//
+	// Filter artists by input value
 	searchInput.addEventListener('keyup', () => {
 		artistsList(`${ searchUrl }${ searchInput.value }`, fetchOptions, artistsContainer);
 	});
