@@ -1,32 +1,53 @@
-.main-navigation {
-	display: block;
-	width: 100%;
+// Menu toggle
+.menu-toggle {
+	border: none;
+	background: none;
+	color: black;
+	padding: 0;
+	position: relative;
+	line-height: 1;
+	z-index: 1000;
+	text-transform: uppercase;
 
-	// Menu toggle
-	.menu-toggle {
-		border: none;
-		background: none;
-		color: black;
-		padding: 0;
-		position: relative;
-		line-height: 1;
-
-		&::after {
-			content: "🔽";
-			position: absolute;
-			top: calc(50% - .5em);
-			left: calc(100% + .5em);
-			transition: all .5s ease-in-out;
-			transform: rotate(0deg);
-			transform-origin: center;
-		}
-
+	&::after {
+		content: "🔽";
+		position: absolute;
+		top: calc(50% - .5em);
+		left: calc(100% + .5em);
+		transition: all .5s ease-in-out;
+		transform: rotate(0deg);
+		transform-origin: center;
 	}
 
+	&.toggled::after {
+		transform: rotate(180deg);
+	}
+}
+
+.main-navigation {
+	display: block;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 100;
+	background-color: white;
+	text-transform: uppercase;
+	
+	transform: translateY(-200%);
+	// transition: transform .5s ease-in-out;
+	
+	@media (min-width: 64em) {
+		display: flex;
+		height: 100%;
+		align-content: center;
+		align-items: center;
+		justify-content: center;
+	}
+	
 	&.toggled {
-		.menu-toggle::after {
-			transform: rotate(180deg);
-		}	
+		transform: translateY(0);
 	}
 
 	ul {
@@ -34,29 +55,35 @@
 		list-style: none;
 		margin: 0;
 		padding-left: 0;
-		// flex-flow: column nowrap;
+		flex-flow: column nowrap;
+
+		@media (min-width: 64em) {
+			flex-flow: row;
+		}
 
 		ul {
-			box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-			// float: left;
-			// position: absolute;
-			// top: 100%;
-			// left: -999em;
-			// z-index: 99999;
 			flex-flow: column nowrap;
+			margin-bottom: .5em;
+			padding-left: 1em;
 
 			ul {
-				// left: -999em;
 				top: 0;
 			}
 
 			li {
+				position: relative;
+
+				&::before {
+					content: ">";
+					position: absolute;
+					left: -1em;
+				}
 
 				&:hover > ul,
 				&.focus > ul {
 					display: block;
 					left: auto;
-				}
+				}	
 			}
 
 			a {
@@ -89,6 +116,10 @@
 	a {
 		display: block;
 		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 
 	.current_page_item > a,
@@ -102,17 +133,6 @@
 // .menu-toggle,
 .main-navigation.toggled ul {
 	display: flex;
-}
-
-@media screen and (min-width: 37.5em) {
-
-	.menu-toggle {
-		// display: none;
-	}
-
-	.main-navigation ul {
-		display: none;
-	}
 }
 
 .comment-navigation,
