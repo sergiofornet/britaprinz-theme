@@ -20,6 +20,10 @@ input[type="submit"] {
 		border-color: $color__border-button-focus;
 	}
 
+	&:focus {
+		outline: 1px solid dotted;
+	}
+
 	// artists list
 	&.artist__button {
 		color: black;
