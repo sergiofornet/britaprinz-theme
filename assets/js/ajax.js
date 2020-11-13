@@ -163,7 +163,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       if (Array.isArray(jsonResponse)) {
         // Create an a array of unique 'order name' initials
         var initialsSet = new Set(jsonResponse.map(function (item) {
-          return item.order[0];
+          return item.order[0].toLowerCase();
         }));
 
         var initials = _toConsumableArray(initialsSet); // Create a group for every initial
@@ -176,7 +176,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           group.insertAdjacentHTML('afterbegin', "\n\t\t\t\t\t\t\t<span class=\"artists-group__label\">".concat(initial, "</span>\n\t\t\t\t\t\t")); // Group every artist by its initial
 
           jsonResponse.filter(function (item) {
-            return item.order[0] === initial;
+            return item.order[0].toLowerCase() === initial;
           }).forEach(function (item) {
             var button = document.createElement('button');
             button.dataset.artist = item.term_id;

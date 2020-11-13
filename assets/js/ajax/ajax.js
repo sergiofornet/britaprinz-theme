@@ -160,7 +160,7 @@
 
 				if (Array.isArray(jsonResponse)) {
 					// Create an a array of unique 'order name' initials
-					const initialsSet = new Set(jsonResponse.map((item) => item.order[ 0 ]));
+					const initialsSet = new Set(jsonResponse.map((item) => item.order[ 0 ].toLowerCase()));
 					const initials = [...initialsSet];
 
 					// Create a group for every initial
@@ -173,7 +173,7 @@
 						`);
 
 						// Group every artist by its initial
-						jsonResponse.filter((item) => item.order[ 0 ] === initial).forEach((item) => {
+						jsonResponse.filter((item) => item.order[ 0 ].toLowerCase() === initial).forEach((item) => {
 							const button = document.createElement('button');
 							button.dataset.artist = item.term_id;
 							button.classList.add('artist__button');
