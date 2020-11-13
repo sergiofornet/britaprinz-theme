@@ -41,6 +41,15 @@
 		}
 
 
+		&:focus {
+			outline: none;
+
+			&::after {
+				border: 1px black dotted;
+			}
+		}
+
+
 	}
 
 }
