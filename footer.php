@@ -17,7 +17,9 @@ $contact = carbon_get_theme_option( 'bp_theme_contact' );
 	<footer id="colophon" class="site-footer">
 		<div class="site-info">
 			<div>
-			
+				<?php echo esc_html ( bloginfo( 'name' ) ); ?>
+			</div>
+			<div>
 				<?php echo wpautop( esc_html( $contact ) ); ?>
 			
 			</div>
