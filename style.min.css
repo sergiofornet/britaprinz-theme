@@ -123,6 +123,8 @@ textarea{width:100%}
 .updated:not(.published){display:none}
 .page-content,.entry-content,.entry-summary{margin:1.5em 0 0}
 .page-links{clear:both;margin:0 0 1.5em}
+.artwork__info{display:none}
+.artwork__info.visible{display:block}
 .comment-content a{word-wrap:break-word}
 .bypostauthor{display:block}
 .widget{margin:0 0 1.5em}

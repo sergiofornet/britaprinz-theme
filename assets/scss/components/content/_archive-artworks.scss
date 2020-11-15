@@ -1,0 +1,7 @@
+.artwork__info {
+	display: none;
+
+	&.visible {
+		display: block;
+	}
+}
