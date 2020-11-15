@@ -114,7 +114,7 @@ textarea{width:100%}
 .comment-navigation .nav-previous,.posts-navigation .nav-previous,.post-navigation .nav-previous{-webkit-box-flex:1;-ms-flex:1 0 50%;flex:1 0 50%}
 .comment-navigation .nav-next,.posts-navigation .nav-next,.post-navigation .nav-next{text-align:end;-webkit-box-flex:1;-ms-flex:1 0 50%;flex:1 0 50%}
 .site-header{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,auto));-webkit-box-align:center;-ms-flex-align:center;align-items:center;justify-items:start}
-.menu-toggle{border:0;background:0;color:black;padding:0;position:relative;line-height:1;z-index:1000;text-transform:uppercase}
+.menu-toggle{border:0;background:0;color:black;padding:0;position:relative;line-height:1;z-index:200;text-transform:uppercase}
 .menu-toggle::after{content:"🔽";position:absolute;top:calc(50% - .5em);left:calc(100% + .5em);-webkit-transition:all .5s ease-in-out;transition:all .5s ease-in-out;-webkit-transform:rotate(0);transform:rotate(0);-webkit-transform-origin:center;transform-origin:center}
 .menu-toggle.toggled::after{-webkit-transform:rotate(180deg);transform:rotate(180deg)}
 .site-footer{display:grid;grid-template-columns:repeat(auto-fit,minmax(375px,auto))}
