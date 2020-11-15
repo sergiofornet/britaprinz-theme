@@ -149,6 +149,9 @@ textarea{width:100%}
 .slide img{max-width:initial;height:initial;max-height:100%;width:auto}
 .slide.current{z-index:10;opacity:100%}
 .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,200px));gap:2rem;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:2rem}
+.artwork-gallery{position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:200}
+.artwork-gallery.hidden{display:none}
+.artwork-gallery .artwork-gallery__close{position:absolute;top:0;right:0}
 .artists__initials .initial__button{color:black;padding:0;background:0;border:0;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;position:relative}
 .artists__initials .initial__button::after{content:"";position:absolute;background-color:transparent;width:1.5em;height:1.5em;top:calc(50% - .75em);left:calc(50% - .75em);border-radius:50%;z-index:-1}
 .artists__initials .initial__button:hover{color:white}
