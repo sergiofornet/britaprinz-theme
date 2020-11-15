@@ -89,11 +89,10 @@
 
 			// Toggles artwork info visibility
 			artworkList.forEach( ( artwork ) => {
-				const stuff = artwork.querySelector( '.artwork__stuff' );
+				const artworkInfo = artwork.querySelector( '.artwork__info' );
 				const artworkTitle = artwork.querySelector( '.artwork__title' );
 				artworkTitle.addEventListener( 'click', ( artworkEvent ) => {
-					artworkEvent.preventDefault();
-					stuff.classList.toggle( 'visible' );
+					artworkInfo.classList.toggle( 'visible' );
 				} );
 			} );
 
