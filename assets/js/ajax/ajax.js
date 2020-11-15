@@ -23,7 +23,10 @@
 	});
 
 	const artworks = document.querySelector( '.artworks' );
-	const artworkGallery = document.querySelector( '.artwork__gallery' );
+	const artworkGallery = document.querySelector( '.artwork-gallery' );
+	artworkGallery.querySelector('.artwork-gallery__close button').addEventListener('click', () => artworkGallery.classList.toggle('hidden'));
+
+	const artworkSlider = artworkGallery.querySelector( '.artwork-gallery__slider' );
 	const initialButtons = document.querySelectorAll( '.initial__button' );
 
 	// Scroll to selected initial group on click
@@ -100,26 +103,28 @@
 			artworksThumbnails.forEach((thumbnail) => {
 				thumbnail.addEventListener('click', (thumbnailEvent) => {
 					thumbnailEvent.preventDefault();
+					artworkGallery.classList.toggle('hidden');
+
 					const { artwork } = thumbnailEvent.currentTarget.dataset;
 
 					if (jsonResponse.some((item) => item.id === parseInt(artwork))) {
-						artworkGallery.innerHTML = '';
+						artworkSlider.innerHTML = '';
 						const slidesContainer = document.createElement('div');
 						slidesContainer.classList.add('slides');
-						artworkGallery.insertAdjacentElement('afterbegin', slidesContainer);
+						artworkSlider.insertAdjacentElement('afterbegin', slidesContainer);
 						const slides = jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery;
 						slides.forEach((slide) => slidesContainer.insertAdjacentHTML('beforeend', `
 							<div class="slide">
 								${ slide }
 							</div>
 						`));
-						artworkGallery.insertAdjacentHTML('beforeend', `
+						artworkSlider.insertAdjacentHTML('beforeend', `
 							<div class="controls">
 								<button class="previous-slide">←</button>
 								<button class="next-slide">→</button>
 							</div>`);
 
-						const slider = new Slider(artworkGallery);
+						const slider = new Slider(artworkSlider);
 
 						// slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
 					}

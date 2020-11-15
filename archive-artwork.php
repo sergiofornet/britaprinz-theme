@@ -44,7 +44,12 @@ get_header();
 				</div>
 				<div class="artworks"></div>
 			</div>
-			<div class="artwork__gallery"></div>
+			<div class="artwork-gallery hidden">
+				<div class="artwork-gallery__close">
+					<button class="close">&times;</button>
+				</div>
+				<div class="artwork-gallery__slider"></div>
+			</div>
 
 		<?php
 		// the_posts_navigation();

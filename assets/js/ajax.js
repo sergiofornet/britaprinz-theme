@@ -37,7 +37,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     threshold: 0.5
   });
   var artworks = document.querySelector('.artworks');
-  var artworkGallery = document.querySelector('.artwork__gallery');
+  var artworkGallery = document.querySelector('.artwork-gallery');
+  artworkGallery.querySelector('.artwork-gallery__close button').addEventListener('click', function () {
+    return artworkGallery.classList.toggle('hidden');
+  });
+  var artworkSlider = artworkGallery.querySelector('.artwork-gallery__slider');
   var initialButtons = document.querySelectorAll('.initial__button'); // Scroll to selected initial group on click
 
   initialButtons.forEach(function (initial) {
@@ -107,23 +111,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       artworksThumbnails.forEach(function (thumbnail) {
         thumbnail.addEventListener('click', function (thumbnailEvent) {
           thumbnailEvent.preventDefault();
+          artworkGallery.classList.toggle('hidden');
           var artwork = thumbnailEvent.currentTarget.dataset.artwork;
 
           if (jsonResponse.some(function (item) {
             return item.id === parseInt(artwork);
           })) {
-            artworkGallery.innerHTML = '';
+            artworkSlider.innerHTML = '';
             var slidesContainer = document.createElement('div');
             slidesContainer.classList.add('slides');
-            artworkGallery.insertAdjacentElement('afterbegin', slidesContainer);
+            artworkSlider.insertAdjacentElement('afterbegin', slidesContainer);
             var slides = jsonResponse.filter(function (item) {
               return item.id === parseInt(artwork);
             })[0].artwork_image_gallery;
             slides.forEach(function (slide) {
               return slidesContainer.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"slide\">\n\t\t\t\t\t\t\t\t".concat(slide, "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t"));
             });
-            artworkGallery.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"controls\">\n\t\t\t\t\t\t\t\t<button class=\"previous-slide\">\u2190</button>\n\t\t\t\t\t\t\t\t<button class=\"next-slide\">\u2192</button>\n\t\t\t\t\t\t\t</div>");
-            var slider = new Slider(artworkGallery); // slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
+            artworkSlider.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"controls\">\n\t\t\t\t\t\t\t\t<button class=\"previous-slide\">\u2190</button>\n\t\t\t\t\t\t\t\t<button class=\"next-slide\">\u2192</button>\n\t\t\t\t\t\t\t</div>");
+            var slider = new Slider(artworkSlider); // slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
           }
         });
       });
