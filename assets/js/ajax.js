@@ -30,22 +30,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     credentials: 'same-origin'
   };
   var searchInput = document.querySelector('.artist-search');
-  var artistsContainer = document.querySelector('.artists__container');
+  var artistsList = document.querySelector('.artists__list');
   var groupObserver = new IntersectionObserver(initialsCallback, {
     rootMargin: '0px 0px -85% 0px',
-    root: artistsContainer,
+    root: artistsList,
     threshold: 0.5
   });
-  var artworksContainer = document.querySelector('.artworks__container');
+  var artworks = document.querySelector('.artworks');
   var artworkGallery = document.querySelector('.artwork__gallery');
-  var initialsLinks = document.querySelectorAll('.initial__button'); // Scroll to selected initial group on click
+  var initialButtons = document.querySelectorAll('.initial__button'); // Scroll to selected initial group on click
 
-  initialsLinks.forEach(function (initial) {
+  initialButtons.forEach(function (initial) {
     var moveTo = new MoveTo({
       tolerance: 10,
       duration: 500,
       easing: 'easeOutQuart',
-      container: artistsContainer
+      container: artistsList
     });
     initial.addEventListener('click', function () {
       var target = initial.dataset.target;
@@ -93,7 +93,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     asyncFetch(artworksUrl, options).then(function (jsonResponse) {
       var html = artworksList(jsonResponse);
       target.insertAdjacentHTML('beforeend', html);
-      var artworkList = document.querySelectorAll('.artwork-list .artwork');
+      var artworkList = document.querySelectorAll('.artworks__list .artwork');
       var artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a'); // Toggles artwork info visibility
 
       artworkList.forEach(function (artwork) {
@@ -138,7 +138,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           description = jsonResponse.description;
 
       if (_typeof(jsonResponse) === 'object') {
-        html = "\n\t\t\t\t<h2>".concat(name, "</h2>\n\t\t\t\t<p>").concat(description, "</p>\n\t\t\t\t");
+        html = "\n\t\t\t\t<div class=\"artworks__artist\">\n\t\t\t\t\t<h2 class=\"artist__name\">".concat(name, "</h2>\n\t\t\t\t\t<p class=\"artist__bio\">").concat(description, "</p>\n\t\t\t\t</div>\n\t\t\t\t");
       } else {
         html = artist;
       }
@@ -155,7 +155,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
    */
 
 
-  var artistsList = function artistsList(url, options, target) {
+  var filterArtists = function filterArtists(url, options, target) {
     target.classList.add('loading');
     asyncFetch(url, options).then(function (jsonResponse) {
       target.innerHTML = '';
@@ -185,7 +185,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             button.insertAdjacentText('afterbegin', item.name); // Display artist info and its artworks
 
             button.addEventListener('click', function (event) {
-              artistArtworks(event, ajax_var, artworksContainer, fetchOptions);
+              artistArtworks(event, ajax_var, artworks, fetchOptions);
             });
             group.insertAdjacentElement('beforeend', button);
           });
@@ -201,10 +201,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }; // Show artists on load
 
 
-  artistsList(searchUrl, fetchOptions, artistsContainer); // Filter artists by input value
+  filterArtists(searchUrl, fetchOptions, artistsList); // Filter artists by input value
 
   searchInput.addEventListener('keyup', function () {
-    artistsList("".concat(searchUrl).concat(searchInput.value), fetchOptions, artistsContainer);
+    filterArtists("".concat(searchUrl).concat(searchInput.value), fetchOptions, artistsList);
   });
 })();
 "use strict";
@@ -215,14 +215,14 @@ function artworksList(artworks) {
   var html = '';
 
   if (_typeof(artworks) === 'object') {
-    html += '<ul class="artwork-list">';
+    html += '<ul class="artworks__list">';
     artworks.forEach(function (element) {
       var _element$artwork_tech = element.artwork_techniques,
           featuredTechniques = _element$artwork_tech.featured_techniques,
           otherTechniques = _element$artwork_tech.other_techniques;
-      html += "\n\t\t\t<li class=\"artwork\" key=\"artwork-".concat(element.slug, "\">\n\t\t\t\t<div class=\"artwork__title\"><a href=\"").concat(element.link, "\">").concat(element.title.rendered, "</a></div>\n\t\t\t\t<div class=\"artwork__stuff\">\n\t\t\t\t\t").concat(element.artwork_image_src ? "<div class=\"artwork__thumbnail\"><a href=\"".concat(element.link, "\" data-artwork=\"").concat(element.id, "\">").concat(element.artwork_image_src, "</a></div>") : '', "\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_year, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_condition, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_copy, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_paper, "</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_size, "</div>\n\t\t\t\t\t").concat(element.artwork_loan ? "<div class=\"artwork__info\">".concat(element.artwork_loan, "</div>") : '', "\n\t\t\t\t\t").concat(element.artwork_sale ? "<div class=\"artwork__info\">".concat(element.artwork_sale, "</div>") : '', "\n\t\t\t\t\t<div class=\"artwork__techniques\">\n\t\t\t\t\t\t").concat(featuredTechniques.map(function (technique) {
-        return "<a href=\"".concat(technique[1], "\">").concat(technique[0], "</a>");
-      }).join('\n'), "\n\t\t\t\t\t\t").concat(otherTechniques && "<span>".concat(otherTechniques, "</span>"), "\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"artwork__info\">").concat(element.bp_artwork_info, "</div>\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t\t");
+      html += "\n\t\t\t<li class=\"artwork\" key=\"artwork-".concat(element.slug, "\">\n\t\t\t\t<div class=\"artwork__title\"><a href=\"").concat(element.link, "\">").concat(element.title.rendered, "</a></div>\n\t\t\t\t<div class=\"artwork__info\">\n\t\t\t\t\t").concat(element.artwork_image_src ? "<div class=\"artwork__thumbnail\"><a href=\"".concat(element.link, "\" data-artwork=\"").concat(element.id, "\">").concat(element.artwork_image_src, "</a></div>") : '', "\n\t\t\t\t\t<div class=\"artwork__year\">").concat(element.bp_artwork_year, "</div>\n\t\t\t\t\t<div class=\"artwork__condition\">").concat(element.bp_artwork_condition, "</div>\n\t\t\t\t\t<div class=\"artwork__copy\">").concat(element.bp_artwork_copy, "</div>\n\t\t\t\t\t<div class=\"artwork__paper\">").concat(element.bp_artwork_paper, "</div>\n\t\t\t\t\t<div class=\"artwork__size\">").concat(element.bp_artwork_size, "</div>\n\t\t\t\t\t").concat(element.artwork_loan ? "<div class=\"artwork__loan\">".concat(element.artwork_loan, "</div>") : '', "\n\t\t\t\t\t").concat(element.artwork_sale ? "<div class=\"artwork__sale\">".concat(element.artwork_sale, "</div>") : '', "\n\t\t\t\t\t<div class=\"artwork__techniques\">\n\t\t\t\t\t\t").concat(featuredTechniques.map(function (technique) {
+        return "<a class=\"technique\" href=\"".concat(technique[1], "\">").concat(technique[0], "</a>");
+      }).join('\n'), "\n\t\t\t\t\t\t").concat(otherTechniques && "<span>".concat(otherTechniques, "</span>"), "\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"artwork__description\">").concat(element.bp_artwork_info, "</div>\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t\t");
     });
     html += '</ul>';
   } else {

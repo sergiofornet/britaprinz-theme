@@ -24,9 +24,9 @@ get_header();
 
 			<input type="search" class="artist-search" autocomplete="off">
 			<div style="display: grid; grid-template-columns: 1fr 1fr;">
-				<div style="display: grid; grid-template-columns: 9fr 1fr; height:100vh">
-					<div class="artists__container" style="height: 100vh; overflow-y: scroll;"></div>
-					<div class="initials__container">
+				<div class="artists" style="display: grid; grid-template-columns: 9fr 1fr; height:100vh">
+					<div class="artists__list" style="height: 100vh; overflow-y: scroll;"></div>
+					<div class="artists__initials">
 					
 						<?php
 						foreach( range( 'a', 'z' ) as $initial) :
@@ -42,7 +42,7 @@ get_header();
 
 					</div>
 				</div>
-				<div class="artworks__container"></div>
+				<div class="artworks"></div>
 			</div>
 			<div class="artwork__gallery"></div>
 

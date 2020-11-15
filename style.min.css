@@ -149,15 +149,15 @@ textarea{width:100%}
 .slide img{max-width:initial;height:initial;max-height:100%;width:auto}
 .slide.current{z-index:10;opacity:100%}
 .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,200px));gap:2rem;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:2rem}
-.initials__container .initial__button{color:black;padding:0;background:0;border:0;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;position:relative}
-.initials__container .initial__button::after{content:"";position:absolute;background-color:transparent;width:1.5em;height:1.5em;top:calc(50% - .75em);left:calc(50% - .75em);border-radius:50%;z-index:-1}
-.initials__container .initial__button:hover{color:white}
-.initials__container .initial__button:hover::after{background-color:black}
-.initials__container .initial__button.active{color:white}
-.initials__container .initial__button.active::after{background-color:black}
-.initials__container .initial__button.active:hover{-webkit-filter:invert(100%);filter:invert(100%)}
-.initials__container .initial__button:focus{outline:0}
-.initials__container .initial__button:focus::after{border:1px black dotted}
+.artists__initials .initial__button{color:black;padding:0;background:0;border:0;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;position:relative}
+.artists__initials .initial__button::after{content:"";position:absolute;background-color:transparent;width:1.5em;height:1.5em;top:calc(50% - .75em);left:calc(50% - .75em);border-radius:50%;z-index:-1}
+.artists__initials .initial__button:hover{color:white}
+.artists__initials .initial__button:hover::after{background-color:black}
+.artists__initials .initial__button.active{color:white}
+.artists__initials .initial__button.active::after{background-color:black}
+.artists__initials .initial__button.active:hover{-webkit-filter:invert(100%);filter:invert(100%)}
+.artists__initials .initial__button:focus{outline:0}
+.artists__initials .initial__button:focus::after{border:1px black dotted}
 .infinite-scroll .posts-navigation,.infinite-scroll.neverending .site-footer{display:none}
 .infinity-end.neverending .site-footer{display:block}
 .screen-reader-text{border:0;clip:rect(1px,1px,1px,1px);-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute !important;width:1px;word-wrap:normal !important}

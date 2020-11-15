@@ -14,25 +14,25 @@
 	};
 
 	const searchInput = document.querySelector('.artist-search');
-	const artistsContainer = document.querySelector('.artists__container');
+	const artistsList = document.querySelector('.artists__list');
 
 	const groupObserver = new IntersectionObserver(initialsCallback, {
 		rootMargin: '0px 0px -85% 0px',
-		root: artistsContainer,
+		root: artistsList,
 		threshold: 0.5,
 	});
 
-	const artworksContainer = document.querySelector( '.artworks__container' );
+	const artworks = document.querySelector( '.artworks' );
 	const artworkGallery = document.querySelector( '.artwork__gallery' );
-	const initialsLinks = document.querySelectorAll( '.initial__button' );
+	const initialButtons = document.querySelectorAll( '.initial__button' );
 
 	// Scroll to selected initial group on click
-	initialsLinks.forEach((initial) => {
+	initialButtons.forEach((initial) => {
 		const moveTo = new MoveTo({
 			tolerance: 10,
 			duration: 500,
 			easing: 'easeOutQuart',
-			container: artistsContainer,
+			container: artistsList,
 		});
 		initial.addEventListener('click', () => {
 			const { target } = initial.dataset;
@@ -84,7 +84,7 @@
 
 			target.insertAdjacentHTML( 'beforeend', html );
 
-			const artworkList = document.querySelectorAll( '.artwork-list .artwork' );
+			const artworkList = document.querySelectorAll( '.artworks__list .artwork' );
 			const artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a');
 
 			// Toggles artwork info visibility
@@ -135,8 +135,10 @@
 
 			if ( typeof jsonResponse === 'object' ) {
 				html = `
-				<h2>${ name }</h2>
-				<p>${ description }</p>
+				<div class="artworks__artist">
+					<h2 class="artist__name">${ name }</h2>
+					<p class="artist__bio">${ description }</p>
+				</div>
 				`;
 			} else {
 				html = artist;
@@ -152,7 +154,7 @@
 	 * @param {Object} options - Request options object
 	 * @param {HTMLElement} target - HTML target element
 	 */
-	const artistsList = (url, options, target) => {
+	const filterArtists = (url, options, target) => {
 		target.classList.add('loading');
 		asyncFetch(url, options)
 			.then((jsonResponse) => {
@@ -182,7 +184,7 @@
 
 							// Display artist info and its artworks
 							button.addEventListener('click', (event) => {
-								artistArtworks(event, ajax_var, artworksContainer, fetchOptions);
+								artistArtworks(event, ajax_var, artworks, fetchOptions);
 							});
 
 							group.insertAdjacentElement('beforeend', button);
@@ -198,10 +200,10 @@
 	};
 
 	// Show artists on load
-	artistsList(searchUrl, fetchOptions, artistsContainer);
+	filterArtists(searchUrl, fetchOptions, artistsList);
 
 	// Filter artists by input value
 	searchInput.addEventListener('keyup', () => {
-		artistsList(`${ searchUrl }${ searchInput.value }`, fetchOptions, artistsContainer);
+		filterArtists(`${ searchUrl }${ searchInput.value }`, fetchOptions, artistsList);
 	});
 }() );
