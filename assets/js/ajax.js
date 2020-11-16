@@ -189,7 +189,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
             button.insertAdjacentText('afterbegin', item.name); // Display artist info and its artworks
 
             button.addEventListener('click', function (event) {
-              artistArtworks(event, ajax_var, artworks, fetchOptions);
+              if (event.currentTarget.classList.contains('inactive')) {
+                document.querySelector('.artist__button.active') && document.querySelector('.artist__button.active').classList.replace('active', 'inactive');
+                artistArtworks(event, ajax_var, artworks, fetchOptions);
+                event.currentTarget.classList.replace('inactive', 'active');
+              } else {
+                event.currentTarget.classList.replace('active', 'inactive');
+                artworks.innerHTML = '';
+              }
             });
             group.insertAdjacentElement('beforeend', button);
           });
