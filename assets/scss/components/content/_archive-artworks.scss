@@ -1,3 +1,15 @@
+.artwork__title {
+	border: none;
+	background-color: initial;
+	padding: 0;
+	color: black;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
 .artwork__info {
 	display: none;
 
