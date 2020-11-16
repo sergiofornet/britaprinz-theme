@@ -6,7 +6,7 @@ function artworksList (artworks) {
 			const { featured_techniques: featuredTechniques, other_techniques: otherTechniques } = element.artwork_techniques;
 			html += `
 			<li class="artwork" key="artwork-${ element.slug }">
-				<div class="artwork__title"><button>${ element.title.rendered }</button></div>
+				<button class="artwork__title">${ element.title.rendered }</button>
 				<div class="artwork__info">
 					${ element.artwork_image_src ? `<div class="artwork__thumbnail"><a href="${ element.link }" data-artwork="${ element.id }">${ element.artwork_image_src }</a></div>` : '' }
 					<div class="artwork__year">${ element.bp_artwork_year }</div>
