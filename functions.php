@@ -322,6 +322,11 @@ function bp_load_scripts() {
 	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri('assets/js/custom.js'), array(), BRITAPRINZ_THEME_VERSION, true );
 	
 	if ( is_post_type_archive( 'artwork' ) ) {
+		$query_artist = sanitize_text_field( get_query_var( 'display_artist' ) );
+
+		// var_dump(get_term_by( 'slug', $query_artist, 'artist')->term_id);
+		$artist_id = get_term_by( 'slug', $query_artist, 'artist')->term_id;
+
 		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri('assets/js/ajax.js'), array(), BRITAPRINZ_THEME_VERSION, true );
 		
 		wp_localize_script( 'britaprinz-ajax', 'ajax_var', array(
@@ -330,8 +335,16 @@ function bp_load_scripts() {
 			'searchUrl'	=> rest_url( 'britaprinz/v1/artists/search' ),
 			'nonce'	=> wp_create_nonce( 'wp_rest' ),
 			// 'lang'	=> defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : '',
+			'artistId' => $artist_id,
+			
 			) );
 		}
 		
 }
 add_action( 'wp_enqueue_scripts', 'bp_load_scripts' );
+
+function bp_custom_query_vars_filter($vars) {
+    $vars[] .= 'display_artist';
+    return $vars;
+}
+add_filter( 'query_vars', 'bp_custom_query_vars_filter' );
