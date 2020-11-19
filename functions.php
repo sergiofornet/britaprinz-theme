@@ -182,6 +182,12 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+ * Redirections.
+ */
+require_once get_template_directory() . '/inc/redirection.php';
+
+
 function artists_endpoint() {
 	register_rest_route( 'britaprinz/v1', '/artists/search(?:/(?P<id>([a-zA-Z0-9]|%20)+)+)?', array(
 		'methods'	=> WP_REST_Server::READABLE,
@@ -322,9 +328,7 @@ function bp_load_scripts() {
 	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri('assets/js/custom.js'), array(), BRITAPRINZ_THEME_VERSION, true );
 	
 	if ( is_post_type_archive( 'artwork' ) ) {
-		$query_artist = sanitize_text_field( get_query_var( 'display_artist' ) );
-
-		// var_dump(get_term_by( 'slug', $query_artist, 'artist')->term_id);
+		$query_artist = get_query_var( 'display_artist' );
 		$artist_id = get_term_by( 'slug', $query_artist, 'artist')->term_id;
 
 		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri('assets/js/ajax.js'), array(), BRITAPRINZ_THEME_VERSION, true );
@@ -343,7 +347,10 @@ function bp_load_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'bp_load_scripts' );
 
-function bp_custom_query_vars_filter($vars) {
+/**
+ * Register custom query vars
+ */
+function bp_custom_query_vars_filter( $vars ) {
     $vars[] .= 'display_artist';
     return $vars;
 }
