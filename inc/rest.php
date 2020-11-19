@@ -8,16 +8,20 @@
 /**
  * Set up artists search endpoint
  */
-function artists_endpoint() {
+function bp_artists_search_endpoint() {
 	register_rest_route( 'britaprinz/v1', '/artists/search(?:/(?P<id>([a-zA-Z0-9]|%20)+)+)?', array(
 		'methods'	=> WP_REST_Server::READABLE,
 		'callback'	=> 'bp_get_artists',
 		'permission_callback' => '__return_true',
 	) ); 
 }
+add_action( 'rest_api_init', 'bp_artists_search_endpoint' );
 
-add_action( 'rest_api_init', 'artists_endpoint' );
-
+/**
+ * Set up artist search query
+ * 
+ * @return array|Error an array of terms or a 404 error if no terms found
+ */
 function bp_get_artists( $request ) {
 	$search = urldecode( $request['id'] );
 
@@ -38,10 +42,8 @@ function bp_get_artists( $request ) {
 	$query = new WP_Term_Query( $args );
 	$terms = $query->terms;
 	
-	/**
-	 * Create new terms array with 'bp_artist_order_name' field in it
-	 * seems to work
-	 */ 
+	// Create new terms array with 'bp_artist_order_name' field in it.
+	// Seems to work. 
 	$updated_terms = [];
 	foreach ( $terms as $term ) {
 		$order = carbon_get_term_meta($term->term_id, 'bp_artist_order_name');
@@ -57,7 +59,9 @@ function bp_get_artists( $request ) {
 	return new WP_Error( 'no_artist', __( 'Artista desconocido', 'britaprinz-theme' ), array( 'status' => 404 ) );
 }
 
-
+/**
+ * Register REST fields
+ */
 function bp_artworks_rest_fields() {
 	register_rest_field( 'artwork', 'artwork_image_src', array(
 		'get_callback'		=> 'bp_rest_image',
@@ -91,11 +95,21 @@ function bp_artworks_rest_fields() {
 }
 add_action( 'rest_api_init', 'bp_artworks_rest_fields' );
 
+/**
+ * Add artwork featured image
+ * 
+ * @return string html image element
+ */
 function bp_rest_image( $object, $field_name, $request ) {
 	$image = wp_get_attachment_image( $object['featured_media'], 'full' );
 	return $image;
 }
 
+/**
+ * Add artwork image gallery
+ * 
+ * @return array an array of html image elements
+ */
 function bp_rest_gallery( $object, $field_name, $request ) {
 	$gallery_ids = carbon_get_post_meta( $object['id'], 'bp_artwork_gallery' );
 	$gallery = [];
@@ -106,6 +120,11 @@ function bp_rest_gallery( $object, $field_name, $request ) {
 	return $gallery;
 }
 
+/**
+ * Add artwork techniques
+ * 
+ * @return array an array 
+ */
 function bp_rest_techniques( $object, $field_name, $request ) {
 	$techniques = carbon_get_post_meta( $object['id'], 'bp_artwork_technique' );
 	$featured_techniques = [];
@@ -125,6 +144,11 @@ function bp_rest_techniques( $object, $field_name, $request ) {
 	);
 }
 
+/**
+ * Add artwork loan field
+ * 
+ * @return string a translatable string
+ */
 function bp_rest_loan( $object, $field_name, $request ) {
 	$loan = carbon_get_post_meta( $object['id'], 'bp_artwork_loan' );
 	if ( $loan ) {
@@ -133,6 +157,11 @@ function bp_rest_loan( $object, $field_name, $request ) {
 	}
 }
 
+/**
+ * Add artwork sale field
+ * 
+ * @return string a translatable string
+ */
 function bp_rest_sale( $object, $field_name, $request ) {
 	$sale = carbon_get_post_meta( $object['id'], 'bp_artwork_sale' );
 	if ($sale) {
