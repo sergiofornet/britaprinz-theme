@@ -134,10 +134,10 @@ function britaprinz_theme_widgets_init() {
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
 			'after_title'   => '</h2>',
-			)
-		);
-	}
-	add_action( 'widgets_init', 'britaprinz_theme_widgets_init' );
+		)
+	);
+}
+add_action( 'widgets_init', 'britaprinz_theme_widgets_init' );
 	
 /**
  * Register custom query vars
@@ -188,8 +188,8 @@ function britaprinz_theme_scripts() {
 			// 'lang'	=> defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : '',
 			'artistId'		=> $artist_id,
 			
-			) );
-		}
+		) );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
 
