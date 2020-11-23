@@ -1,6 +1,5 @@
 .main-navigation {
 	display: block;
-
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -22,27 +21,28 @@
 	
 	&.toggled {
 		transform: translateY(0);
+
+		.nav-menu {
+			display: flex;
+		}
 	}
 
-	ul {
-		display: none;
-		list-style: none;
-		margin: 0;
-		padding-left: 0;
+	.nav-menu {
 		flex-flow: column nowrap;
-
+		
 		@media (min-width: 64em) {
 			flex-flow: row;
 		}
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding-left: 0;
 
 		ul {
-			flex-flow: column nowrap;
 			margin-bottom: .5em;
 			padding-left: 1em;
-
-			ul {
-				top: 0;
-			}
 
 			li {
 				position: relative;
@@ -55,8 +55,8 @@
 
 				&:hover > ul,
 				&.focus > ul {
-					display: block;
-					left: auto;
+					// display: block;
+					// left: auto;
 				}	
 			}
 
@@ -71,19 +71,6 @@
 			a:hover,
 			a.focus {
 			}
-		}
-
-		li:hover > ul,
-		li.focus > ul {
-			left: auto;
-		}
-	}
-
-	li {
-		position: relative;
-
-		&:hover > a,
-		&.focus > a {
 		}
 	}
 
@@ -104,11 +91,6 @@
 }
 
 /* Small menu. */
-// .menu-toggle,
-.main-navigation.toggled ul {
-	display: flex;
-}
-
 .comment-navigation,
 .posts-navigation,
 .post-navigation {

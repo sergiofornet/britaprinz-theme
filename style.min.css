@@ -97,18 +97,15 @@ select{border:1px solid #ccc}
 textarea{width:100%}
 .main-navigation{display:block;position:absolute;top:0;left:0;width:100%;z-index:100;background-color:white;text-transform:uppercase;-webkit-transform:translateY(-200%);transform:translateY(-200%)}
 .main-navigation.toggled{-webkit-transform:translateY(0);transform:translateY(0)}
-.main-navigation ul{display:none;list-style:none;margin:0;padding-left:0;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap}
-.main-navigation ul ul{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;margin-bottom:.5em;padding-left:1em}
-.main-navigation ul ul ul{top:0}
+.main-navigation.toggled .nav-menu{display:-webkit-box;display:-ms-flexbox;display:flex}
+.main-navigation .nav-menu{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap}
+.main-navigation ul{list-style:none;margin:0;padding-left:0}
+.main-navigation ul ul{margin-bottom:.5em;padding-left:1em}
 .main-navigation ul ul li{position:relative}
 .main-navigation ul ul li::before{content:">";position:absolute;left:-1em}
-.main-navigation ul ul li:hover>ul,.main-navigation ul ul li.focus>ul{display:block;left:auto}
 .main-navigation ul ul a{width:200px}
-.main-navigation ul li:hover>ul,.main-navigation ul li.focus>ul{left:auto}
-.main-navigation li{position:relative}
 .main-navigation a{display:block;text-decoration:none}
 .main-navigation a:hover{text-decoration:underline}
-.main-navigation.toggled ul{display:-webkit-box;display:-ms-flexbox;display:flex}
 .site-main .comment-navigation,.site-main .posts-navigation,.site-main .post-navigation{margin:0 0 1.5em}
 .comment-navigation .nav-links,.posts-navigation .nav-links,.post-navigation .nav-links{display:-webkit-box;display:-ms-flexbox;display:flex}
 .comment-navigation .nav-previous,.posts-navigation .nav-previous,.post-navigation .nav-previous{-webkit-box-flex:1;-ms-flex:1 0 50%;flex:1 0 50%}
@@ -175,5 +172,5 @@ textarea{width:100%}
 .alignright{float:right;margin-left:1.5em;margin-bottom:1.5em}
 .aligncenter{clear:both;display:block;margin-left:auto;margin-right:auto;margin-bottom:1.5em}
 @media(min-width:64em){.main-navigation{display:-webkit-box;display:-ms-flexbox;display:flex;height:100%;-ms-flex-line-pack:center;align-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
-.main-navigation ul{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row;flex-flow:row}
+.main-navigation .nav-menu{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row;flex-flow:row}
 }
