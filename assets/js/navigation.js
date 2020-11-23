@@ -34,6 +34,7 @@
 	button.addEventListener( 'click', function() {
 		siteNavigation.classList.toggle( 'toggled' );
 		button.classList.toggle('toggled');
+		document.body.classList.toggle('no-scroll');
 
 		if ( button.getAttribute( 'aria-expanded' ) === 'true' ) {
 			button.setAttribute( 'aria-expanded', 'false' );
