@@ -83,16 +83,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
    * @param {Object} ajax - data object from PHP
    * @param {HTMLElement} target - HTML target element
    * @param {Object} options - Request options object
-   * @param artistId
+   * @param {number} id - An optional artist id
    */
 
 
   var artistArtworks = function artistArtworks(event, ajax, target, options) {
-    var artistId = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+    var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
     var artist;
 
-    if (artistId) {
-      artist = artistId;
+    if (id) {
+      artist = id;
     } else {
       event.preventDefault();
       artist = event.target.dataset.artist;
@@ -225,7 +225,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   filterArtists(searchUrl, fetchOptions, artistsList);
 
   if (artistId) {
-    artistArtworks('', ajax_var, artworks, fetchOptions, artistId);
+    artistArtworks(null, ajax_var, artworks, fetchOptions, artistId);
   } // Filter artists by input value
 
 
