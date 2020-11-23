@@ -1,6 +1,6 @@
 ( function() {
 	const { nonce } = ajax_var;
-	const { lang, searchUrl } = ajax_var;
+	const { lang, searchUrl, artistId } = ajax_var;
 
 	const headers = new Headers( {
 		'Content-Type': 'application/json',
@@ -68,11 +68,16 @@
 	 * @param {Object} ajax - data object from PHP
 	 * @param {HTMLElement} target - HTML target element
 	 * @param {Object} options - Request options object
+	 * @param {number} id - An optional artist id
 	 */
-	const artistArtworks = (event, ajax, target, options) => {
-		event.preventDefault();
-
-		const { artist } = event.target.dataset;
+	const artistArtworks = (event, ajax, target, options, id = '') => {
+		let artist;
+		if (id) {
+			artist = id;
+		} else {
+			event.preventDefault();
+			artist = event.target.dataset.artist;
+		}
 
 		const artworksUrl = `${ ajax.artworkUrl }?artist=${ artist }&order=asc&orderby=slug`;
 		const artistUrl = `${ ajax.artistUrl }${ artist }`;
@@ -212,6 +217,10 @@
 
 	// Show artists on load
 	filterArtists(searchUrl, fetchOptions, artistsList);
+
+	if (artistId) {
+		artistArtworks(null, ajax_var, artworks, fetchOptions, artistId);
+	}
 
 	// Filter artists by input value
 	searchInput.addEventListener('keyup', () => {

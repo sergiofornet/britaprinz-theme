@@ -52,10 +52,11 @@
 					foreach( $artists as $artist ) :
 						$artist_link = get_term_link( get_term( $artist['id'], $taxonomy) );
 						$artist_name = get_term( $artist['id'], $taxonomy)->name;
+						$artist_slug = get_term( $artist['id'], $taxonomy)->slug;
 
 						?>
 						
-						<a href="<?php echo esc_url( $artist_link ) ?>"><?php echo esc_html( $artist_name ) ?></a>
+						<a href="<?php echo esc_url( get_post_type_archive_link( 'artwork' ) . $artist_slug ); ?>"><?php echo esc_html( $artist_name ) ?></a>
 
 						<?php
 					endforeach;

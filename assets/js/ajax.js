@@ -19,7 +19,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       nonce = _ajax_var.nonce;
   var _ajax_var2 = ajax_var,
       lang = _ajax_var2.lang,
-      searchUrl = _ajax_var2.searchUrl;
+      searchUrl = _ajax_var2.searchUrl,
+      artistId = _ajax_var2.artistId;
   var headers = new Headers({
     'Content-Type': 'application/json',
     'X-WP-Nonce': nonce
@@ -82,12 +83,21 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
    * @param {Object} ajax - data object from PHP
    * @param {HTMLElement} target - HTML target element
    * @param {Object} options - Request options object
+   * @param {number} id - An optional artist id
    */
 
 
   var artistArtworks = function artistArtworks(event, ajax, target, options) {
-    event.preventDefault();
-    var artist = event.target.dataset.artist;
+    var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+    var artist;
+
+    if (id) {
+      artist = id;
+    } else {
+      event.preventDefault();
+      artist = event.target.dataset.artist;
+    }
+
     var artworksUrl = "".concat(ajax.artworkUrl, "?artist=").concat(artist, "&order=asc&orderby=slug");
     var artistUrl = "".concat(ajax.artistUrl).concat(artist);
     target.innerHTML = ''; // empty artworks container
@@ -212,7 +222,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }; // Show artists on load
 
 
-  filterArtists(searchUrl, fetchOptions, artistsList); // Filter artists by input value
+  filterArtists(searchUrl, fetchOptions, artistsList);
+
+  if (artistId) {
+    artistArtworks(null, ajax_var, artworks, fetchOptions, artistId);
+  } // Filter artists by input value
+
 
   searchInput.addEventListener('keyup', function () {
     filterArtists("".concat(searchUrl).concat(searchInput.value), fetchOptions, artistsList);

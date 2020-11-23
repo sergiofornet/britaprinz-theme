@@ -138,19 +138,57 @@ function britaprinz_theme_widgets_init() {
 	);
 }
 add_action( 'widgets_init', 'britaprinz_theme_widgets_init' );
+	
+/**
+ * Register custom query vars
+ */
+function bp_custom_query_vars_filter( $vars ) {
+	$vars[] .= 'display_artist';
+	return $vars;
+}
+add_filter( 'query_vars', 'bp_custom_query_vars_filter' );
 
 /**
  * Enqueue scripts and styles.
  */
 function britaprinz_theme_scripts() {
+	// Google fonts
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap', array(), null );
+
+	// Main stylesheet
 	wp_enqueue_style( 'britaprinz-theme-style', get_stylesheet_uri(), array(), BRITAPRINZ_THEME_VERSION );
 	wp_style_add_data( 'britaprinz-theme-style', 'rtl', 'replace' );
 
+	// Main navigation script 
 	wp_enqueue_script( 'britaprinz-theme-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), BRITAPRINZ_THEME_VERSION, true );
 
+	// Comments script
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
+	}
+	
+	// Vendor scripts
+	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri('assets/js/vendor.min.js'), array( 'wp-polyfill' ), BRITAPRINZ_THEME_VERSION, true );
+
+	// Main custom script
+	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri('assets/js/custom.js'), array(), BRITAPRINZ_THEME_VERSION, true );
+	
+	if ( is_post_type_archive( 'artwork' ) ) {
+		$query_artist = get_query_var( 'display_artist' );
+		$artist_id = get_term_by( 'slug', $query_artist, 'artist')->term_id;
+
+		// AJAX script
+		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri('assets/js/ajax.js'), array(), BRITAPRINZ_THEME_VERSION, true );
+		
+		wp_localize_script( 'britaprinz-ajax', 'ajax_var', array(
+			'artworkUrl'	=> rest_url( '/wp/v2/artwork' ),
+			'artistUrl'		=> rest_url( '/wp/v2/artist' ),
+			'searchUrl'		=> rest_url( 'britaprinz/v1/artists/search' ),
+			'nonce'			=> wp_create_nonce( 'wp_rest' ),
+			// 'lang'	=> defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : '',
+			'artistId'		=> $artist_id,
+			
+		) );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
@@ -182,156 +220,12 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
-function artists_endpoint() {
-	register_rest_route( 'britaprinz/v1', '/artists/search(?:/(?P<id>([a-zA-Z0-9]|%20)+)+)?', array(
-		'methods'	=> WP_REST_Server::READABLE,
-		'callback'	=> 'bp_get_artists',
-		'permission_callback' => '__return_true',
-	) ); 
-}
+/**
+ * Redirections.
+ */
+require_once get_template_directory() . '/inc/redirection.php';
 
-
-add_action( 'rest_api_init', 'artists_endpoint' );
-
-function bp_get_artists( $request ) {
-	$search = urldecode( $request['id'] );
-
-	$args = array(
-		'taxonomy'		=> 'artist',
-		'orderby'		=> 'order_name',
-		'order'			=> 'ASC',
-		'hide_empty'	=> false,
-		"name__like"	=> $search,
-		'meta_query'	=> array(
-			'order_name'	=> array(
-				'key'		=> 'bp_artist_order_name',
-				'compare'	=> 'EXISTS',
-			),
-		),
-	);
-	
-	$query = new WP_Term_Query( $args );
-	$terms = $query->terms;
-	
-	/**
-	 * Create new terms array with 'bp_artist_order_name' field in it
-	 * seems to work
-	 */ 
-	$updated_terms = [];
-	foreach ( $terms as $term ) {
-		$order = carbon_get_term_meta($term->term_id, 'bp_artist_order_name');
-		$array_term = $term->to_array();
-		$array_term['order'] = $order;
-		$object_term = (object)$array_term;
-		array_push( $updated_terms, $object_term );
-	}
-	
-	if ( !empty( $updated_terms ) ) {
-		return $updated_terms;
-	}
-	return new WP_Error( 'no_artist', __( 'Artista desconocido', 'britaprinz-theme' ), array( 'status' => 404 ) );
-}
-
-
-function bp_artworks_rest_fields() {
-	register_rest_field( 'artwork', 'artwork_image_src', array(
-		'get_callback'		=> 'bp_rest_image',
-		'update_callback'	=> null,
-		'schema'			=> null,
-	) );
-
-	register_rest_field( 'artwork', 'artwork_image_gallery', array(
-		'get_callback'		=> 'bp_rest_gallery',
-		'update_callback'	=> null,
-		'schema'			=> null,
-	) );
-
-	register_rest_field( 'artwork', 'artwork_techniques', array(
-		'get_callback'		=> 'bp_rest_techniques',
-		'update_callback'	=> null,
-		'schema'			=> null,
-	) );
-
-	register_rest_field( 'artwork', 'artwork_loan', array(
-		'get_callback'		=> 'bp_rest_loan',
-		'update_callback'	=> null,
-		'schema'			=> null,
-	) );
-
-	register_rest_field( 'artwork', 'artwork_sale', array(
-		'get_callback'		=> 'bp_rest_sale',
-		'update_callback'	=> null,
-		'schema'			=> null,
-	) );
-}
-add_action( 'rest_api_init', 'bp_artworks_rest_fields' );
-
-function bp_rest_image( $object, $field_name, $request ) {
-	$image = wp_get_attachment_image( $object['featured_media'], 'full' );
-	return $image;
-}
-
-function bp_rest_gallery( $object, $field_name, $request ) {
-	$gallery_ids = carbon_get_post_meta( $object['id'], 'bp_artwork_gallery' );
-	$gallery = [];
-	foreach ( $gallery_ids as $id ) {
-		$gallery[] = ( wp_get_attachment_image( $id, 'full' ) );
-	}
-
-	return $gallery;
-}
-
-function bp_rest_techniques( $object, $field_name, $request ) {
-	$techniques = carbon_get_post_meta( $object['id'], 'bp_artwork_technique' );
-	$featured_techniques = [];
-	$other_techniques =  '';
-	foreach ( $techniques as $technique_item ) {
-		foreach ( $technique_item['bp_artwork_technique_list'] as $technique ) {
-			
-			$featured_techniques[] = [esc_html( get_the_title( $technique['id'] ) ), esc_url( get_permalink( $technique['id'] ) )];
-		}
-		
-		$other_techniques = $technique_item['bp_artwork_technique_other'] ? 
-			esc_html( $technique_item['bp_artwork_technique_other'] ) : '';
-	}
-	return array(
-		'featured_techniques' => $featured_techniques,
-		'other_techniques' => $other_techniques,
-	);
-}
-
-function bp_rest_loan( $object, $field_name, $request ) {
-	$loan = carbon_get_post_meta( $object['id'], 'bp_artwork_loan' );
-	if ( $loan ) {
-		$loan_string = __( 'Disponible para préstamo', 'britaprinz-theme' );
-		return $loan_string;
-	}
-}
-
-function bp_rest_sale( $object, $field_name, $request ) {
-	$sale = carbon_get_post_meta( $object['id'], 'bp_artwork_sale' );
-	if ($sale) {
-		$sale_string = __( 'Disponible para venta', 'britaprinz-theme' );
-		return $sale_string;
-	}
-}
-	
-function bp_load_scripts() {
-	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri('assets/js/vendor.min.js'), array( 'wp-polyfill' ), BRITAPRINZ_THEME_VERSION, true );
-
-	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri('assets/js/custom.js'), array(), BRITAPRINZ_THEME_VERSION, true );
-	
-	if ( is_post_type_archive( 'artwork' ) ) {
-		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri('assets/js/ajax.js'), array(), BRITAPRINZ_THEME_VERSION, true );
-		
-		wp_localize_script( 'britaprinz-ajax', 'ajax_var', array(
-			'artworkUrl'	=> rest_url( '/wp/v2/artwork' ),
-			'artistUrl'		=> rest_url( '/wp/v2/artist' ),
-			'searchUrl'	=> rest_url( 'britaprinz/v1/artists/search' ),
-			'nonce'	=> wp_create_nonce( 'wp_rest' ),
-			// 'lang'	=> defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : '',
-			) );
-		}
-		
-}
-add_action( 'wp_enqueue_scripts', 'bp_load_scripts' );
+/**
+ * Load REST config.
+ */
+require_once get_template_directory() . '/inc/rest.php';
