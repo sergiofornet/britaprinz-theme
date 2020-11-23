@@ -46,6 +46,7 @@
 		</div><!-- .site-branding -->
 
 		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menú', 'britaprinz-theme' ); ?></button>
+		<?php do_action('wpml_add_language_selector'); ?>
 		<?php get_search_form(); ?>
 	</header><!-- #masthead -->
 	<nav id="site-navigation" class="main-navigation">
