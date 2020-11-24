@@ -97,7 +97,7 @@ input[type="text"],input[type="email"],input[type="url"],input[type="password"],
 input[type="text"]:focus,input[type="email"]:focus,input[type="url"]:focus,input[type="password"]:focus,input[type="search"]:focus,input[type="number"]:focus,input[type="tel"]:focus,input[type="range"]:focus,input[type="date"]:focus,input[type="month"]:focus,input[type="week"]:focus,input[type="time"]:focus,input[type="datetime"]:focus,input[type="datetime-local"]:focus,input[type="color"]:focus,textarea:focus{color:#111}
 select{border:1px solid #ccc}
 textarea{width:100%}
-.main-navigation{display:block;position:absolute;top:0;left:0;width:100%;z-index:100;background-color:white;text-transform:uppercase;-webkit-transform:translateY(-200%);transform:translateY(-200%)}
+.main-navigation{display:block;position:absolute;top:var(--wp-admin-bar,0);left:0;width:100%;z-index:100;background-color:white;text-transform:uppercase;height:calc(100% - var(--wp-admin-bar, 0px));-webkit-transform:translateY(-200%);transform:translateY(-200%)}
 .main-navigation.toggled{-webkit-transform:translateY(0);transform:translateY(0)}
 .main-navigation.toggled .nav-menu{display:-webkit-box;display:-ms-flexbox;display:flex}
 .main-navigation .nav-menu{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap}
@@ -173,6 +173,7 @@ textarea{width:100%}
 .alignleft{float:left;margin-right:1.5em;margin-bottom:1.5em}
 .alignright{float:right;margin-left:1.5em;margin-bottom:1.5em}
 .aligncenter{clear:both;display:block;margin-left:auto;margin-right:auto;margin-bottom:1.5em}
-@media(min-width:64em){.main-navigation{display:-webkit-box;display:-ms-flexbox;display:flex;height:100%;-ms-flex-line-pack:center;align-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
+@media(min-width:64em){.main-navigation{display:-webkit-box;display:-ms-flexbox;display:flex;-ms-flex-line-pack:center;align-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .main-navigation .nav-menu{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row;flex-flow:row}
+}@media(max-width:63.9375em){.main-navigation{overflow-y:scroll}
 }

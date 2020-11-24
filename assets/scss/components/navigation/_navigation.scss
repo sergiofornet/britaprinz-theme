@@ -1,19 +1,23 @@
 .main-navigation {
 	display: block;
 	position: absolute;
-	top: 0;
+	top: var(--wp-admin-bar, 0);
 	left: 0;
 	width: 100%;
 	z-index: 100;
 	background-color: white;
 	text-transform: uppercase;
+	height: calc(100% - var(--wp-admin-bar, 0px));
 	
 	transform: translateY(-200%);
 	// transition: transform .5s ease-in-out;
 	
+	@media (max-width: 63.9375em) {
+		overflow-y: scroll;
+	}
+
 	@media (min-width: 64em) {
 		display: flex;
-		height: 100%;
 		align-content: center;
 		align-items: center;
 		justify-content: center;
