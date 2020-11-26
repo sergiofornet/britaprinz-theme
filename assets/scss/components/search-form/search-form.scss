@@ -1,7 +1,7 @@
 .search-div {
 	display: none;
 	position: absolute;
-	top: 0;
+	top: var(--wp-admin-bar, 0);
 	left: 0;
 	height: calc(100vh - var(--wp-admin-bar, 0px));
 	width: 100%;
@@ -17,7 +17,7 @@
 
 	.search-div__close {
 		position: absolute;
-		top: 0;
+		top: var(--wp-admin-bar, 0);
 		right: 0;
 	}
 }
