@@ -19,10 +19,28 @@ const setAdminBarHeight = (adminBar) => document.documentElement.style.setProper
 	const searchDiv = document.querySelector('.search-div');
 	const searchDivHide = searchDiv.querySelector('.search-div__close');
 
+	function showSearch() {
+		searchDiv.classList.toggle('visible');
+		document.body.classList.toggle('no-scroll');
+
+		if ( searchButton.getAttribute( 'aria-expanded' ) === 'true' ) {
+			searchButton.setAttribute( 'aria-expanded', 'false' );
+		} else {
+			searchButton.setAttribute( 'aria-expanded', 'true' );
+		}
+	}
+
 	[searchButton, searchDivHide].forEach((element) => {
 		element.addEventListener('click', () => {
-			searchDiv.classList.toggle('visible');
-			document.body.classList.toggle('no-scroll');
+			showSearch();
 		});
+	});
+
+	window.addEventListener('keyup', (event) => {
+		if (searchDiv.classList.contains('visible')) {
+			if (event.key === 'Escape' || event.keyCode === 72) {
+				showSearch();
+			}
+		}
 	});
 }() );

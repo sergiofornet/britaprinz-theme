@@ -98,11 +98,29 @@ var setAdminBarHeight = function setAdminBarHeight(adminBar) {
   var searchButton = document.querySelector('.search-button');
   var searchDiv = document.querySelector('.search-div');
   var searchDivHide = searchDiv.querySelector('.search-div__close');
+
+  function showSearch() {
+    searchDiv.classList.toggle('visible');
+    document.body.classList.toggle('no-scroll');
+
+    if (searchButton.getAttribute('aria-expanded') === 'true') {
+      searchButton.setAttribute('aria-expanded', 'false');
+    } else {
+      searchButton.setAttribute('aria-expanded', 'true');
+    }
+  }
+
   [searchButton, searchDivHide].forEach(function (element) {
     element.addEventListener('click', function () {
-      searchDiv.classList.toggle('visible');
-      document.body.classList.toggle('no-scroll');
+      showSearch();
     });
+  });
+  window.addEventListener('keyup', function (event) {
+    if (searchDiv.classList.contains('visible')) {
+      if (event.key === 'Escape' || event.keyCode === 72) {
+        showSearch();
+      }
+    }
   });
 })();
 "use strict";
