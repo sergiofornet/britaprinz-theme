@@ -189,6 +189,11 @@ function britaprinz_theme_scripts() {
 			'artistId'		=> $artist_id,
 			
 		) );
+			
+		/**
+		 * @hooked bp_artwork_redirect	- 10
+		 */
+		do_action( 'artwork_redirect', $query_artist, $artist_id );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
