@@ -45,13 +45,13 @@
 			<?php endif; ?>
 		</div><!-- .site-branding -->
 
-		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menú', 'britaprinz-theme' ); ?></button>
+		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="menu"><?php esc_html_e( 'Menú', 'britaprinz-theme' ); ?></button>
 		<?php do_action('wpml_add_language_selector'); ?>
-		<button class="search-button" type="button">🔍</button>
+		<button class="search-button" type="button" aria-controls="search-div" aria-expanded="false" aria-label="Open search form">🔍</button>
 	</header><!-- #masthead -->
 	<div class="search-div">
-		<button class="search-div__close">&times;</button>
-		
+		<button class="search-div__close" aria-label="Close search form">&times;</button>
+
 		<?php get_search_form(); ?>
 
 	</div>
