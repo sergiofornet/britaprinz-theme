@@ -13,4 +13,16 @@ const setAdminBarHeight = (adminBar) => document.documentElement.style.setProper
 			setAdminBarHeight(wpAdminBar);
 		});
 	}
+
+	// Toggle search form's visibility
+	const searchButton = document.querySelector('.search-button');
+	const searchDiv = document.querySelector('.search-div');
+	const searchDivHide = searchDiv.querySelector('.search-div__close');
+
+	[searchButton, searchDivHide].forEach((element) => {
+		element.addEventListener('click', () => {
+			searchDiv.classList.toggle('visible');
+			document.body.classList.toggle('no-scroll');
+		});
+	});
 }() );

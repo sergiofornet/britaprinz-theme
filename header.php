@@ -47,8 +47,14 @@
 
 		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Menú', 'britaprinz-theme' ); ?></button>
 		<?php do_action('wpml_add_language_selector'); ?>
-		<?php get_search_form(); ?>
+		<button class="search-button" type="button">🔍</button>
 	</header><!-- #masthead -->
+	<div class="search-div">
+		<button class="search-div__close">&times;</button>
+		
+		<?php get_search_form(); ?>
+
+	</div>
 	<nav id="site-navigation" class="main-navigation">
 		<?php
 		wp_nav_menu(

@@ -92,7 +92,18 @@ var setAdminBarHeight = function setAdminBarHeight(adminBar) {
     window.addEventListener('resize', function () {
       setAdminBarHeight(wpAdminBar);
     });
-  }
+  } // Toggle search form's visibility
+
+
+  var searchButton = document.querySelector('.search-button');
+  var searchDiv = document.querySelector('.search-div');
+  var searchDivHide = searchDiv.querySelector('.search-div__close');
+  [searchButton, searchDivHide].forEach(function (element) {
+    element.addEventListener('click', function () {
+      searchDiv.classList.toggle('visible');
+      document.body.classList.toggle('no-scroll');
+    });
+  });
 })();
 "use strict";
 
