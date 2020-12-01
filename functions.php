@@ -198,6 +198,11 @@ function britaprinz_theme_scripts() {
 }
 add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
 
+function britaprinz_admin_scripts() {
+	wp_enqueue_script( 'crb-admin', get_stylesheet_directory_uri() . '/assets/js/admin.js', array( 'carbon-fields-yoast' ) );
+}
+add_action( 'admin_enqueue_scripts', 'britaprinz_admin_scripts' );
+
 /**
  * Implement the Custom Header feature.
  */
@@ -234,3 +239,13 @@ require_once get_template_directory() . '/inc/redirection.php';
  * Load REST config.
  */
 require_once get_template_directory() . '/inc/rest.php';
+
+/**
+ * Load Carbon Fields Yoast
+ */
+function britaprinz_initialize_carbon_yoast() {
+	include_once __DIR__ . '/vendor/autoload.php';
+	
+	new \Carbon_Fields_Yoast\Carbon_Fields_Yoast;
+}
+add_action( 'after_setup_theme', 'britaprinz_initialize_carbon_yoast' );
