@@ -142,11 +142,11 @@ add_action( 'widgets_init', 'britaprinz_theme_widgets_init' );
 /**
  * Register custom query vars
  */
-function bp_custom_query_vars_filter( $vars ) {
+function britaprinz_custom_query_vars_filter( $vars ) {
 	$vars[] .= 'display_artist';
 	return $vars;
 }
-add_filter( 'query_vars', 'bp_custom_query_vars_filter' );
+add_filter( 'query_vars', 'britaprinz_custom_query_vars_filter' );
 
 /**
  * Enqueue scripts and styles.
@@ -191,7 +191,7 @@ function britaprinz_theme_scripts() {
 		) );
 			
 		/**
-		 * @hooked bp_artwork_redirect	- 10
+		 * @hooked britaprinz_artwork_redirect	- 10
 		 */
 		do_action( 'artwork_redirect', $query_artist, $artist_id );
 	}
