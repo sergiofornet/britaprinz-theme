@@ -30,8 +30,8 @@
 			 
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_event_artist' ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_event_info' ) ); ?></p>
-			<p><?php echo esc_html( date( 'd/m/Y', strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ); ?></p>
-			<p><?php echo esc_html( date( 'd/m/Y', strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) ); ?></p>
+			<p><?php echo esc_html( date( __( 'd/m/Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ); ?></p>
+			<p><?php echo esc_html( date( __( 'd/m/Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_condition' ) ); ?></p>
 			<div>
 
