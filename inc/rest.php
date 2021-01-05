@@ -92,6 +92,12 @@ function britaprinz_artworks_rest_fields() {
 		'update_callback'	=> null,
 		'schema'			=> null,
 	) );
+
+	register_rest_field( 'artwork', 'artwork_info', array(
+		'get_callback'		=> 'britaprinz_rest_info',
+		'update_callback'	=> null,
+		'schema'			=> null,
+	) );
 }
 add_action( 'rest_api_init', 'britaprinz_artworks_rest_fields' );
 
@@ -167,5 +173,17 @@ function britaprinz_rest_sale( $object, $field_name, $request ) {
 	if ($sale) {
 		$sale_string = __( 'Disponible para venta', 'britaprinz-theme' );
 		return $sale_string;
+	}
+}
+
+/**
+ * Add artwork info field
+ * 
+ * @return string HTML content
+ */
+function britaprinz_rest_info( $object, $field_name, $request ) {
+	$info = wpautop( carbon_get_post_meta( $object['id'], 'bp_artwork_info' ) );
+	if ( $info ) {
+		return $info;
 	}
 }

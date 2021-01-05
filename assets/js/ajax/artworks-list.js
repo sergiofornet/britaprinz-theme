@@ -20,7 +20,7 @@ function artworksList (artworks) {
 						${ featuredTechniques.map( (technique) => `<a class="technique" href="${ technique[ 1 ] }">${ technique[ 0 ] }</a>` ).join( '\n' ) }
 						${ otherTechniques && `<span>${ otherTechniques }</span>` }
 					</div>
-					<div class="artwork__description">${ element.bp_artwork_info }</div>
+					<div class="artwork__description">${ element.artwork_info }</div>
 				</div>
 			</li>
 			`;
