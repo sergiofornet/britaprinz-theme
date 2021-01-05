@@ -243,9 +243,9 @@ require_once get_template_directory() . '/inc/rest.php';
 /**
  * Load Carbon Fields Yoast
  */
-function britaprinz_initialize_carbon_yoast() {
-	include_once __DIR__ . '/vendor/autoload.php';
+// function britaprinz_initialize_carbon_yoast() {
+// 	include_once __DIR__ . '/vendor/autoload.php';
 	
-	new \Carbon_Fields_Yoast\Carbon_Fields_Yoast;
-}
-add_action( 'after_setup_theme', 'britaprinz_initialize_carbon_yoast' );
+// 	new \Carbon_Fields_Yoast\Carbon_Fields_Yoast;
+// }
+// add_action( 'after_setup_theme', 'britaprinz_initialize_carbon_yoast' );
