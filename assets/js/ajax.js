@@ -90,7 +90,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
   var artistArtworks = function artistArtworks(event, ajax, target, options) {
     var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
-    console.log(ajax, event.target);
+    console.log(ajax);
     var artist;
 
     if (id) {
@@ -181,9 +181,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
       if (Array.isArray(jsonResponse)) {
         // Create an a array of unique 'order name' initials
+        // temporary fix
+        // trimmed order field whitespaces & resorted
+        // must sanitize fields on backend instead
         var initialsSet = new Set(jsonResponse.map(function (item) {
-          return item.order[0].toLowerCase();
-        }));
+          return item.order.trim()[0].toLowerCase();
+        }).sort());
 
         var initials = _toConsumableArray(initialsSet); // Create a group for every initial
 
@@ -195,7 +198,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
           group.insertAdjacentHTML('afterbegin', "\n\t\t\t\t\t\t\t<span class=\"artists-group__label\">".concat(initial, "</span>\n\t\t\t\t\t\t")); // Group every artist by its initial
 
           jsonResponse.filter(function (item) {
-            return item.order[0].toLowerCase() === initial;
+            return item.order.trim()[0].toLowerCase() === initial;
           }).forEach(function (item) {
             var button = document.createElement('button');
             button.dataset.artist = item.term_id;
@@ -251,9 +254,10 @@ function artworksList(artworks) {
       var _element$artwork_tech = element.artwork_techniques,
           featuredTechniques = _element$artwork_tech.featured_techniques,
           otherTechniques = _element$artwork_tech.other_techniques;
+      console.log(element.bp_artwork_info);
       html += "\n\t\t\t<li class=\"artwork\" key=\"artwork-".concat(element.slug, "\">\n\t\t\t\t<button class=\"artwork__title\">").concat(element.title.rendered, "</button>\n\t\t\t\t<div class=\"artwork__info\">\n\t\t\t\t\t").concat(element.artwork_image_src ? "<div class=\"artwork__thumbnail\"><a href=\"".concat(element.link, "\" data-artwork=\"").concat(element.id, "\">").concat(element.artwork_image_src, "</a></div>") : '', "\n\t\t\t\t\t<div class=\"artwork__year\">").concat(element.bp_artwork_year, "</div>\n\t\t\t\t\t<div class=\"artwork__condition\">").concat(element.bp_artwork_condition, "</div>\n\t\t\t\t\t<div class=\"artwork__copy\">").concat(element.bp_artwork_copy, "</div>\n\t\t\t\t\t<div class=\"artwork__paper\">").concat(element.bp_artwork_paper, "</div>\n\t\t\t\t\t<div class=\"artwork__size\">").concat(element.bp_artwork_size, "</div>\n\t\t\t\t\t").concat(element.artwork_loan ? "<div class=\"artwork__loan\">".concat(element.artwork_loan, "</div>") : '', "\n\t\t\t\t\t").concat(element.artwork_sale ? "<div class=\"artwork__sale\">".concat(element.artwork_sale, "</div>") : '', "\n\t\t\t\t\t<div class=\"artwork__techniques\">\n\t\t\t\t\t\t").concat(featuredTechniques.map(function (technique) {
         return "<a class=\"technique\" href=\"".concat(technique[1], "\">").concat(technique[0], "</a>");
-      }).join('\n'), "\n\t\t\t\t\t\t").concat(otherTechniques && "<span>".concat(otherTechniques, "</span>"), "\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"artwork__description\">").concat(element.bp_artwork_info, "</div>\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t\t");
+      }).join('\n'), "\n\t\t\t\t\t\t").concat(otherTechniques && "<span>".concat(otherTechniques, "</span>"), "\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class=\"artwork__description\">").concat(element.artwork_info, "</div>\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t\t");
     });
     html += '</ul>';
   } else {

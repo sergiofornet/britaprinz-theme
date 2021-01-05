@@ -72,7 +72,7 @@
 	 * @param {number} id - An optional artist id
 	 */
 	const artistArtworks = (event, ajax, target, options, id = '') => {
-		console.log(ajax, event.target);
+		console.log(ajax);
 		let artist;
 		if (id) {
 			artist = id;
@@ -176,7 +176,11 @@
 
 				if (Array.isArray(jsonResponse)) {
 					// Create an a array of unique 'order name' initials
-					const initialsSet = new Set(jsonResponse.map((item) => item.order[ 0 ].toLowerCase()));
+
+					// temporary fix
+					// trimmed order field whitespaces & resorted
+					// must sanitize fields on backend instead
+					const initialsSet = new Set(jsonResponse.map((item) => item.order.trim()[ 0 ].toLowerCase()).sort());
 					const initials = [...initialsSet];
 
 					// Create a group for every initial
@@ -189,7 +193,7 @@
 						`);
 
 						// Group every artist by its initial
-						jsonResponse.filter((item) => item.order[ 0 ].toLowerCase() === initial).forEach((item) => {
+						jsonResponse.filter((item) => item.order.trim()[ 0 ].toLowerCase() === initial).forEach((item) => {
 							const button = document.createElement('button');
 							button.dataset.artist = item.term_id;
 							button.classList.add('artist__button');
