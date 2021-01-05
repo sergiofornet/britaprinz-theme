@@ -21,6 +21,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       lang = _ajax_var2.lang,
       searchUrl = _ajax_var2.searchUrl,
       artistId = _ajax_var2.artistId;
+  console.log(ajax_var);
   var headers = new Headers({
     'Content-Type': 'application/json',
     'X-WP-Nonce': nonce
@@ -89,6 +90,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
   var artistArtworks = function artistArtworks(event, ajax, target, options) {
     var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+    console.log(ajax, event.target);
     var artist;
 
     if (id) {
@@ -105,6 +107,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     target.classList.add('loading'); // Fetch artworks asynchronously
 
     asyncFetch(artworksUrl, options).then(function (jsonResponse) {
+      console.log(artworksUrl);
       var html = artworksList(jsonResponse);
       target.insertAdjacentHTML('beforeend', html);
       var artworkList = document.querySelectorAll('.artworks__list .artwork');
@@ -147,6 +150,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }); // Fetch artist info asynchronously
 
     asyncFetch(artistUrl, options).then(function (jsonResponse) {
+      console.log(artistUrl);
       var html;
       var name = jsonResponse.name,
           description = jsonResponse.description;
@@ -170,6 +174,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
   var filterArtists = function filterArtists(url, options, target) {
+    console.log(url);
     target.classList.add('loading');
     asyncFetch(url, options).then(function (jsonResponse) {
       target.innerHTML = '';

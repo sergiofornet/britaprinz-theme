@@ -1,6 +1,7 @@
 ( function() {
 	const { nonce } = ajax_var;
 	const { lang, searchUrl, artistId } = ajax_var;
+	console.log(ajax_var);
 
 	const headers = new Headers( {
 		'Content-Type': 'application/json',
@@ -71,6 +72,7 @@
 	 * @param {number} id - An optional artist id
 	 */
 	const artistArtworks = (event, ajax, target, options, id = '') => {
+		console.log(ajax, event.target);
 		let artist;
 		if (id) {
 			artist = id;
@@ -88,6 +90,7 @@
 
 		// Fetch artworks asynchronously
 		asyncFetch( artworksUrl, options).then( ( jsonResponse ) => {
+			console.log(artworksUrl);
 			const html = artworksList(jsonResponse);
 
 			target.insertAdjacentHTML( 'beforeend', html );
@@ -139,6 +142,7 @@
 
 		// Fetch artist info asynchronously
 		asyncFetch( artistUrl, options).then( ( jsonResponse ) => {
+			console.log(artistUrl);
 			let html;
 			const { name, description } = jsonResponse;
 
@@ -164,6 +168,7 @@
 	 * @param {HTMLElement} target - HTML target element
 	 */
 	const filterArtists = (url, options, target) => {
+		console.log(url);
 		target.classList.add('loading');
 		asyncFetch(url, options)
 			.then((jsonResponse) => {
