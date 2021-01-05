@@ -101,7 +101,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }
 
     var artworksUrl = "".concat(ajax.artworkUrl, "?artist=").concat(artist, "&order=asc&orderby=slug");
-    var artistUrl = "".concat(ajax.artistUrl).concat(artist);
+    var artistUrl = "".concat(ajax.artistUrl, "/").concat(artist);
     target.innerHTML = ''; // empty artworks container
 
     target.classList.add('loading'); // Fetch artworks asynchronously
@@ -235,7 +235,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
   searchInput.addEventListener('keyup', function () {
-    filterArtists("".concat(searchUrl).concat(searchInput.value), fetchOptions, artistsList);
+    filterArtists("".concat(searchUrl, "/").concat(searchInput.value), fetchOptions, artistsList);
   });
 })();
 "use strict";

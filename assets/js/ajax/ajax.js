@@ -82,7 +82,7 @@
 		}
 
 		const artworksUrl = `${ ajax.artworkUrl }?artist=${ artist }&order=asc&orderby=slug`;
-		const artistUrl = `${ ajax.artistUrl }${ artist }`;
+		const artistUrl = `${ ajax.artistUrl }/${ artist }`;
 
 		target.innerHTML = ''; // empty artworks container
 
@@ -229,6 +229,6 @@
 
 	// Filter artists by input value
 	searchInput.addEventListener('keyup', () => {
-		filterArtists(`${ searchUrl }${ searchInput.value }`, fetchOptions, artistsList);
+		filterArtists(`${ searchUrl }/${ searchInput.value }`, fetchOptions, artistsList);
 	});
 }() );
