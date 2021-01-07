@@ -150,7 +150,7 @@
 				html = `
 				<div class="artworks__artist">
 					<h2 class="artist__name">${ name }</h2>
-					<div class="artist__bio">${ artistBio }</div>
+					${ artistBio ? `<div class="artist__bio">${ artistBio }</div>` : '' }
 				</div>
 				`;
 			} else {
