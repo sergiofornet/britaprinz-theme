@@ -62,39 +62,39 @@ function britaprinz_get_artists( $request ) {
 /**
  * Register REST fields
  */
-function britaprinz_artworks_rest_fields() {
+function britaprinz_rest_fields() {
 	register_rest_field( 'artwork', 'artwork_image_src', array(
-		'get_callback'		=> 'britaprinz_rest_image',
+		'get_callback'		=> 'britaprinz_artwork_image',
 		'update_callback'	=> null,
 		'schema'			=> null,
 	) );
 
 	register_rest_field( 'artwork', 'artwork_image_gallery', array(
-		'get_callback'		=> 'britaprinz_rest_gallery',
+		'get_callback'		=> 'britaprinz_artwork_gallery',
 		'update_callback'	=> null,
 		'schema'			=> null,
 	) );
 
 	register_rest_field( 'artwork', 'artwork_techniques', array(
-		'get_callback'		=> 'britaprinz_rest_techniques',
+		'get_callback'		=> 'britaprinz_artwork_techniques',
 		'update_callback'	=> null,
 		'schema'			=> null,
 	) );
 
 	register_rest_field( 'artwork', 'artwork_loan', array(
-		'get_callback'		=> 'britaprinz_rest_loan',
+		'get_callback'		=> 'britaprinz_artwork_loan',
 		'update_callback'	=> null,
 		'schema'			=> null,
 	) );
 
 	register_rest_field( 'artwork', 'artwork_sale', array(
-		'get_callback'		=> 'britaprinz_rest_sale',
+		'get_callback'		=> 'britaprinz_artwork_sale',
 		'update_callback'	=> null,
 		'schema'			=> null,
 	) );
 
 	register_rest_field( 'artwork', 'artwork_info', array(
-		'get_callback'		=> 'britaprinz_rest_info',
+		'get_callback'		=> 'britaprinz_artwork_info',
 		'update_callback'	=> null,
 		'schema'			=> null,
 	) );
@@ -105,14 +105,14 @@ function britaprinz_artworks_rest_fields() {
 		'schema'			=> null,
 	) );
 }
-add_action( 'rest_api_init', 'britaprinz_artworks_rest_fields' );
+add_action( 'rest_api_init', 'britaprinz_rest_fields' );
 
 /**
  * Add artwork featured image
  * 
  * @return string html image element
  */
-function britaprinz_rest_image( $object, $field_name, $request ) {
+function britaprinz_artwork_image( $object, $field_name, $request ) {
 	$image = wp_get_attachment_image( $object['featured_media'], 'full' );
 	return $image;
 }
@@ -122,7 +122,7 @@ function britaprinz_rest_image( $object, $field_name, $request ) {
  * 
  * @return array an array of html image elements
  */
-function britaprinz_rest_gallery( $object, $field_name, $request ) {
+function britaprinz_artwork_gallery( $object, $field_name, $request ) {
 	$gallery_ids = carbon_get_post_meta( $object['id'], 'bp_artwork_gallery' );
 	$gallery = [];
 	foreach ( $gallery_ids as $id ) {
@@ -137,7 +137,7 @@ function britaprinz_rest_gallery( $object, $field_name, $request ) {
  * 
  * @return array an array 
  */
-function britaprinz_rest_techniques( $object, $field_name, $request ) {
+function britaprinz_artwork_techniques( $object, $field_name, $request ) {
 	$techniques = carbon_get_post_meta( $object['id'], 'bp_artwork_technique' );
 	$featured_techniques = [];
 	$other_techniques =  '';
@@ -161,7 +161,7 @@ function britaprinz_rest_techniques( $object, $field_name, $request ) {
  * 
  * @return string a translatable string
  */
-function britaprinz_rest_loan( $object, $field_name, $request ) {
+function britaprinz_artwork_loan( $object, $field_name, $request ) {
 	$loan = carbon_get_post_meta( $object['id'], 'bp_artwork_loan' );
 	if ( $loan ) {
 		$loan_string = __( 'Disponible para préstamo', 'britaprinz-theme' );
@@ -174,7 +174,7 @@ function britaprinz_rest_loan( $object, $field_name, $request ) {
  * 
  * @return string a translatable string
  */
-function britaprinz_rest_sale( $object, $field_name, $request ) {
+function britaprinz_artwork_sale( $object, $field_name, $request ) {
 	$sale = carbon_get_post_meta( $object['id'], 'bp_artwork_sale' );
 	if ($sale) {
 		$sale_string = __( 'Disponible para venta', 'britaprinz-theme' );
@@ -187,7 +187,7 @@ function britaprinz_rest_sale( $object, $field_name, $request ) {
  * 
  * @return string HTML content
  */
-function britaprinz_rest_info( $object, $field_name, $request ) {
+function britaprinz_artwork_info( $object, $field_name, $request ) {
 	$info = wpautop( carbon_get_post_meta( $object['id'], 'bp_artwork_info' ) );
 	if ( $info ) {
 		return $info;
