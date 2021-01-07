@@ -170,13 +170,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
    * @param {string} url - The REST endpoint url
    * @param {Object} options - Request options object
    * @param {HTMLElement} target - HTML target element
+   * @param {string|null} currentLang - Current language on the front end. Needed to fix REST URLs when user is logged in. 🤷 blame WPML developers, not me
    */
 
 
-  var filterArtists = function filterArtists(url, options, target) {
-    console.log(url);
+  var filterArtists = function filterArtists(url, options, target, currentLang) {
+    var fixedUrl = "".concat(currentLang ? "".concat(url, "?lang=").concat(currentLang) : "".concat(url));
+    console.log(fixedUrl);
     target.classList.add('loading');
-    asyncFetch(url, options).then(function (jsonResponse) {
+    asyncFetch(fixedUrl, options).then(function (jsonResponse) {
       target.innerHTML = '';
 
       if (Array.isArray(jsonResponse)) {
@@ -230,7 +232,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   }; // Show artists on load
 
 
-  filterArtists(searchUrl, fetchOptions, artistsList);
+  filterArtists(searchUrl, fetchOptions, artistsList, lang);
 
   if (artistId) {
     artistArtworks(null, ajax_var, artworks, fetchOptions, artistId);
@@ -238,7 +240,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 
 
   searchInput.addEventListener('keyup', function () {
-    filterArtists("".concat(searchUrl, "/").concat(searchInput.value), fetchOptions, artistsList);
+    filterArtists("".concat(searchUrl, "/").concat(searchInput.value), fetchOptions, artistsList, lang);
   });
 })();
 "use strict";

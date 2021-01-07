@@ -166,11 +166,14 @@
 	 * @param {string} url - The REST endpoint url
 	 * @param {Object} options - Request options object
 	 * @param {HTMLElement} target - HTML target element
+	 * @param {string|null} currentLang - Current language on the front end. Needed to fix REST URLs when user is logged in. 🤷 blame WPML developers, not me
 	 */
-	const filterArtists = (url, options, target) => {
-		console.log(url);
+	const filterArtists = (url, options, target, currentLang) => {
+		const fixedUrl = `${ currentLang ? `${ url }?lang=${ currentLang }` : `${ url }` }`;
+		console.log(fixedUrl);
+
 		target.classList.add('loading');
-		asyncFetch(url, options)
+		asyncFetch(fixedUrl, options)
 			.then((jsonResponse) => {
 				target.innerHTML = '';
 
@@ -225,7 +228,12 @@
 	};
 
 	// Show artists on load
-	filterArtists(searchUrl, fetchOptions, artistsList);
+	filterArtists(
+		searchUrl,
+		fetchOptions,
+		artistsList,
+		lang
+	);
 
 	if (artistId) {
 		artistArtworks(null, ajax_var, artworks, fetchOptions, artistId);
@@ -233,6 +241,11 @@
 
 	// Filter artists by input value
 	searchInput.addEventListener('keyup', () => {
-		filterArtists(`${ searchUrl }/${ searchInput.value }`, fetchOptions, artistsList);
+		filterArtists(
+			`${ searchUrl }/${ searchInput.value }`,
+			fetchOptions,
+			artistsList,
+			lang
+		);
 	});
 }() );
