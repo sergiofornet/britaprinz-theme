@@ -98,6 +98,12 @@ function britaprinz_artworks_rest_fields() {
 		'update_callback'	=> null,
 		'schema'			=> null,
 	) );
+
+	register_rest_field( 'artist', 'artist_bio', array(
+		'get_callback'		=> 'britaprinz_artist_bio',
+		'update_callback'	=> null,
+		'schema'			=> null,
+	) );
 }
 add_action( 'rest_api_init', 'britaprinz_artworks_rest_fields' );
 
@@ -185,5 +191,17 @@ function britaprinz_rest_info( $object, $field_name, $request ) {
 	$info = wpautop( carbon_get_post_meta( $object['id'], 'bp_artwork_info' ) );
 	if ( $info ) {
 		return $info;
+	}
+}
+
+/**
+ * Add artist bio field
+ * 
+ * @return string HTML content
+ */
+function britaprinz_artist_bio( $object, $field_name, $request ) {
+	$bio = wpautop( get_term( $object['id'] )->description );
+	if ( $bio ) {
+		return $bio;
 	}
 }

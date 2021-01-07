@@ -144,13 +144,13 @@
 		asyncFetch( artistUrl, options).then( ( jsonResponse ) => {
 			console.log(artistUrl);
 			let html;
-			const { name, description } = jsonResponse;
+			const { name, artist_bio: artistBio } = jsonResponse;
 
 			if ( typeof jsonResponse === 'object' ) {
 				html = `
 				<div class="artworks__artist">
 					<h2 class="artist__name">${ name }</h2>
-					<p class="artist__bio">${ description }</p>
+					<div class="artist__bio">${ artistBio }</div>
 				</div>
 				`;
 			} else {
