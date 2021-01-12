@@ -11,7 +11,8 @@ function artworksList (artworks) {
 					${ element.artwork_image_src ? `<div class="artwork__thumbnail"><a href="${ element.link }" data-artwork="${ element.id }">${ element.artwork_image_src }</a></div>` : '' }
 					<div class="artwork__year">${ element.bp_artwork_year }</div>
 					<div class="artwork__copy">${ element.bp_artwork_copy }</div>
-					<div class="artwork__size">${ element.bp_artwork_size }</div>
+					${ element.bp_artwork_size_image && `<div class="artwork__size-image">${ element.bp_artwork_size_image }</div>` }
+					<div class="artwork__size-sheet">${ element.bp_artwork_size }</div>
 					<div class="artwork__paper">${ element.bp_artwork_paper }</div>
 					<div class="artwork__condition">${ element.bp_artwork_condition }</div>
 					${ element.artwork_info ? `<div class="artwork__description">${ element.artwork_info }</div>` : '' }
