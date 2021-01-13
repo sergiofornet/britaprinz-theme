@@ -21,8 +21,8 @@ get_header();
 
 			$args = array(
 				'post_type'   => 'event',
-				'order'       => 'ASC',
-				'orderby'     => 'start_date',
+				'order'       => 'DESC',
+				'orderby'     => 'end_date',
 				'meta_query'  => array(
 					'end_date' => array(
 						'key'     => 'bp_event_end',
