@@ -21,7 +21,7 @@
 		if ( $date_query->have_posts() ) :
 			?>
 
-			<ul>
+			<ul class="events">
 			
 			<?php
 			while ( $date_query->have_posts() ) :
@@ -29,20 +29,43 @@
 				$date_query->the_post();
 				?>
 				
-				<li>
-					<?php the_title( sprintf(
-						'<a href="%s" title="%s">',
-						esc_url( get_the_permalink() ),
-						esc_html( get_the_title() )
-					), '</a>'); ?>
-				</li>
+				<li class="event">
+					<div class="event__title">
+
+						<?php 
+						the_title( 
+							sprintf(
+								'<a href="%s" title="%s">',
+								esc_url( get_the_permalink() ),
+								esc_html( get_the_title() ),
+								esc_html( carbon_get_the_post_meta( 'bp_event_artist' ) ) 
+							), 
+							sprintf(
+								' – %s</a>',
+								esc_html( carbon_get_the_post_meta( 'bp_event_artist' ) ) 
+							) 
+						);
+						?>
+					
+					</div>
+					<div class="event__date">
+						<?php
+							echo sprintf( 
+								'%s–%s, %s', 
+								esc_html( date_i18n( __( 'd F', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ), 
+								esc_html( date_i18n( __( 'd F', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) ), 
+								esc_html( date_i18n( 'Y', strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ) 
+							);
+						?>
+					</div>
+				</li><!-- .event -->
 
 				<?php
 			endwhile; // End of the loop.
 
 			?>
 
-			</ul>
+			</ul><!-- .events -->
 
 			<?php
 			wp_reset_postdata();
