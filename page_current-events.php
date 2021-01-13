@@ -20,7 +20,7 @@ get_header();
 
 			$args = array(
 				'post_type'   => 'event',
-				'order'       => 'ASC',
+				'order'       => 'DESC',
 				'orderby'     => 'start_date',
 				'meta_query'  => array(
 					'relation'    => 'AND',
