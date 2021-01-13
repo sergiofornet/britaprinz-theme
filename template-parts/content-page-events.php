@@ -51,10 +51,9 @@
 					<div class="event__date">
 						<?php
 							echo sprintf( 
-								'%s–%s, %s', 
-								esc_html( date_i18n( __( 'd F', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ), 
-								esc_html( date_i18n( __( 'd F', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) ), 
-								esc_html( date_i18n( 'Y', strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ) 
+								'%s–%s', 
+								esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ), 
+								esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) )
 							);
 						?>
 					</div>
