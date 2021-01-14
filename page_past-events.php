@@ -20,15 +20,17 @@ get_header();
 			$today = date( 'Y-m-d' );
 
 			$args = array(
-				'post_type'   => 'event',
-				'order'       => 'DESC',
-				'orderby'     => 'end_date',
-				'meta_query'  => array(
-					'end_date' => array(
-						'key'     => 'bp_event_end',
-						'value'   => $today,
-						'compare' => '<',
-						'type'    => 'DATE'
+				'posts_per_page'	=> 20,
+				'post_type'			=> 'event',
+				'order'				=> 'DESC',
+				'orderby'			=> 'end_date',
+				'paged'				=> get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1,
+				'meta_query' 		=> array(
+					'end_date'	=> array(
+					'key'		=> 'bp_event_end',
+					'value'		=> $today,
+					'compare'	=> '<',
+					'type'		=> 'DATE'
 					),
 				),
 			);

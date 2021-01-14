@@ -67,6 +67,16 @@
 			</ul><!-- .events -->
 
 			<?php
+			if ( $date_query->query_vars['paged'] ) :
+				?>
+
+				<nav>
+					<?php next_posts_link( __( 'Exposiciones anteriores', 'britaprinz-theme'), $date_query->max_num_pages ); ?>
+					<?php previous_posts_link( __( 'Exposiciones posteriores', 'britaprinz-theme') ); ?>
+				</nav>
+
+				<?php
+			endif;
 			wp_reset_postdata();
 
 		endif;
