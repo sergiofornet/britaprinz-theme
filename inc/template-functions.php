@@ -217,9 +217,14 @@ function britaprinz_disable_author_page() {
 add_action( 'pre_get_posts', 'britaprinz_modify_queries' ); 
 
 function britaprinz_modify_queries( $query ){
-	if( is_post_type_archive( 'award' ) ) {
+	if( !is_admin() && $query->is_main_query() && is_post_type_archive( 'award' ) ) {
 		$query->set( 'order', 'DESC' );
-		$query->set( 'orderby', 'title' );
+		$query->set( 'orderby', 'date' );
+		$query->set( 'meta_query', array(
+			'date'	=> array(
+				'key'	=> 'bp_award_edition',
+			),
+		) );
 	}
 
 	if( is_post_type_archive( 'artwork' ) ) {
