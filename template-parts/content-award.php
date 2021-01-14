@@ -22,35 +22,73 @@
 
 	<?php britaprinz_theme_post_thumbnail(); ?>
 
-	<div class="entry-content">
+	<div class="entry-content award">
 
 		<?php 
 		if ( is_singular() ) :
+			
+			if ( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) :
+				?>
 
-			if ( carbon_get_the_post_meta( 'bp_award' ) ) :
-				foreach ( carbon_get_the_post_meta( 'bp_award' ) as $award ) :
+				<div class="award__catalogue"><a href="<?php echo esc_url( wp_get_attachment_url( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Catálogo', 'britaprinz-theme' ); ?></a></div>
+
+				<?php
+			endif;
+			
+			if ( carbon_get_the_post_meta( 'bp_award_se' ) ) :
+				?>
+
+				<ul class="award__special-edition">
+				
+				<?php
+				foreach( carbon_get_the_post_meta( 'bp_award_se' ) as $edition ) :
 					?>
 
-					<div>
-						<p><?php echo esc_html( $award['bp_award_category'] ); ?></p>
-						<p><?php echo esc_html( $award['bp_award_title'] ); ?></p>
-						<p><?php echo esc_html( $award['bp_award_artist'] ); ?></p>
-						<p><?php echo esc_html( $award['bp_award_size'] ); ?></p>
-						<p><?php echo esc_html( $award['bp_award_technique'] ); ?></p>
-					</div>
+					<li class="special-edition">
+						<div class="special-edition__year"><?php echo esc_html( $edition['bp_award_se_year'] ); ?></div>
+
+						<div class="special-edition__winners">
+							<?php echo wpautop( esc_html( $edition['bp_award_se_winners'] ) ); ?>
+						</div>
+
+					</li>
 
 					<?php
-
 				endforeach;
-			endif; 
-			?>
-			
-			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_mentions' ) ); ?></p>
-			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_selected' ) ); ?></p>
-			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_edition' ) ); ?></p>
-			<p><a href="<?php echo esc_url( wp_get_attachment_url( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Catálogo', 'britaprinz-theme' ); ?></a></p>
+				?>
 
-		<?php endif;?>
+				</ul>
+				
+				<?php
+			
+			else:
+
+				if ( carbon_get_the_post_meta( 'bp_award' ) ) :
+					foreach ( carbon_get_the_post_meta( 'bp_award' ) as $index => $award ) :
+						?>
+
+						<div class="award__category award__category-<?php echo esc_attr($index + 1); ?>">
+							<p class="category__name"><?php echo esc_html( $award['bp_award_category'] ); ?></p>
+							<p class="category__artwork"><?php echo esc_html( $award['bp_award_title'] ); ?></p>
+							<p class="category__artist"><?php echo esc_html( $award['bp_award_artist'] ); ?></p>
+							<p class="category__size"><?php echo esc_html( $award['bp_award_size'] ); ?></p>
+							<p class="category__technique"><?php echo esc_html( $award['bp_award_technique'] ); ?></p>
+						</div>
+
+						<?php
+
+					endforeach;
+				endif; 
+				?>
+				
+				<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_mentions' ) ); ?></p>
+				<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_selected' ) ); ?></p>
+				<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_edition' ) ); ?></p>
+
+			<?php 
+			endif;
+		endif;
+		?>
 		
 		<?php
 		// the_content(
