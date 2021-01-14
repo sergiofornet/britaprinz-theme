@@ -39,7 +39,16 @@ get_header();
 
 			endwhile;
 
-			// the_posts_navigation();
+			the_posts_navigation( array(
+				'prev_text'				=> __( 'Ediciones anteriores', 'britaprinz-theme' ),
+				'next_text'				=> __( 'Ediciones siguientes', 'britaprinz-theme' ),
+				'aria_label'			=>  __( 'Premio Carmen Arozena', 'britaprinz-theme' ),
+				'screen_reader_text'	=>  __( 'Ver más ediciones', 'britaprinz-theme' ),
+				// 'class'					=> 'awards-navigation'
+			) );
+			?>
+
+		<?php
 
 		else :
 
