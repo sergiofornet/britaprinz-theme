@@ -18,9 +18,14 @@ get_header();
 			the_post();
 
 			$args = array(
-				'post_type'   => 'award',
-				'order'       => 'DESC',
-				'orderby'     => 'title'
+				'post_type'		=> 'award',
+				'order'			=> 'DESC',
+				'orderby'		=> 'edition',
+				'meta_query'	=> array(
+					'edition'	=> array(
+						'key'	=> 'bp_award_edition',
+					)
+				),
 			);
 
 			get_template_part( 'template-parts/content', 'page-catalogues', $args );
