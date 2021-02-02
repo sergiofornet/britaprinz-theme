@@ -132,7 +132,7 @@
 								<button class="next-slide">→</button>
 							</div>`);
 
-						const slider = new Slider(artworkSlider);
+						const slider = new Slider(artworkSlider, true);
 
 						// slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
 					}

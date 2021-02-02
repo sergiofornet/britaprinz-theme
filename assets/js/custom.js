@@ -4,9 +4,12 @@
  * Slider prototype definition
  *
  * @param {HTMLElement} slider
+ * @param {boolean} scroll
  */
 function Slider(slider) {
   var _this = this;
+
+  var scroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
   if (!(slider instanceof Element)) {
     throw new Error('No slider passed in');
@@ -15,11 +18,13 @@ function Slider(slider) {
 
   this.slides = slider.querySelector('.slides');
   this.slider = slider;
+  this.scroll = scroll;
   var prevButton = slider.querySelector('.previous-slide');
   var nextButton = slider.querySelector('.next-slide'); // when this slider is created, run the start slider function
 
   this.startSlider();
-  this.applyClasses(); // requestAnimationFrame(this.autoplay);
+  this.applyClasses();
+  this.scroll && this.scrollImage(); // requestAnimationFrame(this.autoplay);
   // Event listeners
 
   prevButton && prevButton.addEventListener('click', function () {
@@ -72,6 +77,79 @@ Slider.prototype.move = function (direction) {
   }
 
   this.applyClasses();
+  this.scroll && this.scrollImage();
+};
+
+Slider.prototype.scrollImage = function () {
+  [this.next, this.prev].forEach(function (slide) {
+    slide.removeEventListener('mouseenter', enterHandler, false);
+    slide.removeEventListener('mouseleave', leaveHandler, false);
+    slide.removeEventListener('mousemove', moveHandler, false);
+  });
+  this.current.addEventListener('mouseenter', enterHandler, false);
+  this.current.addEventListener('mouseleave', leaveHandler, false);
+  this.current.addEventListener('mousemove', moveHandler, false);
+};
+
+var enterHandler = function enterHandler(event) {
+  var _event$currentTarget$ = event.currentTarget.querySelector('img'),
+      imageWidth = _event$currentTarget$.naturalWidth,
+      imageHeight = _event$currentTarget$.naturalHeight;
+
+  var _window = window,
+      windowWidth = _window.innerWidth,
+      windowHeight = _window.innerHeight; // Check if hi-res image is bigger than screen size
+
+  if (imageWidth > windowWidth || imageHeight > windowHeight) {
+    // Add active state class
+    event.currentTarget.classList.add('active-scroll'); // Create a container for hi-res image
+
+    var hiResContainer = document.createElement('div');
+    hiResContainer.classList.add('slide__hi-res');
+    hiResContainer.style.width = "".concat(window.innerWidth, "px");
+    hiResContainer.style.height = "".concat(window.innerHeight, "px");
+    hiResContainer.style.opacity = '0';
+    event.currentTarget.appendChild(hiResContainer); // Create hi-res image
+
+    var hiResImage = document.createElement('img');
+    var hiResImageUrl = event.currentTarget.querySelector('img').src;
+    hiResImage.src = hiResImageUrl;
+    hiResContainer.appendChild(hiResImage);
+    setTimeout(function () {
+      return hiResContainer.style.opacity = '1';
+    }, 50);
+  }
+};
+
+var leaveHandler = function leaveHandler(event) {
+  // Check if there is an active scrollable image
+  if (event.currentTarget.classList.contains('active-scroll')) {
+    // Remove scrollable image
+    var hiResContainer = event.currentTarget.querySelector('.slide__hi-res');
+    hiResContainer.style.opacity = '0';
+    event.currentTarget.removeChild(hiResContainer); // Remove active state class
+
+    event.currentTarget.classList.remove('active-scroll');
+  }
+};
+
+var moveHandler = function moveHandler(event) {
+  // Check if there is an active scrollable image
+  if (event.currentTarget.classList.contains('active-scroll')) {
+    var hiResImage = event.currentTarget.querySelector('.slide__hi-res img');
+    var _window2 = window,
+        windowWidth = _window2.innerWidth,
+        windowHeight = _window2.innerHeight;
+    var cursorX = event.clientX,
+        cursorY = event.clientY;
+    var imageWidth = hiResImage.naturalWidth,
+        imageHeight = hiResImage.naturalHeight;
+    imageWidth = imageWidth < windowWidth ? windowWidth : imageWidth;
+    imageHeight = imageHeight < windowHeight ? windowHeight : imageHeight;
+    var imageX = Math.floor((imageWidth - windowWidth) * cursorX / windowWidth) * -1;
+    var imageY = Math.floor((imageHeight - windowHeight) * cursorY / windowHeight) * -1;
+    hiResImage.style.transform = "translate(".concat(imageX, "px, ").concat(imageY, "px)");
+  }
 };
 "use strict";
 

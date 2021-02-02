@@ -17,19 +17,30 @@
 	justify-content: center;
 	justify-items: center;
 	color: white;
-	font-size: 100px;
 	font-family: sans-serif;
-	border: 5px solid white;
 	transition: all .75s ease-in-out;
 	// transform: translateX(-200%);
 	z-index: 0;
 	opacity: 0;
 
-	img {
+	& > img {
 		max-width: initial;
 		height: initial;
 		max-height: 100%;
 		width: auto;
+	}
+
+	.slide__hi-res {
+		position: fixed;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+		transition: opacity .25s ease-in-out;
+
+		img {
+			max-width: initial;
+			height: initial;
+		}
 	}
 }
 
