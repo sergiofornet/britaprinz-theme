@@ -11,6 +11,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
+
 		<?php
 		if ( is_singular() ) :
 			the_title( '<h1 class="entry-title">', '</h1>' );
@@ -18,6 +19,7 @@
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
 		?>
+
 	</header><!-- .entry-header -->
 
 	<?php britaprinz_theme_post_thumbnail(); ?>
@@ -26,27 +28,28 @@
 
 		<?php 
 		if ( is_singular() ) :
-			 ?>
-			 
+			?>
+
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_event_artist' ) ); ?></p>
-			<div><?php echo wpautop( carbon_get_the_post_meta( 'bp_event_info' ) ); ?></div>
+			<div><?php echo wpautop( carbon_get_the_post_meta( 'bp_event_info' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 			<p><?php echo esc_html( date( __( 'd/m/Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ); ?></p>
 			<p><?php echo esc_html( date( __( 'd/m/Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_condition' ) ); ?></p>
 			<div>
 
 				<?php 
-				$gallery = carbon_get_the_post_meta('bp_event_gallery');
-				foreach ($gallery as $image) :
+				$gallery = carbon_get_the_post_meta( 'bp_event_gallery' );
+
+				foreach ( $gallery as $image ) :
 					echo wp_get_attachment_image( $image, 'thumbnail' );
 				endforeach;
 				?>
 
 			</div>
-		
-		<?php endif;?>
-		
-		<?php
+
+			<?php 
+		endif;
+
 		the_content(
 			sprintf(
 				wp_kses(
@@ -69,11 +72,9 @@
 			)
 		);
 		?>
-	</div><!-- .entry-content -->
 
+	</div><!-- .entry-content -->
 	<footer class="entry-footer">
-		<?php 
-		// britaprinz_theme_entry_footer(); 
-		?>
+
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

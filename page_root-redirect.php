@@ -6,5 +6,6 @@
  *
  * @package Brita_Prinz_Theme
  */
+
 wp_redirect( home_url() );
 exit;

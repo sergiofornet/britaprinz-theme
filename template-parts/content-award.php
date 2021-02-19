@@ -11,6 +11,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
+
 		<?php
 		if ( is_singular() ) :
 			the_title( '<h1 class="entry-title">', '</h1>' );
@@ -18,6 +19,7 @@
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
 		?>
+
 	</header><!-- .entry-header -->
 
 	<?php britaprinz_theme_post_thumbnail(); ?>
@@ -39,18 +41,22 @@
 				?>
 
 				<ul class="award__special-edition">
-				
+
 				<?php
-				foreach( carbon_get_the_post_meta( 'bp_award_se' ) as $edition ) :
+				foreach ( carbon_get_the_post_meta( 'bp_award_se' ) as $edition ) :
 					?>
 
 					<li class="special-edition">
-						<div class="special-edition__year"><?php echo esc_html( $edition['bp_award_se_year'] ); ?></div>
+						<div class="special-edition__year">
 
-						<div class="special-edition__winners">
-							<?php echo wpautop( esc_html( $edition['bp_award_se_winners'] ) ); ?>
+							<?php echo esc_html( $edition['bp_award_se_year'] ); ?>
+
 						</div>
+						<div class="special-edition__winners">
 
+							<?php echo wpautop( esc_html( $edition['bp_award_se_winners'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+
+						</div>
 					</li>
 
 					<?php
@@ -58,16 +64,16 @@
 				?>
 
 				</ul>
-				
+
 				<?php
-			
-			else:
+			else :
 
 				if ( carbon_get_the_post_meta( 'bp_award' ) ) :
+
 					foreach ( carbon_get_the_post_meta( 'bp_award' ) as $index => $award ) :
 						?>
 
-						<div class="award__category award__category-<?php echo esc_attr($index + 1); ?>">
+						<div class="award__category award__category-<?php echo esc_attr( $index + 1 ); ?>">
 							<p class="category__name"><?php echo esc_html( $award['bp_award_category'] ); ?></p>
 							<p class="category__artwork"><?php echo esc_html( $award['bp_award_title'] ); ?></p>
 							<p class="category__artist"><?php echo esc_html( $award['bp_award_artist'] ); ?></p>
@@ -78,46 +84,22 @@
 						<?php
 
 					endforeach;
+
 				endif; 
 				?>
-				
+
 				<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_mentions' ) ); ?></p>
 				<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_selected' ) ); ?></p>
 				<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_award_edition' ) ); ?></p>
 
-			<?php 
+				<?php 
 			endif;
+
 		endif;
 		?>
-		
-		<?php
-		// the_content(
-		// 	sprintf(
-		// 		wp_kses(
-		// 			/* translators: %s: Name of current post. Only visible to screen readers */
-		// 			__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'britaprinz-theme' ),
-		// 			array(
-		// 				'span' => array(
-		// 					'class' => array(),
-		// 				),
-		// 			)
-		// 		),
-		// 		wp_kses_post( get_the_title() )
-		// 	)
-		// );
 
-		// wp_link_pages(
-		// 	array(
-		// 		'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'britaprinz-theme' ),
-		// 		'after'  => '</div>',
-		// 	)
-		// );
-		?>
 	</div><!-- .entry-content -->
-
 	<footer class="entry-footer">
-		<?php 
-			// britaprinz_theme_entry_footer(); 
-		?>
+
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

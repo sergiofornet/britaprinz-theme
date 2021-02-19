@@ -17,7 +17,7 @@
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
 		?>
-		
+
 	</header><!-- .entry-header -->
 
 	<?php britaprinz_theme_post_thumbnail(); ?>
@@ -42,42 +42,42 @@
 			);
 
 			?>
-			 
+
 			<div>
-			
+
 				<?php 
-				$artists = carbon_get_the_post_meta('bp_technique_artist');
+				$artists = carbon_get_the_post_meta( 'bp_technique_artist' );
 
 				if ( $artists ) :
-					foreach( $artists as $artist ) :
-						$artist_link = get_term_link( get_term( $artist['id'], $taxonomy) );
-						$artist_name = get_term( $artist['id'], $taxonomy)->name;
-						$artist_slug = get_term( $artist['id'], $taxonomy)->slug;
+					foreach ( $artists as $artist ) : 
+						$artist_link = get_term_link( get_term( $artist['id'], $taxonomy ) );
+						$artist_name = get_term( $artist['id'], $taxonomy )->name;
+						$artist_slug = get_term( $artist['id'], $taxonomy )->slug;
 
 						?>
-						
-						<a href="<?php echo esc_url( get_post_type_archive_link( 'artwork' ) . $artist_slug ); ?>"><?php echo esc_html( $artist_name ) ?></a>
+
+						<a href="<?php echo esc_url( get_post_type_archive_link( 'artwork' ) . $artist_slug ); ?>"><?php echo esc_html( $artist_name ); ?></a>
 
 						<?php
 					endforeach;
 				endif;
 				?>
-			
+
 			</div>
 			<div>
 
 				<?php 
-				$gallery = carbon_get_the_post_meta('bp_artwork_gallery');
+				$gallery = carbon_get_the_post_meta( 'bp_artwork_gallery' );
 
-				foreach ($gallery as $image) :
+				foreach ( $gallery as $image ) :
 					echo wp_get_attachment_image( $image, 'thumbnail' );
 				endforeach;
 				?>
 
 			</div>
-		
-		<?php endif;?>
-		
+
+		<?php endif; ?>
+
 		<?php
 		wp_link_pages(
 			array(

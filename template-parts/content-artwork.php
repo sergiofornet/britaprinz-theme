@@ -11,6 +11,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
+
 		<?php
 		if ( is_singular() ) :
 			the_title( '<h1 class="entry-title">', '</h1>' );
@@ -18,6 +19,7 @@
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
 		?>
+
 	</header><!-- .entry-header -->
 
 	<?php britaprinz_theme_post_thumbnail(); ?>
@@ -26,12 +28,13 @@
 
 		<?php 
 		if ( is_singular() ) :
-			 ?>
-			 
+			?>
+
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_year' ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_copy' ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_paper' ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_size' ) ); ?></p>
+
 			<?php 
 			if ( carbon_get_the_post_meta( 'bp_artwork_loan' ) ) : 
 				?>
@@ -40,8 +43,7 @@
 
 				<?php
 			endif;
-			?>
-			<?php 
+
 			if ( carbon_get_the_post_meta( 'bp_artwork_sale' ) ) : 
 				?>
 
@@ -50,14 +52,16 @@
 				<?php
 			endif;
 			?>
+
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_info' ) ); ?></p>
 			<p><?php echo esc_html( carbon_get_the_post_meta( 'bp_artwork_condition' ) ); ?></p>
 			<div>
-			
+
 				<?php 
-				$techniques = carbon_get_the_post_meta('bp_artwork_technique');
+				$techniques = carbon_get_the_post_meta( 'bp_artwork_technique' );
 
 				foreach ( $techniques as $technique_item ) :
+
 					foreach ( $technique_item['bp_artwork_technique_list'] as $technique ) :
 						echo sprintf(
 							'<a href="%s">%s</a>',
@@ -66,27 +70,31 @@
 						);
 					endforeach;
 					
-					echo $technique_item['bp_artwork_technique_other'] ? sprintf( 
-						'<span>%s</span>', 
-						esc_html( $technique_item['bp_artwork_technique_other'] ) ) : '';
+					echo $technique_item['bp_artwork_technique_other'] ? 
+						sprintf( 
+							'<span>%s</span>', 
+							esc_html( $technique_item['bp_artwork_technique_other'] )
+						) 
+						: '';
 				endforeach;
 				?>
-			
+
 			</div>
 			<div>
 
 				<?php 
-				$gallery = carbon_get_the_post_meta('bp_artwork_gallery');
-				foreach ($gallery as $image) :
+				$gallery = carbon_get_the_post_meta( 'bp_artwork_gallery' );
+
+				foreach ( $gallery as $image ) :
 					echo wp_get_attachment_image( $image, 'thumbnail' );
 				endforeach;
 				?>
 
 			</div>
+
+			<?php
+		endif;
 		
-		<?php endif;?>
-		
-		<?php
 		the_content(
 			sprintf(
 				wp_kses(
@@ -102,8 +110,6 @@
 			)
 		);
 
-		
-
 		wp_link_pages(
 			array(
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'britaprinz-theme' ),
@@ -112,10 +118,7 @@
 		);
 		?>
 	</div><!-- .entry-content -->
-
 	<footer class="entry-footer">
-		<?php 
-			// britaprinz_theme_entry_footer(); 
-		?>
+
 	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

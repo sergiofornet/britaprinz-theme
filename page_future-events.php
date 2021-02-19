@@ -16,18 +16,18 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 
-			$today = date('Y-m-d');
+			$today = date( 'Y-m-d' );
 
 			$args = array(
 				'post_type'   => 'event',
 				'order'       => 'ASC',
 				'orderby'     => 'start_date',
-				'meta_query'  => array(
-					'start_date' 	=> array(
+				'meta_query'  => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+					'start_date' => array(
 						'key'     => 'bp_event_start',
 						'value'   => $today,
 						'compare' => '>',
-						'type'    => 'DATE'
+						'type'    => 'DATE',
 					),
 				),
 			);

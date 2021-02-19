@@ -16,25 +16,25 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 
-			$today = date('Y-m-d');
+			$today = date( 'Y-m-d' );
 
 			$args = array(
-				'post_type'   => 'event',
-				'order'       => 'DESC',
-				'orderby'     => 'start_date',
-				'meta_query'  => array(
-					'relation'    => 'AND',
-					'start_date' 	=> array(
+				'post_type'  => 'event',
+				'order'      => 'DESC',
+				'orderby'    => 'start_date',
+				'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+					'relation'   => 'AND',
+					'start_date' => array(
 						'key'     => 'bp_event_start',
 						'value'   => $today,
 						'compare' => '<=',
-						'type'    => 'DATE'
+						'type'    => 'DATE',
 					),
-					'end_date' => array(
+					'end_date'   => array(
 						'key'     => 'bp_event_end',
 						'value'   => $today,
 						'compare' => '>=',
-						'type'    => 'DATE'
+						'type'    => 'DATE',
 					),
 				),
 			);

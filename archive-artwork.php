@@ -8,7 +8,6 @@
  */
 
 get_header();
-
 ?>
 
 	<main id="primary" class="site-main">
@@ -17,25 +16,25 @@ get_header();
 
 			<header class="page-header">
 				<h1 class="page-title">
+
 					<?php echo post_type_archive_title(); ?>
+
 				</h1>
-
 			</header><!-- .page-header -->
-
 			<input type="search" class="artist-search" autocomplete="off">
 			<div style="display: grid; grid-template-columns: 1fr 1fr;">
 				<div class="artists" style="display: grid; grid-template-columns: 9fr 1fr; height:100vh">
 					<div class="artists__list" style="height: 100vh; overflow-y: scroll;"></div>
 					<div class="artists__initials">
-					
+
 						<?php
-						foreach( range( 'a', 'z' ) as $initial) :
+						foreach ( range( 'a', 'z' ) as $initial ) :
 							?>
-							
+
 							<div class="initial">
 								<button class="initial__button" data-target="<?php echo esc_attr( $initial ); ?>"><?php echo esc_html( $initial ); ?></button>
 							</div>
-							
+
 							<?php
 						endforeach;
 						?>
@@ -51,18 +50,13 @@ get_header();
 				<div class="artwork-gallery__slider"></div>
 			</div>
 
-		<?php
-		// the_posts_navigation();
+			<?php
 		else :
-
 			get_template_part( 'template-parts/content', 'none' );
-
 		endif;
 		?>
-
 
 	</main><!-- #main -->
 
 <?php
-// get_sidebar();
 get_footer();

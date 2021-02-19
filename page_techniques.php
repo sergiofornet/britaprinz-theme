@@ -20,7 +20,7 @@ get_header();
 			$args = array(
 				'post_type'   => 'technique',
 				'order'       => 'ASC',
-				'orderby'     => 'title'
+				'orderby'     => 'title',
 			);
 
 			get_template_part( 'template-parts/content', 'page-techniques', $args );

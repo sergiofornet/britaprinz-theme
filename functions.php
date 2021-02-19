@@ -141,6 +141,8 @@ add_action( 'widgets_init', 'britaprinz_theme_widgets_init' );
 	
 /**
  * Register custom query vars
+ * 
+ * @param Array $vars Registered query vars array.
  */
 function britaprinz_custom_query_vars_filter( $vars ) {
 	$vars[] .= 'display_artist';
@@ -152,58 +154,64 @@ add_filter( 'query_vars', 'britaprinz_custom_query_vars_filter' );
  * Enqueue scripts and styles.
  */
 function britaprinz_theme_scripts() {
-	// Google fonts
-	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap', array(), null );
+	// Google fonts.
+	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap', array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 
-	// Main stylesheet
+	// Main stylesheet.
 	wp_enqueue_style( 'britaprinz-theme-style', get_stylesheet_uri(), array(), BRITAPRINZ_THEME_VERSION );
 	wp_style_add_data( 'britaprinz-theme-style', 'rtl', 'replace' );
 
-	// Main navigation script 
+	// Main navigation script.
 	wp_enqueue_script( 'britaprinz-theme-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), BRITAPRINZ_THEME_VERSION, true );
 
-	// Comments script
+	// Comments script.
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 	
-	// Vendor scripts
-	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri('assets/js/vendor.min.js'), array( 'wp-polyfill' ), BRITAPRINZ_THEME_VERSION, true );
+	// Vendor scripts.
+	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri( 'assets/js/vendor.min.js' ), array( 'wp-polyfill' ), BRITAPRINZ_THEME_VERSION, true );
 
-	// Main custom script
-	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri('assets/js/custom.js'), array(), BRITAPRINZ_THEME_VERSION, true );
+	// Main custom script.
+	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri( 'assets/js/custom.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 	
 	if ( is_post_type_archive( 'artwork' ) ) {
 		$query_artist = get_query_var( 'display_artist' );
-		$artist_id = $query_artist ? get_term_by( 'slug', $query_artist, 'artist')->term_id : '';
-		$lang = '';
+		$artist_id    = $query_artist ? get_term_by( 'slug', $query_artist, 'artist' )->term_id : '';
+		$lang         = '';
 		if ( is_user_logged_in() && current_user_can( 'edit_posts' ) && defined( 'ICL_LANGUAGE_CODE' ) ) {
 			$lang = ICL_LANGUAGE_CODE;
 		}
 
-		// AJAX script
-		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri('assets/js/ajax.js'), array(), BRITAPRINZ_THEME_VERSION, true );
+		// AJAX script.
+		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri( 'assets/js/ajax.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 		
-		wp_localize_script( 'britaprinz-ajax', 'ajax_var', array(
-			'artworkUrl'	=> rest_url( '/wp/v2/artwork' ),
-			'artistUrl'		=> rest_url( '/wp/v2/artist' ),
-			'searchUrl'		=> rest_url( 'britaprinz/v1/artists/search' ),
-			'nonce'			=> wp_create_nonce( 'wp_rest' ),
-			'lang'			=> $lang,
-			'artistId'		=> $artist_id,
-			
-		) );
+		wp_localize_script( 
+			'britaprinz-ajax', 
+			'ajax_var', 
+			array(
+				'artworkUrl' => rest_url( '/wp/v2/artwork' ),
+				'artistUrl'  => rest_url( '/wp/v2/artist' ),
+				'searchUrl'  => rest_url( 'britaprinz/v1/artists/search' ),
+				'nonce'      => wp_create_nonce( 'wp_rest' ),
+				'lang'       => $lang,
+				'artistId'   => $artist_id,
+			) 
+		);
 			
 		/**
-		 * @hooked britaprinz_artwork_redirect	- 10
+		 * @hooked britaprinz_artwork_redirect - 10 // phpcs:ignore Generic.Commenting.DocComment.MissingShort
 		 */
 		do_action( 'artwork_redirect', $query_artist, $artist_id );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
 
+/**
+ * Enqueue admin scripts
+ */
 function britaprinz_admin_scripts() {
-	wp_enqueue_script( 'crb-admin', get_stylesheet_directory_uri() . '/assets/js/admin.js', array( 'carbon-fields-yoast' ) );
+	wp_enqueue_script( 'crb-admin', get_stylesheet_directory_uri() . '/assets/js/admin.js', array( 'carbon-fields-yoast' ), BRITAPRINZ_THEME_VERSION, true );
 }
 add_action( 'admin_enqueue_scripts', 'britaprinz_admin_scripts' );
 
@@ -248,8 +256,8 @@ require_once get_template_directory() . '/inc/rest.php';
  * Load Carbon Fields Yoast
  */
 function britaprinz_initialize_carbon_yoast() {
-	include_once __DIR__ . '/vendor/autoload.php';
+	include_once __DIR__ . '/vendor/autoload.php'; // phpcs:ignore PHPCompatibility.Keywords.NewKeywords.t_dirFound
 	
-	new \Carbon_Fields_Yoast\Carbon_Fields_Yoast;
+	new \Carbon_Fields_Yoast\Carbon_Fields_Yoast(); // phpcs:ignore PHPCompatibility.LanguageConstructs.NewLanguageConstructs.t_ns_separatorFound
 }
 add_action( 'after_setup_theme', 'britaprinz_initialize_carbon_yoast' );

@@ -11,22 +11,23 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
+
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+
 	</header><!-- .entry-header -->
-
-	<?php //britaprinz_theme_post_thumbnail(); ?>
-
 	<div class="entry-content">
-		
+
 		<?php the_content(); ?>
 
 		<div>
 			<div>
 				<div class="home__slider">
 					<div class="slides">
+
 						<?php 
-						$gallery = carbon_get_the_post_meta('bp_home_gallery');
-						foreach ($gallery as $image) :
+						$gallery = carbon_get_the_post_meta( 'bp_home_gallery' );
+
+						foreach ( $gallery as $image ) :
 							?>
 
 							<div class="slide">
@@ -39,76 +40,54 @@
 						?>
 
 					</div>
-				
-				
 				</div>
 				<div>
-				
+
 					<?php echo esc_html( carbon_get_the_post_meta( 'bp_home_gallery_text' ) ); ?>
-				
+
 				</div><!--home-gallery-text-->
 			</div><!--home-gallery-->
 			<div>
-			
+
 				<?php 
-					$featured_content = carbon_get_the_post_meta('bp_home_featured');
+				$featured_content = carbon_get_the_post_meta( 'bp_home_featured' );
 
-					foreach ( $featured_content as $content ) :
-						if ( $content['bp_home_featured_post'] ) :
-							$content_url = get_permalink( $content['bp_home_featured_post'][0]['id'] );
-							$content_label = $content['bp_home_featured_label'] ?
-								$content['bp_home_featured_label'] :
-								get_the_title( $content['bp_home_featured_post'][0]['id'] );
-							?>
+				foreach ( $featured_content as $content ) :
 
-							<div>
+					if ( $content['bp_home_featured_post'] ) :
+						$content_url   = get_permalink( $content['bp_home_featured_post'][0]['id'] );
+						$content_label = $content['bp_home_featured_label'] ?
+							$content['bp_home_featured_label'] :
+							get_the_title( $content['bp_home_featured_post'][0]['id'] );
+						?>
 
-								<?php
-								echo sprintf(
-									'<a href="%s">%s</a>',
-									esc_url( $content_url ),
-									esc_html( $content_label )
-								);
-								?>
-
-							</div>
+						<div>
 
 							<?php
-						endif;
-					endforeach;
+							echo sprintf(
+								'<a href="%s">%s</a>',
+								esc_url( $content_url ),
+								esc_html( $content_label )
+							);
+							?>
+
+						</div>
+
+						<?php
+					endif;
+
+				endforeach;
 				?>
-			
+
 			</div><!--home-featured-content-->
 		</div>
 		<div>
-		
-			<?php echo apply_filters( 'the_content', carbon_get_the_post_meta( 'bp_home_about' ) ); ?>
-			
+
+			<?php echo apply_filters( 'the_content', carbon_get_the_post_meta( 'bp_home_about' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+
 		</div><!--home-about-->
-
-	
 	</div><!-- .entry-content -->
+	<footer class="entry-footer">
 
-	<?php if ( get_edit_post_link() ) : ?>
-		<footer class="entry-footer">
-			<?php
-			// edit_post_link(
-			// 	sprintf(
-			// 		wp_kses(
-			// 			/* translators: %s: Name of current post. Only visible to screen readers */
-			// 			__( 'Edit <span class="screen-reader-text">%s</span>', 'britaprinz-theme' ),
-			// 			array(
-			// 				'span' => array(
-			// 					'class' => array(),
-			// 				),
-			// 			)
-			// 		),
-			// 		wp_kses_post( get_the_title() )
-			// 	),
-			// 	'<span class="edit-link">',
-			// 	'</span>'
-			// );
-			?>
-		</footer><!-- .entry-footer -->
-	<?php endif; ?>
+	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
