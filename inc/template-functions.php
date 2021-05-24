@@ -230,3 +230,15 @@ function britaprinz_modify_queries( $query ) {
 };
 	
 add_action( 'pre_get_posts', 'britaprinz_modify_queries' );
+
+/**
+ * Set Yoast metabox priority to 'low'
+ */
+function britaprinz_theme_yoast_priority() { 
+	return 'low';
+}
+
+if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
+	add_filter( 'wpseo_metabox_prio', 'britaprinz_theme_yoast_priority' );
+}
+
