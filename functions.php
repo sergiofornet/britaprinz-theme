@@ -144,11 +144,12 @@ add_action( 'widgets_init', 'britaprinz_theme_widgets_init' );
  * 
  * @param Array $vars Registered query vars array.
  */
-function britaprinz_custom_query_vars_filter( $vars ) {
+function britaprinz_theme_custom_query_vars_filter( $vars ) {
 	$vars[] .= 'display_artist';
 	return $vars;
 }
-add_filter( 'query_vars', 'britaprinz_custom_query_vars_filter' );
+add_filter( 'query_vars', 'britaprinz_theme_custom_query_vars_filter' );
+
 
 /**
  * Enqueue scripts and styles.
@@ -199,8 +200,9 @@ function britaprinz_theme_scripts() {
 			) 
 		);
 			
+		// phpcs:ignore Generic.Commenting.DocComment.MissingShort
 		/**
-		 * @hooked britaprinz_artwork_redirect - 10 // phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		 * @hooked britaprinz_artwork_redirect - 10 
 		 */
 		do_action( 'artwork_redirect', $query_artist, $artist_id );
 	}
@@ -210,10 +212,10 @@ add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
 /**
  * Enqueue admin scripts
  */
-function britaprinz_admin_scripts() {
+function britaprinz_theme_admin_scripts() {
 	wp_enqueue_script( 'crb-admin', get_stylesheet_directory_uri() . '/assets/js/admin.js', array( 'carbon-fields-yoast' ), BRITAPRINZ_THEME_VERSION, true );
 }
-add_action( 'admin_enqueue_scripts', 'britaprinz_admin_scripts' );
+add_action( 'admin_enqueue_scripts', 'britaprinz_theme_admin_scripts' );
 
 /**
  * Implement the Custom Header feature.
@@ -255,9 +257,9 @@ require_once get_template_directory() . '/inc/rest.php';
 /**
  * Load Carbon Fields Yoast
  */
-function britaprinz_initialize_carbon_yoast() {
+function britaprinz_theme_initialize_carbon_yoast() {
 	include_once __DIR__ . '/vendor/autoload.php'; // phpcs:ignore PHPCompatibility.Keywords.NewKeywords.t_dirFound
 	
 	new \Carbon_Fields_Yoast\Carbon_Fields_Yoast(); // phpcs:ignore PHPCompatibility.LanguageConstructs.NewLanguageConstructs.t_ns_separatorFound
 }
-add_action( 'after_setup_theme', 'britaprinz_initialize_carbon_yoast' );
+add_action( 'after_setup_theme', 'britaprinz_theme_initialize_carbon_yoast' );
