@@ -21,33 +21,6 @@
 
 		<div>
 			<div>
-				<div class="home__slider">
-					<div class="slides">
-
-						<?php 
-						$gallery = carbon_get_the_post_meta( 'bp_home_gallery' );
-
-						foreach ( $gallery as $image ) :
-							?>
-
-							<div class="slide">
-
-								<?php echo wp_get_attachment_image( $image, 'full' ); ?>
-							</div>
-
-							<?php
-						endforeach;
-						?>
-
-					</div>
-				</div>
-				<div>
-
-					<?php echo esc_html( carbon_get_the_post_meta( 'bp_home_gallery_text' ) ); ?>
-
-				</div><!--home-gallery-text-->
-			</div><!--home-gallery-->
-			<div>
 
 				<?php 
 				$featured_content = carbon_get_the_post_meta( 'bp_home_featured' );
