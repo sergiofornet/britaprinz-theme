@@ -54,11 +54,6 @@
 
 			</div><!--home-featured-content-->
 		</div>
-		<div>
-
-			<?php echo apply_filters( 'the_content', carbon_get_the_post_meta( 'bp_home_about' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-
-		</div><!--home-about-->
 	</div><!-- .entry-content -->
 	<footer class="entry-footer">
 
