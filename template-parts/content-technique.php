@@ -50,9 +50,9 @@
 
 				if ( $artists ) :
 					foreach ( $artists as $artist ) : 
-						$artist_link = get_term_link( get_term( $artist['id'], $taxonomy ) );
-						$artist_name = get_term( $artist['id'], $taxonomy )->name;
-						$artist_slug = get_term( $artist['id'], $taxonomy )->slug;
+						$artist_link = get_term_link( get_term( $artist['id'], 'artist' ) );
+						$artist_name = get_term( $artist['id'], 'artist' )->name;
+						$artist_slug = get_term( $artist['id'], 'artist' )->slug;
 
 						?>
 
