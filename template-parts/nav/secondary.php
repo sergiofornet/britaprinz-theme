@@ -7,7 +7,8 @@
  * @package Brita_Prinz_Theme
  */
 
-if ( 'undefined' !== $args ) {
+// $args -> menu theme location passed in by get_template_part 
+if ( 'undefined' !== $args && has_nav_menu( $args ) ) :
 	?>
 
 	<nav class="secondary">
@@ -25,5 +26,5 @@ if ( 'undefined' !== $args ) {
 	</nav>
 
 	<?php
-}
+endif;
 
