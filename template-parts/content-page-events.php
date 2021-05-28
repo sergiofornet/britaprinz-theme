@@ -7,6 +7,8 @@
 
 ?>
 
+<?php get_template_part( 'template-parts/nav/secondary', '', 'event-menu' ); ?>
+
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 

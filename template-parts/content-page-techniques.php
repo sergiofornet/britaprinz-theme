@@ -7,6 +7,10 @@
 
 ?>
 
+<?php 
+	get_template_part( 'template-parts/nav/secondary', '', carbon_get_the_post_meta( 'bp_page_menu' ) );
+?>
+
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 
