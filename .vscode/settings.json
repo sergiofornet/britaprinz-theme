@@ -1,7 +1,7 @@
 {
 	// Must install PHP Sniffer extension first.
 	"phpSniffer.standard": "./phpcs.xml.dist",
-	"phpSniffer.executablesFolder": "./vendor/bin",
+	"phpSniffer.autoDetect": true,
 	"[php]": {
 		"editor.formatOnSave": true
 	}
