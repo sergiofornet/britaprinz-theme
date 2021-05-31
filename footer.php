@@ -20,11 +20,11 @@ $contact = carbon_get_theme_option( 'bp_theme_contact' );
 				<?php echo esc_html( bloginfo( 'name' ) ); ?>
 
 			</div>
-			<div>
+			<address>
 
 				<?php echo wpautop( esc_html( $contact ) ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
-			</div>
+			</address>
 		</div><!-- .site-info -->
 		<div class="social-links">
 			<ul>
