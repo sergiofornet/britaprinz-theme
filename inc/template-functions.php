@@ -242,3 +242,61 @@ if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
 	add_filter( 'wpseo_metabox_prio', 'britaprinz_theme_yoast_priority' );
 }
 
+/**
+ * Create Award winners menu subitem.
+ * 
+ * @return string $winners_output  An HTML string containing winners subitem.
+ */
+function britaprinz_theme_get_winners() {
+	$winners_output = '<ul>';
+
+	// Must use inside the loop.
+	while ( have_posts() ) :
+		the_post();
+
+		$edition         = esc_html( get_the_title() );
+		$edition_item    = "<li><button>{$edition}</button></li>";
+		$winners_output .= $edition_item;
+		
+	endwhile;
+
+	$winners_output .= '</ul>';
+	return $winners_output;
+}
+
+/**
+ * Create Award catalogues menu subitem.
+ * 
+ * @return string $catalogues_output  An HTML string containnin catalogues subitem.
+ */
+function britaprinz_theme_get_catalogues() {
+	$args = array(
+		'post_type'  => 'award',
+		'order'      => 'DESC',
+		'orderby'    => 'edition',
+		'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+			'edition' => array(
+				'key' => 'bp_award_edition',
+			),
+		),
+	);
+
+	$award_query = new WP_Query( $args );
+
+	$catalogues_output = '<ul>';
+	while ( $award_query->have_posts() ) :
+		$award_query->the_post();
+		
+		if ( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) :
+
+			$edition    = esc_html( get_the_title() );
+			$catalogues_output .= "<li><button>{$edition}</button></li>";
+		endif;
+		
+	endwhile; // End of the loop.
+
+	$catalogues_output .= '</ul>';
+	wp_reset_postdata();
+
+	return $catalogues_output;
+}

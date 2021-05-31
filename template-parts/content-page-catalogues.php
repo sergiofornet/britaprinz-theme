@@ -7,8 +7,9 @@
 
 ?>
 
-<?php 
-	get_template_part( 'template-parts/nav/secondary', '', 'award-menu' );
+<?php
+	add_filter( 'nav_menu_items_catalogues', 'britaprinz_theme_get_catalogues' );
+	get_template_part( 'template-parts/nav/secondary', 'award', 'award-menu' );	
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

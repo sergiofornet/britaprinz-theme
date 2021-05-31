@@ -13,8 +13,9 @@ get_header();
 	<main id="primary" class="site-main">
 
 		<?php 
+		add_filter( 'nav_menu_items_winners', 'britaprinz_theme_get_winners' );
 		$bpa_theme_award_post_type = get_post_type();
-		get_template_part( 'template-parts/nav/secondary', '', "{$bpa_theme_award_post_type}-menu" );
+		get_template_part( 'template-parts/nav/secondary', 'award', "{$bpa_theme_award_post_type}-menu" );
 		
 		if ( have_posts() ) : 
 			?>
