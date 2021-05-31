@@ -268,3 +268,11 @@ function britaprinz_theme_initialize_carbon_yoast() {
 	new \Carbon_Fields_Yoast\Carbon_Fields_Yoast(); // phpcs:ignore PHPCompatibility.LanguageConstructs.NewLanguageConstructs.t_ns_separatorFound
 }
 add_action( 'after_setup_theme', 'britaprinz_theme_initialize_carbon_yoast' );
+
+/**
+ * Load Brita Prinz Theme Nav Walker
+ */
+function britaprinz_theme_walker_loader() {
+	require_once get_template_directory() . '/inc/classes/class-bpa-theme-walker-nav-menu.php';
+}
+add_action( 'after_setup_theme', 'britaprinz_theme_walker_loader' );
