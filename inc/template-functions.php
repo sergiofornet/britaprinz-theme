@@ -248,14 +248,18 @@ if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
  * @return string $winners_output  An HTML string containing winners subitem.
  */
 function britaprinz_theme_get_winners() {
-	$winners_output = '<ul>';
+	$winners_output = '<ul class="winners-submenu">';
 
 	// Must use inside the loop.
 	while ( have_posts() ) :
 		the_post();
 
 		$edition         = esc_html( get_the_title() );
-		$edition_item    = "<li><button>{$edition}</button></li>";
+		$edition_id      = esc_html( get_the_ID() );
+		$edition_item    = "
+		<li id='winners-item-{$edition_id}' class='winners-item winners-item--{$edition_id}'>
+			<button class='winners-item__button winners-item__button--inactive' data-edition='{$edition_id}'>{$edition}</button>
+		</li>";
 		$winners_output .= $edition_item;
 		
 	endwhile;
@@ -289,8 +293,13 @@ function britaprinz_theme_get_catalogues() {
 		
 		if ( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) :
 
-			$edition    = esc_html( get_the_title() );
-			$catalogues_output .= "<li><button>{$edition}</button></li>";
+			$edition            = esc_html( get_the_title() );
+			$edition_id         = esc_html( get_the_ID() );
+			$catalogues_output .= "
+				<li id='award-catalogue-{$edition_id}'>
+					<button class='award-catalogue__button inactive' data-edition='{$edition_id}'>{$edition}</button>
+				</li>
+			";
 		endif;
 		
 	endwhile; // End of the loop.
