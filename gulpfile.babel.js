@@ -334,6 +334,71 @@ gulp.task( 'JS', () => {
 		.pipe( notify({ message: '\n\n✅  ===> JS — completed!\n', onLast: true }) );
 });
 
+
+/**
+ * Task: `awardJS`.
+ *
+ * Concatenate and uglify custom JS scripts.
+ *
+ * This task does the following:
+ *     1. Gets the source folder for JS custom files
+ *     2. Concatenates all the files and generates custom.js
+ *     3. Renames the JS file with suffix .min.js
+ *     4. Uglifes/Minifies the JS file and generates custom.min.js
+ */
+ gulp.task( 'awardJS', () => {
+	return gulp
+		.src( config.awardSRC, { nodir: false }) // Only run on changed files.
+		.pipe( plumber( errorHandler ) )
+		.pipe(sourcemaps.init())
+		.pipe(
+			rollup(
+				{
+					plugins: [
+						commonjs(),
+						rollupBabel({
+							presets: [
+								[
+									'@babel/preset-env', // Preset to compile your modern JS to ES5.
+									{
+										targets: {
+											browsers: config.BROWSERS_LIST
+										}, // Target browser list to support.
+									},
+								],
+							],
+							plugins: [
+								'@babel/plugin-transform-async-to-generator',
+								'@babel/plugin-transform-runtime',
+							], // Comment out if not using async/await.
+							exclude: 'node_modules/**',
+							babelHelpers: 'runtime', // use 'bundled by default'
+							
+						}),
+						nodeResolve(),
+					],
+				},
+				{
+					format: 'iife',
+				}	
+			)
+		)
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe(sourcemaps.write('./'))
+		.pipe( gulp.dest( config.awardDestination ) )
+		.pipe(
+			rename({
+				basename: config.awardFile,
+				suffix: '.min',
+			})
+		)
+		.pipe(filter('**/*.js'))
+		.pipe( uglify() )
+		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
+		.pipe( gulp.dest( config.awardDestination ) )
+		.pipe( notify({ message: '\n\n✅  ===> Award — completed!\n', onLast: true }) );
+});
+
 /**
  * Task: `images`.
  *
@@ -429,12 +494,13 @@ gulp.task( 'translate', () => {
  */
 gulp.task(
 	'default',
-	gulp.parallel( 'styles', 'vendorsJS', 'customJS', 'JS', 'images', browsersync, () => {
+	gulp.parallel( 'styles', 'vendorsJS', 'customJS', 'JS', 'awardJS', 'images', browsersync, () => {
 		gulp.watch( config.watchPhp, reload ); // Reload on PHP file changes.
 		gulp.watch( config.watchStyles, gulp.parallel( 'styles' ) ); // Reload on SCSS file changes.
 		gulp.watch( config.watchJsVendor, gulp.series( 'vendorsJS', reload ) ); // Reload on vendorsJS file changes.
 		gulp.watch( config.watchJsCustom, gulp.series( 'customJS', reload ) ); // Reload on customJS file changes.
 		gulp.watch( config.watchJs, gulp.series( 'JS', reload ) ); // Reload on customJS file changes.
+		gulp.watch( config.watchJsAward, gulp.series( 'awardJS', reload ) ); // Reload on customJS file changes.
 		gulp.watch( config.imgSRC, gulp.series( 'images', reload ) ); // Reload on customJS file changes.
 	})
 );
