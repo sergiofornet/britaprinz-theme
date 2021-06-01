@@ -51,7 +51,7 @@
 		"gulp-sass": "^4.0.1",
 		"gulp-sort": "^2.0.0",
 		"gulp-sourcemaps": "^3.0.0",
-		"gulp-uglify": "^3.0.2",
+		"gulp-uglify-es": "^2.0.0",
 		"gulp-uglifycss": "^1.1.0",
 		"gulp-wp-pot": "^2.5.0",
 		"gulp-zip": "^5.0.2",
