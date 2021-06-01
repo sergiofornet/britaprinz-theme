@@ -17,6 +17,7 @@
  *
  * @tutorial https://github.com/ahmadawais/WPGulp
  * @author Ahmad Awais <https://twitter.com/MrAhmadAwais/>
+ * @author Betty Symington <contact@betty-symington.xyz>
  */
 
 /**
@@ -41,10 +42,14 @@ const mmq = require( 'gulp-merge-media-queries' ); // Combine matching media que
 const rtlcss = require( 'gulp-rtlcss' ); // Generates RTL stylesheet.
 
 // JS related plugins.
+const rollup = require('@rbnlffl/gulp-rollup');
 const concat = require( 'gulp-concat' ); // Concatenates JS files.
 const order = require( 'gulp-order' ); // Orders JS concatenation
-const uglify = require( 'gulp-uglify' ); // Minifies JS files.
+const uglify = require( 'gulp-uglify-es' ).default; // Minifies JS files.
 const babel = require( 'gulp-babel' ); // Compiles ESNext to browser compatible JS.
+const { babel: rollupBabel } = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
 
 // Image related plugins.
 const imagemin = require( 'gulp-imagemin' ); // Minify PNG, JPEG, GIF and SVG images with imagemin.
@@ -62,6 +67,7 @@ const cache = require( 'gulp-cache' ); // Cache files in stream for later use.
 const remember = require( 'gulp-remember' ); //  Adds all the files it has ever seen back into the stream.
 const plumber = require( 'gulp-plumber' ); // Prevent pipe breaking caused by errors from gulp plugins.
 const beep = require( 'beepbeep' );
+const zip = require('gulp-zip'); // Zip plugin or theme file.
 
 /**
  * Custom Error Handler.
@@ -398,6 +404,22 @@ gulp.task( 'translate', () => {
 		)
 		.pipe( gulp.dest( config.translationDestination + '/' + config.translationFile ) )
 		.pipe( notify({ message: '\n\n✅  ===> TRANSLATE — completed!\n', onLast: true }) );
+});
+
+/**
+ * Zips theme or plugin and places in the parent directory
+ *
+ * zipIncludeGlob: Files to be included in the zip file
+ * zipIgnoreGlob: Files to be ignored from the zip file
+ * zipDestination: Must be a folder outside of the zip folder.
+ * zipName: theme.zip or plugin.zip
+ */
+ gulp.task('zip', () => {
+	const src = [...config.zipIncludeGlob, ...config.zipIgnoreGlob];
+	return gulp
+		.src(src)
+		.pipe(zip(config.zipName))
+		.pipe(gulp.dest(config.zipDestination));
 });
 
 /**
