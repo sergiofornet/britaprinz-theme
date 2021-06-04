@@ -3,6 +3,10 @@
 	"phpSniffer.standard": "./phpcs.xml.dist",
 	"phpSniffer.autoDetect": true,
 	"[php]": {
-		"editor.formatOnSave": true
+		"editor.formatOnSave": false
+	},
+	"workbench.panel.defaultLocation": "right",
+	"emmet.includeLanguages": {
+		"javascript": "html"
 	}
 }
