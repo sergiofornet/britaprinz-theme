@@ -913,235 +913,233 @@
     return html;
   }
 
-  (function () {
-    var _ajax_var = ajax_var,
-        nonce = _ajax_var.nonce;
-    var _ajax_var2 = ajax_var,
-        lang = _ajax_var2.lang,
-        searchUrl = _ajax_var2.searchUrl,
-        artistId = _ajax_var2.artistId;
-    console.log(ajax_var);
-    var headers = new Headers({
-      'Content-Type': 'application/json',
-      'X-WP-Nonce': nonce
+  var _ajax_var = ajax_var,
+      nonce = _ajax_var.nonce;
+  var _ajax_var2 = ajax_var,
+      lang = _ajax_var2.lang,
+      searchUrl = _ajax_var2.searchUrl,
+      artistId = _ajax_var2.artistId;
+  console.log(ajax_var);
+  var headers = new Headers({
+    'Content-Type': 'application/json',
+    'X-WP-Nonce': nonce
+  });
+  var fetchOptions = {
+    method: 'get',
+    headers: headers,
+    credentials: 'same-origin'
+  };
+  var searchInput = document.querySelector('.artist-search');
+  var artistsList = document.querySelector('.artists__list');
+  var groupObserver = new IntersectionObserver(initialsCallback, {
+    rootMargin: '0px 0px -85% 0px',
+    root: artistsList,
+    threshold: 0.5
+  });
+  var artworks = document.querySelector('.artworks');
+  var artworkGallery = document.querySelector('.artwork-gallery');
+  artworkGallery.querySelector('.artwork-gallery__close button').addEventListener('click', function () {
+    return artworkGallery.classList.toggle('hidden');
+  });
+  var artworkSlider = artworkGallery.querySelector('.artwork-gallery__slider');
+  var initialButtons = document.querySelectorAll('.initial__button'); // Scroll to selected initial group on click
+
+  initialButtons.forEach(function (initial) {
+    var moveTo = new MoveTo({
+      tolerance: 10,
+      duration: 500,
+      easing: 'easeOutQuart',
+      container: artistsList
     });
-    var fetchOptions = {
-      method: 'get',
-      headers: headers,
-      credentials: 'same-origin'
-    };
-    var searchInput = document.querySelector('.artist-search');
-    var artistsList = document.querySelector('.artists__list');
-    var groupObserver = new IntersectionObserver(initialsCallback, {
-      rootMargin: '0px 0px -85% 0px',
-      root: artistsList,
-      threshold: 0.5
+    initial.addEventListener('click', function () {
+      var target = initial.dataset.target;
+      var scrollTo = document.querySelector("[data-initial=".concat(target.toLowerCase(), "]"));
+      moveTo.move(scrollTo);
     });
-    var artworks = document.querySelector('.artworks');
-    var artworkGallery = document.querySelector('.artwork-gallery');
-    artworkGallery.querySelector('.artwork-gallery__close button').addEventListener('click', function () {
-      return artworkGallery.classList.toggle('hidden');
-    });
-    var artworkSlider = artworkGallery.querySelector('.artwork-gallery__slider');
-    var initialButtons = document.querySelectorAll('.initial__button'); // Scroll to selected initial group on click
+  });
+  /**
+   * Callback function for groupObserver observer
+   * Highlights the intersecting group's initial on initials container
+   *
+   * @param {Array} entries - Array of intersection entries
+   */
 
-    initialButtons.forEach(function (initial) {
-      var moveTo = new MoveTo({
-        tolerance: 10,
-        duration: 500,
-        easing: 'easeOutQuart',
-        container: artistsList
-      });
-      initial.addEventListener('click', function () {
-        var target = initial.dataset.target;
-        var scrollTo = document.querySelector("[data-initial=".concat(target.toLowerCase(), "]"));
-        moveTo.move(scrollTo);
-      });
-    });
-    /**
-     * Callback function for groupObserver observer
-     * Highlights the intersecting group's initial on initials container
-     *
-     * @param {Array} entries - Array of intersection entries
-     */
+  function initialsCallback(entries) {
+    entries.forEach(function (entry) {
+      var initial = document.querySelector(".initial__button[data-target*=".concat(entry.target.dataset.initial, "]"));
 
-    function initialsCallback(entries) {
-      entries.forEach(function (entry) {
-        var initial = document.querySelector(".initial__button[data-target*=".concat(entry.target.dataset.initial, "]"));
-
-        if (entry.intersectionRatio >= 0.5) {
-          initial.classList.add('active');
-        } else {
-          initial.classList.remove('active');
-        }
-      });
-    }
-    /**
-     * Displays info and artworks from the artist on which the user clicked
-     *
-     * @param {Event} event - The event which triggers the function
-     * @param {Object} ajax - data object from PHP
-     * @param {HTMLElement} target - HTML target element
-     * @param {Object} options - Request options object
-     * @param {number} id - An optional artist id
-     */
-
-
-    var artistArtworks = function artistArtworks(event, ajax, target, options) {
-      var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
-      console.log(ajax);
-      var artist;
-
-      if (id) {
-        artist = id;
+      if (entry.intersectionRatio >= 0.5) {
+        initial.classList.add('active');
       } else {
-        event.preventDefault();
-        artist = event.target.dataset.artist;
+        initial.classList.remove('active');
+      }
+    });
+  }
+  /**
+   * Displays info and artworks from the artist on which the user clicked
+   *
+   * @param {Event} event - The event which triggers the function
+   * @param {Object} ajax - data object from PHP
+   * @param {HTMLElement} target - HTML target element
+   * @param {Object} options - Request options object
+   * @param {number} id - An optional artist id
+   */
+
+
+  var artistArtworks = function artistArtworks(event, ajax, target, options) {
+    var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+    console.log(ajax);
+    var artist;
+
+    if (id) {
+      artist = id;
+    } else {
+      event.preventDefault();
+      artist = event.target.dataset.artist;
+    }
+
+    var artworksUrl = "".concat(ajax.artworkUrl, "?artist=").concat(artist, "&order=asc&orderby=slug");
+    var artistUrl = "".concat(ajax.artistUrl, "/").concat(artist);
+    target.innerHTML = ''; // empty artworks container
+
+    target.classList.add('loading'); // Fetch artworks asynchronously
+
+    asyncFetch(artworksUrl, options).then(function (jsonResponse) {
+      console.log(artworksUrl);
+      var html = artworksList(jsonResponse);
+      target.insertAdjacentHTML('beforeend', html);
+      var artworkList = document.querySelectorAll('.artworks__list .artwork');
+      var artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a'); // Toggles artwork info visibility
+
+      artworkList.forEach(function (artwork) {
+        var artworkInfo = artwork.querySelector('.artwork__info');
+        var artworkTitle = artwork.querySelector('.artwork__title');
+        artworkTitle.addEventListener('click', function (artworkEvent) {
+          artworkInfo.classList.toggle('visible');
+        });
+      }); // Shows artwork detailed images when thumbnail is clicked
+
+      artworksThumbnails.forEach(function (thumbnail) {
+        thumbnail.addEventListener('click', function (thumbnailEvent) {
+          thumbnailEvent.preventDefault();
+          artworkGallery.classList.toggle('hidden');
+          var artwork = thumbnailEvent.currentTarget.dataset.artwork;
+
+          if (jsonResponse.some(function (item) {
+            return item.id === parseInt(artwork);
+          })) {
+            artworkSlider.innerHTML = '';
+            var slidesContainer = document.createElement('div');
+            slidesContainer.classList.add('slides');
+            artworkSlider.insertAdjacentElement('afterbegin', slidesContainer);
+            var slides = jsonResponse.filter(function (item) {
+              return item.id === parseInt(artwork);
+            })[0].artwork_image_gallery;
+            slides.forEach(function (slide) {
+              return slidesContainer.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"slide\">\n\t\t\t\t\t\t\t\t".concat(slide, "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t"));
+            });
+            artworkSlider.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"controls\">\n\t\t\t\t\t\t\t\t<button class=\"previous-slide\">\u2190</button>\n\t\t\t\t\t\t\t\t<button class=\"next-slide\">\u2192</button>\n\t\t\t\t\t\t\t</div>");
+            new Slider(artworkSlider, true); // slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
+          }
+        });
+      });
+    }).then(function () {
+      return target.classList.remove('loading');
+    }); // Fetch artist info asynchronously
+
+    asyncFetch(artistUrl, options).then(function (jsonResponse) {
+      console.log(artistUrl);
+      var html;
+      var name = jsonResponse.name,
+          artistBio = jsonResponse.artist_bio;
+
+      if (_typeof_1(jsonResponse) === 'object') {
+        html = "\n\t\t\t\t<div class=\"artworks__artist\">\n\t\t\t\t\t<h2 class=\"artist__name\">".concat(name, "</h2>\n\t\t\t\t\t").concat(artistBio ? "<div class=\"artist__bio\">".concat(artistBio, "</div>") : '', "\n\t\t\t\t</div>\n\t\t\t\t");
+      } else {
+        html = artist;
       }
 
-      var artworksUrl = "".concat(ajax.artworkUrl, "?artist=").concat(artist, "&order=asc&orderby=slug");
-      var artistUrl = "".concat(ajax.artistUrl, "/").concat(artist);
-      target.innerHTML = ''; // empty artworks container
-
-      target.classList.add('loading'); // Fetch artworks asynchronously
-
-      asyncFetch(artworksUrl, options).then(function (jsonResponse) {
-        console.log(artworksUrl);
-        var html = artworksList(jsonResponse);
-        target.insertAdjacentHTML('beforeend', html);
-        var artworkList = document.querySelectorAll('.artworks__list .artwork');
-        var artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a'); // Toggles artwork info visibility
-
-        artworkList.forEach(function (artwork) {
-          var artworkInfo = artwork.querySelector('.artwork__info');
-          var artworkTitle = artwork.querySelector('.artwork__title');
-          artworkTitle.addEventListener('click', function (artworkEvent) {
-            artworkInfo.classList.toggle('visible');
-          });
-        }); // Shows artwork detailed images when thumbnail is clicked
-
-        artworksThumbnails.forEach(function (thumbnail) {
-          thumbnail.addEventListener('click', function (thumbnailEvent) {
-            thumbnailEvent.preventDefault();
-            artworkGallery.classList.toggle('hidden');
-            var artwork = thumbnailEvent.currentTarget.dataset.artwork;
-
-            if (jsonResponse.some(function (item) {
-              return item.id === parseInt(artwork);
-            })) {
-              artworkSlider.innerHTML = '';
-              var slidesContainer = document.createElement('div');
-              slidesContainer.classList.add('slides');
-              artworkSlider.insertAdjacentElement('afterbegin', slidesContainer);
-              var slides = jsonResponse.filter(function (item) {
-                return item.id === parseInt(artwork);
-              })[0].artwork_image_gallery;
-              slides.forEach(function (slide) {
-                return slidesContainer.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"slide\">\n\t\t\t\t\t\t\t\t".concat(slide, "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t"));
-              });
-              artworkSlider.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"controls\">\n\t\t\t\t\t\t\t\t<button class=\"previous-slide\">\u2190</button>\n\t\t\t\t\t\t\t\t<button class=\"next-slide\">\u2192</button>\n\t\t\t\t\t\t\t</div>");
-              new Slider(artworkSlider, true); // slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
-            }
-          });
-        });
-      }).then(function () {
-        return target.classList.remove('loading');
-      }); // Fetch artist info asynchronously
-
-      asyncFetch(artistUrl, options).then(function (jsonResponse) {
-        console.log(artistUrl);
-        var html;
-        var name = jsonResponse.name,
-            artistBio = jsonResponse.artist_bio;
-
-        if (_typeof_1(jsonResponse) === 'object') {
-          html = "\n\t\t\t\t<div class=\"artworks__artist\">\n\t\t\t\t\t<h2 class=\"artist__name\">".concat(name, "</h2>\n\t\t\t\t\t").concat(artistBio ? "<div class=\"artist__bio\">".concat(artistBio, "</div>") : '', "\n\t\t\t\t</div>\n\t\t\t\t");
-        } else {
-          html = artist;
-        }
-
-        target.insertAdjacentHTML('afterbegin', html);
-      });
-    };
-    /**
-     * Displays a list of Artists filtered by name
-     *
-     * @param {string} url - The REST endpoint url
-     * @param {Object} options - Request options object
-     * @param {HTMLElement} target - HTML target element
-     * @param {string|null} currentLang - Current language on the front end. Needed to fix REST URLs when user is logged in. 🤷 blame WPML developers, not me
-     */
-
-
-    var filterArtists = function filterArtists(url, options, target, currentLang) {
-      var fixedUrl = "".concat(currentLang ? "".concat(url, "?lang=").concat(currentLang) : "".concat(url));
-      console.log(fixedUrl);
-      target.classList.add('loading');
-      asyncFetch(fixedUrl, options).then(function (jsonResponse) {
-        target.innerHTML = '';
-
-        if (Array.isArray(jsonResponse)) {
-          // Create an a array of unique 'order name' initials
-          // temporary fix
-          // trimmed order field whitespaces & resorted
-          // must sanitize fields on backend instead
-          var initialsSet = new Set(jsonResponse.map(function (item) {
-            return item.order.trim()[0].toLowerCase();
-          }).sort());
-
-          var initials = toConsumableArray(initialsSet); // Create a group for every initial
-
-
-          initials.forEach(function (initial) {
-            var group = document.createElement('div');
-            group.classList.add('artists-group');
-            group.dataset.initial = initial;
-            group.insertAdjacentHTML('afterbegin', "\n\t\t\t\t\t\t\t<span class=\"artists-group__label\">".concat(initial, "</span>\n\t\t\t\t\t\t")); // Group every artist by its initial
-
-            jsonResponse.filter(function (item) {
-              return item.order.trim()[0].toLowerCase() === initial;
-            }).forEach(function (item) {
-              var button = document.createElement('button');
-              button.dataset.artist = item.term_id;
-              button.classList.add('artist__button');
-              button.classList.add('inactive');
-              button.insertAdjacentText('afterbegin', item.name); // Display artist info and its artworks
-
-              button.addEventListener('click', function (event) {
-                if (event.currentTarget.classList.contains('inactive')) {
-                  document.querySelector('.artist__button.active') && document.querySelector('.artist__button.active').classList.replace('active', 'inactive');
-                  artistArtworks(event, ajax_var, artworks, fetchOptions);
-                  event.currentTarget.classList.replace('inactive', 'active');
-                } else {
-                  event.currentTarget.classList.replace('active', 'inactive');
-                  artworks.innerHTML = '';
-                }
-              });
-              group.insertAdjacentElement('beforeend', button);
-            });
-            target.insertAdjacentElement('beforeend', group);
-            groupObserver.observe(group);
-          });
-        } else {
-          target.innerHTML = jsonResponse;
-        }
-      }).then(function () {
-        return target.classList.remove('loading');
-      });
-    }; // Show artists on load
-
-
-    filterArtists(searchUrl, fetchOptions, artistsList, lang);
-
-    if (artistId) {
-      artistArtworks(null, ajax_var, artworks, fetchOptions, artistId);
-    } // Filter artists by input value
-
-
-    searchInput.addEventListener('keyup', function () {
-      filterArtists("".concat(searchUrl, "/").concat(searchInput.value), fetchOptions, artistsList, lang);
+      target.insertAdjacentHTML('afterbegin', html);
     });
-  })();
+  };
+  /**
+   * Displays a list of Artists filtered by name
+   *
+   * @param {string} url - The REST endpoint url
+   * @param {Object} options - Request options object
+   * @param {HTMLElement} target - HTML target element
+   * @param {string|null} currentLang - Current language on the front end. Needed to fix REST URLs when user is logged in. 🤷 blame WPML developers, not me
+   */
+
+
+  var filterArtists = function filterArtists(url, options, target, currentLang) {
+    var fixedUrl = "".concat(currentLang ? "".concat(url, "?lang=").concat(currentLang) : "".concat(url));
+    console.log(fixedUrl);
+    target.classList.add('loading');
+    asyncFetch(fixedUrl, options).then(function (jsonResponse) {
+      target.innerHTML = '';
+
+      if (Array.isArray(jsonResponse)) {
+        // Create an a array of unique 'order name' initials
+        // temporary fix
+        // trimmed order field whitespaces & resorted
+        // must sanitize fields on backend instead
+        var initialsSet = new Set(jsonResponse.map(function (item) {
+          return item.order.trim()[0].toLowerCase();
+        }).sort());
+
+        var initials = toConsumableArray(initialsSet); // Create a group for every initial
+
+
+        initials.forEach(function (initial) {
+          var group = document.createElement('div');
+          group.classList.add('artists-group');
+          group.dataset.initial = initial;
+          group.insertAdjacentHTML('afterbegin', "\n\t\t\t\t\t\t\t<span class=\"artists-group__label\">".concat(initial, "</span>\n\t\t\t\t\t\t")); // Group every artist by its initial
+
+          jsonResponse.filter(function (item) {
+            return item.order.trim()[0].toLowerCase() === initial;
+          }).forEach(function (item) {
+            var button = document.createElement('button');
+            button.dataset.artist = item.term_id;
+            button.classList.add('artist__button');
+            button.classList.add('inactive');
+            button.insertAdjacentText('afterbegin', item.name); // Display artist info and its artworks
+
+            button.addEventListener('click', function (event) {
+              if (event.currentTarget.classList.contains('inactive')) {
+                document.querySelector('.artist__button.active') && document.querySelector('.artist__button.active').classList.replace('active', 'inactive');
+                artistArtworks(event, ajax_var, artworks, fetchOptions);
+                event.currentTarget.classList.replace('inactive', 'active');
+              } else {
+                event.currentTarget.classList.replace('active', 'inactive');
+                artworks.innerHTML = '';
+              }
+            });
+            group.insertAdjacentElement('beforeend', button);
+          });
+          target.insertAdjacentElement('beforeend', group);
+          groupObserver.observe(group);
+        });
+      } else {
+        target.innerHTML = jsonResponse;
+      }
+    }).then(function () {
+      return target.classList.remove('loading');
+    });
+  }; // Show artists on load
+
+
+  filterArtists(searchUrl, fetchOptions, artistsList, lang);
+
+  if (artistId) {
+    artistArtworks(null, ajax_var, artworks, fetchOptions, artistId);
+  } // Filter artists by input value
+
+
+  searchInput.addEventListener('keyup', function () {
+    filterArtists("".concat(searchUrl, "/").concat(searchInput.value), fetchOptions, artistsList, lang);
+  });
 
 }());
 
