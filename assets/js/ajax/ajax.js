@@ -1,12 +1,14 @@
-( function() {
+import { asyncFetch } from '../util/async-fetch';
+import { artworksList } from './artworks-list';
+(function () {
 	const { nonce } = ajax_var;
 	const { lang, searchUrl, artistId } = ajax_var;
 	console.log(ajax_var);
 
-	const headers = new Headers( {
+	const headers = new Headers({
 		'Content-Type': 'application/json',
 		'X-WP-Nonce': nonce,
-	} );
+	});
 
 	const fetchOptions = {
 		method: 'get',
@@ -23,12 +25,18 @@
 		threshold: 0.5,
 	});
 
-	const artworks = document.querySelector( '.artworks' );
-	const artworkGallery = document.querySelector( '.artwork-gallery' );
-	artworkGallery.querySelector('.artwork-gallery__close button').addEventListener('click', () => artworkGallery.classList.toggle('hidden'));
+	const artworks = document.querySelector('.artworks');
+	const artworkGallery = document.querySelector('.artwork-gallery');
+	artworkGallery
+		.querySelector('.artwork-gallery__close button')
+		.addEventListener('click', () =>
+			artworkGallery.classList.toggle('hidden')
+		);
 
-	const artworkSlider = artworkGallery.querySelector( '.artwork-gallery__slider' );
-	const initialButtons = document.querySelectorAll( '.initial__button' );
+	const artworkSlider = artworkGallery.querySelector(
+		'.artwork-gallery__slider'
+	);
+	const initialButtons = document.querySelectorAll('.initial__button');
 
 	// Scroll to selected initial group on click
 	initialButtons.forEach((initial) => {
@@ -40,7 +48,9 @@
 		});
 		initial.addEventListener('click', () => {
 			const { target } = initial.dataset;
-			const scrollTo = document.querySelector(`[data-initial=${ target.toLowerCase() }]`);
+			const scrollTo = document.querySelector(
+				`[data-initial=${target.toLowerCase()}]`
+			);
 			moveTo.move(scrollTo);
 		});
 	});
@@ -51,9 +61,11 @@
 	 *
 	 * @param {Array} entries - Array of intersection entries
 	 */
-	function initialsCallback (entries) {
+	function initialsCallback(entries) {
 		entries.forEach((entry) => {
-			const initial = document.querySelector(`.initial__button[data-target*=${ entry.target.dataset.initial }]`);
+			const initial = document.querySelector(
+				`.initial__button[data-target*=${entry.target.dataset.initial}]`
+			);
 			if (entry.intersectionRatio >= 0.5) {
 				initial.classList.add('active');
 			} else {
@@ -81,83 +93,109 @@
 			artist = event.target.dataset.artist;
 		}
 
-		const artworksUrl = `${ ajax.artworkUrl }?artist=${ artist }&order=asc&orderby=slug`;
-		const artistUrl = `${ ajax.artistUrl }/${ artist }`;
+		const artworksUrl = `${ajax.artworkUrl}?artist=${artist}&order=asc&orderby=slug`;
+		const artistUrl = `${ajax.artistUrl}/${artist}`;
 
 		target.innerHTML = ''; // empty artworks container
 
 		target.classList.add('loading');
 
 		// Fetch artworks asynchronously
-		asyncFetch( artworksUrl, options).then( ( jsonResponse ) => {
-			console.log(artworksUrl);
-			const html = artworksList(jsonResponse);
+		asyncFetch(artworksUrl, options)
+			.then((jsonResponse) => {
+				console.log(artworksUrl);
+				const html = artworksList(jsonResponse);
 
-			target.insertAdjacentHTML( 'beforeend', html );
+				target.insertAdjacentHTML('beforeend', html);
 
-			const artworkList = document.querySelectorAll( '.artworks__list .artwork' );
-			const artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a');
+				const artworkList = document.querySelectorAll(
+					'.artworks__list .artwork'
+				);
+				const artworksThumbnails = document.querySelectorAll(
+					'.artwork__thumbnail a'
+				);
 
-			// Toggles artwork info visibility
-			artworkList.forEach( ( artwork ) => {
-				const artworkInfo = artwork.querySelector( '.artwork__info' );
-				const artworkTitle = artwork.querySelector( '.artwork__title' );
-				artworkTitle.addEventListener( 'click', ( artworkEvent ) => {
-					artworkInfo.classList.toggle( 'visible' );
-				} );
-			} );
+				// Toggles artwork info visibility
+				artworkList.forEach((artwork) => {
+					const artworkInfo = artwork.querySelector('.artwork__info');
+					const artworkTitle =
+						artwork.querySelector('.artwork__title');
+					artworkTitle.addEventListener('click', (artworkEvent) => {
+						artworkInfo.classList.toggle('visible');
+					});
+				});
 
-			// Shows artwork detailed images when thumbnail is clicked
-			artworksThumbnails.forEach((thumbnail) => {
-				thumbnail.addEventListener('click', (thumbnailEvent) => {
-					thumbnailEvent.preventDefault();
-					artworkGallery.classList.toggle('hidden');
+				// Shows artwork detailed images when thumbnail is clicked
+				artworksThumbnails.forEach((thumbnail) => {
+					thumbnail.addEventListener('click', (thumbnailEvent) => {
+						thumbnailEvent.preventDefault();
+						artworkGallery.classList.toggle('hidden');
 
-					const { artwork } = thumbnailEvent.currentTarget.dataset;
+						const { artwork } =
+							thumbnailEvent.currentTarget.dataset;
 
-					if (jsonResponse.some((item) => item.id === parseInt(artwork))) {
-						artworkSlider.innerHTML = '';
-						const slidesContainer = document.createElement('div');
-						slidesContainer.classList.add('slides');
-						artworkSlider.insertAdjacentElement('afterbegin', slidesContainer);
-						const slides = jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery;
-						slides.forEach((slide) => slidesContainer.insertAdjacentHTML('beforeend', `
+						if (
+							jsonResponse.some(
+								(item) => item.id === parseInt(artwork)
+							)
+						) {
+							artworkSlider.innerHTML = '';
+							const slidesContainer =
+								document.createElement('div');
+							slidesContainer.classList.add('slides');
+							artworkSlider.insertAdjacentElement(
+								'afterbegin',
+								slidesContainer
+							);
+							const slides = jsonResponse.filter(
+								(item) => item.id === parseInt(artwork)
+							)[0].artwork_image_gallery;
+							slides.forEach((slide) =>
+								slidesContainer.insertAdjacentHTML(
+									'beforeend',
+									`
 							<div class="slide">
-								${ slide }
+								${slide}
 							</div>
-						`));
-						artworkSlider.insertAdjacentHTML('beforeend', `
+						`
+								)
+							);
+							artworkSlider.insertAdjacentHTML(
+								'beforeend',
+								`
 							<div class="controls">
 								<button class="previous-slide">←</button>
 								<button class="next-slide">→</button>
-							</div>`);
+							</div>`
+							);
 
-						const slider = new Slider(artworkSlider, true);
+							const slider = new Slider(artworkSlider, true);
 
-						// slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
-					}
+							// slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
+						}
+					});
 				});
-			});
-		}).then(() => target.classList.remove('loading'));
+			})
+			.then(() => target.classList.remove('loading'));
 
 		// Fetch artist info asynchronously
-		asyncFetch( artistUrl, options).then( ( jsonResponse ) => {
+		asyncFetch(artistUrl, options).then((jsonResponse) => {
 			console.log(artistUrl);
 			let html;
 			const { name, artist_bio: artistBio } = jsonResponse;
 
-			if ( typeof jsonResponse === 'object' ) {
+			if (typeof jsonResponse === 'object') {
 				html = `
 				<div class="artworks__artist">
-					<h2 class="artist__name">${ name }</h2>
-					${ artistBio ? `<div class="artist__bio">${ artistBio }</div>` : '' }
+					<h2 class="artist__name">${name}</h2>
+					${artistBio ? `<div class="artist__bio">${artistBio}</div>` : ''}
 				</div>
 				`;
 			} else {
 				html = artist;
 			}
-			target.insertAdjacentHTML( 'afterbegin', html );
-		} );
+			target.insertAdjacentHTML('afterbegin', html);
+		});
 	};
 
 	/**
@@ -169,7 +207,9 @@
 	 * @param {string|null} currentLang - Current language on the front end. Needed to fix REST URLs when user is logged in. 🤷 blame WPML developers, not me
 	 */
 	const filterArtists = (url, options, target, currentLang) => {
-		const fixedUrl = `${ currentLang ? `${ url }?lang=${ currentLang }` : `${ url }` }`;
+		const fixedUrl = `${
+			currentLang ? `${url}?lang=${currentLang}` : `${url}`
+		}`;
 		console.log(fixedUrl);
 
 		target.classList.add('loading');
@@ -183,7 +223,11 @@
 					// temporary fix
 					// trimmed order field whitespaces & resorted
 					// must sanitize fields on backend instead
-					const initialsSet = new Set(jsonResponse.map((item) => item.order.trim()[ 0 ].toLowerCase()).sort());
+					const initialsSet = new Set(
+						jsonResponse
+							.map((item) => item.order.trim()[0].toLowerCase())
+							.sort()
+					);
 					const initials = [...initialsSet];
 
 					// Create a group for every initial
@@ -191,32 +235,72 @@
 						const group = document.createElement('div');
 						group.classList.add('artists-group');
 						group.dataset.initial = initial;
-						group.insertAdjacentHTML('afterbegin', `
-							<span class="artists-group__label">${ initial }</span>
-						`);
+						group.insertAdjacentHTML(
+							'afterbegin',
+							`
+							<span class="artists-group__label">${initial}</span>
+						`
+						);
 
 						// Group every artist by its initial
-						jsonResponse.filter((item) => item.order.trim()[ 0 ].toLowerCase() === initial).forEach((item) => {
-							const button = document.createElement('button');
-							button.dataset.artist = item.term_id;
-							button.classList.add('artist__button');
-							button.classList.add('inactive');
-							button.insertAdjacentText('afterbegin', item.name);
+						jsonResponse
+							.filter(
+								(item) =>
+									item.order.trim()[0].toLowerCase() ===
+									initial
+							)
+							.forEach((item) => {
+								const button = document.createElement('button');
+								button.dataset.artist = item.term_id;
+								button.classList.add('artist__button');
+								button.classList.add('inactive');
+								button.insertAdjacentText(
+									'afterbegin',
+									item.name
+								);
 
-							// Display artist info and its artworks
-							button.addEventListener('click', (event) => {
-								if ( event.currentTarget.classList.contains('inactive') ) {
-									document.querySelector('.artist__button.active') && document.querySelector('.artist__button.active').classList.replace('active', 'inactive');
-									artistArtworks(event, ajax_var, artworks, fetchOptions);
-									event.currentTarget.classList.replace('inactive', 'active');
-								} else {
-									event.currentTarget.classList.replace('active', 'inactive');
-									artworks.innerHTML = '';
-								}
+								// Display artist info and its artworks
+								button.addEventListener('click', (event) => {
+									if (
+										event.currentTarget.classList.contains(
+											'inactive'
+										)
+									) {
+										document.querySelector(
+											'.artist__button.active'
+										) &&
+											document
+												.querySelector(
+													'.artist__button.active'
+												)
+												.classList.replace(
+													'active',
+													'inactive'
+												);
+										artistArtworks(
+											event,
+											ajax_var,
+											artworks,
+											fetchOptions
+										);
+										event.currentTarget.classList.replace(
+											'inactive',
+											'active'
+										);
+									} else {
+										event.currentTarget.classList.replace(
+											'active',
+											'inactive'
+										);
+										artworks.innerHTML = '';
+									}
+								});
+
+								group.insertAdjacentElement(
+									'beforeend',
+									button
+								);
 							});
-
-							group.insertAdjacentElement('beforeend', button);
-						});
 
 						target.insertAdjacentElement('beforeend', group);
 						groupObserver.observe(group);
@@ -224,16 +308,12 @@
 				} else {
 					target.innerHTML = jsonResponse;
 				}
-			}).then(() => target.classList.remove('loading'));
+			})
+			.then(() => target.classList.remove('loading'));
 	};
 
 	// Show artists on load
-	filterArtists(
-		searchUrl,
-		fetchOptions,
-		artistsList,
-		lang
-	);
+	filterArtists(searchUrl, fetchOptions, artistsList, lang);
 
 	if (artistId) {
 		artistArtworks(null, ajax_var, artworks, fetchOptions, artistId);
@@ -242,10 +322,10 @@
 	// Filter artists by input value
 	searchInput.addEventListener('keyup', () => {
 		filterArtists(
-			`${ searchUrl }/${ searchInput.value }`,
+			`${searchUrl}/${searchInput.value}`,
 			fetchOptions,
 			artistsList,
 			lang
 		);
 	});
-}() );
+})();
