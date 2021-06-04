@@ -318,37 +318,60 @@ gulp.task('customJS', () => {
  *     3. Renames the JS file with suffix .min.js
  *     4. Uglifes/Minifies the JS file and generates custom.min.js
  */
-gulp.task('JS', () => {
+gulp.task('artworksJS', () => {
 	return gulp
-		.src(config.jsSRC, { since: gulp.lastRun('JS') }) // Only run on changed files.
+		.src(config.artworksSRC, { nodir: false }) // Only run on changed files.
 		.pipe(plumber(errorHandler))
+		.pipe(sourcemaps.init())
 		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env', // Preset to compile your modern JS to ES5.
-						{
-							targets: { browsers: config.BROWSERS_LIST }, // Target browser list to support.
-						},
+			rollup(
+				{
+					plugins: [
+						commonjs(),
+						rollupBabel({
+							presets: [
+								[
+									'@babel/preset-env', // Preset to compile your modern JS to ES5.
+									{
+										targets: {
+											browsers: config.BROWSERS_LIST,
+										}, // Target browser list to support.
+									},
+								],
+							],
+							plugins: [
+								'@babel/plugin-transform-async-to-generator',
+								'@babel/plugin-transform-runtime',
+							], // Comment out if not using async/await.
+							exclude: 'node_modules/**',
+							babelHelpers: 'runtime', // use 'bundled by default'
+						}),
+						nodeResolve(),
 					],
-				],
-			})
+				},
+				{
+					format: 'iife',
+				}
+			)
 		)
-		.pipe(remember(config.jsSRC)) // Bring all files back to stream.
-		.pipe(concat(config.jsFile + '.js'))
 		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
-		.pipe(gulp.dest(config.jsDestination))
+		.pipe(sourcemaps.write('./'))
+		.pipe(gulp.dest(config.artworksDestination))
 		.pipe(
 			rename({
-				basename: config.jsFile,
+				basename: config.artworksFile,
 				suffix: '.min',
 			})
 		)
+		.pipe(filter('**/*.js'))
 		.pipe(uglify())
 		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
-		.pipe(gulp.dest(config.jsDestination))
+		.pipe(gulp.dest(config.artworksDestination))
 		.pipe(
-			notify({ message: '\n\n✅  ===> JS — completed!\n', onLast: true })
+			notify({
+				message: '\n\n✅  ===> ARTWORK JS — completed!\n',
+				onLast: true,
+			})
 		);
 });
 
@@ -414,7 +437,7 @@ gulp.task('awardJS', () => {
 		.pipe(gulp.dest(config.awardDestination))
 		.pipe(
 			notify({
-				message: '\n\n✅  ===> Award — completed!\n',
+				message: '\n\n✅  ===> AWARD JS — completed!\n',
 				onLast: true,
 			})
 		);
@@ -536,7 +559,7 @@ gulp.task(
 		'styles',
 		'vendorsJS',
 		'customJS',
-		'JS',
+		'artworksJS',
 		'awardJS',
 		'images',
 		browsersync,
@@ -545,7 +568,7 @@ gulp.task(
 			gulp.watch(config.watchStyles, gulp.parallel('styles')); // Reload on SCSS file changes.
 			gulp.watch(config.watchJsVendor, gulp.series('vendorsJS', reload)); // Reload on vendorsJS file changes.
 			gulp.watch(config.watchJsCustom, gulp.series('customJS', reload)); // Reload on customJS file changes.
-			gulp.watch(config.watchJs, gulp.series('JS', reload)); // Reload on customJS file changes.
+			gulp.watch(config.watchJs, gulp.series('artworksJS', reload)); // Reload on customJS file changes.
 			gulp.watch(config.watchJsAward, gulp.series('awardJS', reload)); // Reload on customJS file changes.
 			gulp.watch(config.imgSRC, gulp.series('images', reload)); // Reload on customJS file changes.
 		}

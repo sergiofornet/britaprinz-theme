@@ -48,18 +48,18 @@ const jsCustomDestination = './assets/js/';
 // Compiled JS custom file name. Default set to custom i.e. custom.js.
 const jsCustomFile = 'custom';
 
-// JS Custom options.
-// Path to JS custom scripts folder.
-const jsSRC = './assets/js/ajax/*.js';
+// Artworks JS options.
+// Path to Artworks JS file.
+const artworksSRC = './assets/js/ajax/ajax.js';
 
 // Path to place the compiled JS custom scripts file.
-const jsDestination = './assets/js/';
+const artworksDestination = './assets/js/';
 
 // Compiled JS custom file name. Default set to custom i.e. custom.js.
-const jsFile = 'ajax';
+const artworksFile = 'ajax';
 
 // Award JS Custom options.
-// Path to JS custom scripts folder.
+// Path to Award JS file.
 const awardSRC = './assets/js/award/award.js';
 
 // Path to place the compiled JS custom scripts file.
@@ -181,9 +181,9 @@ module.exports = {
 	jsCustomSRC,
 	jsCustomDestination,
 	jsCustomFile,
-	jsSRC,
-	jsDestination,
-	jsFile,
+	artworksSRC,
+	artworksDestination,
+	artworksFile,
 	awardSRC,
 	awardDestination,
 	awardFile,
