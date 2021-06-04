@@ -176,7 +176,7 @@ function britaprinz_theme_scripts() {
 	}
 	
 	// Vendor scripts.
-	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri( 'assets/js/vendor.min.js' ), array( 'wp-polyfill' ), BRITAPRINZ_THEME_VERSION, true );
+	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri( 'assets/js/vendor.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 
 	// Main custom script.
 	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri( 'assets/js/custom.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
@@ -210,6 +210,32 @@ function britaprinz_theme_scripts() {
 		 * @hooked britaprinz_artwork_redirect - 10 
 		 */
 		do_action( 'artwork_redirect', $query_artist, $artist_id );
+	}
+
+	if ( is_post_type_archive( 'award' ) ) {
+		$lang = '';
+		if ( is_user_logged_in() && current_user_can( 'edit_posts' ) && defined( 'ICL_LANGUAGE_CODE' ) ) {
+			$lang = ICL_LANGUAGE_CODE;
+		}
+
+		// AJAX script.
+		wp_enqueue_script( 'britaprinz-award', get_theme_file_uri( 'assets/js/award.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
+		
+		wp_localize_script( 
+			'britaprinz-award', 
+			'ajax_var', 
+			array(
+				'awardUrl'   => rest_url( '/wp/v2/award' ),
+				'nonce'      => wp_create_nonce( 'wp_rest' ),
+				'lang'       => $lang,
+			) 
+		);
+			
+		// phpcs:ignore Generic.Commenting.DocComment.MissingShort
+		/**
+		 * @hooked britaprinz_artwork_redirect - 10 
+		 */
+		// do_action( 'artwork_redirect', $query_artist, $artist_id );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
