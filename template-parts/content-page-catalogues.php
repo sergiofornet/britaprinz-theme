@@ -15,3 +15,9 @@
 <div class="edition-container">
 	<span>EDITION</span>
 </div><!--.edition-container -->
+<div class="award-gallery hidden">
+	<div class="award-gallery__close">
+		<button class="close">&times;</button>
+	</div>
+	<div class="award-gallery__slider"></div>
+</div><!--.edition-container -->
