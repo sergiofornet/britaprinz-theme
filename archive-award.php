@@ -10,51 +10,28 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main site-main--half">
 
 		<?php 
-		add_filter( 'nav_menu_items_winners', 'britaprinz_theme_get_winners' );
-		$bpa_theme_award_post_type = get_post_type();
-		get_template_part( 'template-parts/nav/secondary', 'award', "{$bpa_theme_award_post_type}-menu" );
-		
 		if ( have_posts() ) : 
-			?>
+			add_filter( 'nav_menu_items_winners', 'britaprinz_theme_get_winners' );
+			$bpa_theme_award_post_type = get_post_type();
+			get_template_part( 'template-parts/nav/secondary', 'award', "{$bpa_theme_award_post_type}-menu" );
+			?><!--.menu-award-container-->
 
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php echo post_type_archive_title(); ?>
-				</h1>
+			<div class="edition-container">
+				<span>EDITION</span>
 
-				<?php
-				// the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
+			</div><!--.edition-container -->
 
-			</header><!-- .page-header -->
+			<div class="award-gallery hidden">
+				<div class="award-gallery__close">
+					<button class="close">&times;</button>
+				</div>
+				<div class="award-gallery__slider"></div>
+			</div>
 
 			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
-
-			endwhile;
-
-			the_posts_navigation( 
-				array(
-					'prev_text'          => __( 'Ediciones anteriores', 'britaprinz-theme' ),
-					'next_text'          => __( 'Ediciones siguientes', 'britaprinz-theme' ),
-					'aria_label'         => __( 'Premio Carmen Arozena', 'britaprinz-theme' ),
-					'screen_reader_text' => __( 'Ver más ediciones', 'britaprinz-theme' ),
-					// 'class'					=> 'awards-navigation',
-				) 
-			);
-
 		else :
 
 			get_template_part( 'template-parts/content', 'none' );
