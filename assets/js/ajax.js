@@ -866,6 +866,14 @@
   function asyncFetch(_x, _x2) {
     return _asyncFetch.apply(this, arguments);
   }
+  /**
+   * A helper function to create asyncFetch options.
+   *
+   * @param {string} nonce The nonce set up in php.
+   * @param {string} method Fetch method, defaults to 'get'.
+   * @return {Object} An options object
+   */
+
 
   function _asyncFetch() {
     _asyncFetch = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(url, options) {
