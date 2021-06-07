@@ -137,6 +137,46 @@ function britaprinz_rest_fields() {
 			'schema'          => null,
 		) 
 	);
+
+	register_rest_field(
+		'award',
+		'award_catalogue',
+		array(
+			'get_callback'    => 'britaprinz_award_catalogue',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
+
+	register_rest_field(
+		'award',
+		'award',
+		array(
+			'get_callback'    => 'britaprinz_award',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
+
+	register_rest_field(
+		'award',
+		'award_se',
+		array(
+			'get_callback'    => 'britaprinz_award_special_edition',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
+
+	register_rest_field(
+		'award',
+		'award_catalog_gallery',
+		array(
+			'get_callback'    => 'britaprinz_award_catalog_gallery',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
 }
 add_action( 'rest_api_init', 'britaprinz_rest_fields' );
 
@@ -261,4 +301,77 @@ function britaprinz_artist_bio( $object, $field_name, $request ) {
 	if ( $bio ) {
 		return $bio;
 	}
+}
+
+/**
+ * Add award catalogue url field
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return string HTML content
+ */
+function britaprinz_award_catalogue( $object, $field_name, $request ) {
+	$pdf = wp_get_attachment_url( carbon_get_post_meta( $object['id'], 'bp_award_catalogue' ) );
+	if ( $pdf ) {
+		return esc_url( $pdf );
+	}
+}
+
+/**
+ * Add award image field
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return string HTML content
+ */
+function britaprinz_award( $object, $field_name, $request ) {
+	$award = carbon_get_post_meta( $object['id'], 'bp_award' );
+	foreach ( $award as &$prize ) {
+		$prize_img_thumbnail               = wp_get_attachment_image( $prize['bp_award_image'], 'full' );
+		$prize_img                         = wp_get_attachment_image( $prize['bp_award_image'], 'full' );
+		$prize['bp_award_image_thumbnail'] = $prize_img_thumbnail;
+		$prize['bp_award_image_rendered']  = $prize_img;
+	}
+	if ( $award ) {
+		return $award;
+	}
+}
+
+/**
+ * Add award special editions
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return string HTML content
+ */
+function britaprinz_award_special_edition( $object, $field_name, $request ) {
+	$is_special_edition = carbon_get_post_meta( $object['id'], 'bp_award_se_toggle' );
+	if ( $is_special_edition ) {
+		$award_se = carbon_get_post_meta( $object['id'], 'bp_award_se' );
+		foreach ( $award_se as &$edition ) {
+			$edition['bp_award_se_winners'] = wpautop( $edition['bp_award_se_winners'] );
+		}
+		return $award_se;
+	}
+}
+
+/**
+ * Add catalogue image gallery
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return array An array of html image elements.
+ */
+function britaprinz_award_catalog_gallery( $object, $field_name, $request ) {
+	$gallery_ids = carbon_get_post_meta( $object['id'], 'bp_award_catalog_gallery' );
+	$gallery     = array();
+	foreach ( $gallery_ids as $id ) {
+		$gallery[] = ( wp_get_attachment_image( $id, 'full' ) );
+	}
+
+	return $gallery;
 }
