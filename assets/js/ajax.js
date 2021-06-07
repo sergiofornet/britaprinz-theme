@@ -1112,7 +1112,7 @@
             button.dataset.artist = item.term_id;
             button.classList.add('artist__button');
             button.classList.add('inactive');
-            button.insertAdjacentText('afterbegin', item.name); // Display artist info and its artworks
+            button.insertAdjacentText('afterbegin', item.name.replace('&amp;', '&')); // Display artist info and its artworks
 
             button.addEventListener('click', function (event) {
               if (event.currentTarget.classList.contains('inactive')) {
