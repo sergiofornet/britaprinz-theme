@@ -13,7 +13,6 @@ async function asyncFetch(url, options) {
  * @return {Object} An options object
  */
 function asyncFetchOptions(nonce, method) {
-	console.log(method);
 	const headers = new Headers({
 		'Content-Type': 'application/json',
 		'X-WP-Nonce': nonce,
