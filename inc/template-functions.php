@@ -287,7 +287,7 @@ function britaprinz_theme_get_catalogues() {
 
 	$award_query = new WP_Query( $args );
 
-	$catalogues_output = '<ul>';
+	$catalogues_output = '<ul class="catalogues-submenu">';
 	while ( $award_query->have_posts() ) :
 		$award_query->the_post();
 		
