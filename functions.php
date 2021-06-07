@@ -212,30 +212,27 @@ function britaprinz_theme_scripts() {
 		do_action( 'artwork_redirect', $query_artist, $artist_id );
 	}
 
-	if ( is_post_type_archive( 'award' ) ) {
+	if ( is_post_type_archive( 'award' ) || is_page( __( 'Catálogos', 'britaprinz-theme' ) ) ) {
 		$lang = '';
 		if ( is_user_logged_in() && current_user_can( 'edit_posts' ) && defined( 'ICL_LANGUAGE_CODE' ) ) {
 			$lang = ICL_LANGUAGE_CODE;
 		}
 
+		$type = is_post_type_archive( 'award' ) ? 'award' : 'catalogues';
+
 		// AJAX script.
-		wp_enqueue_script( 'britaprinz-award', get_theme_file_uri( 'assets/js/award.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
+		wp_enqueue_script( 'britaprinz-award', get_theme_file_uri( 'assets/js/award.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 		
 		wp_localize_script( 
 			'britaprinz-award', 
-			'ajax_var', 
+			'awardPayload', 
 			array(
-				'awardUrl'   => rest_url( '/wp/v2/award' ),
-				'nonce'      => wp_create_nonce( 'wp_rest' ),
-				'lang'       => $lang,
+				'awardUrl' => rest_url( '/wp/v2/award' ),
+				'nonce'    => wp_create_nonce( 'wp_rest' ),
+				'lang'     => $lang,
+				'type'     => $type,
 			) 
 		);
-			
-		// phpcs:ignore Generic.Commenting.DocComment.MissingShort
-		/**
-		 * @hooked britaprinz_artwork_redirect - 10 
-		 */
-		// do_action( 'artwork_redirect', $query_artist, $artist_id );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
