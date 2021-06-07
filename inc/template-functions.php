@@ -297,7 +297,7 @@ function britaprinz_theme_get_catalogues() {
 			$edition_id         = esc_html( get_the_ID() );
 			$catalogues_output .= "
 				<li id='award-catalogue-{$edition_id}' class='edition-item edition-item--{$edition_id}'>
-					<button class='edition-item__button--inactive' data-edition='{$edition_id}'>{$edition}</button>
+					<button class='.edition-item__button edition-item__button--inactive' data-edition='{$edition_id}'>{$edition}</button>
 				</li>
 			";
 		endif;
