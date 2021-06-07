@@ -1,11 +1,16 @@
 .no-sidebar {
-
-	.site {
+	.site-main--half {
 		display: grid;
-		grid-template-columns: auto;
-		grid-template-areas:
-			"header"
-			"main"
-			"footer";
+		grid-template-columns: repeat(2, calc(50vw - 16px / 2));
+	}
+
+	.site-main--sidebar {
+		@media (max-width: 47.9375em) {
+			
+		}
+		@media (min-width: 48em) {
+			display: grid;
+			grid-template-columns: calc(100vw / 3 - 16px / 3) calc(2 * 100vw / 3 - 2 * 16px / 3);
+		}
 	}
 }
