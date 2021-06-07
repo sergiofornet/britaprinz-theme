@@ -861,13 +861,35 @@
   function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
     var awardHtml = '';
     triggers.forEach(function (button) {
+      button.setAttribute('aria-pressed', 'false');
       button.addEventListener('click', function (event) {
-        target.classList.add('loading');
-        asyncFetch("".concat(ajaxUrl, "/").concat(event.currentTarget.dataset.edition), options).then(function (jsonResponse) {
-          target.innerHTML = '';
-          target.insertAdjacentHTML('afterbegin', callback(jsonResponse, lang));
+        target.classList.contains('loaded') ? target.classList.replace('loaded', 'loading') : target.classList.add('loading'); // Check if button is inactive
+
+        if (event.currentTarget.classList.contains('edition-item__button--inactive')) {
+          // Search for active button
+          if (document.querySelector('.edition-item__button--active')) {
+            // Make active button inactive
+            document.querySelector('.edition-item__button--active').classList.replace('edition-item__button--active', 'edition-item__button--inactive');
+          } // Fetch AJAX data
+
+
+          asyncFetch("".concat(ajaxUrl, "/").concat(event.currentTarget.dataset.edition), options).then(function (jsonResponse) {
+            target.innerHTML = '';
+            target.insertAdjacentHTML('afterbegin', callback(jsonResponse, lang)); // Toggle target loading state
+
+            target.classList.contains('loading') && target.classList.replace('loading', 'loaded');
+          }); // Make current button active
+
+          event.currentTarget.classList.replace('edition-item__button--inactive', 'edition-item__button--active');
+          button.setAttribute('aria-pressed', 'true');
+        } else {
+          // If pressed button is already active
+          target.innerHTML = ''; // Toggle target loading state
+
           target.classList.contains('loading') && target.classList.replace('loading', 'loaded');
-        });
+          event.currentTarget.classList.replace('edition-item__button--active', 'edition-item__button--inactive');
+          button.setAttribute('aria-pressed', 'false');
+        }
       }, false);
     });
     return awardHtml;
@@ -953,9 +975,11 @@
       awardUrl = _awardPayload.awardUrl,
       type = _awardPayload.type,
       lang = _awardPayload.lang; // eslint-disable-line no-undef
+  // Where AJAX data will be displawed
 
-  var editionContainer = document.querySelector('.edition-container');
-  var buttons = document.querySelectorAll('.edition-item__button');
+  var editionContainer = document.querySelector('.award-edition-container');
+  var buttons = document.querySelectorAll('.edition-item__button'); // Where gallery images will be displayed
+
   var awardGallery = document.querySelector('.award-gallery');
   awardGallery.querySelector('.award-gallery__close button').addEventListener('click', function () {
     return awardGallery.classList.toggle('hidden');

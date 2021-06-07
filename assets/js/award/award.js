@@ -7,8 +7,12 @@ console.log(awardPayload);
 // Data received from php.
 const { nonce, awardUrl, type, lang } = awardPayload; // eslint-disable-line no-undef
 
-const editionContainer = document.querySelector('.edition-container');
+// Where AJAX data will be displawed
+const editionContainer = document.querySelector('.award-edition-container');
+
 const buttons = document.querySelectorAll('.edition-item__button');
+
+// Where gallery images will be displayed
 const awardGallery = document.querySelector('.award-gallery');
 awardGallery
 	.querySelector('.award-gallery__close button')
@@ -17,7 +21,6 @@ awardGallery
 const awardSlider = awardGallery.querySelector('.award-gallery__slider');
 
 // console.log(awardUrl);
-
 if (type === 'award') {
 	showAwardInfo(
 		buttons,
