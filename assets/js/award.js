@@ -834,7 +834,6 @@
   }
 
   function asyncFetchOptions(nonce, method) {
-    console.log(method);
     var headers = new Headers({
       'Content-Type': 'application/json',
       'X-WP-Nonce': nonce
