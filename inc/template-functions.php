@@ -257,8 +257,8 @@ function britaprinz_theme_get_winners() {
 		$edition         = esc_html( get_the_title() );
 		$edition_id      = esc_html( get_the_ID() );
 		$edition_item    = "
-		<li id='winners-item-{$edition_id}' class='winners-item winners-item--{$edition_id}'>
-			<button class='winners-item__button winners-item__button--inactive' data-edition='{$edition_id}'>{$edition}</button>
+		<li id='winners-item-{$edition_id}' class='edition-item edition-item--{$edition_id}'>
+			<button class='edition-item__button edition-item__button--inactive' data-edition='{$edition_id}'>{$edition}</button>
 		</li>";
 		$winners_output .= $edition_item;
 		
@@ -296,8 +296,8 @@ function britaprinz_theme_get_catalogues() {
 			$edition            = esc_html( get_the_title() );
 			$edition_id         = esc_html( get_the_ID() );
 			$catalogues_output .= "
-				<li id='award-catalogue-{$edition_id}'>
-					<button class='award-catalogue__button inactive' data-edition='{$edition_id}'>{$edition}</button>
+				<li id='award-catalogue-{$edition_id}' class='edition-item edition-item--{$edition_id}'>
+					<button class='edition-item__button inactive' data-edition='{$edition_id}'>{$edition}</button>
 				</li>
 			";
 		endif;
