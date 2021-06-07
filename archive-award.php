@@ -19,10 +19,10 @@ get_header();
 			get_template_part( 'template-parts/nav/secondary', 'award', "{$bpa_theme_award_post_type}-menu" );
 			?><!--.menu-award-container-->
 
-			<div class="edition-container">
+			<div class="award-edition-container">
 				<span>EDITION</span>
 
-			</div><!--.edition-container -->
+			</div><!--.award-edition-container -->
 
 			<div class="award-gallery hidden">
 				<div class="award-gallery__close">

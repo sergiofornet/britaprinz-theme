@@ -12,12 +12,12 @@
 	get_template_part( 'template-parts/nav/secondary', 'award', 'award-menu' );	
 ?>
 
-<div class="edition-container">
+<div class="award-edition-container">
 	<span>EDITION</span>
-</div><!--.edition-container -->
+</div><!--.award-edition-container -->
 <div class="award-gallery hidden">
 	<div class="award-gallery__close">
 		<button class="close">&times;</button>
 	</div>
 	<div class="award-gallery__slider"></div>
-</div><!--.edition-container -->
+</div><!--.edition-gallery -->
