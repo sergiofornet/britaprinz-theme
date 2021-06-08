@@ -247,13 +247,6 @@ function britaprinz_theme_admin_scripts() {
 }
 add_action( 'admin_enqueue_scripts', 'britaprinz_theme_admin_scripts' );
 
-// add_action( 
-// 	'admin_enqueue_scripts',
-// 	function() {
-// 		wp_enqueue_script( 'flatpickr-locale-es', 'https://npmcdn.com/flatpickr/dist/l10n/es.js', array( 'carbon-fields-boot' ), BRITAPRINZ_THEME_VERSION, true );
-// 	}
-// );
-
 /**
  * Implement the Custom Header feature.
  */
