@@ -31,6 +31,13 @@
 				esc_url( admin_url( 'post-new.php' ) )
 			);
 
+		elseif ( true === is_page_template('page_current-events.php') || true === is_singular( 'event' ) ) :
+			?>
+
+			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'britaprinz-theme' ); ?></p>
+			<?php
+			get_search_form();
+
 		elseif ( is_search() ) :
 			?>
 
