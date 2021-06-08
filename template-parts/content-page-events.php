@@ -19,53 +19,61 @@
 
 		<?php
 		$date_query = new WP_Query( $args );
+		
+		if ( $date_query->have_posts() ) : 
+			$event_years = array();
+			foreach ( $date_query->get_posts() as $event ) :
+				$event_year = date( 'Y', strtotime( carbon_get_post_meta( $event->ID, 'bp_event_start' ) ) );
+				if ( !$event_year ) {
+					continue;
+				}
+				$event_years[ $event_year ][] = $event; 
+			endforeach;
+		endif;
 
 		if ( $date_query->have_posts() ) :
 			?>
 
 			<ul class="events">
 
-			<?php
-			while ( $date_query->have_posts() ) :
-				
-				$date_query->the_post();
-				?>
+			<?php foreach ( $event_years as $event_year => $events ) : ?>
+				<ul class="year">
+					<li>
+						<?php echo $event_year; ?>
+						<ul>
+							<?php foreach ( $events as $event ) : ?>
+								<li class="event">
+									<div class="event__title">
 
-				<li class="event">
-					<div class="event__title">
+										<?php
+										echo sprintf(
+											'<a href="%s" title="%s">%s - %s</a>',
+											esc_url( get_permalink( $event->ID ) ),
+											esc_attr( get_the_title( $event->ID ) ),
+											esc_html( get_the_title( $event->ID ) ),
+											esc_html( carbon_get_post_meta( $event->ID, 'bp_event_artist' ) ) 
+										);
+										?>
+									</div>
+									<div class="event__date">
 
-						<?php 
-						the_title( 
-							sprintf(
-								'<a href="%s" title="%s">',
-								esc_url( get_the_permalink() ),
-								esc_html( get_the_title() ),
-								esc_html( carbon_get_the_post_meta( 'bp_event_artist' ) ) 
-							), 
-							sprintf(
-								' – %s</a>',
-								esc_html( carbon_get_the_post_meta( 'bp_event_artist' ) ) 
-							) 
-						);
-						?>
+										<?php
+											echo sprintf( 
+												'%s–%s', 
+												esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_post_meta( $event->ID, 'bp_event_start' ) ) ) ), 
+												esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_post_meta( $event->ID, 'bp_event_end' ) ) ) )
+											);
+										?>
 
-					</div>
-					<div class="event__date">
+									</div>
+								</li><!-- .event -->
+							<?php endforeach; ?>
+						</ul>
+					</li>
+		
+				</ul>
 
-						<?php
-							echo sprintf( 
-								'%s–%s', 
-								esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ), 
-								esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) )
-							);
-						?>
-
-					</div>
-				</li><!-- .event -->
-
-				<?php
-			endwhile; // End of the loop.
-			?>
+				<?php endforeach; // End of the loop. ?>
 
 			</ul><!-- .events -->
 
