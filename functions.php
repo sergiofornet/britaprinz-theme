@@ -214,7 +214,7 @@ function britaprinz_theme_scripts() {
 
 	if ( is_post_type_archive( 'award' ) || is_page( __( 'Catálogos', 'britaprinz-theme' ) ) ) {
 		$lang = '';
-		if ( is_user_logged_in() && current_user_can( 'edit_posts' ) && defined( 'ICL_LANGUAGE_CODE' ) ) {
+		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
 			$lang = ICL_LANGUAGE_CODE;
 		}
 
