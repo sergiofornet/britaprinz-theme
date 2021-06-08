@@ -19,6 +19,7 @@ get_header();
 			$today = date( 'Y-m-d' );
 
 			$args = array(
+				'posts_per_page' => 15,
 				'post_type'   => 'event',
 				'order'       => 'ASC',
 				'orderby'     => 'start_date',
