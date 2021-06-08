@@ -39,7 +39,7 @@ get_header();
 				),
 			);
 
-			get_template_part( 'template-parts/content', 'page-events', $args );
+			get_template_part( 'template-parts/content', 'page-current-event', $args );
 
 		endwhile; // End of the loop.
 		?>
