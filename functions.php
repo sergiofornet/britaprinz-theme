@@ -242,8 +242,17 @@ add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
  */
 function britaprinz_theme_admin_scripts() {
 	wp_enqueue_script( 'crb-admin', get_stylesheet_directory_uri() . '/assets/js/admin.js', array( 'carbon-fields-yoast' ), BRITAPRINZ_THEME_VERSION, true );
+	wp_enqueue_script( 'flatpickr-locale-es', 'https://npmcdn.com/flatpickr/dist/l10n/es.js', array( 'carbon-fields-core' ), BRITAPRINZ_THEME_VERSION, true );
+	
 }
 add_action( 'admin_enqueue_scripts', 'britaprinz_theme_admin_scripts' );
+
+// add_action( 
+// 	'admin_enqueue_scripts',
+// 	function() {
+// 		wp_enqueue_script( 'flatpickr-locale-es', 'https://npmcdn.com/flatpickr/dist/l10n/es.js', array( 'carbon-fields-boot' ), BRITAPRINZ_THEME_VERSION, true );
+// 	}
+// );
 
 /**
  * Implement the Custom Header feature.
@@ -299,3 +308,14 @@ function britaprinz_theme_walker_loader() {
 	require_once get_template_directory() . '/inc/classes/class-bpa-theme-walker-nav-menu.php';
 }
 add_action( 'after_setup_theme', 'britaprinz_theme_walker_loader' );
+
+/**
+ * Add classes to post types and pages
+ */
+add_filter( 'post_class', 'filter_event_classes', 10, 2 ); 
+function filter_event_classes($classes) {
+	if ( true === is_page_template('page_current-events.php') || true === is_singular( 'event' ) ) {
+		$classes[] = 'event';
+	}
+	return $classes;
+}
