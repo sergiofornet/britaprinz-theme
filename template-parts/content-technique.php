@@ -45,44 +45,47 @@
 				)
 			);
 
-			?>
+			$artwork = carbon_get_the_post_meta( 'bp_technique_artwork' ) ? carbon_get_the_post_meta( 'bp_technique_artwork' ) : null;
+			
+			if ( $artwork) :
+				$artwork_id      = $artwork[0]['id'];
+				$artwork_title   = get_the_title( $artwork_id );
 
-			<div>
+				$artwork_gallery = carbon_get_post_meta( $artwork_id, 'bp_artwork_gallery' );
 
-				<?php 
-				$artists = carbon_get_the_post_meta( 'bp_technique_artist' );
+				$artist          = get_the_terms( $artwork_id, 'artist' );
+				$artist_name     = $artist[0]->name;
+				$artist_link     = get_term_link( $artist[0]->term_id, 'artist' );
+				$artist_slug     = $artist[0]->slug;
 
-				if ( $artists ) :
-					foreach ( $artists as $artist ) : 
-						$artist_link = get_term_link( get_term( $artist['id'], 'artist' ) );
-						$artist_name = get_term( $artist['id'], 'artist' )->name;
-						$artist_slug = get_term( $artist['id'], 'artist' )->slug;
-
-						?>
-
-						<a href="<?php echo esc_url( get_post_type_archive_link( 'artwork' ) . $artist_slug ); ?>"><?php echo esc_html( $artist_name ); ?></a>
-
-						<?php
-					endforeach;
-				endif;
 				?>
 
-			</div>
-			<div>
+				<div class="technique__artwork">
 
-				<?php 
-				$gallery = carbon_get_the_post_meta( 'bp_artwork_gallery' );
+				<?php
+				foreach ( $artwork_gallery as $image ) :
+					?>
+					
+					<figure>
+						<?php echo wp_get_attachment_image( $image, 'thumbnail' ); ?>
+					</figure>
 
-				foreach ( $gallery as $image ) :
-					echo wp_get_attachment_image( $image, 'thumbnail' );
+					<?php
 				endforeach;
 				?>
 
-			</div>
-
-		<?php endif; ?>
-
-		<?php
+				</div>
+				<p class="technique__artist">
+					<span class="artist__name"><?php esc_html_e( $artwork_title, 'britaprinz-theme' ); ?> - </span>
+					<span class="artist__link">
+						<a href="<?php echo esc_url( $artist_link ); ?>"><?php echo esc_html( $artist_name ); ?></a>
+					</span>
+				</p><!-- Artist -->
+		
+				<?php 
+			endif;
+		endif;
+		
 		wp_link_pages(
 			array(
 				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'britaprinz-theme' ),
