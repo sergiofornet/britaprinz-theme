@@ -51,7 +51,8 @@ if ( ! function_exists( 'britaprinz_theme_setup' ) ) :
 				'event-menu'     => esc_html__( 'Exposiciones', 'britaprinz-theme' ),
 				'award-menu'     => esc_html__( 'Premio Carmen Arozena', 'britaprinz-theme' ),
 				'technique-menu' => esc_html__( 'Técnicas', 'britaprinz-theme' ),
-				'news-menu' => esc_html__( 'Noticias', 'britaprinz-theme' ),
+				'news-menu'      => esc_html__( 'Noticias', 'britaprinz-theme' ),
+				'home-menu'      => esc_html__( 'Home', 'britaprinz-theme' )
 			)
 		);
 

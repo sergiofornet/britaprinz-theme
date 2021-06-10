@@ -7,6 +7,16 @@
  * @package Brita_Prinz_Theme
  */
 
+wp_nav_menu(
+	array(
+		'theme_location'  => 'home-menu',
+		'menu_id'         => 'home-menu',
+		'menu_class'      => 'menu home-menu',
+		'container'       => 'nav',
+		'container_class' => 'container--home-menu',
+	)
+);
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
