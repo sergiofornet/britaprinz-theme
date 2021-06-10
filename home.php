@@ -15,8 +15,14 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+	<main id="primary" class="site-main site-main--sidebar">
 
+		<?php
+		get_template_part( 'template-parts/nav/secondary', '', "news-menu" );
+		?>
+		
+		<div>
+		
 		<?php
 		if ( have_posts() ) :
 
@@ -49,6 +55,9 @@ get_header();
 
 		endif;
 		?>
+		
+		</div>
+
 
 	</main><!-- #main -->
 

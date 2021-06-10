@@ -7,7 +7,7 @@
  * @package Brita_Prinz_Theme
  */
 
-$bpa_theme_content_post_type = get_post_type();
+$bpa_theme_content_post_type = 'post' === get_post_type() ? 'news' : get_post_type();
 
 if ( is_singular() ) :
 	get_template_part( 'template-parts/nav/secondary', '', "{$bpa_theme_content_post_type}-menu" );
