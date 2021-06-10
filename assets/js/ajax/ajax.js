@@ -143,16 +143,21 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 						const slides = jsonResponse.filter(
 							(item) => item.id === parseInt(artwork)
 						)[0].artwork_image_gallery;
-						slides.forEach((slide) =>
+						slides.forEach((slide) => {
 							slidesContainer.insertAdjacentHTML(
 								'beforeend',
 								`
-							<div class="slide">
-								${slide}
-							</div>
+							<figure class="slide">
+								${slide.image}
+								${
+									jsonResponse[0]
+										.bp_artwork_multiple_artists &&
+									`<figcaption>${slide.caption}</figcaption>`
+								}
+							</figure>
 						`
-							)
-						);
+							);
+						});
 						artworkSlider.insertAdjacentHTML(
 							'beforeend',
 							`

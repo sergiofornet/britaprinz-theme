@@ -202,11 +202,15 @@ function britaprinz_artwork_image( $object, $field_name, $request ) {
  * @return array An array of html image elements.
  */
 function britaprinz_artwork_gallery( $object, $field_name, $request ) {
-	$gallery_ids = carbon_get_post_meta( $object['id'], 'bp_artwork_gallery' );
-	$gallery     = array();
-	foreach ( $gallery_ids as $id ) {
-		$gallery[] = ( wp_get_attachment_image( $id, 'full' ) );
-	}
+	$images_ids = carbon_get_post_meta( $object['id'], 'bp_artwork_gallery' );
+
+	$gallery = $images_ids ? array_map(
+		fn( $id ) => array(
+			'image'   => wp_get_attachment_image( $id, 'full' ),
+			'caption' => wp_get_attachment_caption( $id ),
+		), 
+		$images_ids
+	) : null;
 
 	return $gallery;
 }

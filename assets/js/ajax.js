@@ -1044,7 +1044,7 @@
               return item.id === parseInt(artwork);
             })[0].artwork_image_gallery;
             slides.forEach(function (slide) {
-              return slidesContainer.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"slide\">\n\t\t\t\t\t\t\t\t".concat(slide, "\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t"));
+              slidesContainer.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<figure class=\"slide\">\n\t\t\t\t\t\t\t\t".concat(slide.image, "\n\t\t\t\t\t\t\t\t").concat(jsonResponse[0].bp_artwork_multiple_artists && "<figcaption>".concat(slide.caption, "</figcaption>"), "\n\t\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t"));
             });
             artworkSlider.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"controls\">\n\t\t\t\t\t\t\t\t<button class=\"previous-slide\">\u2190</button>\n\t\t\t\t\t\t\t\t<button class=\"next-slide\">\u2192</button>\n\t\t\t\t\t\t\t</div>");
             new Slider(artworkSlider, true); // slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
