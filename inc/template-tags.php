@@ -27,7 +27,7 @@ if ( ! function_exists( 'britaprinz_theme_posted_on' ) ) :
 
 		$posted_on = sprintf(
 			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'britaprinz-theme' ),
+			esc_html_x( '%s', 'post date', 'britaprinz-theme' ),
 			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 
