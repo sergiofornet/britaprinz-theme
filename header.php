@@ -78,6 +78,7 @@
 			array(
 				'theme_location' => 'menu-1',
 				'menu_id'        => 'primary-menu',
+				'walker'         => new Bpa_Theme_Walker_Nav_Menu(),
 			)
 		);
 		?>

@@ -131,9 +131,17 @@ class Bpa_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
 		$item_output  = $args->before;
-		$item_output .= '<a' . $attributes . '>';
-		$item_output .= $args->link_before . $title . $args->link_after;
-		$item_output .= '</a>';
+
+		if ( $item->url && '#' !== $item->url ) {
+			$item_output .= '<a' . $attributes . '>';
+			$item_output .= $args->link_before . $title . $args->link_after;
+			$item_output .= '</a>';
+		} else {
+			$item_output .= '<span' . $attributes . '>';
+			$item_output .= $args->link_before . $title . $args->link_after;
+			$item_output .= '</span>';
+		}
+
 		$item_output .= $args->after;
 
 		/**

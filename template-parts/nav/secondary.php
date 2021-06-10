@@ -19,6 +19,7 @@ if ( 'undefined' !== $args && has_nav_menu( $args ) ) :
 				'theme_location'  => $args,
 				'container_class' => "menu-{$args}-container",
 				'menu_class'      => 'sidebar-menu',
+				'walker'          => new Bpa_Theme_Walker_Nav_Menu(),
 			)
 		);
 		?>
