@@ -169,9 +169,6 @@ function britaprinz_theme_scripts() {
 	wp_enqueue_style( 'britaprinz-theme-style', get_stylesheet_uri(), array(), BRITAPRINZ_THEME_VERSION );
 	wp_style_add_data( 'britaprinz-theme-style', 'rtl', 'replace' );
 
-	// Main navigation script.
-	wp_enqueue_script( 'britaprinz-theme-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), BRITAPRINZ_THEME_VERSION, true );
-
 	// Comments script.
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
