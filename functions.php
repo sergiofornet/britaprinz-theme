@@ -233,6 +233,12 @@ function britaprinz_theme_scripts() {
 			) 
 		);
 	}
+
+	// Technique script.
+	if ( is_singular( 'technique' ) ) {
+
+		wp_enqueue_script( 'britaprinz-award', get_theme_file_uri( 'assets/js/technique.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
+	}
 }
 add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
 

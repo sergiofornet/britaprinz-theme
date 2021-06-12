@@ -444,6 +444,74 @@ gulp.task('awardJS', () => {
 });
 
 /**
+ * Task: `techniqueJS`.
+ *
+ * Concatenate and uglify custom JS scripts.
+ *
+ * This task does the following:
+ *     1. Gets the source folder for JS custom files
+ *     2. Concatenates all the files and generates custom.js
+ *     3. Renames the JS file with suffix .min.js
+ *     4. Uglifes/Minifies the JS file and generates custom.min.js
+ */
+gulp.task('techniqueJS', () => {
+	return gulp
+		.src(config.techniqueSRC, { nodir: false }) // Only run on changed files.
+		.pipe(plumber(errorHandler))
+		.pipe(sourcemaps.init())
+		.pipe(
+			rollup(
+				{
+					plugins: [
+						commonjs(),
+						rollupBabel({
+							presets: [
+								[
+									'@babel/preset-env', // Preset to compile your modern JS to ES5.
+									{
+										targets: {
+											browsers: config.BROWSERS_LIST,
+										}, // Target browser list to support.
+									},
+								],
+							],
+							plugins: [
+								'@babel/plugin-transform-async-to-generator',
+								'@babel/plugin-transform-runtime',
+							], // Comment out if not using async/await.
+							exclude: 'node_modules/**',
+							babelHelpers: 'runtime', // use 'bundled by default'
+						}),
+						nodeResolve(),
+					],
+				},
+				{
+					format: 'iife',
+				}
+			)
+		)
+		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
+		.pipe(sourcemaps.write('./'))
+		.pipe(gulp.dest(config.techniqueDestination))
+		.pipe(
+			rename({
+				basename: config.techniqueFile,
+				suffix: '.min',
+			})
+		)
+		.pipe(filter('**/*.js'))
+		.pipe(uglify())
+		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
+		.pipe(gulp.dest(config.techniqueDestination))
+		.pipe(
+			notify({
+				message: '\n\n✅  ===> TECHNIQUE JS — completed!\n',
+				onLast: true,
+			})
+		);
+});
+
+/**
  * Task: `images`.
  *
  * Minifies PNG, JPEG, GIF and SVG images.
@@ -561,6 +629,7 @@ gulp.task(
 		'customJS',
 		'artworksJS',
 		'awardJS',
+		'techniqueJS',
 		'images',
 		browsersync,
 		() => {
@@ -570,6 +639,10 @@ gulp.task(
 			gulp.watch(config.watchJsCustom, gulp.series('customJS', reload)); // Reload on customJS file changes.
 			gulp.watch(config.watchJs, gulp.series('artworksJS', reload)); // Reload on customJS file changes.
 			gulp.watch(config.watchJsAward, gulp.series('awardJS', reload)); // Reload on customJS file changes.
+			gulp.watch(
+				config.watchJsTechnique,
+				gulp.series('techniqueJS', reload)
+			); // Reload on techniqueJS file changes.
 			gulp.watch(config.imgSRC, gulp.series('images', reload)); // Reload on customJS file changes.
 		}
 	)

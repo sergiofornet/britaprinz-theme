@@ -68,6 +68,16 @@ const awardDestination = './assets/js/';
 // Compiled JS custom file name. Default set to custom i.e. custom.js.
 const awardFile = 'award';
 
+// Technique JS Custom options.
+// Path to Technique JS file.
+const techniqueSRC = './assets/js/technique/technique.js';
+
+// Path to place the compiled JS custom scripts file.
+const techniqueDestination = './assets/js/';
+
+// Compiled JS custom file name. Default set to custom i.e. custom.js.
+const techniqueFile = 'technique';
+
 // Images options.
 // Source folder of images which should be optimized and watched. You can also specify types e.g. raw/**.{png,jpg,gif} in the glob.
 const imgSRC = './assets/img/raw/**/*';
@@ -90,6 +100,9 @@ const watchJs = './assets/js/ajax/*.js';
 
 // Path to all custom JS files.
 const watchJsAward = './assets/js/award/**/*.js';
+
+// Path to all custom JS files.
+const watchJsTechnique = './assets/js/technique/**/*.js';
 
 // Path to all PHP files.
 const watchPhp = './**/*.php';
@@ -187,6 +200,9 @@ module.exports = {
 	awardSRC,
 	awardDestination,
 	awardFile,
+	techniqueSRC,
+	techniqueDestination,
+	techniqueFile,
 	imgSRC,
 	imgDST,
 	watchStyles,
@@ -194,6 +210,7 @@ module.exports = {
 	watchJsCustom,
 	watchJs,
 	watchJsAward,
+	watchJsTechnique,
 	watchPhp,
 	zipName,
 	zipDestination,
