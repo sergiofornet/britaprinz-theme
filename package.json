@@ -56,7 +56,8 @@
 		"gulp-wp-pot": "^2.5.0",
 		"gulp-zip": "^5.0.2",
 		"prettier": "^2.3.0",
-		"rtlcss": "^2.6.1"
+		"rtlcss": "^2.6.1",
+		"waait": "^1.0.5"
 	},
 	"rtlcssConfig": {
 		"options": {
@@ -87,5 +88,8 @@
 		"images": "gulp images",
 		"clearCache": "gulp clearCache",
 		"translate": "gulp translate"
+	},
+	"dependencies": {
+		"tiny-slider": "^2.9.3"
 	}
 }
