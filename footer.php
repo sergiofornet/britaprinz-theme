@@ -14,28 +14,35 @@ $contact = carbon_get_theme_option( 'bp_theme_contact' );
 ?>
 
 	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<div>
+		<div class="footer-info">
+			<div class="footer-info__title">
 
 				<?php echo esc_html( bloginfo( 'name' ) ); ?>
 
 			</div>
-			<address>
+			<address class="footer-info__address">
 
 				<?php echo wpautop( esc_html( $contact ) ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 			</address>
 		</div><!-- .site-info -->
-		<div class="social-links">
+		<div class="footer__social-links">
 			<ul>
 
 				<?php 
 				foreach ( $social as $social_item ) :
-					printf( 
-						'<li><a href="%1$s" class="" target="_blank" rel="noopener noreferrer" title="%2$s">%2$s</a></li>', 
-						esc_url( $social_item['bp_theme_social_url'] ),
-						esc_html( $social_item['bp_theme_social_label'] )
-					);
+					?>
+		
+					<li class="social-links__item social-links__item--<?php echo esc_attr( $social_item['bp_theme_social_label'] ); ?>">
+						<a href="<?php echo esc_url( $social_item['bp_theme_social_url'] ); ?>" target="_blank" rel="noopener noreferrer" title="<?php echo esc_attr( $social_item['bp_theme_social_label'] ); ?>">
+			
+							<?php get_template_part( 'template-parts/svg/bpa', "icon-{$social_item['bp_theme_social_label']}" ); ?>
+		
+							<span class="screen-reader-text"><?php echo esc_html( $social_item['bp_theme_social_label'] ); ?></span>
+						</a>
+					</li>
+		
+					<?php
 				endforeach;
 				?>
 
