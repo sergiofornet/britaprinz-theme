@@ -1,6 +1,7 @@
 .no-sidebar {
 	.site {
-		padding-inline: var(--site-padding-inline, 20px);
+		padding-inline-start: var(--site-padding-inline, 20px);
+		padding-inline-end: var(--site-padding-inline, 20px);
 		max-width: calc(1235px + var(--site-padding-inline) * 2);
 		margin: 0 auto;
 		@media (max-width: 47.9375em) {
