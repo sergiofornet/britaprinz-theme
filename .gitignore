@@ -29,6 +29,7 @@ node_modules/
 **.DS_Store*
 ehthumbs.db
 Icon?
+!icons
 Thumbs.db
 ._*
 
