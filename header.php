@@ -29,7 +29,7 @@
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'britaprinz-theme' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
+		<div class="header__logo">
 
 			<?php
 			if ( is_front_page() || is_home() ) :
@@ -69,9 +69,9 @@
 
 			<?php endif; ?>
 
-		</div><!-- .site-branding -->
+		</div><!-- .header__logo -->
 
-		<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="menu"><?php esc_html_e( 'Menú', 'britaprinz-theme' ); ?></button>
+		<button class="header__menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="menu"><?php esc_html_e( 'Menú', 'britaprinz-theme' ); ?></button>
 
 		<?php do_action( 'wpml_add_language_selector' ); ?>
 
