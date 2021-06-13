@@ -1,4 +1,9 @@
 .no-sidebar {
+	.site {
+		max-width: 1235px;
+		margin: 0 auto;
+	}
+
 	.site-main--half {
 		display: grid;
 		grid-template-columns: repeat(2, calc(50vw - 16px / 2));
