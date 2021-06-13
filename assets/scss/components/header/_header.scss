@@ -22,7 +22,7 @@
 	@media (max-width: 47.9375em) {
 		grid-column: 1 / 2;
 		grid-row: 1 / 2;
-		margin-block-end: calc(25em / 16);
+		margin-block-end: calc(25rem / 16);
 		
 		.menu-open & {
 			z-index: -1;
@@ -32,7 +32,7 @@
 	@media (min-width: 48em) {
 		grid-column: 1 / 2;
 		grid-row: 2 / 3;
-		margin-block-end: calc(5em / 16);
+		margin-block-end: calc(5rem / 16);
 		z-index: 200;
 	}
 	
@@ -58,7 +58,7 @@
 	text-transform: uppercase;
 	cursor: pointer;
 	font-weight: 100;
-	font-size: clamp(calc(18em / 16), 4vw, calc(48em / 16) );
+	font-size: clamp(calc(18rem / 16), 4vw, calc(48rem / 16) );
 	justify-self: end;
 
 	@media (max-width: 47.9375em) {
@@ -92,7 +92,7 @@
 	border: initial;
 	padding: initial;
 	z-index: 200;
-	font-size: calc(18em / 16);
+	font-size: calc(18rem / 16);
 	font-weight: 600;
 
 	@media (max-width: 47.9375em) {
