@@ -161,6 +161,16 @@ var moveHandler = function moveHandler(event) {
 var setAdminBarHeight = function setAdminBarHeight(adminBar) {
   return document.documentElement.style.setProperty('--wp-admin-bar', "".concat(adminBar.getBoundingClientRect().height, "px"));
 };
+/**
+ * Get the actual scrollbar width
+ *
+ */
+
+
+function getSrollbarWidth() {
+  var scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  return scrollbarWidth;
+}
 
 (function () {
   var wpAdminBar = document.querySelector('#wpadminbar');
@@ -170,36 +180,34 @@ var setAdminBarHeight = function setAdminBarHeight(adminBar) {
     window.addEventListener('resize', function () {
       setAdminBarHeight(wpAdminBar);
     });
-  } // Toggle search form's visibility
+  } // Set a custom property with th eactual width of the scrollbar
 
 
-  var searchButton = document.querySelector('.search-button');
-  var searchDiv = document.querySelector('.search-div');
-  var searchDivHide = searchDiv.querySelector('.search-div__close');
-
-  function showSearch() {
-    searchDiv.classList.toggle('visible');
-    document.body.classList.toggle('no-scroll');
-
-    if (searchButton.getAttribute('aria-expanded') === 'true') {
-      searchButton.setAttribute('aria-expanded', 'false');
-    } else {
-      searchButton.setAttribute('aria-expanded', 'true');
-    }
-  }
-
-  [searchButton, searchDivHide].forEach(function (element) {
-    element.addEventListener('click', function () {
-      showSearch();
-    });
-  });
-  window.addEventListener('keyup', function (event) {
-    if (searchDiv.classList.contains('visible')) {
-      if (event.key === 'Escape' || event.keyCode === 72) {
-        showSearch();
-      }
-    }
-  });
+  document.documentElement.style.setProperty('--scrollbar-width', "".concat(getSrollbarWidth(), "px")); // Toggle search form's visibility
+  // const searchButton = document.querySelector('.search-button');
+  // const searchDiv = document.querySelector('.search-div');
+  // const searchDivHide = searchDiv.querySelector('.search-div__close');
+  // function showSearch() {
+  // 	searchDiv.classList.toggle('visible');
+  // 	document.body.classList.toggle('no-scroll');
+  // 	if ( searchButton.getAttribute( 'aria-expanded' ) === 'true' ) {
+  // 		searchButton.setAttribute( 'aria-expanded', 'false' );
+  // 	} else {
+  // 		searchButton.setAttribute( 'aria-expanded', 'true' );
+  // 	}
+  // }
+  // [searchButton, searchDivHide].forEach((element) => {
+  // 	element.addEventListener('click', () => {
+  // 		showSearch();
+  // 	});
+  // });
+  // window.addEventListener('keyup', (event) => {
+  // 	if (searchDiv.classList.contains('visible')) {
+  // 		if (event.key === 'Escape' || event.keyCode === 72) {
+  // 			showSearch();
+  // 		}
+  // 	}
+  // });
 })();
 "use strict";
 
@@ -230,13 +238,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
  * navigation support for dropdown menus.
  */
 (function () {
-  var siteNavigation = document.querySelector('#site-navigation'); // Return early if the navigation don't exist.
+  var siteNavigation = document.querySelector('#site-navigation');
+  var siteHeader = document.querySelector('.site-header'); // Return early if the navigation don't exist.
 
   if (!siteNavigation) {
     return;
   }
 
-  var button = document.querySelector('.menu-toggle'); // Return early if the button don't exist.
+  var button = document.querySelector('.header__menu-toggle'); // Return early if the button don't exist.
 
   if ('undefined' === typeof button) {
     return;
@@ -258,6 +267,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     siteNavigation.classList.toggle('toggled');
     button.classList.toggle('toggled');
     document.body.classList.toggle('no-scroll');
+    siteHeader.classList.toggle('menu-open');
 
     if (button.getAttribute('aria-expanded') === 'true') {
       button.setAttribute('aria-expanded', 'false');
