@@ -6,7 +6,7 @@
 
 	.site-main--half {
 		display: grid;
-		grid-template-columns: repeat(2, calc(50vw - 16px / 2));
+		grid-template-columns: repeat(2, calc(50% - var(--scrollbar-width) / 2));
 	}
 
 	.site-main--sidebar {
@@ -15,7 +15,7 @@
 		}
 		@media (min-width: 48em) {
 			display: grid;
-			grid-template-columns: calc(100vw / 3 - 16px / 3) calc(2 * 100vw / 3 - 2 * 16px / 3);
+			grid-template-columns: calc(100% / 3 - var(--scrollbar-width) / 3) 1fr;
 		}
 	}
 }
