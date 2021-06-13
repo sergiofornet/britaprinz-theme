@@ -1,7 +1,14 @@
 .no-sidebar {
 	.site {
-		max-width: 1235px;
+		padding-inline: var(--site-padding-inline, 20px);
+		max-width: calc(1235px + var(--site-padding-inline) * 2);
 		margin: 0 auto;
+		@media (max-width: 47.9375em) {
+			--site-padding-inline: 20px;
+		}
+		@media (min-width: 48em) {
+			--site-padding-inline: 25px;
+		}
 	}
 
 	.site-main--half {

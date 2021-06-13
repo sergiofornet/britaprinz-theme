@@ -1,12 +1,53 @@
 .site-header {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-	align-items: center;
-	justify-items: start;
+	background-color: var(--color-white);
+	border-block-end: 3px solid var(--color-black);
+	
+	@media (max-width: 47.9375em) {
+		padding-block-start: 15px;
+		grid-template-columns: 1fr auto;
+		grid-rows: 1fr;
+		align-items: start;
+	}
+	
+	@media (min-width: 48em) {
+		grid-template-columns: 1fr 1fr auto;
+		grid-template-rows: repeat(2, auto);
+		align-items: center;
+	}
+}
+
+.header__logo {
+	justify-self: start;
+	@media (max-width: 47.9375em) {
+		grid-column: 1 / 2;
+		grid-row: 1 / 2;
+		margin-block-end: calc(25em / 16);
+		
+		.menu-open & {
+			z-index: -1;
+		}
+	}
+	
+	@media (min-width: 48em) {
+		grid-column: 1 / 2;
+		grid-row: 2 / 3;
+		margin-block-end: calc(5em / 16);
+		z-index: 200;
+	}
+	
+	h1, p {
+		margin: 0;
+	}
+	
+	svg {
+		width: clamp(200px, 30vw, 298px);
+		display: block;
+	}
 }
 
 // Menu toggle
-.menu-toggle {
+.header__menu-toggle {
 	border: none;
 	background: none;
 	color: black;
@@ -16,18 +57,70 @@
 	z-index: 200;
 	text-transform: uppercase;
 	cursor: pointer;
+	font-weight: 100;
+	font-size: clamp(calc(18em / 16), 4vw, calc(48em / 16) );
+	justify-self: end;
+
+	@media (max-width: 47.9375em) {
+		grid-column: 2 / 3;
+		margin-inline-end: 1.5em;
+		margin-block-start: 0.4em;
+	}
+
+	@media (min-width: 48em) {
+		grid-column: 2 / 3;
+		grid-row: 2 / 3;
+		margin-inline-end: 1.5em;
+	}
 
 	&::after {
-		content: "🔽";
+		content: ">";
 		position: absolute;
 		top: calc(50% - .5em);
 		left: calc(100% + .5em);
-		transition: all .5s ease-in-out;
-		transform: rotate(0deg);
-		transform-origin: center;
+		transition: transform .5s ease-in-out;
+		transform: rotate(90deg);
+		transform-origin: 50% 60%;
 	}
 
 	&.toggled::after {
-		transform: rotate(180deg);
+		transform: rotate(270deg);
+	}
+}
+
+.wpml-ls-legacy-list-horizontal {
+	border: initial;
+	padding: initial;
+	z-index: 200;
+	font-size: calc(18em / 16);
+	font-weight: 600;
+
+	@media (max-width: 47.9375em) {
+		grid-column: 1 / 2;
+		grid-row: 1 / 2;
+		:not(.menu-open) > & {
+			z-index: -1;
+		}
+	}
+	
+	@media (min-width: 48em) {
+		grid-column: 3 / 4;
+		grid-row: 1 / 2;
+	}
+
+	a.wpml-ls-link span {
+		&:hover {
+			text-decoration: underline;
+			text-decoration-thickness: 2px;
+		}
+	}
+
+	.wpml-ls-current-language a.wpml-ls-link span {
+		text-decoration: underline;
+		text-decoration-thickness: 2px;
+		
+		&:hover {
+			text-decoration: none;
+		}
 	}
 }
