@@ -75,14 +75,7 @@
 
 		<?php do_action( 'wpml_add_language_selector' ); ?>
 
-		<button class="search-button" type="button" aria-controls="search-div" aria-expanded="false" aria-label="Open search form">🔍</button>
 	</header><!-- #masthead -->
-	<div class="search-div">
-		<button class="search-div__close" aria-label="Close search form">&times;</button>
-
-		<?php get_search_form(); ?>
-
-	</div>
 	<nav id="site-navigation" class="main-navigation">
 
 		<?php
