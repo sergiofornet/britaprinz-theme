@@ -32,18 +32,30 @@
 		<div class="site-branding">
 
 			<?php
-			the_custom_logo();
-
-			if ( is_front_page() && is_home() ) :
+			if ( is_front_page() || is_home() ) :
 				?>
 
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+				<h1 class="site-title">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" title="<?php esc_attr( bloginfo( 'name' ) ); ?>">
+						<span class="screen-reader-text"><?php bloginfo( 'name' ); ?></span>
+				
+						<?php get_template_part( 'template-parts/svg/BPA', 'logo' ); ?>
+				
+					</a>
+				</h1>
 
 				<?php
 			else :
 				?>
 
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+				<p class="site-title">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" title="<?php bloginfo( 'name' ); ?>">
+						<span class="screen-reader-text"><?php bloginfo( 'name' ); ?></span>
+					
+					<?php get_template_part( 'template-parts/svg/BPA', 'logo' ); ?>
+
+					</a>
+				</p>
 
 				<?php
 			endif;
