@@ -101,4 +101,10 @@
 			menuItem.classList.toggle('focus');
 		}
 	}
+
+	function getHeight(element) {
+		return element.offsetHeight;
+	}
+	const headerHeight = getHeight(siteHeader);
+	siteNavigation.style.setProperty('--header-height', `${headerHeight}px`);
 })();

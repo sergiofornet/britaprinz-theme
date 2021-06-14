@@ -361,4 +361,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       menuItem.classList.toggle('focus');
     }
   }
+
+  function getHeight(element) {
+    return element.offsetHeight;
+  }
+
+  var headerHeight = getHeight(siteHeader);
+  siteNavigation.style.setProperty('--header-height', "".concat(headerHeight, "px"));
 })();
