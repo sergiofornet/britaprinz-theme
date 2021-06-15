@@ -105,6 +105,15 @@
 	function getHeight(element) {
 		return element.offsetHeight;
 	}
+
+	function setHeaderHeight(height) {
+		siteNavigation.style.setProperty('--header-height', `${height}px`);
+	}
+
 	const headerHeight = getHeight(siteHeader);
-	siteNavigation.style.setProperty('--header-height', `${headerHeight}px`);
+	setHeaderHeight(headerHeight);
+
+	window.addEventListener('resize', () => {
+		setHeaderHeight(getHeight(siteHeader));
+	});
 })();

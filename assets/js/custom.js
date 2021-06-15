@@ -366,6 +366,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     return element.offsetHeight;
   }
 
+  function setHeaderHeight(height) {
+    siteNavigation.style.setProperty('--header-height', "".concat(height, "px"));
+  }
+
   var headerHeight = getHeight(siteHeader);
-  siteNavigation.style.setProperty('--header-height', "".concat(headerHeight, "px"));
+  setHeaderHeight(headerHeight);
+  window.addEventListener('resize', function () {
+    setHeaderHeight(getHeight(siteHeader));
+  });
 })();
