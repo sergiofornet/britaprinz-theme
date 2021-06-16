@@ -35,5 +35,4 @@ get_template_part( 'template-parts/nav/secondary', '', 'event-menu' );
 		endif;
 		?>
 
-	</div><!-- .entry-content -->
 </article><!-- #post-<?php the_ID(); ?> -->
