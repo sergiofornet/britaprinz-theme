@@ -34,6 +34,10 @@ class Bpa_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$classes   = empty( $item->classes ) ? array() : (array) $item->classes;
 		$classes[] = 'menu-item-' . $item->ID;
 
+		if ( 0 === $depth ) {
+			$classes[] = 'menu-item--title';
+		}
+
 		/**
 		 * Filters the arguments for a single nav menu item.
 		 *
@@ -110,6 +114,9 @@ class Bpa_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$attributes = '';
 		foreach ( $atts as $attr => $value ) {
 			if ( is_scalar( $value ) && '' !== $value && false !== $value ) {
+				if ( 'href' === $attr && '#' === $value ) {
+					continue;
+				}
 				$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
 				$attributes .= ' ' . $attr . '="' . $value . '"';
 			}

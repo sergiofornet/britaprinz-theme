@@ -1,5 +1,10 @@
 .no-sidebar {
+
+	
 	.site {
+		// body.no-scroll & {
+		// 	overflow-y: hidden;
+		// }
 		padding-inline-start: var(--site-padding-inline, 20px);
 		padding-inline-end: var(--site-padding-inline, 20px);
 		max-width: calc(1235px + var(--site-padding-inline) * 2);
@@ -10,6 +15,17 @@
 		@media (min-width: 48em) {
 			--site-padding-inline: 25px;
 		}
+		position: relative;
+		z-index: 0;
+	}
+
+	.site-main {
+		position: relative;
+		z-index: 100;
+
+		@media (min-width: 48em) {	
+			padding: 2em;
+		}
 	}
 
 	.site-main--half {
@@ -19,11 +35,33 @@
 
 	.site-main--sidebar {
 		@media (max-width: 47.9375em) {
+			.secondary-navigation {
+				padding-block-end: 1em;
+			}
 			
+			& > article, & > div {
+				padding-inline-start: 1em;
+				padding-inline-end: 1em;
+				padding-block-start: 1em;
+			}
 		}
 		@media (min-width: 48em) {
 			display: grid;
 			grid-template-columns: calc(100% / 3 - var(--scrollbar-width) / 3) 1fr;
+			
+			.secondary-navigation {
+				padding-inline-end: 1em;
+			}
+			
+			& > article, & > div {
+				padding-inline-start: 1em;
+
+			}
 		}
+	}
+
+	.site-footer {
+		position: relative;
+		z-index: 1;
 	}
 }

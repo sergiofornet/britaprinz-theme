@@ -16,7 +16,7 @@ if ( 'undefined' !== $args && has_nav_menu( $args ) ) :
 				'container_class'      => "{$args}-container secondary-navigation",
 				'container_aria_label' => 'Secondary navigation',
 				'menu_id'              => "{$args}",
-				'menu_class'           => "{$args} menu nav-menu",
+				'menu_class'           => "menu {$args} sidebar-menu nav-menu",
 				'fallback_cb'          => false,
 				'walker'               => new Bpa_Theme_Walker_Nav_Menu(),
 				'theme_location'       => $args,

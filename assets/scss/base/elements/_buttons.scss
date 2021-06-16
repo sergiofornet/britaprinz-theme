@@ -25,12 +25,15 @@ input[type="submit"] {
 	}
 
 	// artists list
-	&.artist__button {
+	&.artist__button, &.edition-item__button {
 		color: black;
 		padding: 0;
 		background: none;
 		border: none;
 		display: block;
+		font-size: inherit;
+		font-weight: inherit;
+		text-transform: inherit;
 
 		&:hover {
 			text-decoration: underline;

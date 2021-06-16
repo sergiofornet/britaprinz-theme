@@ -11,14 +11,14 @@
 if ( 'undefined' !== $args && has_nav_menu( $args ) ) :
 	?>
 
-	<nav class="secondary">
+	<nav class="secondary-navigation">
 
 		<?php 
 		wp_nav_menu(
 			array(
 				'theme_location'  => $args,
 				'container_class' => "menu-{$args}-container",
-				'menu_class'      => 'sidebar-menu',
+				'menu_class'      => 'menu sidebar-menu nav-menu',
 				'walker'          => new Bpa_Theme_Walker_Nav_Menu(),
 			)
 		);
