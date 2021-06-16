@@ -22,7 +22,7 @@
 			}
 		}
 		
-		.current-menu-item {
+		.current-menu-item:not(.menu-item--title) {
 			margin-inline-start: 2em;
 		}
 		
