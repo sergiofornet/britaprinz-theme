@@ -52,7 +52,7 @@
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" title="<?php bloginfo( 'name' ); ?>">
 						<span class="screen-reader-text"><?php bloginfo( 'name' ); ?></span>
 					
-					<?php get_template_part( 'template-parts/svg/BPA', 'logo' ); ?>
+					<?php get_template_part( 'template-parts/svg/bpa', 'logo' ); ?>
 
 					</a>
 				</p>
