@@ -84,8 +84,8 @@
 				<nav>
 
 					<?php
-					next_posts_link( __( 'Exposiciones anteriores', 'britaprinz-theme' ), $date_query->max_num_pages );
-					previous_posts_link( __( 'Exposiciones posteriores', 'britaprinz-theme' ) );
+					next_posts_link( __( 'Anterior', 'britaprinz-theme' ), $date_query->max_num_pages );
+					previous_posts_link( __( 'Siguiente', 'britaprinz-theme' ) );
 					?>
 
 				</nav>
