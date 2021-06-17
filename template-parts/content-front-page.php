@@ -20,17 +20,16 @@ wp_nav_menu(
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
+	<!-- <header class="entry-header">
 
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+		<?php //the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 
-	</header><!-- .entry-header -->
-	<div class="entry-content">
+	</header>.entry-header -->
+	<div class="entry-content circle-container">
 
 		<?php the_content(); ?>
 
-		<div>
-			<div>
+		<div class="circle">
 
 				<?php 
 				$featured_content = carbon_get_the_post_meta( 'bp_home_featured' );
@@ -44,7 +43,7 @@ wp_nav_menu(
 							get_the_title( $content['bp_home_featured_post'][0]['id'] );
 						?>
 
-						<div>
+						<div class="circle__item">
 
 							<?php
 							echo sprintf(
@@ -62,10 +61,9 @@ wp_nav_menu(
 				endforeach;
 				?>
 
-			</div><!--home-featured-content-->
 		</div>
 	</div><!-- .entry-content -->
-	<footer class="entry-footer">
+	<!-- <footer class="entry-footer"> -->
 
-	</footer><!-- .entry-footer -->
+	<!-- </footer>.entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
