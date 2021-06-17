@@ -13,7 +13,6 @@
 ?>
 
 <div class="award-edition-container">
-	<span>EDITION</span>
 </div><!--.award-edition-container -->
 <div class="award-gallery hidden">
 	<div class="award-gallery__close">

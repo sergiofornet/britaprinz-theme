@@ -20,7 +20,6 @@ get_header();
 			?><!--.menu-award-container-->
 
 			<div class="award-edition-container">
-				<span>EDITION</span>
 
 			</div><!--.award-edition-container -->
 
