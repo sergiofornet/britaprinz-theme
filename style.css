@@ -1725,7 +1725,7 @@ ul.menu a:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  max-width: calc(var(--circle-diameter) * 0.7);
+  max-width: calc(var(--circle-diameter) * 0.6);
 }
 
 .home article.page .circle-container .circle .circle__item a {
