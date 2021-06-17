@@ -277,4 +277,5 @@ ul.menu ul li{font-size:calc(14rem / 16);-webkit-margin-after:1.5em;margin-block
 .home article.page .circle{--circle-diameter:75vw}
 }@media(orientation:landscape) and (max-width:29.9375em){.home article.page{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .home article.page .circle{--circle-diameter:40vh}
+}@media(orientation:landscape) and (max-height:48em){.main-navigation{-webkit-transform:translateY(-500%);transform:translateY(-500%)}
 }
