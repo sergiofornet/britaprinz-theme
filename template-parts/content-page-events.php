@@ -94,7 +94,7 @@
 		</div><!-- .entry-content -->
 
 		<?php
-		wp_reset_postdata();
+		$date_query->wp_reset_postdata();
 	else :
 		?>
 

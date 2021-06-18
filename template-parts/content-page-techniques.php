@@ -57,7 +57,7 @@
 
 			<?php
 		endif;
-		wp_reset_postdata();
+		$date_query->wp_reset_postdata();
 		?>
 	</div><!-- .entry-content -->
 

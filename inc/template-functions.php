@@ -305,7 +305,7 @@ function britaprinz_theme_get_catalogues() {
 	endwhile; // End of the loop.
 
 	$catalogues_output .= '</ul>';
-	wp_reset_postdata();
+	$award_query->wp_reset_postdata();
 
 	return $catalogues_output;
 }

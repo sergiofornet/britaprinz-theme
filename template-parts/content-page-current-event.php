@@ -40,7 +40,7 @@ get_template_part( 'template-parts/nav/secondary', '', 'event-menu' );
 			
 			<?php
 		endif;
-		wp_reset_postdata();
+		$date_query->wp_reset_postdata();
 		?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

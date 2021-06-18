@@ -96,7 +96,7 @@
 
 				<?php
 			endif;
-			wp_reset_postdata();
+			$award_query->wp_reset_postdata();
 			?>
 		</div><!-- .entry-content -->
 	</article><!-- #post-<?php the_ID(); ?> -->
