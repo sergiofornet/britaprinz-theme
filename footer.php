@@ -51,6 +51,11 @@ $contact = carbon_get_theme_option( 'bp_theme_contact' );
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 
+
+<?php
+
+do_action( 'bpa_theme_gallery_markup' ); ?>
+
 <?php wp_footer(); ?>
 
 </body>
