@@ -2,10 +2,6 @@
 
 	ul.sidebar-menu {
 		
-		li > a {
-			display: inline;
-		}
-		
 		@media(max-width: 47.9375em) {
 			& > li.menu-item--title  {
 				padding-block-end: 1em;
