@@ -29,8 +29,16 @@ get_template_part( 'template-parts/nav/secondary', '', 'event-menu' );
 
 			
 		else:
+			?>
+			<div class="entry-content">
+
+				<?php
+				echo apply_filters( 'the_content', ( britaprinz_get_i18n_theme_option( 'bp_event_none' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				?>
+
+			</div>
 			
-			get_template_part( 'template-parts/content', 'none' );
+			<?php
 		endif;
 		wp_reset_postdata();
 		?>

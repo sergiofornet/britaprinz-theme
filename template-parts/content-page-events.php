@@ -10,30 +10,27 @@
 <?php get_template_part( 'template-parts/nav/secondary', '', 'event-menu' ); ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
 
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+	<?php
+	$date_query = new WP_Query( $args );
+	
+	if ( $date_query->have_posts() ) : 
+		$event_years = array();
+		foreach ( $date_query->get_posts() as $event ) :
+			$event_year = date( 'Y', strtotime( carbon_get_post_meta( $event->ID, 'bp_event_start' ) ) );
+			if ( !$event_year ) {
+				continue;
+			}
+			$event_years[ $event_year ][] = $event; 
+		endforeach;
+		?>
 
-	</header><!-- .entry-header -->
-	<div class="entry-content">
-
-		<?php
-		$date_query = new WP_Query( $args );
-		
-		if ( $date_query->have_posts() ) : 
-			$event_years = array();
-			foreach ( $date_query->get_posts() as $event ) :
-				$event_year = date( 'Y', strtotime( carbon_get_post_meta( $event->ID, 'bp_event_start' ) ) );
-				if ( !$event_year ) {
-					continue;
-				}
-				$event_years[ $event_year ][] = $event; 
-			endforeach;
-		endif;
-
-		if ( $date_query->have_posts() ) :
-			?>
-
+		<header class="entry-header">
+	
+			<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+	
+		</header><!-- .entry-header -->
+		<div class="entry-content">
 			<ul class="events">
 
 			<?php foreach ( $event_years as $event_year => $events ) : ?>
@@ -70,7 +67,7 @@
 							<?php endforeach; ?>
 						</ul>
 					</li>
-		
+
 				</ul>
 
 				<?php endforeach; // End of the loop. ?>
@@ -92,10 +89,25 @@
 
 				<?php
 			endif;
+			?>
 
-		endif;
+		</div><!-- .entry-content -->
+
+		<?php
 		wp_reset_postdata();
+	else :
 		?>
 
-	</div><!-- .entry-content -->
+		<div class="entry-content">
+		
+			<?php
+			echo apply_filters( 'the_content', ( britaprinz_get_i18n_theme_option( 'bp_event_none' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			?>
+		
+		</div>
+
+		<?php
+	endif;
+	?>
+
 </article><!-- #post-<?php the_ID(); ?> -->
