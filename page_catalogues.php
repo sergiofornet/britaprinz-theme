@@ -18,10 +18,12 @@ get_header();
 			the_post();
 
 			$args = array(
-				'post_type'  => 'award',
-				'order'      => 'DESC',
-				'orderby'    => 'edition',
-				'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				'post_type'      => 'award',
+				'order'          => 'DESC',
+				'orderby'        => 'edition',
+				'posts_per_page' => 1,
+				'post_status'    => 'publish',
+				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 					'edition' => array(
 						'key' => 'bp_award_edition',
 					),
