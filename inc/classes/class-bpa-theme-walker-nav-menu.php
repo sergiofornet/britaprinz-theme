@@ -139,7 +139,7 @@ class Bpa_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		$item_output  = $args->before;
 
-		if ( $item->url && '#' !== $item->url && is_home() ) {
+		if ( get_permalink( get_option( 'page_for_posts' ) ) === $item->url && is_home() ) {
 			$item_output .= '<h1>';
 			$item_output .= $args->link_before . $title . $args->link_after;
 			$item_output .= '</h1>';
