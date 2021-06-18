@@ -27,12 +27,12 @@ get_template_part( 'template-parts/nav/secondary', '', 'event-menu' );
 
 			endwhile; // End of the loop.
 
-			wp_reset_postdata();
-
+			
 		else:
-		
+			
 			get_template_part( 'template-parts/content', 'none' );
 		endif;
+		wp_reset_postdata();
 		?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

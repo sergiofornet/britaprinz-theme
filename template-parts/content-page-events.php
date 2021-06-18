@@ -93,8 +93,8 @@
 				<?php
 			endif;
 
-			wp_reset_postdata();
 		endif;
+		wp_reset_postdata();
 		?>
 
 	</div><!-- .entry-content -->
