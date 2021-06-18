@@ -38,6 +38,9 @@ class Bpa_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 			$classes[] = 'menu-item--title';
 		}
 
+		$main_menu         = ( isset( $args->theme_location ) && 'menu-1' === $args->theme_location );
+		$current_menu_item = in_array( 'current-menu-item', $classes, true );
+		
 		/**
 		 * Filters the arguments for a single nav menu item.
 		 *
@@ -137,12 +140,16 @@ class Bpa_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 		 */
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
-		$item_output  = $args->before;
+		$item_output = $args->before;
 
-		if ( get_permalink( get_option( 'page_for_posts' ) ) === $item->url && is_home() ) {
+		if ( false === $main_menu && true === $current_menu_item && is_home() ) {
 			$item_output .= '<h1>';
 			$item_output .= $args->link_before . $title . $args->link_after;
 			$item_output .= '</h1>';
+		} elseif ( true === $current_menu_item ) {
+			$item_output .= '<span>';
+			$item_output .= $args->link_before . $title . $args->link_after;
+			$item_output .= '</span>';
 		} else if ( $item->url && '#' !== $item->url ) {
 			$item_output .= '<a' . $attributes . '>';
 			$item_output .= $args->link_before . $title . $args->link_after;
