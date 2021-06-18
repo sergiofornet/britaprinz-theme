@@ -35,7 +35,13 @@ get_header();
 
 			endwhile;
 
-			the_posts_navigation();
+			the_posts_navigation(
+				array(
+					'prev_text'          => __( 'Anterior', 'britaprinz-theme' ),
+					'next_text'          => __( 'Siguiente', 'britaprinz-theme' ),
+					'screen_reader_text' => __( 'Posts navigation', 'britaprinz-theme' )
+				)
+			);
 
 		else :
 
