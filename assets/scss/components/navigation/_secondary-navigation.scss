@@ -6,7 +6,6 @@
 			& > li.menu-item--title  {
 				padding-block-end: 1em;
 			}
-			
 		}
 		
 		@media(min-width: 48em) {
@@ -72,7 +71,7 @@
 				cursor: pointer;
 			}
 			
-			& span::after {
+			& > span::after {
 				content: ">";
 				position: absolute;
 				bottom: 0;
@@ -99,7 +98,14 @@
 				border-block-end: 1px solid black;
 
 				& .current-menu-item {
-					margin-inline-start: 1em;
+					@media (max-width: 63.9375em) {
+						margin-inline-start: 0;
+						font-weight: 700;
+					}
+
+					@media (min-width: 64em) {
+						margin-inline-start: 1em;
+					}
 				}
 			}
 		}

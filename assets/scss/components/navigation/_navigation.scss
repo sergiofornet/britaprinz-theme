@@ -16,7 +16,7 @@ ul.menu {
 			transform: translateX(0);
 			transition: transform .2s ease-in-out;
 
-			&:hover, &:focus {
+			&:not(.current-menu-item):hover, &:not(.current-menu-item):focus {
 				transform: translateX(1em);
 			}
 		}
@@ -82,8 +82,8 @@ ul.menu {
 				transition: transform .2s ease-in-out, opacity .2s;
 			}
 
-			&:hover::before,
-			&:focus::before {
+			&:not(.current-menu-item):hover::before,
+			&:not(.current-menu-item):focus::before {
 				transform: translateX(-400%);
 				opacity: 0;
 			}

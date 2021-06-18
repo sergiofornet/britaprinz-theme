@@ -81,6 +81,10 @@
 			@media (min-width: 64em) {
 				align-items: center;
 			}
+
+			.current-menu-item {
+				font-weight: 700;
+			}
 			
 			& > a, & > span {
 				display: block;
@@ -100,7 +104,7 @@
 				transform: translateX(0);
 				transition: transform .2s ease-in-out;
 
-				&:hover, &:focus {
+				&:not(.current-menu-item):hover, &:not(.current-menu-item):focus {
 					transform: translateX(5%);
 				}
 			}
