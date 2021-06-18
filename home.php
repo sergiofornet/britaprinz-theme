@@ -20,17 +20,17 @@ get_header();
 		<?php
 		get_template_part( 'template-parts/nav/secondary', '', "news-menu" );
 		?>
-		
+
 		<div>
-		
+
 		<?php
 		if ( have_posts() ) :
 
 			if ( is_home() && ! is_front_page() ) :
 				?>
-				<header>
+				<!-- <header>
 					<h1 class="page-title"><?php single_post_title(); ?></h1>
-				</header>
+				</header> -->
 				<?php
 			endif;
 
@@ -47,7 +47,13 @@ get_header();
 
 			endwhile;
 
-			the_posts_navigation();
+			the_posts_navigation(
+				array(
+					'prev_text'          => __( 'Anterior', 'britaprinz-theme' ),
+					'next_text'          => __( 'Siguiente', 'britaprinz-theme' ),
+					'screen_reader_text' => __( 'Posts navigation', 'britaprinz-theme' )
+				)
+			);
 
 		else :
 
