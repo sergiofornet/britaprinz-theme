@@ -60,6 +60,7 @@ template{display:none}
 html{-webkit-box-sizing:border-box;box-sizing:border-box}
 body,button,input,select,optgroup,textarea{color:var(--color-text-main);font-family:"Raleway",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;font-size:1rem;line-height:1.5}
 h1,h2,h3,h4,h5,h6{clear:both}
+.menu-item--title h1{margin:0;font-weight:inherit;font-size:inherit}
 p{margin-bottom:1.5em}
 dfn,cite,em,i{font-style:italic}
 blockquote{margin:0 1.5em}
@@ -106,7 +107,7 @@ ul.menu>li.menu-item--title .sub-menu li{-webkit-transform:translateX(0);transfo
 ul.menu>li.menu-item--title .sub-menu li:hover,ul.menu>li.menu-item--title .sub-menu li:focus{-webkit-transform:translateX(1em);transform:translateX(1em)}
 ul.menu>li.menu-item--title .sub-menu li.current-menu-item:hover,ul.menu>li.menu-item--title .sub-menu li.current-menu-item:focus{-webkit-transform:translateX(0);transform:translateX(0)}
 ul.menu>li.menu-item--title .sub-menu li.current-menu-item .catalogues-submenu li:hover,ul.menu>li.menu-item--title .sub-menu li.current-menu-item .winners-submenu li:hover{-webkit-transform:translateX(0);transform:translateX(0)}
-ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{display:block;line-height:calc(29 / 24);font-weight:300}
+ul.menu>li.menu-item--title>h1,ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{display:block;line-height:calc(29 / 24);font-weight:300}
 ul.menu ul{list-style:none;margin:0;padding-left:0;margin-bottom:.5em;padding-left:1em}
 ul.menu ul li{position:relative;line-height:calc(21 / 18);font-weight:500}
 ul.menu ul li::before{content:">";position:absolute;left:-1em;-webkit-transform:translateX(0);transform:translateX(0);opacity:100%;-webkit-transition:opacity .2s,-webkit-transform .2s ease-in-out;transition:opacity .2s,-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out,opacity .2s;transition:transform .2s ease-in-out,opacity .2s,-webkit-transform .2s ease-in-out}
@@ -213,7 +214,7 @@ ul.menu a:hover{text-decoration:underline}
 .alignleft{float:left;margin-right:1.5em;margin-bottom:1.5em}
 .alignright{float:right;margin-left:1.5em;margin-bottom:1.5em}
 .aligncenter{clear:both;display:block;margin-left:auto;margin-right:auto;margin-bottom:1.5em}
-@media(min-width:30em){ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{font-size:calc(24rem / 16)}
+@media(min-width:30em){ul.menu>li.menu-item--title>h1,ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{font-size:calc(24rem / 16)}
 ul.menu ul li{font-size:calc(18rem / 16);-webkit-margin-after:2em;margin-block-end:2em}
 .main-navigation .nav-menu{-webkit-padding-before:3rem;padding-block-start:3rem;-webkit-padding-after:2rem;padding-block-end:2rem}
 }@media(min-width:30em) and (max-width:47.9375em){.header__menu-toggle{font-size:calc(36rem / 16)}
@@ -226,8 +227,8 @@ ul.menu ul li{font-size:calc(18rem / 16);-webkit-margin-after:2em;margin-block-e
 .no-sidebar .site-main--sidebar{display:grid;grid-template-columns:calc(100% / 3 - var(--scrollbar-width) / 3) 1fr}
 .no-sidebar .site-main--sidebar .secondary-navigation{-webkit-padding-end:1em;padding-inline-end:1em}
 .no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-start:1em;padding-inline-start:1em}
-ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{max-width:180px}
-.secondary-navigation ul.sidebar-menu>li.menu-item--title>a,.secondary-navigation ul.sidebar-menu>li.menu-item--title>span{display:block;margin-bottom:3em}
+ul.menu>li.menu-item--title>h1,ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{max-width:180px}
+.secondary-navigation ul.sidebar-menu>li.menu-item--title>a,.secondary-navigation ul.sidebar-menu>li.menu-item--title>h1,.secondary-navigation ul.sidebar-menu>li.menu-item--title>span{display:block;margin-bottom:3em}
 .site-header{grid-template-columns:1fr 1fr auto;grid-template-rows:repeat(2,auto);-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .header__logo{grid-column:1 / 2;grid-row:2 / 3;z-index:200}
 .header__menu-toggle{grid-column:2 / 3;grid-row:2 / 3;-webkit-margin-end:1.5em;margin-inline-end:1.5em;font-size:calc(48rem / 16)}
@@ -251,9 +252,9 @@ ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{max-width:180px}
 .no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-start:1em;padding-inline-start:1em;-webkit-padding-end:1em;padding-inline-end:1em;-webkit-padding-before:1em;padding-block-start:1em}
 .secondary-navigation ul.sidebar-menu>li.menu-item--title{-webkit-padding-after:1em;padding-block-end:1em}
 .secondary-navigation .award-menu .menu-item--title{-webkit-padding-start:1em;padding-inline-start:1em;-webkit-padding-end:1em;padding-inline-end:1em;-webkit-padding-before:1em;padding-block-start:1em;-webkit-padding-after:1em;padding-block-end:1em}
-.secondary-navigation .award-menu .menu-item--title>span,.secondary-navigation .award-menu .menu-item--title>a{background-color:white;-webkit-margin-after:1em;margin-block-end:1em;position:relative;z-index:100}
+.secondary-navigation .award-menu .menu-item--title>span,.secondary-navigation .award-menu .menu-item--title>a,.secondary-navigation .award-menu .menu-item--title>h1{background-color:white;-webkit-margin-after:1em;margin-block-end:1em;position:relative;z-index:100}
 .secondary-navigation :not(.award-menu) .menu-item--title{width:100%}
-.secondary-navigation :not(.award-menu) .menu-item--title>span,.secondary-navigation :not(.award-menu) .menu-item--title>a{-webkit-padding-start:1em;padding-inline-start:1em;-webkit-padding-end:1em;padding-inline-end:1em;-webkit-padding-before:1em;padding-block-start:1em;background-color:white;position:relative;z-index:100;cursor:pointer}
+.secondary-navigation :not(.award-menu) .menu-item--title>span,.secondary-navigation :not(.award-menu) .menu-item--title>a,.secondary-navigation :not(.award-menu) .menu-item--title>h1{-webkit-padding-start:1em;padding-inline-start:1em;-webkit-padding-end:1em;padding-inline-end:1em;-webkit-padding-before:1em;padding-block-start:1em;background-color:white;position:relative;z-index:100;cursor:pointer}
 .secondary-navigation :not(.award-menu) .menu-item--title span::after{content:">";position:absolute;bottom:0;right:1em;-webkit-transition:-webkit-transform .5s ease-in-out;transition:-webkit-transform .5s ease-in-out;transition:transform .5s ease-in-out;transition:transform .5s ease-in-out,-webkit-transform .5s ease-in-out;-webkit-transform:rotate(90deg);transform:rotate(90deg);-webkit-transform-origin:50% 60%;transform-origin:50% 60%}
 .secondary-navigation :not(.award-menu) .menu-item--title>ul.sub-menu{position:absolute;z-index:1;left:0;-webkit-padding-before:1em;padding-block-start:1em;-webkit-padding-after:1em;padding-block-end:1em;-webkit-padding-start:2em;padding-inline-start:2em;-webkit-padding-end:2em;padding-inline-end:2em;width:100%;-webkit-transition:-webkit-transform .5s ease-in-out;transition:-webkit-transform .5s ease-in-out;transition:transform .5s ease-in-out;transition:transform .5s ease-in-out,-webkit-transform .5s ease-in-out;background-color:white;-webkit-transform:translateY(-200%);transform:translateY(-200%);-webkit-border-after:1px solid black;border-block-end:1px solid black}
 .secondary-navigation :not(.award-menu) .menu-item--title>ul.sub-menu .current-menu-item{-webkit-margin-start:1em;margin-inline-start:1em}
@@ -268,7 +269,7 @@ ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{max-width:180px}
 .menu-open>.wpml-ls-legacy-list-horizontal{opacity:100%;-webkit-transform:translateX(0);transform:translateX(0)}
 .home .container--home-menu{-webkit-padding-before:calc(30em / 24);padding-block-start:calc(30em / 24)}
 .home article.page .circle-container{font-size:calc(14rem / 16)}
-}@media(max-width:29.9375em){ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{font-size:calc(20rem / 16)}
+}@media(max-width:29.9375em){ul.menu>li.menu-item--title>h1,ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{font-size:calc(20rem / 16)}
 ul.menu ul li{font-size:calc(14rem / 16);-webkit-margin-after:1.5em;margin-block-end:1.5em}
 .main-navigation .nav-menu{-webkit-padding-before:4vh;padding-block-start:4vh;-webkit-padding-after:3vh;padding-block-end:3vh}
 .header__menu-toggle{font-size:calc(20rem / 16)}

@@ -6,3 +6,11 @@ h5,
 h6 {
 	clear: both;
 }
+
+h1 {
+	.menu-item--title & {
+		margin: 0;
+		font-weight: inherit;
+		font-size: inherit;
+	}
+}

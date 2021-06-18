@@ -12,6 +12,7 @@
 		@media(min-width: 48em) {
 			
 			& > li.menu-item--title > a,
+			& > li.menu-item--title > h1,
 			& > li.menu-item--title > span {
 				display: block;
 				margin-bottom: 3em;
@@ -50,7 +51,7 @@
 			padding-block-start: 1em;
 			padding-block-end: 1em;
 			
-			& > span, & > a {
+			& > span, & > a, & > h1 {
 				background-color: white;
 				margin-block-end: 1em;
 				position: relative;
@@ -61,7 +62,7 @@
 		:not(.award-menu) .menu-item--title {
 			width: 100%;
 			
-			& > span, & > a {
+			& > span, & > a, & > h1 {
 				padding-inline-start: 1em;
 				padding-inline-end: 1em;
 				padding-block-start: 1em;
