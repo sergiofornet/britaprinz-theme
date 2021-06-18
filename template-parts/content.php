@@ -21,16 +21,6 @@ endif;
 			the_title( '<h1 class="entry-title">', '</h1>' );
 		else :
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-			
-			if ( has_excerpt() ) :
-				?>
-
-				<div class="excerpt">
-					<?php the_excerpt(); ?>
-				</div>
-		
-				<?php
-			endif;
 		endif;
 
 		if ( 'post' === get_post_type() ) :
@@ -38,16 +28,12 @@ endif;
 			<div class="entry-meta">
 				<?php
 				britaprinz_theme_posted_on();
-				britaprinz_theme_posted_by();
 				?>
 			</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
 	<?php 
-	
-	britaprinz_theme_post_thumbnail(); // must review 
-	
 	if ( is_singular() ) :
 		?>
 
@@ -77,12 +63,15 @@ endif;
 				?>
 			</div><!-- .entry-content -->
 
+			<!-- <footer class="entry-footer"> -->
+				<?php
+				// britaprinz_theme_entry_footer(); 
+				// britaprinz_theme_posted_by();
+				?>
+			<!-- </footer>.entry-footer -->
 		<?php
 	endif;
 	?>
 
 
-	<footer class="entry-footer">
-		<?php britaprinz_theme_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->
