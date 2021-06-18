@@ -13,15 +13,17 @@
  */
 
 get_header();
+
+$bpa_theme_sidebar = carbon_get_the_post_meta( 'bp_page_menu' ) === 'undefined' ? null : carbon_get_the_post_meta( 'bp_page_menu' );
 ?>
 
-	<main id="primary" class="site-main site-main--sidebar">
+	<main id="primary" class="site-main site-main<?php echo $bpa_theme_sidebar ? '--sidebar' : ''; ?>">
 
 		<?php
 		while ( have_posts() ) :
 			the_post();
 
-			get_template_part( 'template-parts/content', 'page' );
+			get_template_part( 'template-parts/content', 'page', array( 'sidebar' => $bpa_theme_sidebar ) );
 		endwhile; // End of the loop.
 		?>
 
