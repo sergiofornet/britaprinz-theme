@@ -17,25 +17,40 @@ get_header();
 			add_filter( 'nav_menu_items_winners', 'britaprinz_theme_get_winners' );
 			$bpa_theme_award_post_type = get_post_type();
 			get_template_part( 'template-parts/nav/secondary', 'award', "{$bpa_theme_award_post_type}-menu" );
-			?><!--.menu-award-container-->
+		endif;
+		rewind_posts();
+		?><!--.menu-award-container-->
 
-			<div class="award-edition-container">
-
-			</div><!--.award-edition-container -->
-
-			<div class="award-gallery hidden">
-				<div class="award-gallery__close">
-					<button class="close">&times;</button>
-				</div>
-				<div class="award-gallery__slider"></div>
-			</div>
+		<div class="award-edition-container">
 
 			<?php
-		else :
+			if ( have_posts() ) :
+				the_post();
+				get_template_part( 'template-parts/award/winners' ); 
+				rewind_posts();
+			endif;
+			?>
 
-			get_template_part( 'template-parts/content', 'none' );
+		</div><!--.award-edition-container -->
 
-		endif;
+		<?php
+		$edition_id = get_the_ID();
+		add_action(
+			'bpa_theme_gallery_markup',
+			function() use ( $edition_id ) {
+				$markup = "
+					<div class='award-gallery hidden' data-edition='{$edition_id}'>
+						<div class='award-gallery__close'>
+							<button class='close'>&times;</button>
+						</div>
+						<div class='award-gallery__slider'></div>
+					</div><!--.edition-gallery -->
+				";
+				echo $markup;
+			}, 
+			10,
+			2
+		);
 		?>
 
 	</main><!-- #main -->

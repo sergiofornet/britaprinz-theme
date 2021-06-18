@@ -44,11 +44,7 @@ function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 						`${ajaxUrl}/${event.currentTarget.dataset.edition}`,
 						options
 					).then((jsonResponse) => {
-						target.innerHTML = '';
-						target.insertAdjacentHTML(
-							'afterbegin',
-							callback(jsonResponse, lang)
-						);
+						callback(jsonResponse, target, lang);
 						// Toggle target loading state
 						target.classList.contains('loading') &&
 							target.classList.replace('loading', 'loaded');

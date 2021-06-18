@@ -1,76 +1,97 @@
 /**
  * @param {Object} payload A JSON object
- * @param lang
- * @return {string} HTML string
+ * @param {HTMLElement} target - DOM Element where the info will be displayed
+ * @param {string} lang
+ * @return {void}
  */
-function awardEditionHTML(payload, lang) {
+function awardEditionHTML(payload, target, lang) {
 	const {
 		title: { rendered: title },
-		bp_award_edition: edition,
 		bp_award_mentions: mentions,
 		bp_award_se_toggle: isSpecialEdition,
 		award_se: specialEdition,
 		award: awardPrizes,
-		award_catalogue: catalogueUrl,
+		id,
 	} = payload;
 
 	let mentionsHTML = '';
 	if (mentions) {
+		mentionsHTML += `<ul class="prizes_mentions">`;
 		mentions.forEach((mention) => {
 			mentionsHTML += `
-			<div class="award__mentions">
-				<div class="mentions__title">${mention.bp_award_mentions_title}</div>
-				<div class="mentions__text">${mention.bp_award_mentions_text}</div>
-			</div>`;
+			<li class="mention">
+				<h2 class="mention__title">${mention.bp_award_mentions_title}</h2>
+				<p class="mention__text">${mention.bp_award_mentions_text}</p>
+			</li>`;
 		});
+		mentionsHTML += `</ul>`;
 	}
 
-	const html = isSpecialEdition
-		? `
-			<ul id="award-se" class="award-se">
-				${specialEditionHTML(specialEdition)}
-			</ul>
-			`
-		: `<div id="" class="award">
-				${title && `<div class="award__title">${title}</div>`}
-				${
-					awardPrizes &&
+	const html = `
+	<article id="post-${id}">
+		<div class="entry-content award">
+			${
+				title &&
+				`<div class="award__title">
+					<h1>${title}</h1>
+				</div>`
+			}
+			${
+				isSpecialEdition
+					? `
+					<ul id="award-se" class="award-se">
+						${specialEditionHTML(specialEdition)}
+					</ul>
 					`
-					<div class="award__prizes">
-						<ol class="prizes__list">${prizesListHTML(awardPrizes)}</ol>
-					</div>
-				`
-				}
-				${edition && `<div class="award__edition">${edition}</div>`}
-				${mentions && mentionsHTML}
-				${catalogueUrl && `<div class="award_catalogue">${catalogueUrl}</div>`}
-			</div>`;
+					: `	
+					${
+						awardPrizes
+							? `
+						<div class="award__prizes">
+							<ol class="prizes__list">${prizesListHTML(awardPrizes)}</ol>
+							${mentions && mentionsHTML}
+						</div>`
+							: ``
+					}`
+			}
+		</div>
+	</article>`;
 
-	return html;
+	target.innerHTML = '';
+	target.insertAdjacentHTML('afterbegin', html);
 }
 
 function prizesListHTML(payload) {
 	let html = ``;
-	payload.forEach((prize, index) => {
-		html += `
-		<li id="prize-${index + 1}">
-			<div>${prize.bp_award_category}</div>
-			<div>${prize.bp_award_artist}</div>
-			<div>${prize.bp_award_image_rendered}</div>
-			<div>${prize.bp_award_title}</div>
-			<div>${prize.bp_award_technique}</div>
-			<div>${prize.bp_award_size}</div>
-			<div>${prize.bp_award_year}</div>
+	if (payload) {
+		payload.forEach((prize, index) => {
+			html += `
+		<li id="prize-${index + 1}" class="prize__category prize__category-${
+				index + 1
+			}">
+			<h2 class="prize__name">${prize.bp_award_category}</h2>
+			<p class="prize__artist">${prize.bp_award_artist}</p>
+			<figure class="prize__image">${prize.bp_award_image_rendered}</figure>
+			<p class="prize__artwork">${prize.bp_award_title}</p>
+			<p class="prize__technique">${prize.bp_award_technique}</p>
+			<p class="prize__size">${prize.bp_award_size}</p>
+			<p class="prize__year">${prize.bp_award_year}</p>
 		</li>
 		`;
-	});
+		});
+	}
 	return html;
 }
+/**
+ * TODO:
+ * images
+ */
 
 function specialEditionHTML(payload) {
 	let html = ``;
 	// console.log(payload);
 	payload.forEach((edition) => {
+		console.log(edition.bp_award_se_year);
 		html += `
 		<li id="award-se-${edition.bp_award_se_year}" class="award-se__edition">
 			<div class="edition__year">

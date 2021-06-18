@@ -874,8 +874,7 @@
 
 
           asyncFetch("".concat(ajaxUrl, "/").concat(event.currentTarget.dataset.edition), options).then(function (jsonResponse) {
-            target.innerHTML = '';
-            target.insertAdjacentHTML('afterbegin', callback(jsonResponse, lang)); // Toggle target loading state
+            callback(jsonResponse, target, lang); // Toggle target loading state
 
             target.classList.contains('loading') && target.classList.replace('loading', 'loaded');
           }); // Make current button active
@@ -897,76 +896,109 @@
 
   /**
    * @param {Object} payload A JSON object
-   * @param lang
-   * @return {string} HTML string
+   * @param {HTMLElement} target - DOM Element where the info will be displayed
+   * @param {string} lang
+   * @return {void}
    */
-  function awardEditionHTML(payload, lang) {
+  function awardEditionHTML(payload, target, lang) {
     var title = payload.title.rendered,
-        edition = payload.bp_award_edition,
         mentions = payload.bp_award_mentions,
         isSpecialEdition = payload.bp_award_se_toggle,
         specialEdition = payload.award_se,
         awardPrizes = payload.award,
-        catalogueUrl = payload.award_catalogue;
+        id = payload.id;
     var mentionsHTML = '';
 
     if (mentions) {
+      mentionsHTML += "<ul class=\"prizes_mentions\">";
       mentions.forEach(function (mention) {
-        mentionsHTML += "\n\t\t\t<div class=\"award__mentions\">\n\t\t\t\t<div class=\"mentions__title\">".concat(mention.bp_award_mentions_title, "</div>\n\t\t\t\t<div class=\"mentions__text\">").concat(mention.bp_award_mentions_text, "</div>\n\t\t\t</div>");
+        mentionsHTML += "\n\t\t\t<li class=\"mention\">\n\t\t\t\t<h2 class=\"mention__title\">".concat(mention.bp_award_mentions_title, "</h2>\n\t\t\t\t<p class=\"mention__text\">").concat(mention.bp_award_mentions_text, "</p>\n\t\t\t</li>");
       });
+      mentionsHTML += "</ul>";
     }
 
-    var html = isSpecialEdition ? "\n\t\t\t<ul id=\"award-se\" class=\"award-se\">\n\t\t\t\t".concat(specialEditionHTML(specialEdition), "\n\t\t\t</ul>\n\t\t\t") : "<div id=\"\" class=\"award\">\n\t\t\t\t".concat(title && "<div class=\"award__title\">".concat(title, "</div>"), "\n\t\t\t\t").concat(awardPrizes && "\n\t\t\t\t\t<div class=\"award__prizes\">\n\t\t\t\t\t\t<ol class=\"prizes__list\">".concat(prizesListHTML(awardPrizes), "</ol>\n\t\t\t\t\t</div>\n\t\t\t\t"), "\n\t\t\t\t").concat(edition && "<div class=\"award__edition\">".concat(edition, "</div>"), "\n\t\t\t\t").concat(mentions && mentionsHTML, "\n\t\t\t\t").concat(catalogueUrl && "<div class=\"award_catalogue\">".concat(catalogueUrl, "</div>"), "\n\t\t\t</div>");
-    return html;
+    var html = "\n\t<article id=\"post-".concat(id, "\">\n\t\t<div class=\"entry-content award\">\n\t\t\t").concat(title && "<div class=\"award__title\">\n\t\t\t\t\t<h1>".concat(title, "</h1>\n\t\t\t\t</div>"), "\n\t\t\t").concat(isSpecialEdition ? "\n\t\t\t\t\t<ul id=\"award-se\" class=\"award-se\">\n\t\t\t\t\t\t".concat(specialEditionHTML(specialEdition), "\n\t\t\t\t\t</ul>\n\t\t\t\t\t") : "\t\n\t\t\t\t\t".concat(awardPrizes ? "\n\t\t\t\t\t\t<div class=\"award__prizes\">\n\t\t\t\t\t\t\t<ol class=\"prizes__list\">".concat(prizesListHTML(awardPrizes), "</ol>\n\t\t\t\t\t\t\t").concat(mentions && mentionsHTML, "\n\t\t\t\t\t\t</div>") : ""), "\n\t\t</div>\n\t</article>");
+    target.innerHTML = '';
+    target.insertAdjacentHTML('afterbegin', html);
   }
 
   function prizesListHTML(payload) {
     var html = "";
-    payload.forEach(function (prize, index) {
-      html += "\n\t\t<li id=\"prize-".concat(index + 1, "\">\n\t\t\t<div>").concat(prize.bp_award_category, "</div>\n\t\t\t<div>").concat(prize.bp_award_artist, "</div>\n\t\t\t<div>").concat(prize.bp_award_image_rendered, "</div>\n\t\t\t<div>").concat(prize.bp_award_title, "</div>\n\t\t\t<div>").concat(prize.bp_award_technique, "</div>\n\t\t\t<div>").concat(prize.bp_award_size, "</div>\n\t\t\t<div>").concat(prize.bp_award_year, "</div>\n\t\t</li>\n\t\t");
-    });
+
+    if (payload) {
+      payload.forEach(function (prize, index) {
+        html += "\n\t\t<li id=\"prize-".concat(index + 1, "\" class=\"prize__category prize__category-").concat(index + 1, "\">\n\t\t\t<h2 class=\"prize__name\">").concat(prize.bp_award_category, "</h2>\n\t\t\t<p class=\"prize__artist\">").concat(prize.bp_award_artist, "</p>\n\t\t\t<figure class=\"prize__image\">").concat(prize.bp_award_image_rendered, "</figure>\n\t\t\t<p class=\"prize__artwork\">").concat(prize.bp_award_title, "</p>\n\t\t\t<p class=\"prize__technique\">").concat(prize.bp_award_technique, "</p>\n\t\t\t<p class=\"prize__size\">").concat(prize.bp_award_size, "</p>\n\t\t\t<p class=\"prize__year\">").concat(prize.bp_award_year, "</p>\n\t\t</li>\n\t\t");
+      });
+    }
+
     return html;
   }
+  /**
+   * TODO:
+   * images
+   */
+
 
   function specialEditionHTML(payload) {
     var html = ""; // console.log(payload);
 
     payload.forEach(function (edition) {
+      console.log(edition.bp_award_se_year);
       html += "\n\t\t<li id=\"award-se-".concat(edition.bp_award_se_year, "\" class=\"award-se__edition\">\n\t\t\t<div class=\"edition__year\">\n\t\t\t\t<p>").concat(edition.bp_award_se_year, "</p>\n\t\t\t</div>\n\t\t\t<div class=\"edition__winners\">").concat(edition.bp_award_se_winners, "</div>\n\t\t</li>\n\t\t");
     });
     return html;
   }
 
+  createCommonjsModule(function (module) {
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      module.exports = _typeof = function _typeof(obj) {
+        return typeof obj;
+      };
+    } else {
+      module.exports = _typeof = function _typeof(obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  module.exports = _typeof;
+  });
+
+  // import { tns } from '../../../node_modules/tiny-slider/src/tiny-slider';
+
   /**
    * @param {Object} payload A JSON object
+   * @param target
    * @param {string} lang Current language
    * @return {string} HTML string
    */
-  function catalogueEditionHTML(payload, lang) {
+  function catalogueEditionHTML(payload, target, lang) {
     var catalogueEdition = payload.title.rendered,
         catalogueUrl = payload.award_catalogue,
         catalogueGallery = payload.award_catalog_gallery;
+        payload.id;
     var html = "\n\t".concat(catalogueUrl && catalogueHTML({
       catalogueUrl: catalogueUrl,
       catalogueEdition: catalogueEdition,
+      catalogueGallery: catalogueGallery,
       lang: lang
-    }), "\n\t").concat(catalogueGallery && catalogueGalleryHTML(catalogueGallery), "\n\t");
-    return html;
+    }), "\n\t");
+    target.innerHTML = '';
+    target.insertAdjacentHTML('afterbegin', html); // catalogueGalleryHTML(catalogueGallery, id);
   }
 
   function catalogueHTML(payload) {
-    var html = payload && "<div>\n\t\t\t<h2>\n\t\t\t\t<p>".concat(payload.lang === 'es' ? 'Catálogo' : 'Catalogue', "</p>\n\t\t\t\t<p>").concat(payload.catalogueEdition, "</p>\n\t\t\t</h2>\n\t\t\t<a href=\"").concat(payload.catalogueUrl, "\">").concat(payload.lang === 'es' ? 'Descargar PDF' : 'Download PDF', "</a>\n\t\t</div>");
+    var html = payload && "<article>\n\t\t\t<div class=\"entry-content\">\n\t\t\t\t<h1>\n\t\t\t\t\t<p>".concat(payload.lang === 'es' ? 'Catálogo' : 'Catalogue', "</p>\n\t\t\t\t\t<p>").concat(payload.catalogueEdition, "</p>\n\t\t\t\t</h1>\n\t\t\t\t<a href=\"").concat(payload.catalogueUrl, "\">\n\t\t\t\t\t").concat(payload.lang === 'es' ? 'Descargar PDF' : 'Download PDF', "\n\t\t\t\t</a>\n\t\t\t\t").concat(payload.catalogueGallery.length ? "<div class=\"\">\n\t\t\t\t\t\t\t<button class=\"catalog-gallery__toggle\">".concat(payload.lang === 'es' ? 'Ver catálogo' : 'View catalog', "</button>\n\t\t\t\t\t\t</div>") : "", "\n\t\t\t</div>\n\t\t</article>");
     return html;
   }
 
-  function catalogueGalleryHTML(payload) {
-    var images = '';
-    payload.forEach(function (image) {
-      images += image;
-    });
-    var html = payload ? "\n\t\t<div>".concat(images, "</div>\n\t\t") : '';
-    return html;
-  }
+  // import Swiper from 'swiper';
+  // import { tns } from '../../../node_modules/tiny-slider/src/tiny-slider';
 
   console.log(awardPayload); // Data received from php.
 
@@ -979,18 +1011,74 @@
 
   var editionContainer = document.querySelector('.award-edition-container');
   var buttons = document.querySelectorAll('.edition-item__button'); // Where gallery images will be displayed
-
-  var awardGallery = document.querySelector('.award-gallery');
-  awardGallery.querySelector('.award-gallery__close button').addEventListener('click', function () {
-    return awardGallery.classList.toggle('hidden');
-  });
-  awardGallery.querySelector('.award-gallery__slider'); // console.log(awardUrl);
+  // const awardGallery = document.querySelector('.award-gallery');
+  // awardGallery
+  // 	.querySelector('.award-gallery__close button')
+  // 	.addEventListener('click', () => awardGallery.classList.toggle('hidden'));
+  // const awardSlider = awardGallery.querySelector('.award-gallery__slider');
+  // console.log(awardUrl);
 
   if (type === 'award') {
     showAwardInfo(buttons, editionContainer, awardUrl, lang, asyncFetchOptions(nonce, 'get'), awardEditionHTML);
   } else if (type === 'catalogues') {
     showAwardInfo(buttons, editionContainer, awardUrl, lang, asyncFetchOptions(nonce, 'get'), catalogueEditionHTML);
-  }
+  } // const slider = tns({
+  // 	container: '.award-gallery__slider',
+  // 	items: 1,
+  // 	slideBy: 1,
+  // 	mouseDrag: true,
+  // 	swipeAngle: false,
+  // 	speed: 400,
+  // 	autoplay: false,
+  // 	arrowKeys: true,
+  // 	center: true,
+  // 	// edgePadding: 20,
+  // 	// fixedWidth: 1500,
+  // 	// autoHeight: true,
+  // 	// viewportMax: '60%',
+  // 	responsive: {
+  // 		480: {
+  // 			items: 2,
+  // 		},
+  // 	},
+  // 	useLocalStorage: true,
+  // });
+  // SwiperCore.use([Navigation]);
+  // const swiper = new Swiper('.swiper-container', {
+  // 	// Optional parameters
+  // 	direction: 'horizontal',
+  // 	loop: true,
+  // 	spaceBetween: 0,
+  // 	centeredSlides: true,
+  // 	slidesPerView: 3,
+  // 	navigation: {
+  // 		nextEl: '.swiper-button-next',
+  // 		prevEl: '.swiper-button-prev',
+  // 	},
+  // });
+  // swiper.init();
+  // const galleryButton = document.querySelector('.catalog-gallery__toggle');
+  // const gallery = document.querySelector('.award-gallery');
+  // galleryButton.addEventListener('click', () => {
+  // 	if (gallery.classList.contains('hidden')) {
+  // 		gallery.classList.replace('hidden', 'visible');
+  // 	}
+  // });
+  // gallery
+  // 	.querySelector('.award-gallery__close button')
+  // 	.addEventListener('click', () =>
+  // 		gallery.classList.replace('visible', 'hidden')
+  // 	);
+  // window.addEventListener('keyup', (event) => {
+  // 	if (gallery.classList.contains('visible')) {
+  // 		if (event.key === 'Escape' || event.keyCode === 72) {
+  // 			gallery.classList.replace('visible', 'hidden');
+  // 		}
+  // 	}
+  // });
+  // window.addEventListener('resize', () => {
+  // 	slider.updateSliderHeight();
+  // });
 
 }());
 
