@@ -210,7 +210,7 @@ add_action( 'template_redirect', 'britaprinz_disable_author_page' );
  */
 function britaprinz_modify_queries( $query ) {
 	if ( ! is_admin() && $query->is_main_query() && is_post_type_archive( 'award' ) ) {
-		$query->set( 'posts_per_page', 20 );
+		$query->set( 'posts_per_page', -1 );
 		$query->set( 'order', 'DESC' );
 		$query->set( 'orderby', 'date' );
 		$query->set( 
