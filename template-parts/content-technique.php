@@ -34,6 +34,35 @@
 			wp_kses_post( get_the_title() )
 			)
 		);
+
+		$bpa_theme_technique_steps = carbon_get_the_post_meta( 'bp_technique_steps' );
+		if ( $bpa_theme_technique_steps ) :
+			?>
+		
+			<div class="technique-content__steps">
+
+				<?php
+				foreach ($bpa_theme_technique_steps as $bpa_theme_step ) :
+					$bpa_theme_step_text = $bpa_theme_step['bp_technique_steps_text'];
+					$bpa_theme_step_image_id = $bpa_theme_step['bp_technique_steps_image'];
+					?>
+
+					<figure class="step">
+					
+						<?php 
+						echo wp_get_attachment_image( $bpa_theme_step_image_id, 'medium' ); 
+						?>
+						
+						<figcaption><?php echo esc_html( $bpa_theme_step_text ); ?></figcaption>
+					</figure>
+
+					<?php
+				endforeach;
+				?>
+
+			</div>
+			<?php
+		endif;
 		?>
 
 	</div><!-- .entry-content -->
