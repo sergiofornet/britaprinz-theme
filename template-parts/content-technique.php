@@ -37,32 +37,7 @@ get_template_part( 'template-parts/nav/secondary', '', 'technique-menu' );
 		);
 
 		if ( $bpa_theme_technique_steps ) :
-			?>
-
-			<div class="technique-content__steps">
-
-				<?php
-				foreach ( $bpa_theme_technique_steps as $bpa_theme_step ) :
-					$bpa_theme_step_text = $bpa_theme_step['bp_technique_steps_text'];
-					$bpa_theme_step_image_id = $bpa_theme_step['bp_technique_steps_image'];
-					?>
-
-					<figure class="step">
-
-						<?php 
-						echo wp_get_attachment_image( $bpa_theme_step_image_id, 'medium' ); 
-						?>
-
-						<figcaption><?php echo esc_html( $bpa_theme_step_text ); ?></figcaption>
-					</figure>
-
-					<?php
-				endforeach;
-				?>
-
-			</div><!-- .technique-content__steps -->
-
-			<?php
+			get_template_part( 'template-parts/technique/technique', 'steps', $bpa_theme_technique_steps );
 		endif;
 
 		if ( $bpa_theme_artworks && $bpa_theme_artworks_link ) :
