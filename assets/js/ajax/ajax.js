@@ -96,6 +96,12 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 
 	target.classList.add('loading');
 
+	const artistsButtons = [...document.querySelectorAll('.artist__button')];
+
+	artistsButtons.forEach((buttonToDisable) => {
+		buttonToDisable.setAttribute('disabled', '');
+	});
+
 	// Fetch artworks asynchronously
 	asyncFetch(artworksUrl, options)
 		.then((jsonResponse) => {
@@ -174,7 +180,12 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 				});
 			});
 		})
-		.then(() => target.classList.remove('loading'));
+		.then(() => target.classList.remove('loading'))
+		.then(() =>
+			artistsButtons.forEach((buttonToEnable) => {
+				buttonToEnable.removeAttribute('disabled');
+			})
+		);
 
 	// Fetch artist info asynchronously
 	asyncFetch(artistUrl, options).then((jsonResponse) => {
