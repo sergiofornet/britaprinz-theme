@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Betty Symington
 Author URI: https://betty-symington.xyz
 Description: Description
-Version: 0.0.50
+Version: 0.0.51
 Tested up to: 5.7.2
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -1763,7 +1763,7 @@ ul.menu a:hover {
   text-decoration: underline;
 }
 
-/* Front Page
+/* Technique Single Pages
 --------------------------------------------- */
 .technique-content__steps {
   --technique-gap: 1em;
