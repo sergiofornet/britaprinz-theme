@@ -14,17 +14,18 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 
-			<header class="page-header">
-				<h1 class="page-title">
-
-					<?php echo post_type_archive_title(); ?>
-
-				</h1>
-			</header><!-- .page-header -->
-			<input type="search" class="artist-search" autocomplete="off">
-			<div style="display: grid; grid-template-columns: 1fr 1fr;">
-				<div class="artists" style="display: grid; grid-template-columns: 9fr 1fr; height:100vh">
-					<div class="artists__list" style="height: 100vh; overflow-y: scroll;"></div>
+			<div class="collection">
+				<header class="page-header collection__header">
+					<h1 class="page-title">
+	
+						<?php echo post_type_archive_title(); ?>
+	
+					</h1>
+					<input type="search" class="artist-search
+					collection__search" autocomplete="off">
+				</header><!-- .page-header -->
+				<div class="artists collection__artists">
+					<div class="artists__list" style=""></div>
 					<div class="artists__initials">
 
 						<?php
@@ -41,7 +42,8 @@ get_header();
 
 					</div>
 				</div>
-				<div class="artworks"></div>
+				<div class="artworks collection__artworks">
+				</div>
 			</div>
 			<div class="artwork-gallery hidden">
 				<div class="artwork-gallery__close">

@@ -1,3 +1,151 @@
+body.post-type-archive-artwork {
+	overflow-x: hidden;
+
+	&.no-sidebar .site-main {
+		background-color: white;
+		overflow-x: hidden;
+		position: relative;
+		padding: 0;
+
+		@media(min-width: 63.9375em) {
+			margin: 0 2em;
+		}
+	}
+}
+
+.collection {
+	max-height: calc(100vh - var(--wp-admin-bar, 0px));
+	overflow-y: hidden;
+	overflow-x: visible;
+	transform: translateX(0%);
+	background-color: white;
+	position: relative;
+	transition: transform .5s ease-in-out;
+
+	&.open {
+		@media (max-width: 63.9375em) {
+			transform: translateX(-50%);
+		}
+	}
+
+	display: grid;
+	grid-template-rows: var(--collection-header-height) auto;
+	
+	@media (max-width: 63.9375em) {
+		width: 200%;
+		grid-template-columns: repeat(2, 50%);
+	}
+
+	@media (min-width: 64em) {
+		grid-template-columns: repeat(2, 50%);
+	}
+
+	.collection__header {
+		grid-column: 1 / 2;
+		grid-row: 1 / 2;
+		border-right: 2px solid var(--color-black);
+	}
+
+	input.collection__search {
+		border-color: var(--color-black);
+		border-width: 2px 0 2px 2px;
+		border-radius: 0;
+		width: 100%;
+	}
+
+	.collection__artists {
+		grid-column: 1 / 2;
+		grid-row: 2 / 3;
+		position: relative;
+		height: calc(100vh - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
+		border-right: 2px solid var(--color-black);
+		
+		.artists__list {
+			height: calc(100vh - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
+			overflow-y: auto;
+		}
+
+		.artists__initials {
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: calc(100vh - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
+			margin: 0.2em 0;
+			margin-right: calc(var(--scrollbar-width) + 1em);
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+			line-height: 1;
+			
+			@media (max-height: 37.9375em) {
+				justify-content: space-between;
+			}
+			
+			@media (min-height: 38em) {
+				justify-content: space-evenly;
+			}
+			
+			.initial button {
+				text-transform: uppercase;
+				@media (max-width: 48em) {
+					font-size: 12px;
+
+				}
+
+			}
+		}
+		
+	}
+	.collection__artworks {
+		padding: 1em;
+		border-left: 2px solid var(--color-black);
+		grid-column: 2 / 3;
+		grid-row: 1 / 3;
+		overflow-y: auto;
+		height: calc(100vh - var(--wp-admin-bar, 0px));
+		transition: all .5s ease-in-out;
+		background-color: white;
+		position: relative;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			width: 0%;
+			height: 100%;
+			background-color: var(--color-black);
+			transition: width .5s ease-in-out, background-color .5s ease-in-out;;
+			z-index: 999;
+		}
+		
+		&.loading::before {
+			width: 100%;
+			background-color: var(--color-white);
+			left: 0;
+			right: unset;
+		}
+
+		&.loaded::before {
+			width: 0%;
+			background-color: var(--color-black);
+			right: 0;
+			left: unset;
+		}
+
+		.artworks__return {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			@media(min-width: 63.9357em){
+				display: none;
+			}
+		}
+	}
+}
+
 .artwork__title {
 	border: none;
 	background-color: initial;

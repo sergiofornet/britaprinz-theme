@@ -1,5 +1,13 @@
 import { asyncFetch } from '../util/async-fetch';
 import { artworksList } from './artworks-list';
+import { getHeight } from '../util/util';
+
+const collectionHeader = document.querySelector('.collection__header');
+const collectionHeaderHeight = getHeight(collectionHeader);
+document.documentElement.style.setProperty(
+	'--collection-header-height',
+	`${collectionHeaderHeight}px`
+);
 
 const { nonce } = ajax_var;
 const { lang, searchUrl, artistId } = ajax_var;
@@ -94,8 +102,10 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 
 	target.innerHTML = ''; // empty artworks container
 
-	target.classList.add('loading');
+	target.classList.replace('loaded', 'loading') ||
+		target.classList.toggle('loading');
 
+	const collection = document.querySelector('.collection');
 	const artistsButtons = [...document.querySelectorAll('.artist__button')];
 
 	artistsButtons.forEach((buttonToDisable) => {
@@ -180,7 +190,7 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 				});
 			});
 		})
-		.then(() => target.classList.remove('loading'))
+		.then(() => target.classList.replace('loading', 'loaded'))
 		.then(() =>
 			artistsButtons.forEach((buttonToEnable) => {
 				buttonToEnable.removeAttribute('disabled');
@@ -195,6 +205,7 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 
 		if (typeof jsonResponse === 'object') {
 			html = `
+				<button class="artworks__return"><</button>
 				<div class="artworks__artist">
 					<h2 class="artist__name">${name}</h2>
 					${artistBio ? `<div class="artist__bio">${artistBio}</div>` : ''}
@@ -204,6 +215,11 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 			html = artist;
 		}
 		target.insertAdjacentHTML('afterbegin', html);
+		// button event listener => go back
+		const returnButton = target.querySelector('.artworks__return');
+		returnButton.addEventListener('click', (event) =>
+			collection.classList.toggle('open')
+		);
 	});
 };
 
@@ -293,6 +309,9 @@ const filterArtists = (url, options, target, currentLang) => {
 										'inactive',
 										'active'
 									);
+									const collection =
+										document.querySelector('.collection');
+									collection.classList.toggle('open');
 								} else {
 									event.currentTarget.classList.replace(
 										'active',

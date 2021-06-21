@@ -921,6 +921,29 @@
 	  return html;
 	}
 
+	/**
+	 * Handles active/inactive state on buttons
+	 *
+	 * @param {NodeList} buttons Buttons object
+	 * @param {string} activeState Active state class
+	 * @param {string} inactiveState Inactive state class
+	 * @param target
+	 */
+	/**
+	 * Get the computed size of an element
+	 *
+	 * @param {HTMLElement} element - html element
+	 * @return {number} element computed height
+	 */
+
+
+	function getHeight(element) {
+	  return element.offsetHeight;
+	}
+
+	var collectionHeader = document.querySelector('.collection__header');
+	var collectionHeaderHeight = getHeight(collectionHeader);
+	document.documentElement.style.setProperty('--collection-header-height', "".concat(collectionHeaderHeight, "px"));
 	var _ajax_var = ajax_var,
 	    nonce = _ajax_var.nonce;
 	var _ajax_var2 = ajax_var,
@@ -1010,7 +1033,8 @@
 	  var artistUrl = "".concat(ajax.artistUrl, "/").concat(artist);
 	  target.innerHTML = ''; // empty artworks container
 
-	  target.classList.add('loading');
+	  target.classList.replace('loaded', 'loading') || target.classList.toggle('loading');
+	  var collection = document.querySelector('.collection');
 
 	  var artistsButtons = toConsumableArray(document.querySelectorAll('.artist__button'));
 
@@ -1058,7 +1082,7 @@
 	      });
 	    });
 	  }).then(function () {
-	    return target.classList.remove('loading');
+	    return target.classList.replace('loading', 'loaded');
 	  }).then(function () {
 	    return artistsButtons.forEach(function (buttonToEnable) {
 	      buttonToEnable.removeAttribute('disabled');
@@ -1072,12 +1096,17 @@
 	        artistBio = jsonResponse.artist_bio;
 
 	    if (_typeof_1(jsonResponse) === 'object') {
-	      html = "\n\t\t\t\t<div class=\"artworks__artist\">\n\t\t\t\t\t<h2 class=\"artist__name\">".concat(name, "</h2>\n\t\t\t\t\t").concat(artistBio ? "<div class=\"artist__bio\">".concat(artistBio, "</div>") : '', "\n\t\t\t\t</div>\n\t\t\t\t");
+	      html = "\n\t\t\t\t<button class=\"artworks__return\"><</button>\n\t\t\t\t<div class=\"artworks__artist\">\n\t\t\t\t\t<h2 class=\"artist__name\">".concat(name, "</h2>\n\t\t\t\t\t").concat(artistBio ? "<div class=\"artist__bio\">".concat(artistBio, "</div>") : '', "\n\t\t\t\t</div>\n\t\t\t\t");
 	    } else {
 	      html = artist;
 	    }
 
-	    target.insertAdjacentHTML('afterbegin', html);
+	    target.insertAdjacentHTML('afterbegin', html); // button event listener => go back
+
+	    var returnButton = target.querySelector('.artworks__return');
+	    returnButton.addEventListener('click', function (event) {
+	      return collection.classList.toggle('open');
+	    });
 	  });
 	};
 	/**
@@ -1129,6 +1158,8 @@
 	              document.querySelector('.artist__button.active') && document.querySelector('.artist__button.active').classList.replace('active', 'inactive');
 	              artistArtworks(event, ajax_var, artworks, fetchOptions);
 	              event.currentTarget.classList.replace('inactive', 'active');
+	              var collection = document.querySelector('.collection');
+	              collection.classList.toggle('open');
 	            } else {
 	              event.currentTarget.classList.replace('active', 'inactive');
 	              artworks.innerHTML = '';
