@@ -10,6 +10,15 @@
  */
 
 $social  = carbon_get_theme_option( 'bp_theme_social' );
+$links = carbon_get_theme_option( 'bp_theme_footer_links' );
+$footer_links = array();
+foreach( $links as $link ) {
+	$link_id = $link['bp_theme_footer_links_list'][0]['id'];
+	$footer_links[] = array(
+		'url'   => get_the_permalink($link_id),
+		'title' => get_the_title($link_id),
+	);
+}
 $contact = carbon_get_theme_option( 'bp_theme_contact' );
 ?>
 
@@ -26,6 +35,22 @@ $contact = carbon_get_theme_option( 'bp_theme_contact' );
 
 			</address>
 		</div><!-- .site-info -->
+		<div class="footer-links">
+
+			<?php
+			if ( $footer_links ) :
+				foreach ( $footer_links as $footer_link ) :
+					?>
+
+					<div class="footer-links__link">
+						<a href="<?php esc_url( $footer_link['url'] ); ?>" title="<?php esc_html_e( $footer_link['title'], 'britaprinz-theme' ); ?>"><?php esc_html_e( $footer_link['title'], 'britaprinz-theme' ); ?></a>
+					</div>
+
+					<?php
+				endforeach;
+			endif;
+			?>
+		</div><!-- .footer-links -->
 		<div class="footer__social-links">
 			<ul>
 
