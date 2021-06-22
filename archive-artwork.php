@@ -30,15 +30,22 @@ get_header();
 
 						<?php
 						$bpa_theme_initials = array();
+						
 						while ( have_posts() ) :
 							the_post();
-							$bpa_theme_term_id = get_the_terms( $post->ID, 'artist' )[0]->term_id;
-							$bpa_theme_artist = carbon_get_term_meta( $bpa_theme_term_id, 'bp_artist_order_name' );
-							$bpa_theme_initials[] = trim( $bpa_theme_artist )[0];
+							$bpa_theme_post_terms = get_the_terms( $post->ID, 'artist' );
+						
+							foreach ( $bpa_theme_post_terms as $bpa_theme_post_term ) :
+								$bpa_theme_term_id    = $bpa_theme_post_term->term_id;
+								$bpa_theme_artist     = carbon_get_term_meta( $bpa_theme_term_id, 'bp_artist_order_name' );
+								$bpa_theme_initials[] = strtolower( trim( $bpa_theme_artist )[0] );
+							endforeach;
+
 						endwhile;
 
 						$bpa_theme_unique_initials = array_unique( $bpa_theme_initials );
 						sort( $bpa_theme_unique_initials );
+						
 						foreach ( $bpa_theme_unique_initials as $bpa_theme_initial ) :
 							?>
 
