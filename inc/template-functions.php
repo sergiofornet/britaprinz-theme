@@ -224,7 +224,6 @@ function britaprinz_modify_queries( $query ) {
 	}
 		
 	if ( is_post_type_archive( 'artwork' ) ) {
-		$query->set( 'posts_per_page', -1 );
 		$query->set( 'order', 'ASC' );
 		$query->set( 'orderby', 'title' );
 	}

@@ -29,23 +29,23 @@ get_header();
 					<div class="artists__initials">
 
 						<?php
-						$bpa_theme_initials = array();
-						
-						while ( have_posts() ) :
-							the_post();
-							$bpa_theme_post_terms = get_the_terms( $post->ID, 'artist' );
-						
-							foreach ( $bpa_theme_post_terms as $bpa_theme_post_term ) :
-								$bpa_theme_term_id    = $bpa_theme_post_term->term_id;
-								$bpa_theme_artist     = carbon_get_term_meta( $bpa_theme_term_id, 'bp_artist_order_name' );
-								$bpa_theme_initials[] = strtolower( trim( $bpa_theme_artist )[0] );
-							endforeach;
+						$bpa_theme_initials   = array();
+						$bpa_theme_post_terms = get_terms( 
+							array( 
+								'taxonomy'   => 'artist',
+								'hide_empty' => false,
+							)
+						);
 
-						endwhile;
+						foreach ( $bpa_theme_post_terms as $bpa_theme_post_term ) :
+							$bpa_theme_term_id    = $bpa_theme_post_term->term_id;
+							$bpa_theme_artist     = carbon_get_term_meta( $bpa_theme_term_id, 'bp_artist_order_name' );
+							$bpa_theme_initials[] = strtolower( trim( $bpa_theme_artist )[0] );
+						endforeach;
 
 						$bpa_theme_unique_initials = array_unique( $bpa_theme_initials );
 						sort( $bpa_theme_unique_initials );
-						
+
 						foreach ( $bpa_theme_unique_initials as $bpa_theme_initial ) :
 							?>
 
