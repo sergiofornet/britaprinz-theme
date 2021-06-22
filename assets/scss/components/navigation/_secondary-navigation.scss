@@ -8,9 +8,9 @@
 			}
 		}
 		
-		@media(min-width: 48em) {
+		body:not(.post-type-archive-artwork) & {
 
-			:not(.post-type-archive-artwork) & {
+			@media(min-width: 48em) {
 				& > li.menu-item--title > a,
 				& > li.menu-item--title > h1,
 				& > li.menu-item--title > span {

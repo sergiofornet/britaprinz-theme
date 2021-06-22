@@ -262,7 +262,7 @@ ul.menu ul li{font-size:calc(18rem / 16);-webkit-margin-after:2em;margin-block-e
 .no-sidebar .site-main--sidebar .secondary-navigation{-webkit-padding-end:1em;padding-inline-end:1em}
 .no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-start:1em;padding-inline-start:1em}
 ul.menu>li.menu-item--title>h1 :not(.post-type-archive-artwork),ul.menu>li.menu-item--title>a :not(.post-type-archive-artwork),ul.menu>li.menu-item--title>span :not(.post-type-archive-artwork){max-width:180px}
-:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>a,:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>h1,:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>span{display:block;margin-bottom:3em}
+body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>a,body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>h1,body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>span{display:block;margin-bottom:3em}
 .site-header{grid-template-columns:1fr 1fr auto;grid-template-rows:repeat(2,auto);-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .header__logo{grid-column:1 / 2;grid-row:2 / 3;z-index:200}
 .header__menu-toggle{grid-column:2 / 3;grid-row:2 / 3;-webkit-margin-end:1.5em;margin-inline-end:1.5em;font-size:calc(48rem / 16)}
