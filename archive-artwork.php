@@ -29,11 +29,21 @@ get_header();
 					<div class="artists__initials">
 
 						<?php
-						foreach ( range( 'a', 'z' ) as $initial ) :
+						$bpa_theme_initials = array();
+						while ( have_posts() ) :
+							the_post();
+							$bpa_theme_term_id = get_the_terms( $post->ID, 'artist' )[0]->term_id;
+							$bpa_theme_artist = carbon_get_term_meta( $bpa_theme_term_id, 'bp_artist_order_name' );
+							$bpa_theme_initials[] = trim( $bpa_theme_artist )[0];
+						endwhile;
+
+						$bpa_theme_unique_initials = array_unique( $bpa_theme_initials );
+						sort( $bpa_theme_unique_initials );
+						foreach ( $bpa_theme_unique_initials as $bpa_theme_initial ) :
 							?>
 
 							<div class="initial">
-								<button class="initial__button" data-target="<?php echo esc_attr( $initial ); ?>"><?php echo esc_html( $initial ); ?></button>
+								<button class="initial__button" data-target="<?php echo esc_attr( $bpa_theme_initial ); ?>"><?php echo esc_html( $bpa_theme_initial ); ?></button>
 							</div>
 
 							<?php

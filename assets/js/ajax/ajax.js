@@ -70,10 +70,12 @@ function initialsCallback(entries) {
 		const initial = document.querySelector(
 			`.initial__button[data-target*=${entry.target.dataset.initial}]`
 		);
-		if (entry.intersectionRatio >= 0.5) {
-			initial.classList.add('active');
-		} else {
-			initial.classList.remove('active');
+		if (initial) {
+			if (initial && entry.intersectionRatio >= 0.5) {
+				initial.classList.add('active');
+			} else {
+				initial.classList.remove('active');
+			}
 		}
 	});
 }

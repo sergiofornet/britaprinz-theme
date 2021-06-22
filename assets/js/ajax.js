@@ -999,10 +999,12 @@
 	  entries.forEach(function (entry) {
 	    var initial = document.querySelector(".initial__button[data-target*=".concat(entry.target.dataset.initial, "]"));
 
-	    if (entry.intersectionRatio >= 0.5) {
-	      initial.classList.add('active');
-	    } else {
-	      initial.classList.remove('active');
+	    if (initial) {
+	      if (initial && entry.intersectionRatio >= 0.5) {
+	        initial.classList.add('active');
+	      } else {
+	        initial.classList.remove('active');
+	      }
 	    }
 	  });
 	}
