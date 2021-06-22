@@ -16,11 +16,11 @@ get_header();
 
 			<div class="collection">
 				<header class="page-header collection__header">
-					<h1 class="page-title">
-	
-						<?php echo post_type_archive_title(); ?>
-	
-					</h1>
+					
+					<?php
+					get_template_part( 'template-parts/nav/secondary', '', 'artwork-menu' );	
+					?>
+
 					<input type="search" class="artist-search
 					collection__search" autocomplete="off">
 				</header><!-- .page-header -->
