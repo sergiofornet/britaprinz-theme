@@ -56,7 +56,9 @@ ul.menu {
 		}
 
 		@media (min-width: 48em) {
-			max-width: 180px;
+			:not(.post-type-archive-artwork) {
+				max-width: 180px;
+			}
 		}
 		
 	}
