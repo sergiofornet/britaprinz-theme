@@ -28,7 +28,7 @@ const searchInput = document.querySelector('.artist-search');
 const artistsList = document.querySelector('.artists__list');
 
 const groupObserver = new IntersectionObserver(initialsCallback, {
-	rootMargin: '0px 0px -85% 0px',
+	rootMargin: '0px 0px 0px 0px',
 	root: artistsList,
 	threshold: 0.5,
 });
