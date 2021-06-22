@@ -10,7 +10,7 @@
 		
 		@media(min-width: 48em) {
 
-			:not(.post-type-archive-artwork) {
+			:not(.post-type-archive-artwork) & {
 				& > li.menu-item--title > a,
 				& > li.menu-item--title > h1,
 				& > li.menu-item--title > span {
@@ -47,7 +47,7 @@
 	}
 
 	@media(max-width: 47.9375em) {
-		:not(.post-type-archive-artwork) {
+		:not(.post-type-archive-artwork) & {
 
 			.award-menu .menu-item--title {
 				padding-inline-start: 1em;
