@@ -4,7 +4,7 @@ Theme URI: http://underscores.me/
 Author: Betty Symington
 Author URI: https://betty-symington.xyz
 Description: Description
-Version: 0.0.54
+Version: 0.0.55
 Tested up to: 5.7.2
 Requires PHP: 5.6
 License: GNU General Public License v2 or later
@@ -178,6 +178,7 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:white;over
 .collection .collection__header{grid-column:1 / 2;grid-row:1 / 2;border-right:2px solid var(--color-black)}
 .collection input.collection__search{border-color:var(--color-black);border-width:2px 0 2px 2px;border-radius:0;width:100%}
 .collection .collection__artists{grid-column:1 / 2;grid-row:2 / 3;position:relative;height:calc(100vh - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));border-right:2px solid var(--color-black)}
+.collection .collection__artists::before{content:"";position:absolute;top:0;left:0;width:100%;height:35%;-webkit-border-after:1px dashed red;border-block-end:1px dashed red;z-index:-1}
 .collection .collection__artists .artists__list{height:calc(100vh - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));overflow-y:auto}
 .collection .collection__artists .artists__initials{position:absolute;top:0;right:0;height:calc(100vh - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));margin:.2em 0;margin-right:calc(var(--scrollbar-width) + 1em);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;line-height:1}
 .collection .collection__artists .artists__initials .initial button{text-transform:uppercase}
