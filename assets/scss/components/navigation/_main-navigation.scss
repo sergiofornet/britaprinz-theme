@@ -20,6 +20,7 @@
 	@media (max-width: 63.9375em) {
 		.no-scroll & {
 			overflow-y: scroll;
+			overflow-x: hidden;
 		}
 	}
 	

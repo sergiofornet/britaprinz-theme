@@ -297,7 +297,7 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .technique-content__steps .step:nth-child(5){grid-row:2 / 3;grid-column:5 / 7}
 }@media(min-height:38em){.collection .collection__artists .artists__initials{-webkit-box-pack:space-evenly;-ms-flex-pack:space-evenly;justify-content:space-evenly}
 }@media(max-width:63.9375em){.main-navigation ul.menu>li.menu-item--title{margin-bottom:2em}
-.no-scroll .main-navigation{overflow-y:scroll}
+.no-scroll .main-navigation{overflow-y:scroll;overflow-x:hidden}
 .main-navigation .nav-menu>li.menu-item--title:last-child{border-bottom:1px solid var(--color-black)}
 .main-navigation ul.menu>li.menu-item--title{-webkit-box-align:left;-ms-flex-align:left;align-items:left}
 .main-navigation ul.menu>li.menu-item--title>a,.main-navigation ul.menu>li.menu-item--title>span{max-width:40%;margin-bottom:1em}
