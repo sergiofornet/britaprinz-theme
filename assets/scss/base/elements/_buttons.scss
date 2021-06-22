@@ -31,12 +31,25 @@ input[type="submit"] {
 		background: none;
 		border: none;
 		display: block;
-		font-size: inherit;
-		font-weight: inherit;
-		text-transform: inherit;
-
-		&:hover {
-			text-decoration: underline;
+		font-size: calc(18rem / 16);
+		font-weight: 400;
+		text-transform: uppercase;
+		transition: all .5s ease-in-out, font-weight .1s ease-in-out;
+		text-align: left;
+		
+		&.active {
+			font-weight: 600;
+		}
+	}
+	
+	@media (min-width: 47.9375em) {
+		
+		&.artist__button {
+			transform: translateX(0);
+			
+			&.active {
+				transform: translateX(calc(15vw - 50%));
+			}
 		}
 	}
 
