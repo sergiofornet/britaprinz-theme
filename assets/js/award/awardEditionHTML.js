@@ -1,3 +1,5 @@
+import { handleReturnButton } from './awardHandlers';
+
 /**
  * @param {Object} payload A JSON object
  * @param {HTMLElement} target - DOM Element where the info will be displayed
@@ -59,6 +61,19 @@ function awardEditionHTML(payload, target, lang) {
 
 	target.innerHTML = '';
 	target.insertAdjacentHTML('afterbegin', html);
+
+	const returnButton = document.createElement('button');
+	returnButton.classList.add('award-edition-container__return-button');
+	returnButton.setAttribute('aria-pressed', 'false');
+	returnButton.innerHTML = '<';
+	returnButton.addEventListener(
+		'click',
+		() => {
+			handleReturnButton(returnButton, target);
+		},
+		false
+	);
+	target.insertAdjacentElement('afterbegin', returnButton);
 }
 
 function prizesListHTML(payload) {
