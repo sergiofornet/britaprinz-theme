@@ -1059,14 +1059,13 @@
   module.exports = _typeof;
   });
 
-  // import { tns } from '../../../node_modules/tiny-slider/src/tiny-slider';
-
   /**
    * @param {Object} payload A JSON object
    * @param target
    * @param {string} lang Current language
    * @return {string} HTML string
    */
+
   function catalogueEditionHTML(payload, target, lang) {
     var catalogueEdition = payload.title.rendered,
         catalogueUrl = payload.award_catalogue,
@@ -1079,7 +1078,15 @@
       lang: lang
     }), "\n\t");
     target.innerHTML = '';
-    target.insertAdjacentHTML('afterbegin', html); // catalogueGalleryHTML(catalogueGallery, id);
+    target.insertAdjacentHTML('afterbegin', html);
+    var returnButton = document.createElement('button');
+    returnButton.classList.add('award-edition-container__return-button');
+    returnButton.setAttribute('aria-pressed', 'false');
+    returnButton.innerHTML = '<';
+    returnButton.addEventListener('click', function () {
+      handleReturnButton(returnButton, target);
+    }, false);
+    target.insertAdjacentElement('afterbegin', returnButton); // catalogueGalleryHTML(catalogueGallery, id);
   }
 
   function catalogueHTML(payload) {
