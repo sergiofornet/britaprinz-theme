@@ -1091,7 +1091,7 @@
   }
 
   function catalogueHTML(payload) {
-    var html = payload && "<article id=\"post-".concat(payload.id, ">\n\t\t\t<div class=\"entry-content\">\n\t\t\t\t<h1>\n\t\t\t\t\t<p>").concat(payload.lang === 'es' ? 'Catálogo' : 'Catalogue', "</p>\n\t\t\t\t\t<p>").concat(payload.catalogueEdition, "</p>\n\t\t\t\t</h1>\n\t\t\t\t<a href=\"").concat(payload.catalogueUrl, "\">\n\t\t\t\t\t").concat(payload.lang === 'es' ? 'Descargar PDF' : 'Download PDF', "\n\t\t\t\t</a>\n\t\t\t\t").concat(payload.catalogueGallery.length ? "<div class=\"\">\n\t\t\t\t\t\t\t<button class=\"catalog-gallery__toggle\">".concat(payload.lang === 'es' ? 'Ver catálogo' : 'View catalog', "</button>\n\t\t\t\t\t\t</div>") : "", "\n\t\t\t</div>\n\t\t</article>");
+    var html = payload && "<article id=\"post-".concat(payload.id, "\">\n\t\t\t<div class=\"entry-content\">\n\t\t\t\t<h1>\n\t\t\t\t\t<p>").concat(payload.lang === 'es' ? 'Catálogo' : 'Catalogue', "</p>\n\t\t\t\t\t<p>").concat(payload.catalogueEdition, "</p>\n\t\t\t\t</h1>\n\t\t\t\t<a href=\"").concat(payload.catalogueUrl, "\">\n\t\t\t\t\t").concat(payload.lang === 'es' ? 'Descargar PDF' : 'Download PDF', "\n\t\t\t\t</a>\n\t\t\t\t").concat(payload.catalogueGallery.length ? "<div class=\"\">\n\t\t\t\t\t\t\t<button class=\"catalog-gallery__toggle\">".concat(payload.lang === 'es' ? 'Ver catálogo' : 'View catalog', "</button>\n\t\t\t\t\t\t</div>") : "", "\n\t\t\t</div>\n\t\t</article>");
     return html;
   }
 
