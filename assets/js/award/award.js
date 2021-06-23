@@ -2,19 +2,36 @@ import { asyncFetchOptions } from '../util/async-fetch';
 import { showAwardInfo } from './showAwardInfo';
 import { awardEditionHTML } from './awardEditionHTML';
 import { catalogueEditionHTML } from './catalogueEditionHTML';
+import { handleReturnButton } from './awardHandlers';
 // import SwiperCore, { Navigation } from 'swiper/core';
 // import Swiper from 'swiper';
 
 // import { tns } from '../../../node_modules/tiny-slider/src/tiny-slider';
-console.log(awardPayload);
-
 // Data received from php.
 const { nonce, awardUrl, type, lang } = awardPayload; // eslint-disable-line no-undef
-
+console.log(awardPayload);
+const returnButton = document.querySelector(
+	'.award-edition-container__return-button'
+);
 // Where AJAX data will be displawed
 const editionContainer = document.querySelector('.award-edition-container');
 
+// Make first button active
 const buttons = document.querySelectorAll('.edition-item__button');
+buttons[0].classList.replace(
+	'edition-item__button--inactive',
+	'edition-item__button--active'
+);
+
+// Handle return button
+returnButton.addEventListener(
+	'click',
+	() => {
+		handleReturnButton(returnButton, editionContainer);
+	},
+	false
+);
+editionContainer.insertAdjacentElement('afterbegin', returnButton);
 
 // Where gallery images will be displayed
 // const awardGallery = document.querySelector('.award-gallery');

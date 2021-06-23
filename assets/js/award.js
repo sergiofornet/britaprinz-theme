@@ -846,6 +846,10 @@
     return options;
   }
 
+  const wait = (amount = 0) => new Promise(resolve => setTimeout(resolve, amount));
+
+  var waait = wait;
+
   /**
    * Outputs Award info.
    *
@@ -862,36 +866,113 @@
     var awardHtml = '';
     triggers.forEach(function (button) {
       button.setAttribute('aria-pressed', 'false');
-      button.addEventListener('click', function (event) {
-        target.classList.contains('loaded') ? target.classList.replace('loaded', 'loading') : target.classList.add('loading'); // Check if button is inactive
+      button.addEventListener('click', /*#__PURE__*/function () {
+        var _ref = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(event) {
+          return regenerator.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  if (!event.currentTarget.classList.contains('edition-item__button--inactive')) {
+                    _context.next = 8;
+                    break;
+                  }
 
-        if (event.currentTarget.classList.contains('edition-item__button--inactive')) {
-          // Search for active button
-          if (document.querySelector('.edition-item__button--active')) {
-            // Make active button inactive
-            document.querySelector('.edition-item__button--active').classList.replace('edition-item__button--active', 'edition-item__button--inactive');
-          } // Fetch AJAX data
+                  target.classList.contains('loaded') ? target.classList.replace('loaded', 'loading') : target.classList.replace('unloaded', 'loading'); // Search for an active button
+
+                  if (document.querySelector('.edition-item__button--active')) {
+                    // Make active button inactive
+                    document.querySelector('.edition-item__button--active').classList.replace('edition-item__button--active', 'edition-item__button--inactive');
+                  } // Fetch AJAX data
 
 
-          asyncFetch("".concat(ajaxUrl, "/").concat(event.currentTarget.dataset.edition), options).then(function (jsonResponse) {
-            callback(jsonResponse, target, lang); // Toggle target loading state
+                  asyncFetch("".concat(ajaxUrl, "/").concat(event.currentTarget.dataset.edition), options).then(function (jsonResponse) {
+                    callback(jsonResponse, target, lang); // Toggle target loading state
 
-            target.classList.contains('loading') && target.classList.replace('loading', 'loaded');
-          }); // Make current button active
+                    target.classList.contains('loading') && target.classList.replace('loading', 'loaded');
+                  }); // Make current button active
 
-          event.currentTarget.classList.replace('edition-item__button--inactive', 'edition-item__button--active');
-          button.setAttribute('aria-pressed', 'true');
-        } else {
-          // If pressed button is already active
-          target.innerHTML = ''; // Toggle target loading state
+                  event.currentTarget.classList.replace('edition-item__button--inactive', 'edition-item__button--active');
+                  button.setAttribute('aria-pressed', 'true');
+                  _context.next = 15;
+                  break;
 
-          target.classList.contains('loading') && target.classList.replace('loading', 'loaded');
-          event.currentTarget.classList.replace('edition-item__button--active', 'edition-item__button--inactive');
-          button.setAttribute('aria-pressed', 'false');
-        }
-      }, false);
+                case 8:
+                  // If pressed button is already active
+                  // Make it inactive
+                  event.currentTarget.classList.replace('edition-item__button--active', 'edition-item__button--inactive');
+                  button.setAttribute('aria-pressed', 'false'); // Toggle target loading state
+
+                  target.classList.replace('loaded', 'unloading'); // Wait half a second
+
+                  _context.next = 13;
+                  return waait(500);
+
+                case 13:
+                  // Toggle target loading state
+                  target.classList.replace('unloading', 'unloaded'); // Empty target container
+
+                  target.innerHTML = '';
+
+                case 15:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }(), false);
     });
     return awardHtml;
+  }
+
+  function handleReturnButton(_x, _x2) {
+    return _handleReturnButton.apply(this, arguments);
+  }
+
+  function _handleReturnButton() {
+    _handleReturnButton = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(button, target) {
+      var activeButton;
+      return regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              activeButton = document.querySelector('.edition-item__button--active');
+              console.log(activeButton);
+
+              if (activeButton) {
+                activeButton.classList.replace('edition-item__button--active', 'edition-item__button--inactive');
+                activeButton.setAttribute('aria-pressed', 'false');
+                console.log('if 1');
+              }
+
+              if (button.getAttribute('aria-pressed') === 'true') {
+                button.setAttribute('aria-pressed', 'false');
+                console.log('if 2');
+              } else {
+                button.setAttribute('aria-pressed', 'true');
+                console.log('else');
+              }
+
+              target.classList.replace('loaded', 'unloading');
+              _context.next = 7;
+              return waait(500);
+
+            case 7:
+              target.classList.replace('unloading', 'unloaded');
+              target.innerHTML = '';
+
+            case 9:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+    return _handleReturnButton.apply(this, arguments);
   }
 
   /**
@@ -900,6 +981,7 @@
    * @param {string} lang
    * @return {void}
    */
+
   function awardEditionHTML(payload, target, lang) {
     var title = payload.title.rendered,
         mentions = payload.bp_award_mentions,
@@ -920,6 +1002,14 @@
     var html = "\n\t<article id=\"post-".concat(id, "\">\n\t\t<div class=\"entry-content award\">\n\t\t\t").concat(title && "<div class=\"award__title\">\n\t\t\t\t\t<h1>".concat(title, "</h1>\n\t\t\t\t</div>"), "\n\t\t\t").concat(isSpecialEdition ? "\n\t\t\t\t\t<ul id=\"award-se\" class=\"award-se\">\n\t\t\t\t\t\t".concat(specialEditionHTML(specialEdition), "\n\t\t\t\t\t</ul>\n\t\t\t\t\t") : "\t\n\t\t\t\t\t".concat(awardPrizes ? "\n\t\t\t\t\t\t<div class=\"award__prizes\">\n\t\t\t\t\t\t\t<ol class=\"prizes__list\">".concat(prizesListHTML(awardPrizes), "</ol>\n\t\t\t\t\t\t\t").concat(mentions && mentionsHTML, "\n\t\t\t\t\t\t</div>") : ""), "\n\t\t</div>\n\t</article>");
     target.innerHTML = '';
     target.insertAdjacentHTML('afterbegin', html);
+    var returnButton = document.createElement('button');
+    returnButton.classList.add('award-edition-container__return-button');
+    returnButton.setAttribute('aria-pressed', 'false');
+    returnButton.innerHTML = '<';
+    returnButton.addEventListener('click', function () {
+      handleReturnButton(returnButton, target);
+    }, false);
+    target.insertAdjacentElement('afterbegin', returnButton);
   }
 
   function prizesListHTML(payload) {
@@ -999,18 +1089,26 @@
 
   // import Swiper from 'swiper';
   // import { tns } from '../../../node_modules/tiny-slider/src/tiny-slider';
-
-  console.log(awardPayload); // Data received from php.
+  // Data received from php.
 
   var _awardPayload = awardPayload,
       nonce = _awardPayload.nonce,
       awardUrl = _awardPayload.awardUrl,
       type = _awardPayload.type,
       lang = _awardPayload.lang; // eslint-disable-line no-undef
-  // Where AJAX data will be displawed
 
-  var editionContainer = document.querySelector('.award-edition-container');
-  var buttons = document.querySelectorAll('.edition-item__button'); // Where gallery images will be displayed
+  console.log(awardPayload);
+  var returnButton = document.querySelector('.award-edition-container__return-button'); // Where AJAX data will be displawed
+
+  var editionContainer = document.querySelector('.award-edition-container'); // Make first button active
+
+  var buttons = document.querySelectorAll('.edition-item__button');
+  buttons[0].classList.replace('edition-item__button--inactive', 'edition-item__button--active'); // Handle return button
+
+  returnButton.addEventListener('click', function () {
+    handleReturnButton(returnButton, editionContainer);
+  }, false);
+  editionContainer.insertAdjacentElement('afterbegin', returnButton); // Where gallery images will be displayed
   // const awardGallery = document.querySelector('.award-gallery');
   // awardGallery
   // 	.querySelector('.award-gallery__close button')
