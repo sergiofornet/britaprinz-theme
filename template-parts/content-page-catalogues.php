@@ -12,7 +12,7 @@
 	get_template_part( 'template-parts/nav/secondary', 'award', 'award-menu' );	
 ?>
 
-<div class="award-edition-container">
+<div class="award-edition-container" data-state="loaded">
 	<button class="award-edition-container__return-button" aria-pressed="false"><</button>
 	<article id="post-<?php //the_ID(); ?>" <?php //post_class(); ?>>
 		<div class="entry-content">

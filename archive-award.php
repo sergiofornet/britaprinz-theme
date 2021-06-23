@@ -21,7 +21,7 @@ get_header();
 		rewind_posts();
 		?><!--.menu-award-container-->
 
-		<div class="award-edition-container loaded">
+		<div class="award-edition-container" data-state="loaded">
 
 			<?php
 			if ( have_posts() ) :

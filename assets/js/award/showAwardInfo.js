@@ -20,25 +20,18 @@ function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 			'click',
 			async (event) => {
 				// Check if presed button is inactive
-				if (
-					event.currentTarget.classList.contains(
-						'edition-item__button--inactive'
-					)
-				) {
-					target.classList.contains('loaded')
-						? target.classList.replace('loaded', 'loading')
-						: target.classList.replace('unloaded', 'loading');
+				if (event.currentTarget.dataset.active === 'false') {
+					target.dataset.state = 'loading';
 					// Search for an active button
 					if (
-						document.querySelector('.edition-item__button--active')
+						document.querySelector(
+							'.edition-item__button[data-active="true"]'
+						)
 					) {
 						// Make active button inactive
-						document
-							.querySelector('.edition-item__button--active')
-							.classList.replace(
-								'edition-item__button--active',
-								'edition-item__button--inactive'
-							);
+						document.querySelector(
+							'.edition-item__button[data-active="true"]'
+						).dataset.active = false;
 					}
 					// Fetch AJAX data
 					asyncFetch(
@@ -47,29 +40,22 @@ function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 					).then((jsonResponse) => {
 						callback(jsonResponse, target, lang);
 						// Toggle target loading state
-						target.classList.contains('loading') &&
-							target.classList.replace('loading', 'loaded');
+						target.dataset.state = 'loaded';
 					});
 					// Make current button active
-					event.currentTarget.classList.replace(
-						'edition-item__button--inactive',
-						'edition-item__button--active'
-					);
+					event.currentTarget.dataset.active = true;
 					button.setAttribute('aria-pressed', 'true');
 				} else {
 					// If pressed button is already active
 					// Make it inactive
-					event.currentTarget.classList.replace(
-						'edition-item__button--active',
-						'edition-item__button--inactive'
-					);
+					event.currentTarget.dataset.active = false;
 					button.setAttribute('aria-pressed', 'false');
-					// Toggle target loading state
-					target.classList.replace('loaded', 'unloading');
+					// Change target loading state
+					target.dataset.state = 'unloading';
 					// Wait half a second
 					await wait(500);
-					// Toggle target loading state
-					target.classList.replace('unloading', 'unloaded');
+					// Change target loading state
+					target.dataset.state = 'unloaded';
 					// Empty target container
 					target.innerHTML = '';
 				}

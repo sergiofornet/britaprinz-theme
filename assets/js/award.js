@@ -872,26 +872,26 @@
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  if (!event.currentTarget.classList.contains('edition-item__button--inactive')) {
+                  if (!(event.currentTarget.dataset.active === 'false')) {
                     _context.next = 8;
                     break;
                   }
 
-                  target.classList.contains('loaded') ? target.classList.replace('loaded', 'loading') : target.classList.replace('unloaded', 'loading'); // Search for an active button
+                  target.dataset.state = 'loading'; // Search for an active button
 
-                  if (document.querySelector('.edition-item__button--active')) {
+                  if (document.querySelector('.edition-item__button[data-active="true"]')) {
                     // Make active button inactive
-                    document.querySelector('.edition-item__button--active').classList.replace('edition-item__button--active', 'edition-item__button--inactive');
+                    document.querySelector('.edition-item__button[data-active="true"]').dataset.active = false;
                   } // Fetch AJAX data
 
 
                   asyncFetch("".concat(ajaxUrl, "/").concat(event.currentTarget.dataset.edition), options).then(function (jsonResponse) {
                     callback(jsonResponse, target, lang); // Toggle target loading state
 
-                    target.classList.contains('loading') && target.classList.replace('loading', 'loaded');
+                    target.dataset.state = 'loaded';
                   }); // Make current button active
 
-                  event.currentTarget.classList.replace('edition-item__button--inactive', 'edition-item__button--active');
+                  event.currentTarget.dataset.active = true;
                   button.setAttribute('aria-pressed', 'true');
                   _context.next = 15;
                   break;
@@ -899,17 +899,17 @@
                 case 8:
                   // If pressed button is already active
                   // Make it inactive
-                  event.currentTarget.classList.replace('edition-item__button--active', 'edition-item__button--inactive');
-                  button.setAttribute('aria-pressed', 'false'); // Toggle target loading state
+                  event.currentTarget.dataset.active = false;
+                  button.setAttribute('aria-pressed', 'false'); // Change target loading state
 
-                  target.classList.replace('loaded', 'unloading'); // Wait half a second
+                  target.dataset.state = 'unloading'; // Wait half a second
 
                   _context.next = 13;
                   return waait(500);
 
                 case 13:
-                  // Toggle target loading state
-                  target.classList.replace('unloading', 'unloaded'); // Empty target container
+                  // Change target loading state
+                  target.dataset.state = 'unloaded'; // Empty target container
 
                   target.innerHTML = '';
 
@@ -940,10 +940,17 @@
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              activeButton = document.querySelector('.edition-item__button--active');
+              // const activeButton = document.querySelector(
+              // 	'.edition-item__button--active'
+              // );
+              activeButton = document.querySelector('.edition-item__button[data-active="true"]');
 
               if (activeButton) {
-                activeButton.classList.replace('edition-item__button--active', 'edition-item__button--inactive');
+                // activeButton.classList.replace(
+                // 	'edition-item__button--active',
+                // 	'edition-item__button--inactive'
+                // );
+                activeButton.dataset.active = false;
                 activeButton.setAttribute('aria-pressed', 'false');
               }
 
@@ -951,14 +958,16 @@
                 button.setAttribute('aria-pressed', 'false');
               } else {
                 button.setAttribute('aria-pressed', 'true');
-              }
+              } // target.classList.replace('loaded', 'unloading');
 
-              target.classList.replace('loaded', 'unloading');
+
+              target.dataset.state = 'unloading';
               _context.next = 6;
               return waait(500);
 
             case 6:
-              target.classList.replace('unloading', 'unloaded');
+              // target.classList.replace('unloading', 'unloaded');
+              target.dataset.state = 'unloaded';
               target.innerHTML = '';
 
             case 8:
@@ -1107,7 +1116,7 @@
   var editionContainer = document.querySelector('.award-edition-container'); // Make first button active
 
   var buttons = document.querySelectorAll('.edition-item__button');
-  buttons[0].classList.replace('edition-item__button--inactive', 'edition-item__button--active'); // Handle return button
+  buttons[0].dataset.active = true; // Handle return button
 
   returnButton.addEventListener('click', function () {
     handleReturnButton(returnButton, editionContainer);

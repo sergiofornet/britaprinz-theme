@@ -18,10 +18,7 @@ const editionContainer = document.querySelector('.award-edition-container');
 
 // Make first button active
 const buttons = document.querySelectorAll('.edition-item__button');
-buttons[0].classList.replace(
-	'edition-item__button--inactive',
-	'edition-item__button--active'
-);
+buttons[0].dataset.active = true;
 
 // Handle return button
 returnButton.addEventListener(
