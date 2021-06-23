@@ -941,31 +941,27 @@
           switch (_context.prev = _context.next) {
             case 0:
               activeButton = document.querySelector('.edition-item__button--active');
-              console.log(activeButton);
 
               if (activeButton) {
                 activeButton.classList.replace('edition-item__button--active', 'edition-item__button--inactive');
                 activeButton.setAttribute('aria-pressed', 'false');
-                console.log('if 1');
               }
 
               if (button.getAttribute('aria-pressed') === 'true') {
                 button.setAttribute('aria-pressed', 'false');
-                console.log('if 2');
               } else {
                 button.setAttribute('aria-pressed', 'true');
-                console.log('else');
               }
 
               target.classList.replace('loaded', 'unloading');
-              _context.next = 7;
+              _context.next = 6;
               return waait(500);
 
-            case 7:
+            case 6:
               target.classList.replace('unloading', 'unloaded');
               target.innerHTML = '';
 
-            case 9:
+            case 8:
             case "end":
               return _context.stop();
           }
