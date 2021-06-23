@@ -24,6 +24,7 @@ function catalogueEditionHTML(payload, target, lang) {
 			catalogueEdition,
 			catalogueGallery,
 			lang,
+			id,
 		})
 	}
 	`;
@@ -49,7 +50,7 @@ function catalogueEditionHTML(payload, target, lang) {
 function catalogueHTML(payload) {
 	const html =
 		payload &&
-		`<article>
+		`<article id="post-${payload.id}>
 			<div class="entry-content">
 				<h1>
 					<p>${payload.lang === 'es' ? 'Catálogo' : 'Catalogue'}</p>
