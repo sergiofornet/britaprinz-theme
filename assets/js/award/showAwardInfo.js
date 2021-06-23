@@ -1,3 +1,4 @@
+import wait from 'waait';
 import { asyncFetch } from '../util/async-fetch';
 
 /**
@@ -17,17 +18,17 @@ function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 		button.setAttribute('aria-pressed', 'false');
 		button.addEventListener(
 			'click',
-			(event) => {
-				target.classList.contains('loaded')
-					? target.classList.replace('loaded', 'loading')
-					: target.classList.add('loading');
-				// Check if button is inactive
+			async (event) => {
+				// Check if presed button is inactive
 				if (
 					event.currentTarget.classList.contains(
 						'edition-item__button--inactive'
 					)
 				) {
-					// Search for active button
+					target.classList.contains('loaded')
+						? target.classList.replace('loaded', 'loading')
+						: target.classList.replace('unloaded', 'loading');
+					// Search for an active button
 					if (
 						document.querySelector('.edition-item__button--active')
 					) {
@@ -57,15 +58,20 @@ function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 					button.setAttribute('aria-pressed', 'true');
 				} else {
 					// If pressed button is already active
-					target.innerHTML = '';
-					// Toggle target loading state
-					target.classList.contains('loading') &&
-						target.classList.replace('loading', 'loaded');
+					// Make it inactive
 					event.currentTarget.classList.replace(
 						'edition-item__button--active',
 						'edition-item__button--inactive'
 					);
 					button.setAttribute('aria-pressed', 'false');
+					// Toggle target loading state
+					target.classList.replace('loaded', 'unloading');
+					// Wait half a second
+					await wait(500);
+					// Toggle target loading state
+					target.classList.replace('unloading', 'unloaded');
+					// Empty target container
+					target.innerHTML = '';
 				}
 			},
 			false
