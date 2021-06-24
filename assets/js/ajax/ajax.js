@@ -87,10 +87,11 @@ function initialsCallback(entries) {
  * @param {Event} event - The event which triggers the function
  * @param {Object} ajax - data object from PHP
  * @param {HTMLElement} target - HTML target element
+ * @param {string} currentLang - Language code
  * @param {Object} options - Request options object
  * @param {number} id - An optional artist id
  */
-const artistArtworks = (event, ajax, target, options, id = '') => {
+const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 	console.log(ajax);
 	let artist;
 	if (id) {
@@ -118,7 +119,7 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 	asyncFetch(artworksUrl, options)
 		.then((jsonResponse) => {
 			console.log(artworksUrl);
-			const html = artworksList(jsonResponse);
+			const html = artworksList(jsonResponse, currentLang);
 
 			target.insertAdjacentHTML('beforeend', html);
 
@@ -311,6 +312,7 @@ const filterArtists = (url, options, target, currentLang) => {
 										event,
 										ajax_var,
 										artworks,
+										currentLang,
 										fetchOptions
 									);
 									event.currentTarget.dataset.active = true;

@@ -900,11 +900,12 @@
     return _asyncFetch.apply(this, arguments);
   }
 
-  function artworksList(artworks) {
+  function artworksList(artworks, lang) {
+    console.log(lang);
     var html = '';
 
     if (_typeof_1(artworks) === 'object') {
-      html += '<ul class="artworks__list">';
+      html += "\n\t\t<ul class=\"artworks__list\">\n\t\t\t".concat(lang === "es" ? "<h2>Obras</h2>" : "<h2>Artworks</h2>");
       artworks.forEach(function (element) {
         var _element$artwork_tech = element.artwork_techniques,
             featuredTechniques = _element$artwork_tech.featured_techniques,
@@ -1018,13 +1019,14 @@
    * @param {Event} event - The event which triggers the function
    * @param {Object} ajax - data object from PHP
    * @param {HTMLElement} target - HTML target element
+   * @param {string} currentLang - Language code
    * @param {Object} options - Request options object
    * @param {number} id - An optional artist id
    */
 
 
-  var artistArtworks = function artistArtworks(event, ajax, target, options) {
-    var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+  var artistArtworks = function artistArtworks(event, ajax, target, currentLang, options) {
+    var id = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '';
     console.log(ajax);
     var artist;
 
@@ -1050,7 +1052,7 @@
 
     asyncFetch(artworksUrl, options).then(function (jsonResponse) {
       console.log(artworksUrl);
-      var html = artworksList(jsonResponse);
+      var html = artworksList(jsonResponse, currentLang);
       target.insertAdjacentHTML('beforeend', html);
       var artworkList = document.querySelectorAll('.artworks__list .artwork');
       var artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a'); // Toggles artwork info visibility
@@ -1202,7 +1204,7 @@
                           document.querySelector('.artist__button[data-active=true]').dataset.active = false;
                         }
 
-                        artistArtworks(event, ajax_var, artworks, fetchOptions);
+                        artistArtworks(event, ajax_var, artworks, currentLang, fetchOptions);
                         event.currentTarget.dataset.active = true;
                         collection.dataset.state = 'open';
                         _context2.next = 17;

@@ -1,7 +1,10 @@
-function artworksList(artworks) {
+function artworksList(artworks, lang) {
+	console.log(lang);
 	let html = '';
 	if (typeof artworks === 'object') {
-		html += '<ul class="artworks__list">';
+		html += `
+		<ul class="artworks__list">
+			${lang === `es` ? `<h2>Obras</h2>` : `<h2>Artworks</h2>`}`;
 		artworks.forEach((element) => {
 			const {
 				featured_techniques: featuredTechniques,
