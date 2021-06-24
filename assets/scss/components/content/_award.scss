@@ -1,0 +1,55 @@
+.page-template-page_catalogues,
+.post-type-archive-award {
+		overflow-x: hidden;
+}
+
+.award-container {
+	display: grid;
+	grid-template-columns: repeat(2, 50%);
+	background-color: white;
+	overflow-x: hidden;
+	overflow-y: visible;
+	padding: 0;
+	transition: var(--transition);
+	transform: translateX(0);
+	position: relative;
+	--secondary-nav-padding: calc(24rem / 16);
+
+	@media(min-width: 48em) {
+		& > * {
+			padding-block-start: 2em;
+			padding-block-end: 2em;
+		}
+		
+		
+		
+		.award-edition-container {
+			// padding-inline-end: var(--secondary-nav-padding);
+		}
+		
+	}
+
+	@media (min-width: 48em) and (max-width: 63.9375em) {
+		.award-menu-container {
+			padding-inline-start: var(--secondary-nav-padding);
+		}
+	}
+
+	@media(max-width: 63.9375em) {
+		width: 200%;
+	}
+	
+	&[data-state=loaded] {
+		@media (max-width: 63.9375em) {
+			transform: translateX(-50%);
+		}
+	}
+	.award-menu-container {
+		border-right: 2px solid var(--color-black);
+	}
+	
+	.award-edition-container {
+		padding: 1em;
+		border-left: 2px solid var(--color-black);
+	}
+}

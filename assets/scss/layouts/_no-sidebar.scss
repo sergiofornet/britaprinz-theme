@@ -29,8 +29,16 @@
 	}
 
 	.site-main--half {
-		display: grid;
-		grid-template-columns: repeat(2, calc(50% - var(--scrollbar-width) / 2));
+		background-color: white;
+		overflow-x: hidden;
+		overflow-y: visible;
+		padding: 0;
+		position: relative;
+
+		@media (min-width: 64em) {
+			margin: 0 2em;
+		}
+
 	}
 
 	.site-main--sidebar {

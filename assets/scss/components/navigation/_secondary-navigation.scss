@@ -48,18 +48,35 @@
 
 	@media(max-width: 47.9375em) {
 		:not(.post-type-archive-artwork) & {
+			--secondary-nav-padding: calc(24rem / 16);
 
-			.award-menu .menu-item--title {
-				padding-inline-start: 1em;
-				padding-inline-end: 1em;
-				padding-block-start: 1em;
-				padding-block-end: 1em;
-				
+			.menu-item--title {
 				& > span, & > a, & > h1 {
 					background-color: white;
-					margin-block-end: 1em;
 					position: relative;
 					z-index: 100;
+				}
+
+				& > ul.sub-menu {
+
+					& .current-menu-item {
+						@media (max-width: 63.9375em) {
+							font-weight: 700;
+						}
+					}
+				}
+			}
+
+			.award-menu {
+				.menu-item--title {
+					padding-inline-start: var(--secondary-nav-padding);
+					// padding-inline-end: 1em;
+					padding-block-start: var(--secondary-nav-padding);
+					// padding-block-end: 1em;
+					
+					& > span, & > a, & > h1 {
+						margin-block-end: 1em;
+					}
 				}
 			}
 
@@ -70,9 +87,6 @@
 					padding-inline-start: 1em;
 					padding-inline-end: 1em;
 					padding-block-start: 1em;
-					background-color: white;
-					position: relative;
-					z-index: 100;
 					cursor: pointer;
 				}
 				
