@@ -301,7 +301,7 @@ function britaprinz_artwork_info( $object, $field_name, $request ) {
  * @return string HTML content
  */
 function britaprinz_artist_bio( $object, $field_name, $request ) {
-	$bio = wpautop( get_term( $object['id'] )->description );
+	$bio = wpautop( carbon_get_term_meta( get_term( $object['id'] )->term_id, 'bp_artist_bio' ));
 	if ( $bio ) {
 		return $bio;
 	}
