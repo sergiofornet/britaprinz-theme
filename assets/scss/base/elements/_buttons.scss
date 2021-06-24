@@ -42,9 +42,6 @@ input[type="submit"] {
 		// Prevent hover state get stuck on touchscreens
 		// must review
 		@media(hover: hover) and (pointer: fine) {
-			&.active {
-				font-weight: 600;
-			}
 
 			&[data-active=true] {
 				font-weight: 600;
@@ -61,11 +58,11 @@ input[type="submit"] {
 				cursor: progress;
 			}
 
-			&.inactive:not([disabled]):hover {
+			&[data-active=false]:not([disabled]):hover {
 				transform: translateX(2em);
 			}
 			
-			&.active {
+			&[data-active=true] {
 				transform: translateX(calc(15vw - 50%));
 				&:hover {
 					transform: translateX(calc(15vw - 50%));

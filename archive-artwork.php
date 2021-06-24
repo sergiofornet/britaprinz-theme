@@ -14,7 +14,7 @@ get_header();
 
 		<?php if ( have_posts() ) : ?>
 
-			<div class="collection">
+			<div class="collection" data-state="closed">
 				<header class="page-header collection__header">
 					
 					<?php
@@ -59,7 +59,7 @@ get_header();
 
 					</div>
 				</div>
-				<div class="artworks collection__artworks">
+				<div class="artworks collection__artworks" data-state='unloaded'>
 				</div>
 			</div>
 			<div class="artwork-gallery hidden">

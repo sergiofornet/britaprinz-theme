@@ -29,7 +29,7 @@
 			}
 		}
 
-		&.active {
+		&[data-active=true] {
 			color: white;
 
 			&::after {

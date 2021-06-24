@@ -1,6 +1,7 @@
 import { asyncFetch } from '../util/async-fetch';
 import { artworksList } from './artworks-list';
 import { getHeight } from '../util/util';
+import wait from 'waait';
 
 const collectionHeader = document.querySelector('.collection__header');
 const collectionHeaderHeight = getHeight(collectionHeader);
@@ -72,9 +73,9 @@ function initialsCallback(entries) {
 		);
 		if (initial) {
 			if (initial && entry.intersectionRatio >= 0.5) {
-				initial.classList.add('active');
+				initial.dataset.active = true;
 			} else {
-				initial.classList.remove('active');
+				initial.dataset.active = false;
 			}
 		}
 	});
@@ -104,8 +105,7 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 
 	target.innerHTML = ''; // empty artworks container
 
-	target.classList.replace('loaded', 'loading') ||
-		target.classList.toggle('loading');
+	target.dataset.state = 'loading';
 
 	const collection = document.querySelector('.collection');
 	const artistsButtons = [...document.querySelectorAll('.artist__button')];
@@ -192,7 +192,7 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 				});
 			});
 		})
-		.then(() => target.classList.replace('loading', 'loaded'))
+		.then(() => (target.dataset.state = 'loaded'))
 		.then(() =>
 			artistsButtons.forEach((buttonToEnable) => {
 				buttonToEnable.removeAttribute('disabled');
@@ -219,9 +219,16 @@ const artistArtworks = (event, ajax, target, options, id = '') => {
 		target.insertAdjacentHTML('afterbegin', html);
 		// button event listener => go back
 		const returnButton = target.querySelector('.artworks__return');
-		returnButton.addEventListener('click', (event) =>
-			collection.classList.toggle('open')
-		);
+		returnButton.addEventListener('click', async (event) => {
+			collection.dataset.state = 'closed';
+			target.dataset.state = 'unloading';
+			document.querySelector(
+				'button.artist__button[data-active=true]'
+			).dataset.active = false;
+			await wait(500);
+			target.dataset.state = 'unloaded';
+			target.innerHTML = '';
+		});
 	});
 };
 
@@ -237,7 +244,7 @@ const filterArtists = (url, options, target, currentLang) => {
 	const fixedUrl = `${currentLang ? `${url}?lang=${currentLang}` : `${url}`}`;
 	console.log(fixedUrl);
 
-	target.classList.add('loading');
+	target.dataset.state = 'loading';
 	asyncFetch(fixedUrl, options)
 		.then((jsonResponse) => {
 			target.innerHTML = '';
@@ -277,48 +284,45 @@ const filterArtists = (url, options, target, currentLang) => {
 							const button = document.createElement('button');
 							button.dataset.artist = item.term_id;
 							button.classList.add('artist__button');
-							button.classList.add('inactive');
+							button.dataset.active = false;
 							button.insertAdjacentText(
 								'afterbegin',
 								item.name.replace('&amp;', '&')
 							);
 
 							// Display artist info and its artworks
-							button.addEventListener('click', (event) => {
+							button.addEventListener('click', async (event) => {
+								const collection =
+									document.querySelector('.collection');
 								if (
-									event.currentTarget.classList.contains(
-										'inactive'
-									)
+									event.currentTarget.dataset.active ===
+									'false'
 								) {
-									document.querySelector(
-										'.artist__button.active'
-									) &&
-										document
-											.querySelector(
-												'.artist__button.active'
-											)
-											.classList.replace(
-												'active',
-												'inactive'
-											);
+									if (
+										document.querySelector(
+											'.artist__button[data-active=true]'
+										)
+									) {
+										document.querySelector(
+											'.artist__button.[data-active=true]'
+										).dataset.active = false;
+									}
 									artistArtworks(
 										event,
 										ajax_var,
 										artworks,
 										fetchOptions
 									);
-									event.currentTarget.classList.replace(
-										'inactive',
-										'active'
-									);
-									const collection =
-										document.querySelector('.collection');
-									collection.classList.toggle('open');
+									event.currentTarget.dataset.active = true;
+									collection.dataset.state = 'open';
 								} else {
-									event.currentTarget.classList.replace(
-										'active',
-										'inactive'
-									);
+									console.log('else');
+									event.currentTarget.dataset.active = false;
+									collection.dataset.state = 'closing';
+									artworks.dataset.state = 'unloading';
+									await wait(500);
+									collection.dataset.state = 'closed';
+									artworks.dataset.state = 'unloaded';
 									artworks.innerHTML = '';
 								}
 							});
@@ -333,7 +337,7 @@ const filterArtists = (url, options, target, currentLang) => {
 				target.innerHTML = jsonResponse;
 			}
 		})
-		.then(() => target.classList.remove('loading'));
+		.then(() => (target.dataset.state = 'loaded'));
 };
 
 // Show artists on load
