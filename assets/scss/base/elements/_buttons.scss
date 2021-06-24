@@ -40,6 +40,10 @@ input[type="submit"] {
 		&.active {
 			font-weight: 600;
 		}
+
+		&[data-active=true] {
+			font-weight: 600;
+		}
 	}
 	
 	@media (min-width: 47.9375em) {
