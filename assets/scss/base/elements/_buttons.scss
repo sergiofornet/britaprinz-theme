@@ -39,12 +39,16 @@ input[type="submit"] {
 		transition: all .5s ease-in-out, font-weight .1s ease-in-out;
 		text-align: left;
 		
-		&.active {
-			font-weight: 600;
-		}
+		// Prevent hover state get stuck on touchscreens
+		// must review
+		@media(hover: hover) and (pointer: fine) {
+			&.active {
+				font-weight: 600;
+			}
 
-		&[data-active=true] {
-			font-weight: 600;
+			&[data-active=true] {
+				font-weight: 600;
+			}
 		}
 	}
 	
