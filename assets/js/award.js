@@ -796,6 +796,10 @@
 
   var regenerator = runtime_1;
 
+  const wait = (amount = 0) => new Promise(resolve => setTimeout(resolve, amount));
+
+  var waait = wait;
+
   function asyncFetch(_x, _x2) {
     return _asyncFetch.apply(this, arguments);
   }
@@ -846,10 +850,6 @@
     return options;
   }
 
-  const wait = (amount = 0) => new Promise(resolve => setTimeout(resolve, amount));
-
-  var waait = wait;
-
   /**
    * Outputs Award info.
    *
@@ -877,7 +877,7 @@
                   }
 
                   target.dataset.state = 'loading';
-                  target.parentElement.dataset.state = 'loading'; // Search for an active button
+                  target.parentElement.dataset.state = 'loaded'; // Search for an active button
 
                   if (document.querySelector('.edition-item__button[data-active="true"]')) {
                     // Make active button inactive
@@ -889,7 +889,6 @@
                     callback(jsonResponse, target, lang); // Toggle target loading state
 
                     target.dataset.state = 'loaded';
-                    target.parentElement.dataset.state = 'loaded';
                   }); // Make current button active
 
                   event.currentTarget.dataset.active = true;
@@ -1113,7 +1112,37 @@
 
   var buttons = document.querySelectorAll('.edition-item__button');
   buttons[0].dataset.active = true;
-  buttons[0].setAttribute('aria-pressed', 'true'); // Handle return button
+  buttons[0].setAttribute('aria-pressed', 'true'); // Animate first load
+
+  var awardContainer = document.querySelector('.award-container');
+
+  function fakeButtonPress() {
+    return _fakeButtonPress.apply(this, arguments);
+  }
+
+  function _fakeButtonPress() {
+    _fakeButtonPress = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee() {
+      return regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return waait(1500);
+
+            case 2:
+              awardContainer.dataset.state = 'loaded';
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+    return _fakeButtonPress.apply(this, arguments);
+  }
+
+  document.addEventListener('DOMContentLoaded', fakeButtonPress, false); // Handle return button
 
   returnButton.addEventListener('click', function () {
     handleReturnButton(returnButton, editionContainer);

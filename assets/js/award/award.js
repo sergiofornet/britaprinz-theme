@@ -1,3 +1,4 @@
+import wait from 'waait';
 import { asyncFetchOptions } from '../util/async-fetch';
 import { showAwardInfo } from './showAwardInfo';
 import { awardEditionHTML } from './awardEditionHTML';
@@ -20,6 +21,14 @@ const editionContainer = document.querySelector('.award-edition-container');
 const buttons = document.querySelectorAll('.edition-item__button');
 buttons[0].dataset.active = true;
 buttons[0].setAttribute('aria-pressed', 'true');
+
+// Animate first load
+const awardContainer = document.querySelector('.award-container');
+async function fakeButtonPress() {
+	await wait(1500);
+	awardContainer.dataset.state = 'loaded';
+}
+document.addEventListener('DOMContentLoaded', fakeButtonPress, false);
 
 // Handle return button
 returnButton.addEventListener(
