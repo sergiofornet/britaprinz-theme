@@ -873,11 +873,12 @@
               switch (_context.prev = _context.next) {
                 case 0:
                   if (!(event.currentTarget.dataset.active === 'false')) {
-                    _context.next = 8;
+                    _context.next = 9;
                     break;
                   }
 
-                  target.dataset.state = 'loading'; // Search for an active button
+                  target.dataset.state = 'loading';
+                  target.parentElement.dataset.state = 'loading'; // Search for an active button
 
                   if (document.querySelector('.edition-item__button[data-active="true"]')) {
                     // Make active button inactive
@@ -889,31 +890,34 @@
                     callback(jsonResponse, target, lang); // Toggle target loading state
 
                     target.dataset.state = 'loaded';
+                    target.parentElement.dataset.state = 'loaded';
                   }); // Make current button active
 
                   event.currentTarget.dataset.active = true;
                   button.setAttribute('aria-pressed', 'true');
-                  _context.next = 15;
+                  _context.next = 18;
                   break;
 
-                case 8:
+                case 9:
                   // If pressed button is already active
                   // Make it inactive
                   event.currentTarget.dataset.active = false;
                   button.setAttribute('aria-pressed', 'false'); // Change target loading state
 
-                  target.dataset.state = 'unloading'; // Wait half a second
+                  target.dataset.state = 'unloading';
+                  target.parentElement.dataset.state = 'unloading'; // Wait half a second
 
-                  _context.next = 13;
+                  _context.next = 15;
                   return waait(500);
 
-                case 13:
+                case 15:
                   // Change target loading state
-                  target.dataset.state = 'unloaded'; // Empty target container
+                  target.dataset.state = 'unloaded';
+                  target.parentElement.dataset.state = 'unloaded'; // Empty target container
 
                   target.innerHTML = '';
 
-                case 15:
+                case 18:
                 case "end":
                   return _context.stop();
               }
@@ -954,14 +958,16 @@
               }
 
               target.dataset.state = 'unloading';
-              _context.next = 6;
+              target.parentElement.dataset.state = 'unloading';
+              _context.next = 7;
               return waait(500);
 
-            case 6:
+            case 7:
               target.dataset.state = 'unloaded';
+              target.parentElement.dataset.state = 'unloaded';
               target.innerHTML = '';
 
-            case 8:
+            case 10:
             case "end":
               return _context.stop();
           }

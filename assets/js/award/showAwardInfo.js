@@ -22,6 +22,7 @@ function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 				// Check if presed button is inactive
 				if (event.currentTarget.dataset.active === 'false') {
 					target.dataset.state = 'loading';
+					target.parentElement.dataset.state = 'loading';
 					// Search for an active button
 					if (
 						document.querySelector(
@@ -41,6 +42,7 @@ function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 						callback(jsonResponse, target, lang);
 						// Toggle target loading state
 						target.dataset.state = 'loaded';
+						target.parentElement.dataset.state = 'loaded';
 					});
 					// Make current button active
 					event.currentTarget.dataset.active = true;
@@ -52,10 +54,12 @@ function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 					button.setAttribute('aria-pressed', 'false');
 					// Change target loading state
 					target.dataset.state = 'unloading';
+					target.parentElement.dataset.state = 'unloading';
 					// Wait half a second
 					await wait(500);
 					// Change target loading state
 					target.dataset.state = 'unloaded';
+					target.parentElement.dataset.state = 'unloaded';
 					// Empty target container
 					target.innerHTML = '';
 				}
