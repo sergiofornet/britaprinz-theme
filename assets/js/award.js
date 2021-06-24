@@ -865,7 +865,6 @@
   function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
     var awardHtml = '';
     triggers.forEach(function (button) {
-      button.setAttribute('aria-pressed', 'false');
       button.addEventListener('click', /*#__PURE__*/function () {
         var _ref = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(event) {
           return regenerator.wrap(function _callee$(_context) {
@@ -1113,7 +1112,8 @@
   var editionContainer = document.querySelector('.award-edition-container'); // Make first button active
 
   var buttons = document.querySelectorAll('.edition-item__button');
-  buttons[0].dataset.active = true; // Handle return button
+  buttons[0].dataset.active = true;
+  buttons[0].setAttribute('aria-pressed', 'true'); // Handle return button
 
   returnButton.addEventListener('click', function () {
     handleReturnButton(returnButton, editionContainer);

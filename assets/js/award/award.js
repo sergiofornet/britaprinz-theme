@@ -19,6 +19,7 @@ const editionContainer = document.querySelector('.award-edition-container');
 // Make first button active
 const buttons = document.querySelectorAll('.edition-item__button');
 buttons[0].dataset.active = true;
+buttons[0].setAttribute('aria-pressed', 'true');
 
 // Handle return button
 returnButton.addEventListener(

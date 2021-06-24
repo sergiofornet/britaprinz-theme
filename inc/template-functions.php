@@ -258,7 +258,7 @@ function britaprinz_theme_get_winners() {
 		$edition_id      = esc_html( get_the_ID() );
 		$edition_item    = "
 		<li id='winners-item-{$edition_id}' class='edition-item edition-item--{$edition_id}'>
-			<button class='edition-item__button' data-edition='{$edition_id}' data-active='false'>{$edition}</button>
+			<button class='edition-item__button' data-edition='{$edition_id}' data-active='false' aria-pressed='false'>{$edition}</button>
 		</li>";
 		$winners_output .= $edition_item;
 		

@@ -15,7 +15,6 @@ import { asyncFetch } from '../util/async-fetch';
 function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 	const awardHtml = '';
 	triggers.forEach((button) => {
-		button.setAttribute('aria-pressed', 'false');
 		button.addEventListener(
 			'click',
 			async (event) => {
