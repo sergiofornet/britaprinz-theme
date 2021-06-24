@@ -1199,7 +1199,7 @@
                         }
 
                         if (document.querySelector('.artist__button[data-active=true]')) {
-                          document.querySelector('.artist__button.[data-active=true]').dataset.active = false;
+                          document.querySelector('.artist__button[data-active=true]').dataset.active = false;
                         }
 
                         artistArtworks(event, ajax_var, artworks, fetchOptions);

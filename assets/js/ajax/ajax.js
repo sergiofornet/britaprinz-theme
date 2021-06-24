@@ -304,7 +304,7 @@ const filterArtists = (url, options, target, currentLang) => {
 										)
 									) {
 										document.querySelector(
-											'.artist__button.[data-active=true]'
+											'.artist__button[data-active=true]'
 										).dataset.active = false;
 									}
 									artistArtworks(
