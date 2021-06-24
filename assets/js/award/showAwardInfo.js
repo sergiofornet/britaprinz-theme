@@ -21,7 +21,7 @@ function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 				// Check if presed button is inactive
 				if (event.currentTarget.dataset.active === 'false') {
 					target.dataset.state = 'loading';
-					target.parentElement.dataset.state = 'loading';
+					target.parentElement.dataset.state = 'loaded';
 					// Search for an active button
 					if (
 						document.querySelector(
@@ -41,7 +41,6 @@ function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
 						callback(jsonResponse, target, lang);
 						// Toggle target loading state
 						target.dataset.state = 'loaded';
-						target.parentElement.dataset.state = 'loaded';
 					});
 					// Make current button active
 					event.currentTarget.dataset.active = true;
