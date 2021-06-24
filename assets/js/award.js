@@ -940,16 +940,9 @@
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              // const activeButton = document.querySelector(
-              // 	'.edition-item__button--active'
-              // );
               activeButton = document.querySelector('.edition-item__button[data-active="true"]');
 
               if (activeButton) {
-                // activeButton.classList.replace(
-                // 	'edition-item__button--active',
-                // 	'edition-item__button--inactive'
-                // );
                 activeButton.dataset.active = false;
                 activeButton.setAttribute('aria-pressed', 'false');
               }
@@ -958,15 +951,13 @@
                 button.setAttribute('aria-pressed', 'false');
               } else {
                 button.setAttribute('aria-pressed', 'true');
-              } // target.classList.replace('loaded', 'unloading');
-
+              }
 
               target.dataset.state = 'unloading';
               _context.next = 6;
               return waait(500);
 
             case 6:
-              // target.classList.replace('unloading', 'unloaded');
               target.dataset.state = 'unloaded';
               target.innerHTML = '';
 

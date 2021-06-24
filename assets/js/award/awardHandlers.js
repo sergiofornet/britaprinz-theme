@@ -1,17 +1,10 @@
 import wait from 'waait';
 
 async function handleReturnButton(button, target) {
-	// const activeButton = document.querySelector(
-	// 	'.edition-item__button--active'
-	// );
 	const activeButton = document.querySelector(
 		'.edition-item__button[data-active="true"]'
 	);
 	if (activeButton) {
-		// activeButton.classList.replace(
-		// 	'edition-item__button--active',
-		// 	'edition-item__button--inactive'
-		// );
 		activeButton.dataset.active = false;
 		activeButton.setAttribute('aria-pressed', 'false');
 	}
@@ -20,10 +13,8 @@ async function handleReturnButton(button, target) {
 	} else {
 		button.setAttribute('aria-pressed', 'true');
 	}
-	// target.classList.replace('loaded', 'unloading');
 	target.dataset.state = 'unloading';
 	await wait(500);
-	// target.classList.replace('unloading', 'unloaded');
 	target.dataset.state = 'unloaded';
 	target.innerHTML = '';
 }
