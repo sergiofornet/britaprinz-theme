@@ -4,7 +4,8 @@
 	right: 0;
 	height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
 	margin: 0.2em 0;
-	margin-right: calc(var(--scrollbar-width, 0px) + .3em);
+	/* 🤷‍♂️ */
+	margin-right: unquote("min(max(.9vw, .7em), 1em)");
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
