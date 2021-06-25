@@ -3,12 +3,15 @@ import { artworksList } from './artworks-list';
 import { getHeight } from '../util/util';
 import wait from 'waait';
 
-const collectionHeader = document.querySelector('.collection__header');
-const collectionHeaderHeight = getHeight(collectionHeader);
-document.documentElement.style.setProperty(
-	'--collection-header-height',
-	`${collectionHeaderHeight}px`
-);
+function setCollectionHeaderHeight() {
+	const collectionHeader = document.querySelector('.collection__header');
+	document.documentElement.style.setProperty(
+		'--collection-header-height',
+		`${getHeight(collectionHeader)}px`
+	);
+}
+setCollectionHeaderHeight();
+window.addEventListener('resize', setCollectionHeaderHeight);
 
 const { nonce } = ajax_var;
 const { lang, searchUrl, artistId } = ajax_var;

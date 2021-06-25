@@ -946,9 +946,13 @@
 
   var waait = wait;
 
-  var collectionHeader = document.querySelector('.collection__header');
-  var collectionHeaderHeight = getHeight(collectionHeader);
-  document.documentElement.style.setProperty('--collection-header-height', "".concat(collectionHeaderHeight, "px"));
+  function setCollectionHeaderHeight() {
+    var collectionHeader = document.querySelector('.collection__header');
+    document.documentElement.style.setProperty('--collection-header-height', "".concat(getHeight(collectionHeader), "px"));
+  }
+
+  setCollectionHeaderHeight();
+  window.addEventListener('resize', setCollectionHeaderHeight);
   var _ajax_var = ajax_var,
       nonce = _ajax_var.nonce;
   var _ajax_var2 = ajax_var,
