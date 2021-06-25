@@ -199,9 +199,9 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:white;over
 .home article.page .circle-container .circle .circle__item a{color:var(--color-white);text-align:center;text-decoration:none}
 .home article.page .circle-container .circle .circle__item a:hover{text-decoration:underline}
 .page-template-page_catalogues,.post-type-archive-award{overflow-x:hidden}
-.award-container{max-height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));overflow-y:hidden;overflow-x:hidden;display:grid;grid-template-columns:repeat(2,50%);background-color:white;padding:0;-webkit-transition:var(--transition-default);transition:var(--transition-default);-webkit-transform:translateX(0);transform:translateX(0);position:relative;--secondary-nav-padding:calc(24rem / 16)}
-.award-container .award-menu-container{border-right:2px solid var(--color-black);overflow-y:auto;overflow-x:hidden;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px))}
-.award-container .award-edition-container{padding:1em;overflow-y:auto;overflow-x:hidden;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));border-left:2px solid var(--color-black)}
+.award-container{overflow-x:hidden;display:grid;grid-template-columns:repeat(2,50%);background-color:white;padding:0;-webkit-transition:var(--transition-default);transition:var(--transition-default);-webkit-transform:translateX(0);transform:translateX(0);position:relative;--secondary-nav-padding:calc(24rem / 16)}
+.award-container .award-menu-container{border-right:2px solid var(--color-black);overflow-x:hidden}
+.award-container .award-edition-container{padding:1em;overflow-x:hidden;border-left:2px solid var(--color-black)}
 .technique-content__steps{--technique-gap:1em;display:grid}
 .technique-content__steps .step{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:center;-ms-flex-align:center;align-items:center;gap:calc(var(--technique-gap) / 2);margin:0;counter-increment:figcaption}
 .technique-content__steps .step figcaption{margin-top:auto;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;display:list-item;list-style-position:inside;list-style-type:decimal;max-width:300px}
@@ -315,8 +315,11 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .main-navigation ul.menu>li.menu-item--title>a,.main-navigation ul.menu>li.menu-item--title>span{max-width:40%;margin-bottom:1em}
 .collection[data-state=open]{-webkit-transform:translateX(-50%);transform:translateX(-50%)}
 .collection{width:200%;grid-template-columns:repeat(2,50%)}
+.award-container{max-height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));overflow-y:hidden}
 .award-container{width:200%}
 .award-container[data-state=loaded]{-webkit-transform:translateX(-50%);transform:translateX(-50%)}
+.award-container .award-menu-container{overflow-y:auto;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px))}
+.award-container .award-edition-container{overflow-y:auto;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px))}
 }@media(max-width:59.9375em){.technique-content__steps{grid-template-columns:1fr;gap:calc(var(--technique-gap) * 2)}
 }@media(max-width:48em){.artists__initials .initial__button{font-size:12px}
 }@media(max-width:47.9375em){.no-sidebar .site{--site-padding-inline:20px}
