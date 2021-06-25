@@ -74,38 +74,8 @@ body.post-type-archive-artwork {
 			}
 		}
 		
-
-		.artists__initials {
-			position: absolute;
-			top: 0;
-			right: 0;
-			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
-			margin: 0.2em 0;
-			margin-right: calc(var(--scrollbar-width) + 1em);
-			display: flex;
-			flex-flow: column nowrap;
-			align-items: center;
-			line-height: 1;
-			
-			@media (max-height: 37.9375em) {
-				justify-content: space-between;
-			}
-			
-			@media (min-height: 38em) {
-				justify-content: space-evenly;
-			}
-			
-			.initial button {
-				text-transform: uppercase;
-				@media (max-width: 48em) {
-					font-size: 12px;
-
-				}
-
-			}
-		}
-		
 	}
+	
 	.collection__artworks {
 		padding: 1em;
 		border-left: 2px solid var(--color-black);

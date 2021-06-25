@@ -179,8 +179,6 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:white;over
 .collection .collection__artists{grid-column:1 / 2;grid-row:2 / 3;position:relative;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));border-right:2px solid var(--color-black)}
 .collection .collection__artists .artists__list{height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));overflow-y:auto;-ms-overflow-style:none;scrollbar-width:none}
 .collection .collection__artists .artists__list::-webkit-scrollbar{display:none}
-.collection .collection__artists .artists__initials{position:absolute;top:0;right:0;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));margin:.2em 0;margin-right:calc(var(--scrollbar-width) + 1em);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;line-height:1}
-.collection .collection__artists .artists__initials .initial button{text-transform:uppercase}
 .collection .collection__artworks{padding:1em;border-left:2px solid var(--color-black);grid-column:2 / 3;grid-row:1 / 3;overflow-y:auto;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));-webkit-transition:all .5s ease-in-out;transition:all .5s ease-in-out;background-color:white;position:relative}
 .collection .collection__artworks::before{content:"";position:absolute;top:0;left:0;right:0;width:0;height:100%;background-color:var(--color-black);-webkit-transition:width .5s ease-in-out,background-color .5s ease-in-out;transition:width .5s ease-in-out,background-color .5s ease-in-out;z-index:999}
 .collection .collection__artworks[data-state=loading]::before,.collection .collection__artworks[data-state=unloading]::before{width:100%;background-color:var(--color-white);left:0;right:unset}
@@ -234,9 +232,10 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:white;over
 .artwork-gallery.hidden{display:none}
 .artwork-gallery .artwork-gallery__close{position:absolute;top:0;right:0}
 .admin-bar .artwork-gallery{top:32px;height:calc(100% - 32px)}
-.artists__initials .initial__button{color:black;padding:0;background:0;border:0;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;position:relative;line-height:1}
+.artists__initials{position:absolute;top:0;right:0;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));margin:.2em 0;margin-right:calc(var(--scrollbar-width, 0px) + .3em);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;line-height:1}
+.artists__initials .initial__button{color:black;padding:0;background:0;border:0;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;position:relative;line-height:1;width:1em;height:1em;text-transform:uppercase}
 .artists__initials .initial__button::after{content:"";position:absolute;background-color:transparent;width:1.5em;height:1.5em;top:calc(50% - .75em);left:calc(50% - .75em);border-radius:50%;z-index:-1}
-.artists__initials .initial__button:hover{color:white}
+.artists__initials .initial__button:hover{color:white;font-weight:500}
 .artists__initials .initial__button:hover::after{background-color:black}
 .artists__initials .initial__button[data-active=true]{color:white}
 .artists__initials .initial__button[data-active=true]::after{background-color:black}
@@ -308,7 +307,7 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .technique-content__steps .step:nth-child(3){grid-row:2 / 3;grid-column:1 / 3}
 .technique-content__steps .step:nth-child(4){grid-row:2 / 3;grid-column:3 / 5}
 .technique-content__steps .step:nth-child(5){grid-row:2 / 3;grid-column:5 / 7}
-}@media(min-height:38em){.collection .collection__artists .artists__initials{-webkit-box-pack:space-evenly;-ms-flex-pack:space-evenly;justify-content:space-evenly}
+}@media(min-height:38em){.artists__initials{-webkit-box-pack:space-evenly;-ms-flex-pack:space-evenly;justify-content:space-evenly}
 }@media(max-width:63.9375em){.main-navigation ul.menu>li.menu-item--title{margin-bottom:2em}
 .no-scroll .main-navigation{overflow-y:scroll;overflow-x:hidden}
 .main-navigation .nav-menu>li.menu-item--title:last-child{border-bottom:1px solid var(--color-black)}
@@ -319,7 +318,7 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .award-container{width:200%}
 .award-container[data-state=loaded]{-webkit-transform:translateX(-50%);transform:translateX(-50%)}
 }@media(max-width:59.9375em){.technique-content__steps{grid-template-columns:1fr;gap:calc(var(--technique-gap) * 2)}
-}@media(max-width:48em){.collection .collection__artists .artists__initials .initial button{font-size:12px}
+}@media(max-width:48em){.artists__initials .initial__button{font-size:12px}
 }@media(max-width:47.9375em){.no-sidebar .site{--site-padding-inline:20px}
 .no-sidebar .site-main--sidebar .secondary-navigation{-webkit-padding-after:1em;padding-block-end:1em}
 .no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-start:1em;padding-inline-start:1em;-webkit-padding-end:1em;padding-inline-end:1em;-webkit-padding-before:1em;padding-block-start:1em}
@@ -358,5 +357,5 @@ ul.menu ul li{font-size:calc(14rem / 16);-webkit-margin-after:1.5em;margin-block
 }@media(orientation:landscape) and (max-width:29.9375em){.home article.page{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .home article.page .circle{--circle-diameter:40vh}
 }@media(orientation:landscape) and (max-height:48em){.main-navigation{-webkit-transform:translateY(-500%);transform:translateY(-500%)}
-}@media(max-height:37.9375em){.collection .collection__artists .artists__initials{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}
+}@media(max-height:37.9375em){.artists__initials{-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between}
 }
