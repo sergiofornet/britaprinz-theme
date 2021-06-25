@@ -4,11 +4,12 @@
 }
 
 .award-container {
+	max-height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
+	overflow-y: hidden;
+	overflow-x: visible;
 	display: grid;
 	grid-template-columns: repeat(2, 50%);
 	background-color: white;
-	overflow-x: hidden;
-	overflow-y: visible;
 	padding: 0;
 	transition: var(--transition);
 	transform: translateX(0);
@@ -46,10 +47,14 @@
 	}
 	.award-menu-container {
 		border-right: 2px solid var(--color-black);
+		overflow-y: auto;
+		height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
 	}
 	
 	.award-edition-container {
 		padding: 1em;
+		overflow-y: auto;
+		height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
 		border-left: 2px solid var(--color-black);
 	}
 }
