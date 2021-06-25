@@ -38,14 +38,9 @@ input[type="submit"] {
 		font-weight: 400;
 		transition: all .5s ease-in-out, font-weight .1s ease-in-out;
 		text-align: left;
-		
-		// Prevent hover state get stuck on touchscreens
-		// must review
-		@media(hover: hover) and (pointer: fine) {
 
-			&[data-active=true] {
-				font-weight: 600;
-			}
+		&[data-active=true] {
+			font-weight: 600;
 		}
 	}
 	
