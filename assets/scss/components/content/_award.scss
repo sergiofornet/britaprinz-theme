@@ -49,11 +49,14 @@
 		}
 	}
 	.award-menu-container {
-		border-right: 2px solid var(--color-black);
 		overflow-x: hidden;
 		@media (max-width: 63.9375em) {
+			border-right: 2px solid var(--color-black);
 			overflow-y: auto;
 			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
+		}
+		@media (min-width: 64em) {
+			border-right: 1px solid var(--color-black);
 		}
 	}
 	
@@ -61,9 +64,13 @@
 		padding: 1em;
 		overflow-x: hidden;
 		@media (max-width: 63.9375em) {
+			border-left: 2px solid var(--color-black);
 			overflow-y: auto;
 			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
 		}
-		border-left: 2px solid var(--color-black);
+		
+		@media (min-width: 64em) {
+			border-left: 1px solid var(--color-black);
+		}
 	}
 }
