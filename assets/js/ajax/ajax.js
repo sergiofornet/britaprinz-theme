@@ -112,6 +112,7 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 	target.dataset.state = 'loading';
 
 	const collection = document.querySelector('.collection');
+	collection.dataset.state = 'opening';
 	const artistsButtons = [...document.querySelectorAll('.artist__button')];
 
 	artistsButtons.forEach((buttonToDisable) => {
@@ -201,7 +202,15 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 			artistsButtons.forEach((buttonToEnable) => {
 				buttonToEnable.removeAttribute('disabled');
 			})
-		);
+		)
+		.then(() => {
+			if (id) {
+				document.querySelector(
+					`button[data-artist="${id}"]`
+				).dataset.active = true;
+				collection.dataset.state = 'open';
+			}
+		});
 
 	// Fetch artist info asynchronously
 	asyncFetch(artistUrl, options).then((jsonResponse) => {

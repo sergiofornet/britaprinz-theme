@@ -1047,6 +1047,7 @@
 
     target.dataset.state = 'loading';
     var collection = document.querySelector('.collection');
+    collection.dataset.state = 'opening';
 
     var artistsButtons = toConsumableArray(document.querySelectorAll('.artist__button'));
 
@@ -1099,6 +1100,11 @@
       return artistsButtons.forEach(function (buttonToEnable) {
         buttonToEnable.removeAttribute('disabled');
       });
+    }).then(function () {
+      if (id) {
+        document.querySelector("button[data-artist=\"".concat(id, "\"]")).dataset.active = true;
+        collection.dataset.state = 'open';
+      }
     }); // Fetch artist info asynchronously
 
     asyncFetch(artistUrl, options).then(function (jsonResponse) {
