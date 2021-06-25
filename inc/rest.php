@@ -189,7 +189,7 @@ add_action( 'rest_api_init', 'britaprinz_rest_fields' );
  * @return string HTML image element.
  */
 function britaprinz_artwork_image( $object, $field_name, $request ) {
-	$image = wp_get_attachment_image( $object['featured_media'], 'full' );
+	$image = wp_get_attachment_image( $object['featured_media'], 'artwork-thumbnail' );
 	return $image;
 }
 
