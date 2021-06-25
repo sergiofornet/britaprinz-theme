@@ -11,7 +11,7 @@
 	grid-template-columns: repeat(2, 50%);
 	background-color: white;
 	padding: 0;
-	transition: var(--transition);
+	transition: var(--transition-default);
 	transform: translateX(0);
 	position: relative;
 	--secondary-nav-padding: calc(24rem / 16);
