@@ -210,7 +210,7 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 			html = `
 				<button class="artworks__return"><</button>
 				<div class="artworks__artist">
-					<h2 class="artist__name">${name}</h2>
+					<h1 class="artist__name">${name}</h1>
 					${artistBio ? `<div class="artist__bio">${artistBio}</div>` : ''}
 				</div>
 				`;

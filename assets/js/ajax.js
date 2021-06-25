@@ -1104,7 +1104,7 @@
           artistBio = jsonResponse.artist_bio;
 
       if (_typeof_1(jsonResponse) === 'object') {
-        html = "\n\t\t\t\t<button class=\"artworks__return\"><</button>\n\t\t\t\t<div class=\"artworks__artist\">\n\t\t\t\t\t<h2 class=\"artist__name\">".concat(name, "</h2>\n\t\t\t\t\t").concat(artistBio ? "<div class=\"artist__bio\">".concat(artistBio, "</div>") : '', "\n\t\t\t\t</div>\n\t\t\t\t");
+        html = "\n\t\t\t\t<button class=\"artworks__return\"><</button>\n\t\t\t\t<div class=\"artworks__artist\">\n\t\t\t\t\t<h1 class=\"artist__name\">".concat(name, "</h1>\n\t\t\t\t\t").concat(artistBio ? "<div class=\"artist__bio\">".concat(artistBio, "</div>") : '', "\n\t\t\t\t</div>\n\t\t\t\t");
       } else {
         html = artist;
       }
