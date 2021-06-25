@@ -32,7 +32,7 @@
 							<p class="prize__artist"><?php echo esc_html( $prize['bp_award_artist'] ); ?></p>
 							<?php /** TODO: images */ ?>
 							<figure class="prize__image">
-								<?php echo wp_get_attachment_image( $prize['bp_award_image'], 'full' ); ?>
+								<?php echo wp_get_attachment_image( $prize['bp_award_image'], 'award-thumbnail' ); ?>
 							</figure>
 							<p class="prize__artwork"><?php echo esc_html( $prize['bp_award_title'] ); ?></p>
 							<p class="prize__technique"><?php echo esc_html( $prize['bp_award_technique'] ); ?></p>

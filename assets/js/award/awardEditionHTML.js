@@ -86,7 +86,7 @@ function prizesListHTML(payload) {
 			}">
 			<h2 class="prize__name">${prize.bp_award_category}</h2>
 			<p class="prize__artist">${prize.bp_award_artist}</p>
-			<figure class="prize__image">${prize.bp_award_image_rendered}</figure>
+			<figure class="prize__image">${prize.bp_award_image_thumbnail}</figure>
 			<p class="prize__artwork">${prize.bp_award_title}</p>
 			<p class="prize__technique">${prize.bp_award_technique}</p>
 			<p class="prize__size">${prize.bp_award_size}</p>

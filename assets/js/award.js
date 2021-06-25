@@ -1017,7 +1017,7 @@
 
     if (payload) {
       payload.forEach(function (prize, index) {
-        html += "\n\t\t<li id=\"prize-".concat(index + 1, "\" class=\"prize__category prize__category-").concat(index + 1, "\">\n\t\t\t<h2 class=\"prize__name\">").concat(prize.bp_award_category, "</h2>\n\t\t\t<p class=\"prize__artist\">").concat(prize.bp_award_artist, "</p>\n\t\t\t<figure class=\"prize__image\">").concat(prize.bp_award_image_rendered, "</figure>\n\t\t\t<p class=\"prize__artwork\">").concat(prize.bp_award_title, "</p>\n\t\t\t<p class=\"prize__technique\">").concat(prize.bp_award_technique, "</p>\n\t\t\t<p class=\"prize__size\">").concat(prize.bp_award_size, "</p>\n\t\t\t<p class=\"prize__year\">").concat(prize.bp_award_year, "</p>\n\t\t</li>\n\t\t");
+        html += "\n\t\t<li id=\"prize-".concat(index + 1, "\" class=\"prize__category prize__category-").concat(index + 1, "\">\n\t\t\t<h2 class=\"prize__name\">").concat(prize.bp_award_category, "</h2>\n\t\t\t<p class=\"prize__artist\">").concat(prize.bp_award_artist, "</p>\n\t\t\t<figure class=\"prize__image\">").concat(prize.bp_award_image_thumbnail, "</figure>\n\t\t\t<p class=\"prize__artwork\">").concat(prize.bp_award_title, "</p>\n\t\t\t<p class=\"prize__technique\">").concat(prize.bp_award_technique, "</p>\n\t\t\t<p class=\"prize__size\">").concat(prize.bp_award_size, "</p>\n\t\t\t<p class=\"prize__year\">").concat(prize.bp_award_year, "</p>\n\t\t</li>\n\t\t");
       });
     }
 
