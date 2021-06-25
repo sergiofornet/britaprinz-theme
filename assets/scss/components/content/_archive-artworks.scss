@@ -63,8 +63,9 @@ body.post-type-archive-artwork {
 		.artists__list {
 			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
 			overflow-y: auto;
+			overflow-x: hidden;
 			padding: 0.5rem 0.5rem calc(19rem / 16);
-
+			
 			// Hide scrollbar firefox / edge?
 			-ms-overflow-style: none;  /* IE and Edge */
 			scrollbar-width: none;
@@ -73,7 +74,7 @@ body.post-type-archive-artwork {
 			&::-webkit-scrollbar {
 				display: none;
 			}
-
+			
 			.artists-group {
 				margin-block-end: calc(19rem / 16);
 				text-transform: uppercase;
@@ -87,7 +88,7 @@ body.post-type-archive-artwork {
 					display: block;
 					width: 1em;
 				}
-
+				
 				.artist__button {
 					margin-block-end: calc(14rem / 16);
 					
@@ -106,11 +107,12 @@ body.post-type-archive-artwork {
 		grid-column: 2 / 3;
 		grid-row: 1 / 3;
 		overflow-y: auto;
+		overflow-x: hidden;
 		height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
 		transition: all .5s ease-in-out;
 		background-color: white;
 		position: relative;
-
+		
 		&::before {
 			content: "";
 			position: absolute;
@@ -131,7 +133,7 @@ body.post-type-archive-artwork {
 			left: 0;
 			right: unset;
 		}
-
+		
 		&[data-state=loaded]::before,
 		&[data-state=unloaded]::before {
 			width: 0%;
@@ -139,12 +141,12 @@ body.post-type-archive-artwork {
 			right: 0;
 			left: unset;
 		}
-
+		
 		.artworks__return {
 			position: absolute;
 			top: 0;
 			left: 0;
-
+			
 			@media(min-width: 63.9357em){
 				display: none;
 			}
