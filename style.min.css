@@ -177,8 +177,13 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:white;over
 .collection .collection__header{grid-column:1 / 2;grid-row:1 / 2;border-right:2px solid var(--color-black)}
 .collection input.collection__search{border-color:var(--color-black);border-width:2px 0 2px 2px;border-radius:0;width:100%}
 .collection .collection__artists{grid-column:1 / 2;grid-row:2 / 3;position:relative;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));border-right:2px solid var(--color-black)}
-.collection .collection__artists .artists__list{height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));overflow-y:auto;-ms-overflow-style:none;scrollbar-width:none}
+.collection .collection__artists .artists__list{height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));overflow-y:auto;padding:.5rem .5rem calc(19rem / 16);-ms-overflow-style:none;scrollbar-width:none}
 .collection .collection__artists .artists__list::-webkit-scrollbar{display:none}
+.collection .collection__artists .artists__list .artists-group{-webkit-margin-after:calc(19rem / 16);margin-block-end:calc(19rem / 16);text-transform:uppercase}
+.collection .collection__artists .artists__list .artists-group:last-of-type{-webkit-margin-after:0;margin-block-end:0}
+.collection .collection__artists .artists__list .artists-group span.artists-group__label{margin-bottom:calc(19rem / 16);display:block;width:1em}
+.collection .collection__artists .artists__list .artists-group .artist__button{-webkit-margin-after:calc(14rem / 16);margin-block-end:calc(14rem / 16)}
+.collection .collection__artists .artists__list .artists-group .artist__button:last-of-type{-webkit-margin-after:0;margin-block-end:0}
 .collection .collection__artworks{padding:1em;border-left:2px solid var(--color-black);grid-column:2 / 3;grid-row:1 / 3;overflow-y:auto;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));-webkit-transition:all .5s ease-in-out;transition:all .5s ease-in-out;background-color:white;position:relative}
 .collection .collection__artworks::before{content:"";position:absolute;top:0;left:0;right:0;width:0;height:100%;background-color:var(--color-black);-webkit-transition:width .5s ease-in-out,background-color .5s ease-in-out;transition:width .5s ease-in-out,background-color .5s ease-in-out;z-index:999}
 .collection .collection__artworks[data-state=loading]::before,.collection .collection__artworks[data-state=unloading]::before{width:100%;background-color:var(--color-white);left:0;right:unset}

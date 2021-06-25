@@ -63,6 +63,7 @@ body.post-type-archive-artwork {
 		.artists__list {
 			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
 			overflow-y: auto;
+			padding: 0.5rem 0.5rem calc(19rem / 16);
 
 			// Hide scrollbar firefox / edge?
 			-ms-overflow-style: none;  /* IE and Edge */
@@ -71,6 +72,29 @@ body.post-type-archive-artwork {
 			// hide scrollbar chrome/ opera / safari?
 			&::-webkit-scrollbar {
 				display: none;
+			}
+
+			.artists-group {
+				margin-block-end: calc(19rem / 16);
+				text-transform: uppercase;
+				
+				&:last-of-type {
+					margin-block-end: 0;
+				}
+				
+				span.artists-group__label {
+					margin-bottom: calc(19rem / 16);
+					display: block;
+					width: 1em;
+				}
+
+				.artist__button {
+					margin-block-end: calc(14rem / 16);
+					
+					&:last-of-type {
+						margin-block-end: 0;
+					}
+				}
 			}
 		}
 		
