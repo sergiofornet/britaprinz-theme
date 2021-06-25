@@ -349,7 +349,7 @@ const filterArtists = (url, options, target, currentLang) => {
 filterArtists(searchUrl, fetchOptions, artistsList, lang);
 
 if (artistId) {
-	artistArtworks(null, ajax_var, artworks, fetchOptions, artistId);
+	artistArtworks(null, ajax_var, artworks, lang, fetchOptions, artistId);
 }
 
 // Filter artists by input value
