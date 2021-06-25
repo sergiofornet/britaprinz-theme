@@ -14,7 +14,7 @@ body.post-type-archive-artwork {
 }
 
 .collection {
-	max-height: calc(100vh - var(--wp-admin-bar, 0px));
+	max-height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
 	overflow-y: hidden;
 	overflow-x: visible;
 	transform: translateX(0%);
@@ -57,11 +57,11 @@ body.post-type-archive-artwork {
 		grid-column: 1 / 2;
 		grid-row: 2 / 3;
 		position: relative;
-		height: calc(100vh - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
+		height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
 		border-right: 2px solid var(--color-black);
 		
 		.artists__list {
-			height: calc(100vh - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
+			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
 			overflow-y: auto;
 
 			// Hide scrollbar firefox / edge?
@@ -79,7 +79,7 @@ body.post-type-archive-artwork {
 			position: absolute;
 			top: 0;
 			right: 0;
-			height: calc(100vh - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
+			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));
 			margin: 0.2em 0;
 			margin-right: calc(var(--scrollbar-width) + 1em);
 			display: flex;
@@ -112,7 +112,7 @@ body.post-type-archive-artwork {
 		grid-column: 2 / 3;
 		grid-row: 1 / 3;
 		overflow-y: auto;
-		height: calc(100vh - var(--wp-admin-bar, 0px));
+		height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
 		transition: all .5s ease-in-out;
 		background-color: white;
 		position: relative;
