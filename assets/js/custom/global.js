@@ -19,6 +19,14 @@ function getSrollbarWidth() {
 	return scrollbarWidth;
 }
 
+/**
+ * Set a custom '1vh' value
+ */
+function handleVhValue() {
+	const vh = window.innerHeight * 0.01;
+	document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
 (function () {
 	const wpAdminBar = document.querySelector('#wpadminbar');
 	if (wpAdminBar) {
@@ -33,6 +41,9 @@ function getSrollbarWidth() {
 		'--scrollbar-width',
 		`${getSrollbarWidth()}px`
 	);
+
+	handleVhValue();
+	window.addEventListener('resize', handleVhValue);
 
 	// Toggle search form's visibility
 	// const searchButton = document.querySelector('.search-button');
