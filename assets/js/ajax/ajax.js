@@ -137,7 +137,9 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 			// Toggles artwork info visibility
 			artworkList.forEach((artwork) => {
 				const artworkInfo = artwork.querySelector('.artwork__info');
-				const artworkTitle = artwork.querySelector('.artwork__title');
+				const artworkTitle = artwork.querySelector(
+					'.artwork__title button'
+				);
 				artworkTitle.addEventListener('click', (artworkEvent) => {
 					artworkInfo.classList.toggle('visible');
 				});

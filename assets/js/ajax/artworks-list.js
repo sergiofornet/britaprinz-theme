@@ -13,7 +13,7 @@ function artworksList(artworks, lang) {
 			} = element.artwork_techniques;
 			html += `
 			<li class="artwork" key="artwork-${element.slug}">
-				<button class="artwork__title">${element.title.rendered}</button>
+				<h3 class="artwork__title"><button>${element.title.rendered}</button></h3>
 				<div class="artwork__info">
 					${
 						element.artwork_image_src

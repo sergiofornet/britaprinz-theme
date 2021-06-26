@@ -194,8 +194,8 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:white;over
 .collection .collection__artworks[data-state=loading]::before,.collection .collection__artworks[data-state=unloading]::before{width:100%;background-color:var(--color-white);left:0;right:unset}
 .collection .collection__artworks[data-state=loaded]::before,.collection .collection__artworks[data-state=unloaded]::before{width:0;background-color:var(--color-black);right:0;left:unset}
 .collection .collection__artworks .artworks__return{position:absolute;top:0;left:0}
-.artwork__title{border:0;background:initial;padding:0;color:black;cursor:pointer}
-.artwork__title:hover{text-decoration:underline}
+.artwork__title button{border:0;background:initial;padding:0;color:black;cursor:pointer}
+.artwork__title button:hover{text-decoration:underline}
 .artwork__info{display:none}
 .artwork__info.visible{display:block}
 .home .site-main--sidebar{-webkit-padding-start:0;padding-inline-start:0;-webkit-padding-end:0;padding-inline-end:0}
