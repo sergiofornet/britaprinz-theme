@@ -30,10 +30,10 @@
 		width: 1em;
 		height: 1em;
 		text-transform: uppercase;
-		@media (max-width: 47.9375em) {
-			font-size: 12px;
+		@media (orientation: portrait) and (max-height: 63.9375em) {
+			font-size: unquote("max(1.75vh, calc(12rem / 16))");
 		}
-		@media (min-width: 48em) {
+		@media (min-height: 64em) and (min-width: 48em) {
 			font-size: calc(18rem / 16);
 		}
 
