@@ -905,7 +905,7 @@
     var html = '';
 
     if (_typeof_1(artworks) === 'object') {
-      html += "\n\t\t<ul class=\"artworks__list\">\n\t\t\t".concat(lang === "es" ? "<h2>Obras</h2>" : "<h2>Artworks</h2>");
+      html += "\n\t\t".concat(lang === "es" ? "<h2>Obras</h2>" : "<h2>Artworks</h2>", "\n\t\t<ul class=\"artworks__list\">\n\t\t");
       artworks.forEach(function (element) {
         var _element$artwork_tech = element.artwork_techniques,
             featuredTechniques = _element$artwork_tech.featured_techniques,

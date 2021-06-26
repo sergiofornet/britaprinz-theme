@@ -3,8 +3,9 @@ function artworksList(artworks, lang) {
 	let html = '';
 	if (typeof artworks === 'object') {
 		html += `
+		${lang === `es` ? `<h2>Obras</h2>` : `<h2>Artworks</h2>`}
 		<ul class="artworks__list">
-			${lang === `es` ? `<h2>Obras</h2>` : `<h2>Artworks</h2>`}`;
+		`;
 		artworks.forEach((element) => {
 			const {
 				featured_techniques: featuredTechniques,
