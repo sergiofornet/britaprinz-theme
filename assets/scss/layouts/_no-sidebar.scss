@@ -44,13 +44,12 @@
 	.site-main--sidebar {
 		@media (max-width: 47.9375em) {
 			.secondary-navigation {
-				padding-block-end: 1em;
+				margin-block-end: 1em;
 			}
 			
 			& > article, & > div {
 				padding-inline-start: 1em;
 				padding-inline-end: 1em;
-				padding-block-start: 1em;
 			}
 		}
 		@media (min-width: 48em) {
@@ -62,6 +61,7 @@
 			}
 			
 			& > article, & > div {
+				padding-block-start: calc(20rem / 16);
 				padding-inline-start: 1em;
 
 			}

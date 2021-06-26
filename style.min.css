@@ -279,7 +279,7 @@ button.artist__button[data-active=true]:hover,input[type="button"].artist__butto
 .no-sidebar .site-main{padding:2em}
 .no-sidebar .site-main--sidebar{display:grid;grid-template-columns:calc(100% / 3 - var(--scrollbar-width) / 3) 1fr}
 .no-sidebar .site-main--sidebar .secondary-navigation{-webkit-padding-end:1em;padding-inline-end:1em}
-.no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-start:1em;padding-inline-start:1em}
+.no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-before:calc(20rem / 16);padding-block-start:calc(20rem / 16);-webkit-padding-start:1em;padding-inline-start:1em}
 ul.menu>li.menu-item--title>h1 :not(.post-type-archive-artwork),ul.menu>li.menu-item--title>a :not(.post-type-archive-artwork),ul.menu>li.menu-item--title>span :not(.post-type-archive-artwork){max-width:180px}
 body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>a,body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>h1,body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>span{display:block;margin-bottom:3em}
 .site-header{grid-template-columns:1fr 1fr auto;grid-template-rows:repeat(2,auto);-webkit-box-align:center;-ms-flex-align:center;align-items:center}
@@ -341,8 +341,8 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .award-container .award-edition-container{border-left:2px solid var(--color-black);overflow-y:auto;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px))}
 }@media(max-width:59.9375em){.technique-content__steps{grid-template-columns:1fr;gap:calc(var(--technique-gap) * 2)}
 }@media(max-width:47.9375em){.no-sidebar .site{--site-padding-inline:20px}
-.no-sidebar .site-main--sidebar .secondary-navigation{-webkit-padding-after:1em;padding-block-end:1em}
-.no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-start:1em;padding-inline-start:1em;-webkit-padding-end:1em;padding-inline-end:1em;-webkit-padding-before:1em;padding-block-start:1em}
+.no-sidebar .site-main--sidebar .secondary-navigation{-webkit-margin-after:1em;margin-block-end:1em}
+.no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-start:1em;padding-inline-start:1em;-webkit-padding-end:1em;padding-inline-end:1em}
 .secondary-navigation ul.sidebar-menu>li.menu-item--title{-webkit-padding-after:1em;padding-block-end:1em}
 :not(.post-type-archive-artwork) .secondary-navigation{--secondary-nav-padding:calc(24rem / 16)}
 :not(.post-type-archive-artwork) .secondary-navigation .menu-item--title>span,:not(.post-type-archive-artwork) .secondary-navigation .menu-item--title>a,:not(.post-type-archive-artwork) .secondary-navigation .menu-item--title>h1{background-color:white;position:relative;z-index:100}
