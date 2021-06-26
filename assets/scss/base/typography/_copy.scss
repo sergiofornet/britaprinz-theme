@@ -1,5 +1,8 @@
 p {
-	margin-bottom: 1.5em;
+	margin: calc(17rem / 16) 0;
+	line-height: 1.24;
+	letter-spacing: .01em;
+	font-size: var(--font-size-default);
 }
 
 dfn,
@@ -7,6 +10,10 @@ cite,
 em,
 i {
 	font-style: italic;
+}
+
+strong {
+	font-weight: 600;
 }
 
 blockquote {
