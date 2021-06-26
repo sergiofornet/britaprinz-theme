@@ -64,8 +64,13 @@ body,button,input,select,optgroup,textarea{color:var(--color-text-main);font-fam
 h1,h2,h3,h4,h5,h6{clear:both;text-transform:uppercase;font-weight:600;letter-spacing:.015em;line-height:1.24}
 h1{font-size:calc(18rem / 16);margin:0}
 .menu-item--title h1{margin:0;font-weight:inherit;font-size:inherit}
+.site-main--default h1{font-size:calc(36rem / 16)}
 h2{font-size:1rem;margin:calc(17rem / 16) 0}
+.site-main--default h2{font-size:calc(21rem / 16);position:relative;-webkit-margin-after:calc(37rem / 16);margin-block-end:calc(37rem / 16)}
+.site-main--default h2::after{content:"";position:absolute;bottom:-10px;left:0;width:31px;height:5px;background-color:var(--color-black)}
+.site-main--default p+h2{-webkit-margin-before:calc(37rem / 16);margin-block-start:calc(37rem / 16)}
 p{margin:calc(17rem / 16) 0;line-height:1.24;letter-spacing:.01em;font-size:var(--font-size-default)}
+.site-main--default p{font-size:calc(18rem / 16)}
 dfn,cite,em,i{font-style:italic}
 strong{font-weight:600}
 blockquote{margin:0 1.5em}

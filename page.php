@@ -17,7 +17,7 @@ get_header();
 $bpa_theme_sidebar = carbon_get_the_post_meta( 'bp_page_menu' ) === 'undefined' ? null : carbon_get_the_post_meta( 'bp_page_menu' );
 ?>
 
-	<main id="primary" class="site-main site-main<?php echo $bpa_theme_sidebar ? '--sidebar' : ''; ?>">
+	<main id="primary" class="site-main <?php echo $bpa_theme_sidebar ? 'site-main--sidebar' : 'site-main--default'; ?>">
 
 		<?php
 		while ( have_posts() ) :

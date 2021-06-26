@@ -20,9 +20,36 @@ h1 {
 		font-weight: inherit;
 		font-size: inherit;
 	}
+
+	.site-main--default & {
+		font-size: calc(36rem / 16);
+	}
 }
 
 h2 {
 	font-size: 1rem;
 	margin: calc(17rem / 16) 0;
+	
+	.site-main--default & {
+		font-size: calc(21rem / 16);
+		position: relative;
+		margin-block-end: calc(37rem / 16);
+
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: -10px;
+			left: 0;
+			width: 31px;
+			height: 5px;
+			background-color: var(--color-black);
+		}
+
+	}
+	
+	p + & {
+		.site-main--default & {
+			margin-block-start: calc(37rem / 16);
+		}
+	}
 }

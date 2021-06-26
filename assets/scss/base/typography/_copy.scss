@@ -3,6 +3,10 @@ p {
 	line-height: 1.24;
 	letter-spacing: .01em;
 	font-size: var(--font-size-default);
+
+	.site-main--default & {
+		font-size: calc(18rem / 16);
+	}
 }
 
 dfn,
