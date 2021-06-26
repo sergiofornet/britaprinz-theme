@@ -47,6 +47,7 @@
 			left: calc(50% - .75em);
 			border-radius: 50%;
 			z-index: -1;
+			transition: background-color .2s ease-in-out;
 		}
 
 		&:hover {
