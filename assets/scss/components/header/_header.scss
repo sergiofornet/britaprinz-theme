@@ -105,8 +105,11 @@
 .wpml-ls-legacy-list-horizontal {
 	border: initial;
 	padding: initial;
-	font-size: calc(18rem / 16);
 	font-weight: 600;
+	
+	ul {
+		font-size: calc(18rem / 16);
+	}
 	
 	@media (max-width: 47.9375em) {
 		grid-column: 1 / 2;
