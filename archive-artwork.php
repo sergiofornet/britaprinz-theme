@@ -21,8 +21,7 @@ get_header();
 					get_template_part( 'template-parts/nav/secondary', '', 'artwork-menu' );	
 					?>
 
-					<input type="search" class="artist-search
-					collection__search" autocomplete="off">
+					<input type="search" class="artist-search collection__search" autocomplete="off">
 				</header><!-- .page-header -->
 				<div class="artists collection__artists">
 					<div class="artists__list" style=""></div>
