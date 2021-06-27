@@ -47,14 +47,6 @@ get_header();
 
 			endwhile;
 
-			the_posts_navigation(
-				array(
-					'prev_text'          => __( 'Anterior', 'britaprinz-theme' ),
-					'next_text'          => __( 'Siguiente', 'britaprinz-theme' ),
-					'screen_reader_text' => __( 'Posts navigation', 'britaprinz-theme' )
-				)
-			);
-
 		else :
 
 			get_template_part( 'template-parts/content', 'none' );
@@ -64,6 +56,17 @@ get_header();
 		
 		</div>
 
+		<?php
+		add_filter( 'next_posts_link_attributes', 'bpa_theme_previous_posts_link_attributes' );
+		add_filter( 'previous_posts_link_attributes', 'bpa_theme_next_posts_link_attributes' );
+		the_posts_navigation(
+			array(
+				'prev_text'          => __( 'Anterior', 'britaprinz-theme' ),
+				'next_text'          => __( 'Siguiente', 'britaprinz-theme' ),
+				'screen_reader_text' => __( 'Posts navigation', 'britaprinz-theme' ),
+			)
+		);
+		?>
 
 	</main><!-- #main -->
 
