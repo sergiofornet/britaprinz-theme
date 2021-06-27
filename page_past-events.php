@@ -40,6 +40,8 @@ get_header();
 		endwhile; // End of the loop.
 		?>
 
+		<?php do_action( 'bpa_theme_events_navigation' ); ?>
+
 	</main><!-- #main -->
 
 <?php

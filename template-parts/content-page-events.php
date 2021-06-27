@@ -77,14 +77,34 @@
 			if ( $date_query->query_vars['paged'] ) :
 				?>
 
-				<nav>
+				<?php
+				add_action(
+					'bpa_theme_events_navigation',
+					function() use ( $date_query, $args ) {
+						?>
+						<nav class="posts-navigation">
 
-					<?php
-					next_posts_link( __( 'Anterior', 'britaprinz-theme' ), $date_query->max_num_pages );
-					previous_posts_link( __( 'Siguiente', 'britaprinz-theme' ) );
-					?>
+							<?php
+							if ( 'DESC' === $args['order'] ) {
+								add_filter( 'next_posts_link_attributes', 'bpa_theme_previous_posts_link_attributes' );
+								add_filter( 'previous_posts_link_attributes', 'bpa_theme_next_posts_link_attributes' );
+								next_posts_link( __( 'Anterior', 'britaprinz-theme' ), $date_query->max_num_pages );
+								previous_posts_link( __( 'Siguiente', 'britaprinz-theme' ) );
+							} else {
+								add_filter( 'next_posts_link_attributes', 'bpa_theme_next_posts_link_attributes' );
+								add_filter( 'previous_posts_link_attributes', 'bpa_theme_previous_posts_link_attributes' );
+								previous_posts_link( __( 'Anterior', 'britaprinz-theme' ) );
+								next_posts_link( __( 'Siguiente', 'britaprinz-theme' ), $date_query->max_num_pages );
+							}
+							?>
 
-				</nav>
+						</nav><!-- .events-navigation -->
+						<?php
+					}, 
+					10,
+					2
+				);
+				?>
 
 				<?php
 			endif;

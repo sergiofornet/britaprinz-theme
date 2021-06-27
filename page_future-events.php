@@ -23,6 +23,7 @@ get_header();
 				'post_type'   => 'event',
 				'order'       => 'ASC',
 				'orderby'     => 'start_date',
+				'paged'          => get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1,
 				'meta_query'  => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 					'start_date' => array(
 						'key'     => 'bp_event_start',
@@ -37,6 +38,8 @@ get_header();
 
 		endwhile; // End of the loop.
 		?>
+
+		<?php do_action( 'bpa_theme_events_navigation' ); ?>
 
 	</main><!-- #main -->
 

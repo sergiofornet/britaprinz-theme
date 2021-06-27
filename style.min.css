@@ -116,6 +116,15 @@ textarea{width:100%}
 .no-sidebar .site{-webkit-padding-start:var(--site-padding-inline,20px);padding-inline-start:var(--site-padding-inline,20px);-webkit-padding-end:var(--site-padding-inline,20px);padding-inline-end:var(--site-padding-inline,20px);max-width:calc(1235px + var(--site-padding-inline) * 2);margin:0 auto;position:relative;z-index:0}
 .no-sidebar .site-main{position:relative;z-index:100}
 .no-sidebar .site-main--half{background-color:white;overflow-x:hidden;overflow-y:visible;padding:0;position:relative}
+.no-sidebar .site-main--sidebar .posts-navigation{display:grid;grid-template-rows:1fr}
+.no-sidebar .site-main--sidebar .posts-navigation a{position:relative;-webkit-margin-after:1.5em;margin-block-end:1.5em}
+.no-sidebar .site-main--sidebar .posts-navigation a::after{content:"";position:absolute;bottom:-1.5em;width:59px;height:24px}
+.no-sidebar .site-main--sidebar .posts-navigation a.previous{-webkit-margin-end:2em;margin-inline-end:2em;-webkit-margin-start:2em;margin-inline-start:2em;grid-column:1 / 2}
+.no-sidebar .site-main--sidebar .posts-navigation a.previous::after{left:-2em;width:59px;height:24px;background-image:url("assets/img/icons/bpa_arrow.svg");background-repeat:no-repeat;-webkit-transform:translateX(0) rotate(180deg);transform:translateX(0) rotate(180deg);-webkit-transition:-webkit-transform .5s ease-in-out;transition:-webkit-transform .5s ease-in-out;transition:transform .5s ease-in-out;transition:transform .5s ease-in-out,-webkit-transform .5s ease-in-out}
+.no-sidebar .site-main--sidebar .posts-navigation a.previous:hover::after{-webkit-transform:translateX(-0.5em) rotate(180deg);transform:translateX(-0.5em) rotate(180deg)}
+.no-sidebar .site-main--sidebar .posts-navigation a.next{-webkit-margin-start:2em;margin-inline-start:2em;-webkit-margin-end:2em;margin-inline-end:2em;grid-column:2 / 3}
+.no-sidebar .site-main--sidebar .posts-navigation a.next::after{right:-2em;width:59px;height:24px;background-image:url("assets/img/icons/bpa_arrow.svg");background-repeat:no-repeat;-webkit-transform:translateX(0);transform:translateX(0);-webkit-transition:-webkit-transform .5s ease-in-out;transition:-webkit-transform .5s ease-in-out;transition:transform .5s ease-in-out;transition:transform .5s ease-in-out,-webkit-transform .5s ease-in-out}
+.no-sidebar .site-main--sidebar .posts-navigation a.next:hover::after{-webkit-transform:translateX(0.5em);transform:translateX(0.5em)}
 .no-sidebar .site-footer{position:relative;z-index:1}
 ul.menu{text-transform:uppercase;list-style:none;margin:0;padding-left:0}
 ul.menu>li.menu-item--title .sub-menu li{-webkit-transform:translateX(0);transform:translateX(0);-webkit-transition:-webkit-transform .2s ease-in-out;transition:-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out;transition:transform .2s ease-in-out,-webkit-transform .2s ease-in-out}
@@ -293,9 +302,12 @@ button.artist__button[data-active=true]:hover,input[type="button"].artist__butto
 }@media(max-width:47.9375em) and (min-width:64em){:not(.post-type-archive-artwork) .secondary-navigation:not(.award-menu) .menu-item--title>ul.sub-menu .current-menu-item{-webkit-margin-start:1em;margin-inline-start:1em}
 }@media(min-width:48em){.no-sidebar .site{--site-padding-inline:25px}
 .no-sidebar .site-main{padding:2em}
-.no-sidebar .site-main--sidebar{display:grid;grid-template-columns:calc(100% / 3 - var(--scrollbar-width) / 3) 1fr}
-.no-sidebar .site-main--sidebar .secondary-navigation{-webkit-padding-end:1em;padding-inline-end:1em}
-.no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-before:calc(20rem / 16);padding-block-start:calc(20rem / 16);-webkit-padding-start:1em;padding-inline-start:1em}
+.no-sidebar .site-main--sidebar{display:grid;grid-template-columns:calc(100% / 3 - var(--scrollbar-width) / 3) 1fr;grid-template-rows:auto auto}
+.no-sidebar .site-main--sidebar .secondary-navigation{-webkit-padding-end:1em;padding-inline-end:1em;grid-row:1 / 2;grid-column:1 / 2}
+.no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{grid-row:1 / 2;grid-column:2 / 3;-webkit-padding-before:calc(20rem / 16);padding-block-start:calc(20rem / 16);-webkit-padding-start:1em;padding-inline-start:1em}
+.no-sidebar .site-main--sidebar .posts-navigation{grid-column:1 / 3;grid-row:2 / 3;grid-template-columns:calc(100% / 3 - var(--scrollbar-width) / 3) 1fr}
+.no-sidebar .site-main--sidebar .posts-navigation a.previous{justify-self:end}
+.no-sidebar .site-main--sidebar .posts-navigation a.next{justify-self:start}
 ul.menu>li.menu-item--title>h1 :not(.post-type-archive-artwork),ul.menu>li.menu-item--title>a :not(.post-type-archive-artwork),ul.menu>li.menu-item--title>span :not(.post-type-archive-artwork){max-width:180px}
 body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>a,body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>h1,body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>span{display:block;margin-bottom:3em}
 .site-header{grid-template-columns:1fr 1fr auto;grid-template-rows:repeat(2,auto);-webkit-box-align:center;-ms-flex-align:center;align-items:center}
@@ -360,6 +372,8 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .no-sidebar .site-main--default{-webkit-margin-before:1em;margin-block-start:1em;-webkit-margin-after:1em;margin-block-end:1em}
 .no-sidebar .site-main--sidebar .secondary-navigation{-webkit-margin-after:1em;margin-block-end:1em}
 .no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-start:1em;padding-inline-start:1em;-webkit-padding-end:1em;padding-inline-end:1em}
+.no-sidebar .site-main--sidebar .posts-navigation a.previous{justify-self:start}
+.no-sidebar .site-main--sidebar .posts-navigation a.next{justify-self:end}
 .secondary-navigation ul.sidebar-menu>li.menu-item--title{-webkit-padding-after:1em;padding-block-end:1em}
 :not(.post-type-archive-artwork) .secondary-navigation{--secondary-nav-padding:calc(24rem / 16)}
 :not(.post-type-archive-artwork) .secondary-navigation .menu-item--title>span,:not(.post-type-archive-artwork) .secondary-navigation .menu-item--title>a,:not(.post-type-archive-artwork) .secondary-navigation .menu-item--title>h1{background-color:white;position:relative;z-index:100}

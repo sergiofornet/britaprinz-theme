@@ -332,3 +332,21 @@ function britaprinz_theme_archive_title( $title ) {
 	return $title;
 }
 add_filter( 'get_the_archive_title', 'britaprinz_theme_archive_title' );
+
+/**
+ * Add attributes to next posts links
+ * 
+ * @return string next posts link attributes  
+ */
+function bpa_theme_next_posts_link_attributes() {
+	return 'class="next"';
+}
+
+/**
+ * Add attributes to previous posts links
+ * 
+ * @return string previous posts link attributes  
+ */
+function bpa_theme_previous_posts_link_attributes() {
+	return 'class="previous"';
+}
