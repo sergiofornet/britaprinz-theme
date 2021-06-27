@@ -45,6 +45,12 @@ input[type="submit"] {
 		}
 	}
 	
+	&.edition-item__button {
+		&[data-active=true] {
+			transform: translateX(1em);
+		}
+	}
+	
 	@media (min-width: 47.9375em) {
 		
 		&.artist__button {
