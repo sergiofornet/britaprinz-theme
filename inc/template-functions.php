@@ -223,6 +223,16 @@ function britaprinz_modify_queries( $query ) {
 		);
 	}
 		
+	if ( is_post_type_archive( 'project' ) ) {
+		$query->set( 'order', 'ASC' );
+		$query->set( 'orderby', 'title' );
+		$query->set( 'posts_per_page', 2 );
+		$query->set(
+			'paged',
+			get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1,
+		);
+	}
+		
 	if ( is_post_type_archive( 'artwork' ) ) {
 		$query->set( 'order', 'ASC' );
 		$query->set( 'orderby', 'title' );
