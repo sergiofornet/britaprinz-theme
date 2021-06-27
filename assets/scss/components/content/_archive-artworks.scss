@@ -53,12 +53,29 @@ body.post-type-archive-artwork {
 		}
 	}
 
-	input.collection__search {
-		border-color: var(--color-black);
-		border-width: 2px 0 2px 2px;
-		border-radius: 0;
-		width: 100%;
+	.collection__search-container {
+		position: relative;
+
+		&::after {
+			content: "";
+			position: absolute;
+			top: 4px; 
+			left: 4px;
+			width: calc(2.5em);
+			height: calc(100% - 8px);
+			background-image: url("assets/img/icons/bpa_search.svg");
+			background-repeat: no-repeat;
+		}
+
+		input.collection__search {
+			border-color: var(--color-black);
+			border-width: 2px 0 2px 2px;
+			border-radius: 0;
+			width: 100%;
+			padding-left: calc(2.5em);
+		}
 	}
+
 
 	.collection__artists {
 		grid-column: 1 / 2;
