@@ -53,6 +53,7 @@
 		.posts-navigation {
 			display: grid;
 			grid-template-rows: 1fr;
+			font-size: var(--font-size-default);
 
 			a {
 				position: relative;
