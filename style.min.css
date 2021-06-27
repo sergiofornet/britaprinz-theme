@@ -230,6 +230,9 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:white;over
 .technique-content__steps .step figcaption{margin-top:auto;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;display:list-item;list-style-position:inside;list-style-type:decimal;max-width:300px}
 .technique-content__steps .step figcaption::marker{content:counter(figcaption) ". "}
 .technique-content__steps .step img{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:1;flex-shrink:1}
+.technique-content__related-artworks .related-artworks__toggle{border:0;position:relative;text-align:left;padding:0;-webkit-margin-end:2em;margin-inline-end:2em;-webkit-margin-after:1.5em;margin-block-end:1.5em;font-size:calc(21rem / 16);font-weight:500;text-transform:none}
+.technique-content__related-artworks .related-artworks__toggle::after{content:"";position:absolute;bottom:-1.5em;right:-2em;width:59px;height:24px;background-image:url("assets/img/icons/bpa_arrow.svg");background-repeat:no-repeat;-webkit-transform:translateX(0);transform:translateX(0);-webkit-transition:-webkit-transform .5s ease-in-out;transition:-webkit-transform .5s ease-in-out;transition:transform .5s ease-in-out;transition:transform .5s ease-in-out,-webkit-transform .5s ease-in-out}
+.technique-content__related-artworks .related-artworks__toggle:hover::after,.technique-content__related-artworks .related-artworks__toggle:focus::after,.technique-content__related-artworks .related-artworks__toggle:focus-visible::after{-webkit-transform:translateX(0.5em);transform:translateX(0.5em)}
 .comment-content a{word-wrap:break-word}
 .bypostauthor{display:block}
 .widget{margin:0 0 1.5em}

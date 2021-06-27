@@ -103,3 +103,37 @@
 		}
 	}
 }
+
+.technique-content__related-artworks {
+	
+	.related-artworks__toggle {
+		border: none;
+		position: relative;
+		text-align: left;
+		padding: 0;
+		margin-inline-end: 2em;
+		margin-block-end: 1.5em;
+		font-size: calc(21rem / 16);
+		font-weight: 500;
+		text-transform: none;
+		
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: -1.5em;
+			right: -2em;
+			width: 59px;
+			height: 24px;
+			background-image: url("assets/img/icons/bpa_arrow.svg");
+			background-repeat: no-repeat;
+			transform: translateX(0);
+			transition: transform .5s ease-in-out;
+		}
+	
+		&:hover::after,
+		&:focus::after,
+		&:focus-visible::after {
+			transform: translateX(0.5em);
+		}
+	}
+}
