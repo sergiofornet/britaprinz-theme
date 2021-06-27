@@ -43,7 +43,7 @@ $contact = carbon_get_theme_option( 'bp_theme_contact' );
 					?>
 
 					<div class="footer-links__link">
-						<a href="<?php esc_url( $footer_link['url'] ); ?>" title="<?php esc_html_e( $footer_link['title'], 'britaprinz-theme' ); ?>"><?php esc_html_e( $footer_link['title'], 'britaprinz-theme' ); ?></a>
+						<a href="<?php echo esc_url( $footer_link['url'] ); ?>" title="<?php echo esc_html__( $footer_link['title'], 'britaprinz-theme' ); ?>"><?php echo esc_html__( $footer_link['title'], 'britaprinz-theme' ); ?></a>
 					</div>
 
 					<?php
