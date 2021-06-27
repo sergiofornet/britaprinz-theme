@@ -148,7 +148,7 @@ ul.menu a:hover{text-decoration:underline}
 .main-navigation ul.menu{list-style:none;margin:0}
 .main-navigation ul.menu>li.menu-item--title{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column wrap;flex-flow:column wrap}
 .main-navigation ul.menu>li.menu-item--title .current-menu-item{font-weight:700}
-.main-navigation ul.menu>li.menu-item--title>a,.main-navigation ul.menu>li.menu-item--title>span{display:block}
+.main-navigation ul.menu>li.menu-item--title>a,.main-navigation ul.menu>li.menu-item--title>span{display:block;max-width:180px}
 .main-navigation ul.menu>li.menu-item--title .sub-menu li{-webkit-transform:translateX(0);transform:translateX(0);-webkit-transition:-webkit-transform .2s ease-in-out;transition:-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out;transition:transform .2s ease-in-out,-webkit-transform .2s ease-in-out}
 .main-navigation ul.menu>li.menu-item--title .sub-menu li:not(.current-menu-item):hover,.main-navigation ul.menu>li.menu-item--title .sub-menu li:not(.current-menu-item):focus{-webkit-transform:translateX(5%);transform:translateX(5%)}
 .main-navigation ul.menu a{display:block}
@@ -366,7 +366,7 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .no-scroll .main-navigation{overflow-y:scroll;overflow-x:hidden}
 .main-navigation .nav-menu>li.menu-item--title:last-child{border-bottom:1px solid var(--color-black)}
 .main-navigation ul.menu>li.menu-item--title{-webkit-box-align:left;-ms-flex-align:left;align-items:left}
-.main-navigation ul.menu>li.menu-item--title>a,.main-navigation ul.menu>li.menu-item--title>span{max-width:40%;margin-bottom:1em}
+.main-navigation ul.menu>li.menu-item--title>a,.main-navigation ul.menu>li.menu-item--title>span{margin-bottom:1em}
 .collection[data-state=open]{-webkit-transform:translateX(-50%);transform:translateX(-50%)}
 .collection{width:200%;grid-template-columns:repeat(2,50%)}
 .collection .collection__header{border-right:2px solid var(--color-black)}
