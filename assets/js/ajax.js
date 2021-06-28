@@ -1100,11 +1100,6 @@
       return artistsButtons.forEach(function (buttonToEnable) {
         buttonToEnable.removeAttribute('disabled');
       });
-    }).then(function () {
-      if (id) {
-        document.querySelector("button[data-artist=\"".concat(id, "\"]")).dataset.active = true;
-        collection.dataset.state = 'open';
-      }
     }); // Fetch artist info asynchronously
 
     asyncFetch(artistUrl, options).then(function (jsonResponse) {
@@ -1150,6 +1145,11 @@
           return _ref.apply(this, arguments);
         };
       }());
+    }).then(function () {
+      if (id) {
+        document.querySelector("button[data-artist=\"".concat(id, "\"]")).dataset.active = true;
+        collection.dataset.state = 'open';
+      }
     });
   };
   /**

@@ -204,7 +204,40 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 			artistsButtons.forEach((buttonToEnable) => {
 				buttonToEnable.removeAttribute('disabled');
 			})
-		)
+		);
+
+	// Fetch artist info asynchronously
+	asyncFetch(artistUrl, options)
+		.then((jsonResponse) => {
+			console.log(artistUrl);
+			let html;
+			const { name, artist_bio: artistBio } = jsonResponse;
+
+			if (typeof jsonResponse === 'object') {
+				html = `
+				<button class="artworks__return"><</button>
+				<div class="artworks__artist">
+					<h1 class="artist__name">${name}</h1>
+					${artistBio ? `<div class="artist__bio">${artistBio}</div>` : ''}
+				</div>
+				`;
+			} else {
+				html = artist;
+			}
+			target.insertAdjacentHTML('afterbegin', html);
+			// button event listener => go back
+			const returnButton = target.querySelector('.artworks__return');
+			returnButton.addEventListener('click', async (event) => {
+				collection.dataset.state = 'closed';
+				target.dataset.state = 'unloading';
+				document.querySelector(
+					'button.artist__button[data-active=true]'
+				).dataset.active = false;
+				await wait(500);
+				target.dataset.state = 'unloaded';
+				target.innerHTML = '';
+			});
+		})
 		.then(() => {
 			if (id) {
 				document.querySelector(
@@ -213,38 +246,6 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 				collection.dataset.state = 'open';
 			}
 		});
-
-	// Fetch artist info asynchronously
-	asyncFetch(artistUrl, options).then((jsonResponse) => {
-		console.log(artistUrl);
-		let html;
-		const { name, artist_bio: artistBio } = jsonResponse;
-
-		if (typeof jsonResponse === 'object') {
-			html = `
-				<button class="artworks__return"><</button>
-				<div class="artworks__artist">
-					<h1 class="artist__name">${name}</h1>
-					${artistBio ? `<div class="artist__bio">${artistBio}</div>` : ''}
-				</div>
-				`;
-		} else {
-			html = artist;
-		}
-		target.insertAdjacentHTML('afterbegin', html);
-		// button event listener => go back
-		const returnButton = target.querySelector('.artworks__return');
-		returnButton.addEventListener('click', async (event) => {
-			collection.dataset.state = 'closed';
-			target.dataset.state = 'unloading';
-			document.querySelector(
-				'button.artist__button[data-active=true]'
-			).dataset.active = false;
-			await wait(500);
-			target.dataset.state = 'unloaded';
-			target.innerHTML = '';
-		});
-	});
 };
 
 /**
