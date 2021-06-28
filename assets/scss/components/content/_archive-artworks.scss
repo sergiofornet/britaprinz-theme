@@ -60,7 +60,7 @@ body.post-type-archive-artwork {
 			content: "";
 			position: absolute;
 			top: 4px; 
-			left: 4px;
+			left: 6px;
 			width: calc(2.5em);
 			height: calc(100% - 8px);
 			background-image: url("assets/img/icons/bpa_search.svg");
@@ -69,7 +69,8 @@ body.post-type-archive-artwork {
 
 		input.collection__search {
 			border-color: var(--color-black);
-			border-width: 2px 0 2px 2px;
+			border-width: 2px;
+			transform: translateX(2px);
 			border-radius: 0;
 			width: 100%;
 			padding-left: calc(2.5em);
@@ -140,7 +141,7 @@ body.post-type-archive-artwork {
 		transition: all .5s ease-in-out;
 		background-color: white;
 		position: relative;
-		padding: unquote("min(5.5vh, 60px) min(8vw, 115px) min(8vh, 90px)");
+		padding: unquote("min(6vh, 60px) min(8vw, 115px) min(8vh, 90px)");
 		
 		@media (max-width: 63.9375em) {
 			padding-left: unquote("min(6vw, 115px)");
@@ -182,8 +183,8 @@ body.post-type-archive-artwork {
 		
 		.artworks__return {
 			position: absolute;
-			top: 0;
-			left: 0;
+			top: -2px;
+			left: -2px;
 			
 			@media(min-width: 63.9357em){
 				display: none;
@@ -194,49 +195,72 @@ body.post-type-archive-artwork {
 			padding: 0;
 			list-style-type: none;
 			
-			.artwork__title {
-				
-				button {
-					border: none;
-					background: initial;
-					padding: 0;
-					color: black;
-					cursor: pointer;
-					text-transform: none;
-					text-decoration: underline;
-				
-					&:hover {
-						text-decoration: none;
+			.artwork {
+				margin-bottom: unquote("min(2vh, 20px)");
+
+				.artwork__title {
+					
+					button {
+						border: none;
+						background: initial;
+						padding: 0;
+						color: black;
+						cursor: pointer;
+						text-transform: none;
+						text-decoration: underline;
+					
+						&:hover {
+							text-decoration: none;
+						}
 					}
 				}
-			}
 
-			.artwork__thumbnail {
-				display: flex;
-				flex-flow: column nowrap;
-				margin-block-start: unquote("min(4vh, 38px)");
-				margin-block-end: unquote("min(4vh, 40px)");
-				
-				@media (max-width: 63.9375em) {
-					align-items: center;
+				.artwork__info {
+					display: none;
+					padding-block-end: 1vh;
+
+					&.visible {
+						display: block;
+					}
+					
+					p {
+						margin: 0;
+					}
+
+					.artwork__thumbnail {
+						display: flex;
+						flex-flow: column nowrap;
+						margin-block-start: unquote("min(4vh, 38px)");
+						margin-block-end: unquote("min(4vh, 40px)");
+						align-items: center;
+						
+						@media (max-width: 63.9375em) {
+						}
+		
+						@media (min-width: 64em) {
+						}
+					}
+
+					.artwork__loan,
+					.artwork__sale {
+						position: relative;
+						width: fit-content;
+
+						&::after {
+							position: absolute;
+							content: "";
+							right: -1.5em;
+							top: calc(1em - 50%);
+							height: 1em;
+							width: 1em;
+							background-image: url("assets/img/icons/bpa_mail.svg");
+						}
+
+					}
 				}
-
-				@media (min-width: 64em) {
-					align-items: flex-end;
-					margin-right: calc(20rem / 16)
-				}
-
-
 			}
 		}
 	}
 }
 
 
-.artwork__info {
-	display: none;
-
-	&.visible {
-		display: block;
-	}
-}
