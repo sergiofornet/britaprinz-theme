@@ -205,6 +205,7 @@ ul.menu a:hover{text-decoration:underline}
 .post,.page{margin:0 0 1.5em}
 .updated:not(.published){display:none}
 .page-content,.entry-content,.entry-summary{margin:1.5em 0 0}
+.post .entry-content>:last-child,.single .entry-content>:last-child{-webkit-margin-after:0;margin-block-end:0}
 .page-links{clear:both;margin:0 0 1.5em}
 body.post-type-archive-artwork{overflow-x:hidden}
 body.post-type-archive-artwork.no-sidebar .site-main{background-color:white;overflow-x:hidden;position:relative;padding:0}
@@ -253,7 +254,6 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:white;over
 .technique-content__related-artworks .related-artworks__toggle::after{content:"";position:absolute;bottom:-1.5em;right:-2em;width:59px;height:24px;background-image:url("assets/img/icons/bpa_arrow.svg");background-repeat:no-repeat;-webkit-transform:translateX(0);transform:translateX(0);-webkit-transition:-webkit-transform .5s ease-in-out;transition:-webkit-transform .5s ease-in-out;transition:transform .5s ease-in-out;transition:transform .5s ease-in-out,-webkit-transform .5s ease-in-out}
 .technique-content__related-artworks .related-artworks__toggle:hover::after,.technique-content__related-artworks .related-artworks__toggle:focus::after,.technique-content__related-artworks .related-artworks__toggle:focus-visible::after{-webkit-transform:translateX(0.5em);transform:translateX(0.5em)}
 .projects .project h2{font-size:calc(18rem / 16);margin:calc(40rem / 16) 0;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;-webkit-transition:-webkit-transform .2s ease-in-out;transition:-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out;transition:transform .2s ease-in-out,-webkit-transform .2s ease-in-out;-webkit-transform:translateX(0);transform:translateX(0)}
-.projects .project h2:last-of-type{-webkit-margin-after:0;margin-block-end:0}
 .projects .project h2:hover{-webkit-transform:translateX(1em);transform:translateX(1em)}
 .projects .project a{text-decoration:none}
 .projects .project a:hover{text-decoration:underline}
