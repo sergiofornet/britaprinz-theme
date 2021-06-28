@@ -4,7 +4,7 @@ p {
 	letter-spacing: .01em;
 	font-size: var(--font-size-default);
 
-	&:last-of-type {
+	&:last-child {
 		margin-block-end: 0;
 	}
 
