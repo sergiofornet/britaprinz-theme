@@ -51,6 +51,11 @@
 									);
 									?>
 								</div>
+								<div class="event__artist">
+								
+									<?php echo esc_html( carbon_get_post_meta( $event->ID, 'bp_event_artist' ) ); ?>
+
+								</div>
 								<div class="event__date">
 
 									<?php
