@@ -111,8 +111,8 @@
 		position: relative;
 		text-align: left;
 		padding: 0;
-		margin-inline-end: 2em;
-		margin-block-end: 1.5em;
+		margin-inline-end: 1.1em;
+		margin-block-end: 0.9em;
 		font-size: calc(21rem / 16);
 		font-weight: 500;
 		text-transform: none;
@@ -120,10 +120,10 @@
 		&::after {
 			content: "";
 			position: absolute;
-			bottom: -1.5em;
-			right: -2em;
-			width: 59px;
-			height: 24px;
+			bottom: -0.9em;
+			right: -1.1em;
+			width: 45px;
+			height: 18px;
 			background-image: url("assets/img/icons/bpa_arrow.svg");
 			background-repeat: no-repeat;
 			transform: translateX(0);
