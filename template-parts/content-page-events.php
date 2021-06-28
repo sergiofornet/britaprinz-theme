@@ -39,33 +39,31 @@
 					<ul class="year__events">
 						<?php foreach ( $events as $event ) : ?>
 							<li class="event">
-								<div class="event__title">
+								<a href="<?php echo esc_url( get_permalink( $event->ID ) ); ?>" title="<?php echo esc_attr( get_the_title( $event->ID ) ) ?>">
+									<div class="event__title">
 
-									<?php
-									echo sprintf(
-										'<a href="%s" title="%s">%s</a>',
-										esc_url( get_permalink( $event->ID ) ),
-										esc_attr( get_the_title( $event->ID ) ),
-										esc_html( get_the_title( $event->ID ) )
-									);
-									?>
-								</div>
-								<div class="event__artist">
-								
-									<?php echo esc_html( carbon_get_post_meta( $event->ID, 'bp_event_artist' ) ); ?>
+										<?php
+										echo esc_html( get_the_title( $event->ID ) );
+										?>
 
-								</div>
-								<div class="event__date">
+									</div>
+									<div class="event__artist">
+									
+										<?php echo esc_html( carbon_get_post_meta( $event->ID, 'bp_event_artist' ) ); ?>
 
-									<?php
-										echo sprintf( 
-											'%s–%s', 
-											esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_post_meta( $event->ID, 'bp_event_start' ) ) ) ), 
-											esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_post_meta( $event->ID, 'bp_event_end' ) ) ) )
-										);
-									?>
+									</div>
+									<div class="event__date">
 
-								</div>
+										<?php
+											echo sprintf( 
+												'%s–%s', 
+												esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_post_meta( $event->ID, 'bp_event_start' ) ) ) ), 
+												esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_post_meta( $event->ID, 'bp_event_end' ) ) ) )
+											);
+										?>
+
+									</div>
+								</a>
 							</li><!-- .event -->
 
 						<?php endforeach; ?>
