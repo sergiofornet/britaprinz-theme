@@ -45,12 +45,12 @@ function artworksList(artworks, lang) {
 					</div>
 					${
 						element.artwork_loan
-							? `<div class="artwork__loan">${element.artwork_loan}</div>`
+							? `<div class="artwork__loan"><a href="mailto:arte@britaprinzarte.com">${element.artwork_loan}</a></div>`
 							: ''
 					}
 					${
 						element.artwork_sale
-							? `<div class="artwork__sale">${element.artwork_sale}</div>`
+							? `<div class="artwork__sale"><a href="mailto:arte@britaprinzarte.com">${element.artwork_sale}</a></div>`
 							: ''
 					}
 				</div>
