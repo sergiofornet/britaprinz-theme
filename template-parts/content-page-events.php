@@ -43,11 +43,10 @@
 
 									<?php
 									echo sprintf(
-										'<a href="%s" title="%s">%s - %s</a>',
+										'<a href="%s" title="%s">%s</a>',
 										esc_url( get_permalink( $event->ID ) ),
 										esc_attr( get_the_title( $event->ID ) ),
-										esc_html( get_the_title( $event->ID ) ),
-										esc_html( carbon_get_post_meta( $event->ID, 'bp_event_artist' ) ) 
+										esc_html( get_the_title( $event->ID ) )
 									);
 									?>
 								</div>
