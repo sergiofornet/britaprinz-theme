@@ -9,16 +9,17 @@
  * @package Brita_Prinz_Theme
  */
 
-$social  = carbon_get_theme_option( 'bp_theme_social' );
-$links = carbon_get_theme_option( 'bp_theme_footer_links' );
+$social       = carbon_get_theme_option( 'bp_theme_social' );
+$links        = britaprinz_get_i18n_theme_option( 'bp_theme_footer_links' );
 $footer_links = array();
 foreach( $links as $link ) {
-	$link_id = $link['bp_theme_footer_links_list'][0]['id'];
+	$link_id        = $link['bp_theme_footer_links_list'][0]['id'];
 	$footer_links[] = array(
 		'url'   => get_the_permalink($link_id),
 		'title' => get_the_title($link_id),
 	);
 }
+
 $contact = carbon_get_theme_option( 'bp_theme_contact' );
 ?>
 

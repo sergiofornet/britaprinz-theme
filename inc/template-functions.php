@@ -37,20 +37,6 @@ function britaprinz_theme_pingback_header() {
 add_action( 'wp_head', 'britaprinz_theme_pingback_header' );
 
 /**
- * Add i18n suffix to custom fields on option pages.
- * 
- * @return String
- */
-function britaprinz_get_i18n_suffix() {
-	$suffix = '';
-	if ( ! defined( 'ICL_LANGUAGE_CODE' ) ) {
-		return $suffix;
-	}
-	$suffix = '_' . ICL_LANGUAGE_CODE;
-	return $suffix;
-}
-
-/**
  * Get i18n theme option
  * 
  * @param String $option_name Field name.
