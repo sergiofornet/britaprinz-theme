@@ -27,8 +27,8 @@ if (!defined( 'ABSPATH' ) ) exit;
 	<?php
 			echo sprintf( 
 				'<span>%s</span> – <span>%s</span>', 
-				esc_html( date_i18n( __( 'd F, Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ), 
-				esc_html( date_i18n( __( 'd F, Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) )
+				esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ), 
+				esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) )
 			);
 	?>
 
