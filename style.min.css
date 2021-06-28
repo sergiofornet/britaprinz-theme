@@ -187,7 +187,7 @@ ul.menu a:hover{text-decoration:underline}
 .wpml-ls-legacy-list-horizontal a.wpml-ls-link span:hover{text-decoration:underline;text-decoration-thickness:2px}
 .wpml-ls-legacy-list-horizontal .wpml-ls-current-language a.wpml-ls-link span{text-decoration:underline;text-decoration-thickness:2px}
 .wpml-ls-legacy-list-horizontal .wpml-ls-current-language a.wpml-ls-link span:hover{text-decoration:none}
-.site-footer{-webkit-padding-before:1.3rem;padding-block-start:1.3rem;-webkit-padding-after:1.3rem;padding-block-end:1.3rem;-webkit-border-before:2px solid var(--color-black);border-block-start:2px solid var(--color-black);display:grid;gap:1em}
+.site-footer{-webkit-padding-before:1.3rem;padding-block-start:1.3rem;-webkit-padding-after:1.3rem;padding-block-end:1.3rem;-webkit-border-before:2px solid var(--color-black);border-block-start:2px solid var(--color-black);display:grid;row-gap:1em}
 .footer-info .footer-info__title{font-size:clamp(calc(12rem / 16), 2.5vw, calc(18rem / 16));text-transform:uppercase;font-weight:600;line-height:calc(21.13 / 18)}
 .footer-info .footer-info__address{font-style:normal;font-size:clamp(calc(12rem / 16), 2.5vw, calc(14rem / 16));line-height:calc(17 / 14)}
 .footer-info .footer-info__address p{margin:initial}

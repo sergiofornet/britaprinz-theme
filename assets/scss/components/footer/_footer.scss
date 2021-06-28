@@ -3,7 +3,7 @@
 	padding-block-end: 1.3rem;
 	border-block-start: 2px solid var(--color-black);
 	display: grid;
-	gap: 1em;
+	row-gap: 1em;
 	
 	@media (max-width: 47.9375em) {
 		grid-template-columns: repeat(2, 50%);
