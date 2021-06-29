@@ -83,12 +83,35 @@
 		}
 		
 		@media (min-width: 64em) {
-			padding: unquote("min(6vh, 60px) 0 min(6vh, 60px) min(5vw, 55px)");
+			padding: unquote("min(6vh, 60px) 0 min(12vh, 120px) min(5vw, 55px)");
 			border-left: 1px solid var(--color-black);
 		}
 
 		p {
 			margin: 0;
+		}
+
+		.prizes__list, .prizes__mentions {
+			padding: 0;
+			padding-inline-start: 2.5em;
+		}
+
+		.prizes__list, .prize__category, .prizes__mentions .mention {
+			margin-bottom: unquote("min(9vh, 90px)"); 
+		}
+
+		
+		.prizes__mentions {
+			list-style: none;
+			margin: 0;
+			
+			& .mention:last-of-type {
+				margin-bottom: 0;
+			}
+
+			.mention__title {
+				margin-bottom: 2em;
+			}
 		}
 
 		.prize__category {
@@ -104,7 +127,7 @@
 				content: counter(category);
 				position: absolute;
 				top: 0;
-				left: 0;
+				left: -3em;
 				--diameter: 2em;
 				width: var(--diameter);
 				height: var(--diameter);
@@ -120,7 +143,8 @@
 		}
 
 		.prize__name,
-		.prize__artist {
+		.prize__artist,
+		.mention__title {
 			font-size: calc(18rem / 16);
 			line-height: 1;
 			letter-spacing: 0.02em;
@@ -137,10 +161,7 @@
 			display: flex;
 			flex-flow: column nowrap;
 			align-items: center;
-		}
-
-		.prizes__mentions {
-			list-style: none;
+			margin: unquote("min(6vh, 3.5rem)") 0;
 		}
 
 	}

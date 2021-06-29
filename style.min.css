@@ -255,13 +255,17 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .award-container .award-menu-container{overflow-x:hidden}
 .award-container .award-edition-container{overflow-x:hidden}
 .award-container .award-edition-container p{margin:0}
+.award-container .award-edition-container .prizes__list,.award-container .award-edition-container .prizes__mentions{padding:0;-webkit-padding-start:2.5em;padding-inline-start:2.5em}
+.award-container .award-edition-container .prizes__list,.award-container .award-edition-container .prize__category,.award-container .award-edition-container .prizes__mentions .mention{margin-bottom:min(9vh,90px)}
+.award-container .award-edition-container .prizes__mentions{list-style:none;margin:0}
+.award-container .award-edition-container .prizes__mentions .mention:last-of-type{margin-bottom:0}
+.award-container .award-edition-container .prizes__mentions .mention__title{margin-bottom:2em}
 .award-container .award-edition-container .prize__category{position:relative;list-style:none;counter-increment:category}
 .award-container .award-edition-container .prize__category::marker{display:none}
-.award-container .award-edition-container .prize__category::before{content:counter(category);position:absolute;top:0;left:0;--diameter:2em;width:var(--diameter);height:var(--diameter);padding:calc(var(--diameter) / 2 - var(--font-size-default) / 2);line-height:1;color:var(--color-white);text-align:center;font-weight:600;background-color:var(--color-black);border-radius:50%;z-index:-1}
-.award-container .award-edition-container .prize__name,.award-container .award-edition-container .prize__artist{font-size:calc(18rem / 16);line-height:1;letter-spacing:.02em;font-weight:600;text-align:center;margin:0}
+.award-container .award-edition-container .prize__category::before{content:counter(category);position:absolute;top:0;left:-3em;--diameter:2em;width:var(--diameter);height:var(--diameter);padding:calc(var(--diameter) / 2 - var(--font-size-default) / 2);line-height:1;color:var(--color-white);text-align:center;font-weight:600;background-color:var(--color-black);border-radius:50%;z-index:-1}
+.award-container .award-edition-container .prize__name,.award-container .award-edition-container .prize__artist,.award-container .award-edition-container .mention__title{font-size:calc(18rem / 16);line-height:1;letter-spacing:.02em;font-weight:600;text-align:center;margin:0}
 .award-container .award-edition-container .prize__name{text-transform:uppercase}
-.award-container .award-edition-container .prize__image{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
-.award-container .award-edition-container .prizes__mentions{list-style:none}
+.award-container .award-edition-container .prize__image{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin:min(6vh,3.5rem) 0}
 .technique-content__steps{--technique-gap:1em;display:grid}
 .technique-content__steps .step{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:center;-ms-flex-align:center;align-items:center;gap:calc(var(--technique-gap) / 2);margin:0;counter-increment:figcaption}
 .technique-content__steps .step figcaption{margin-top:auto;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;display:list-item;list-style-position:inside;list-style-type:decimal;max-width:300px}
@@ -384,7 +388,7 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .collection .collection__artists{border-right:1px solid var(--color-black)}
 .collection .collection__artworks{border-left:1px solid var(--color-black)}
 .award-container .award-menu-container{border-right:1px solid var(--color-black)}
-.award-container .award-edition-container{padding:min(6vh,60px) 0 min(6vh,60px) min(5vw,55px);border-left:1px solid var(--color-black)}
+.award-container .award-edition-container{padding:min(6vh,60px) 0 min(12vh,120px) min(5vw,55px);border-left:1px solid var(--color-black)}
 }@media(min-height:64em) and (min-width:48em){.artists__initials .initial__button{font-size:calc(18rem / 16)}
 }@media(min-width:80em){.technique-content__steps{grid-template-rows:auto auto;grid-template-columns:repeat(6,calc(100% / 6))}
 .technique-content__steps .step{padding:calc(var(--technique-gap) / 2)}
