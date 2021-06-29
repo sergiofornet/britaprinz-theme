@@ -64,6 +64,7 @@
 	
 	.award-edition-container {
 		overflow-x: hidden;
+
 		@media (max-width: 63.9375em) {
 			border-left: 2px solid var(--color-black);
 			overflow-y: auto;
@@ -84,6 +85,34 @@
 		@media (min-width: 64em) {
 			padding: unquote("min(6vh, 60px) min(5vw, 55px)");
 			border-left: 1px solid var(--color-black);
+		}
+
+		.prize__category {
+			position: relative;
+			list-style: none;
+			counter-increment: category;
+
+			&::marker {
+				display: none;
+			}
+
+			&::before {
+				content: counter(category);
+				position: absolute;
+				top: 0;
+				left: 0;
+				--diameter: 2em;
+				width: var(--diameter);
+				height: var(--diameter);
+				padding: calc(var(--diameter) / 2 - var(--font-size-default) / 2);
+				line-height: 1;
+				color: var(--color-white);
+				text-align: center;
+				font-weight: 600;
+				background-color: var(--color-black);
+				border-radius: 50%;
+				z-index: -1;
+			}
 		}
 	}
 }
