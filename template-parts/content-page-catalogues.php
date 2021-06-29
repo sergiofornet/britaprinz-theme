@@ -13,7 +13,7 @@
 ?>
 
 <div class="award-edition-container" data-state="loaded">
-	<button class="award-edition-container__return-button return button" aria-pressed="false"><</button>
+	<button class="award-edition-container__return-button return-button" aria-pressed="false"><</button>
 	<article id="post-<?php //the_ID(); ?>" <?php //post_class(); ?>>
 		<div class="entry-content">
 
