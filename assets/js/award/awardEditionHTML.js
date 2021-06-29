@@ -18,7 +18,7 @@ function awardEditionHTML(payload, target, lang) {
 
 	let mentionsHTML = '';
 	if (mentions) {
-		mentionsHTML += `<ul class="prizes_mentions">`;
+		mentionsHTML += `<ul class="prizes__mentions">`;
 		mentions.forEach((mention) => {
 			mentionsHTML += `
 			<li class="mention">

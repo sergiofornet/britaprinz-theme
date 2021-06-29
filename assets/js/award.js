@@ -992,7 +992,7 @@
     var mentionsHTML = '';
 
     if (mentions) {
-      mentionsHTML += "<ul class=\"prizes_mentions\">";
+      mentionsHTML += "<ul class=\"prizes__mentions\">";
       mentions.forEach(function (mention) {
         mentionsHTML += "\n\t\t\t<li class=\"mention\">\n\t\t\t\t<h2 class=\"mention__title\">".concat(mention.bp_award_mentions_title, "</h2>\n\t\t\t\t<p class=\"mention__text\">").concat(mention.bp_award_mentions_text, "</p>\n\t\t\t</li>");
       });
