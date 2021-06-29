@@ -64,17 +64,17 @@
 	
 	.award-edition-container {
 		overflow-x: hidden;
-
+		
 		@media (max-width: 63.9375em) {
 			border-left: 2px solid var(--color-black);
 			overflow-y: auto;
 			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
 		}
-
+		
 		@media (max-width: 29.9375em) {
 			padding: 5vh 4vw;
 		}
-
+		
 		@media (min-width: 30em) and (max-width: 63.9375em) {
 			padding: unquote("min(6vh, 60px) min(11vw, 120px)");
 			border-left: 2px solid var(--color-black);
@@ -86,7 +86,7 @@
 			padding: unquote("min(6vh, 60px) 0 min(6vh, 60px) min(5vw, 55px)");
 			border-left: 1px solid var(--color-black);
 		}
-
+		
 		.prize__category {
 			position: relative;
 			list-style: none;
@@ -128,5 +128,12 @@
 		.prize__name {
 			text-transform: uppercase;
 		}
+
+		.prize__image {
+			display: flex;
+			flex-flow: column nowrap;
+			align-items: center;
+		}
+
 	}
 }
