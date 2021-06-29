@@ -83,7 +83,7 @@
 		}
 		
 		@media (min-width: 64em) {
-			padding: unquote("min(6vh, 60px) min(5vw, 55px)");
+			padding: unquote("min(6vh, 60px) 0 min(6vh, 60px) min(5vw, 55px)");
 			border-left: 1px solid var(--color-black);
 		}
 
@@ -113,6 +113,20 @@
 				border-radius: 50%;
 				z-index: -1;
 			}
+		}
+
+		.prize__name,
+		.prize__artist {
+			font-size: calc(18rem / 16);
+			line-height: 1;
+			letter-spacing: 0.02em;
+			font-weight: 600;
+			text-align: center;
+			margin: 0;
+		}
+
+		.prize__name {
+			text-transform: uppercase;
 		}
 	}
 }
