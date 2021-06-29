@@ -4,7 +4,7 @@ input[type="reset"],
 input[type="submit"] {
 	font-size: var(--font-size-default);
 	border: 2px solid var(--color-black);
-	border-color: var(--black);
+	border-color: var(--color-black);
 	border-radius: 0;
 	background: var(--color-white);
 
@@ -25,7 +25,7 @@ input[type="submit"] {
 
 	&:focus {
 		border-color: transparent;
-		outline: 1px solid dotted;
+		outline: 1px dotted var(--black);
 	}
 
 	// artists list / award edition list
