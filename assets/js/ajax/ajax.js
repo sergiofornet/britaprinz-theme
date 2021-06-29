@@ -215,7 +215,7 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 
 			if (typeof jsonResponse === 'object') {
 				html = `
-				<button class="artworks__return"><</button>
+				<button class="artworks__return return-button"><</button>
 				<div class="artworks__artist">
 					<h1 class="artist__name">${name}</h1>
 					${artistBio ? `<div class="artist__bio">${artistBio}</div>` : ''}

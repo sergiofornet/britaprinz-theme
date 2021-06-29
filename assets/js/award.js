@@ -1004,6 +1004,7 @@
     target.insertAdjacentHTML('afterbegin', html);
     var returnButton = document.createElement('button');
     returnButton.classList.add('award-edition-container__return-button');
+    returnButton.classList.add('return-button');
     returnButton.setAttribute('aria-pressed', 'false');
     returnButton.innerHTML = '<';
     returnButton.addEventListener('click', function () {
@@ -1082,6 +1083,7 @@
     target.insertAdjacentHTML('afterbegin', html);
     var returnButton = document.createElement('button');
     returnButton.classList.add('award-edition-container__return-button');
+    returnButton.classList.add('return-button');
     returnButton.setAttribute('aria-pressed', 'false');
     returnButton.innerHTML = '<';
     returnButton.addEventListener('click', function () {
