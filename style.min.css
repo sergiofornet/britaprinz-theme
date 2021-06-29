@@ -443,7 +443,7 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 ul.menu ul li{font-size:calc(14rem / 16);-webkit-margin-after:1.5em;margin-block-end:1.5em}
 .main-navigation .nav-menu{-webkit-padding-before:4vh;padding-block-start:4vh;-webkit-padding-after:3vh;padding-block-end:3vh}
 .header__menu-toggle{font-size:calc(20rem / 16)}
-.award-container .award-edition-container{padding:5vh 2vw}
+.award-container .award-edition-container{padding:5vh 4vw}
 }@media(orientation:portrait) and (max-width:29.9375em){.home article.page{-webkit-padding-before:1em;padding-block-start:1em;-webkit-padding-after:1em;padding-block-end:1em;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}
 .home article.page .circle{--circle-diameter:75vw}
 }@media(orientation:landscape) and (max-width:29.9375em){.home article.page{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
