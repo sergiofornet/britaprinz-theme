@@ -250,7 +250,8 @@ function britaprinz_theme_get_winners() {
 	while ( have_posts() ) :
 		the_post();
 
-		$edition         = esc_html( get_the_title() );
+		$edition = esc_html( carbon_get_the_post_meta( 'bp_award_edition' ) );
+
 		$edition_id      = esc_html( get_the_ID() );
 		$edition_item    = "
 		<li id='winners-item-{$edition_id}' class='edition-item edition-item--{$edition_id}'>
