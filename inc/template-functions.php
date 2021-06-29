@@ -347,3 +347,25 @@ function bpa_theme_next_posts_link_attributes() {
 function bpa_theme_previous_posts_link_attributes() {
 	return 'class="previous"';
 }
+
+/**
+ * Return an array o allowed img attributes
+ * 
+ * @return array
+ */
+function bpa_theme_image_allowed_attrs() {
+	return array(
+		'img' => array(
+			'src'     => true,
+			'srcset'  => true,
+			'sizes'   => true,
+			'class'   => true,
+			'id'      => true,
+			'width'   => true,
+			'height'  => true,
+			'alt'     => true,
+			'align'   => true,
+			'loading' => true,
+		),
+	);
+}

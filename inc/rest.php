@@ -474,8 +474,14 @@ function britaprinz_award( $object, $field_name, $request ) {
 	foreach ( $award as &$prize ) {
 		$prize_img_thumbnail               = wp_get_attachment_image( $prize['bp_award_image'], 'award-thumbnail' );
 		$prize_img                         = wp_get_attachment_image( $prize['bp_award_image'], 'full' );
-		$prize['bp_award_image_thumbnail'] = $prize_img_thumbnail;
-		$prize['bp_award_image_rendered']  = $prize_img;
+		$prize['bp_award_image_thumbnail'] = wp_kses( $prize_img_thumbnail, bpa_theme_image_allowed_attrs() );
+		$prize['bp_award_image_rendered']  = wp_kses( $prize_img, bpa_theme_image_allowed_attrs() );
+		$prize['bp_award_category']        = wp_kses( $prize['bp_award_category'], array( 'sup' => array() ) );
+		$prize['bp_award_title']           = esc_html( $prize['bp_award_title'] );
+		$prize['bp_award_artist']          = esc_html( $prize['bp_award_artist'] );
+		$prize['bp_award_size']            = esc_html( $prize['bp_award_size'] );
+		$prize['bp_award_technique']       = esc_html( $prize['bp_award_technique'] );
+		$prize['bp_award_year']            = esc_html( $prize['bp_award_year'] );
 	}
 	if ( $award ) {
 		return $award;
@@ -495,6 +501,7 @@ function britaprinz_award_special_edition( $object, $field_name, $request ) {
 	if ( $is_special_edition ) {
 		$award_se = carbon_get_post_meta( $object['id'], 'bp_award_se' );
 		foreach ( $award_se as &$edition ) {
+			$edition['bp_award_se_year']    = esc_html( $edition['bp_award_se_year'] );
 			$edition['bp_award_se_winners'] = wpautop( $edition['bp_award_se_winners'] );
 		}
 		return $award_se;
