@@ -20,12 +20,11 @@
 	}
 
 	@media(min-width: 48em) {
+
 		& > * {
 			padding-block-start: 2em;
 			padding-block-end: 2em;
 		}
-		
-		
 		
 		.award-edition-container {
 			// padding-inline-end: var(--secondary-nav-padding);
@@ -34,6 +33,7 @@
 	}
 
 	@media (min-width: 48em) and (max-width: 63.9375em) {
+
 		.award-menu-container {
 			padding-inline-start: var(--secondary-nav-padding);
 		}
@@ -44,12 +44,14 @@
 	}
 	
 	&[data-state=loaded] {
+
 		@media (max-width: 63.9375em) {
 			transform: translateX(-50%);
 		}
 	}
 	.award-menu-container {
 		overflow-x: hidden;
+
 		@media (max-width: 63.9375em) {
 			border-right: 2px solid var(--color-black);
 			overflow-y: auto;
@@ -61,15 +63,26 @@
 	}
 	
 	.award-edition-container {
-		padding: 1em;
 		overflow-x: hidden;
 		@media (max-width: 63.9375em) {
 			border-left: 2px solid var(--color-black);
 			overflow-y: auto;
 			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
 		}
+
+		@media (max-width: 29.9375em) {
+			padding: 5vh 2vw;
+		}
+
+		@media (min-width: 30em) and (max-width: 63.9375em) {
+			padding: unquote("min(6vh, 60px) min(11vw, 120px)");
+			border-left: 2px solid var(--color-black);
+			overflow-y: auto;
+			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
+		}
 		
 		@media (min-width: 64em) {
+			padding: unquote("min(6vh, 60px) min(5vw, 55px)");
 			border-left: 1px solid var(--color-black);
 		}
 	}
