@@ -86,7 +86,11 @@
 			padding: unquote("min(6vh, 60px) 0 min(6vh, 60px) min(5vw, 55px)");
 			border-left: 1px solid var(--color-black);
 		}
-		
+
+		p {
+			margin: 0;
+		}
+
 		.prize__category {
 			position: relative;
 			list-style: none;

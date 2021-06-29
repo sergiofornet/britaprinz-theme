@@ -254,6 +254,7 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .award-container{overflow-x:hidden;display:grid;grid-template-columns:repeat(2,50%);background-color:white;padding:0;-webkit-transition:var(--transition-default);transition:var(--transition-default);-webkit-transform:translateX(0);transform:translateX(0);position:relative;--secondary-nav-padding:calc(24rem / 16)}
 .award-container .award-menu-container{overflow-x:hidden}
 .award-container .award-edition-container{overflow-x:hidden}
+.award-container .award-edition-container p{margin:0}
 .award-container .award-edition-container .prize__category{position:relative;list-style:none;counter-increment:category}
 .award-container .award-edition-container .prize__category::marker{display:none}
 .award-container .award-edition-container .prize__category::before{content:counter(category);position:absolute;top:0;left:0;--diameter:2em;width:var(--diameter);height:var(--diameter);padding:calc(var(--diameter) / 2 - var(--font-size-default) / 2);line-height:1;color:var(--color-white);text-align:center;font-weight:600;background-color:var(--color-black);border-radius:50%;z-index:-1}
