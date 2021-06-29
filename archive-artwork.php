@@ -63,14 +63,25 @@ get_header();
 				<div class="artworks collection__artworks" data-state='unloaded'>
 				</div>
 			</div>
-			<div class="artwork-gallery hidden">
-				<div class="artwork-gallery__close">
-					<button class="close">&times;</button>
-				</div>
-				<div class="artwork-gallery__slider"></div>
-			</div>
 
 			<?php
+			add_action(
+				'bpa_theme_gallery_markup',
+				function() {
+					$markup = "
+						<div class='artwork-gallery hidden'>
+							<div class='artwork-gallery__close'>
+								<button class='close'>&times;</button>
+							</div>
+							<div class='artwork-gallery__slider'></div>
+						</div>
+					";
+					echo $markup;
+				}, 
+				10,
+				2
+			);
+
 		else :
 			get_template_part( 'template-parts/content', 'none' );
 		endif;
