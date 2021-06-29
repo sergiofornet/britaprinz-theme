@@ -70,6 +70,67 @@ function britaprinz_get_artists( $request ) {
 function britaprinz_rest_fields() {
 	register_rest_field(
 		'artwork',
+		'bp_artwork_year',
+		array(
+			'get_callback'    => 'britaprinz_artwork_year',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
+
+	register_rest_field(
+		'artwork',
+		'bp_artwork_copy',
+		array(
+			'get_callback'    => 'britaprinz_artwork_copy',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
+
+	register_rest_field(
+		'artwork',
+		'bp_artwork_paper',
+		array(
+			'get_callback'    => 'britaprinz_artwork_paper',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
+
+	register_rest_field(
+		'artwork',
+		'bp_artwork_condition',
+		array(
+			'get_callback'    => 'britaprinz_artwork_condition',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
+
+	register_rest_field(
+		'artwork',
+		'bp_artwork_size',
+		array(
+			'get_callback'    => 'britaprinz_artwork_size',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
+
+
+	register_rest_field(
+		'artwork',
+		'bp_artwork_size_image',
+		array(
+			'get_callback'    => 'britaprinz_artwork_size_image',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
+
+	register_rest_field(
+		'artwork',
 		'artwork_image_src',
 		array(
 			'get_callback'    => 'britaprinz_artwork_image',
@@ -179,6 +240,84 @@ function britaprinz_rest_fields() {
 	);
 }
 add_action( 'rest_api_init', 'britaprinz_rest_fields' );
+
+/**
+ * Add artwork year
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return string Artwork year.
+ */
+function britaprinz_artwork_year( $object, $field_name, $request ) {
+	$year = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_year' ) );
+	return $year;
+}
+
+/**
+ * Add artwork copy
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return string Artwork copy.
+ */
+function britaprinz_artwork_copy( $object, $field_name, $request ) {
+	$copy = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_copy' ) );
+	return $copy;
+}
+
+/**
+ * Add artwork paper
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return string Artwork paper.
+ */
+function britaprinz_artwork_paper( $object, $field_name, $request ) {
+	$paper = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_paper' ) );
+	return $paper;
+}
+
+/**
+ * Add artwork condition
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return string Artwork condition.
+ */
+function britaprinz_artwork_condition( $object, $field_name, $request ) {
+	$condition = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_condition' ) );
+	return $condition;
+}
+
+/**
+ * Add artwork size
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return string Artwork size.
+ */
+function britaprinz_artwork_size( $object, $field_name, $request ) {
+	$size = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_size' ) );
+	return $size;
+}
+
+/**
+ * Add artwork size image
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return string Artwork size image.
+ */
+function britaprinz_artwork_size_image( $object, $field_name, $request ) {
+	$size_image = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_size_image' ) );
+	return $size_image;
+}
 
 /**
  * Add artwork featured image
