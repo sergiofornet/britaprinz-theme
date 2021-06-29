@@ -144,7 +144,8 @@
 
 		.prize__name,
 		.prize__artist,
-		.mention__title {
+		.mention__title, 
+		.award__title {
 			font-size: calc(18rem / 16);
 			line-height: 1;
 			letter-spacing: 0.02em;
@@ -164,5 +165,21 @@
 			margin: unquote("min(6vh, 3.5rem)") 0;
 		}
 
+		.award-se {
+			list-style: none;
+			padding: 0;
+		}
+
 	}
+}
+
+.award-gallery {
+	&.hidden {
+		display: none;
+	}
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 900;
 }
