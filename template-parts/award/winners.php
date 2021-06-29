@@ -28,7 +28,7 @@
 						?>
 
 						<li id="prize-<?php echo esc_html( $index + 1 ); ?>" class="prize__category prize__category-<?php echo esc_attr( $index + 1 );?>" >
-							<h2 class="prize__name"><?php echo esc_html( $prize['bp_award_category'] ); ?></h2>
+							<h2 class="prize__name"><?php echo wp_kses( $prize['bp_award_category'], array( 'sup' => array() ) ); ?></h2>
 							<p class="prize__artist"><?php echo esc_html( $prize['bp_award_artist'] ); ?></p>
 							<?php /** TODO: images */ ?>
 							<figure class="prize__image">
