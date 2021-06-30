@@ -35,6 +35,8 @@
 						$edition = carbon_get_the_post_meta( 'bp_award_edition' );
 
 						$edition_cover_image = wp_get_attachment_image( carbon_get_the_post_meta( 'bp_award_catalogue_cover' ), 'medium' );
+
+						$images_ids = carbon_get_the_post_meta( 'bp_award_catalog_gallery' );
 						?>
 
 						<h1 class="catalogue__title">
@@ -61,14 +63,16 @@
 							esc_html( get_the_title() ),
 							esc_html__( 'Descargar PDF', 'britaprinz-theme' )
 						);
+
+						if ( $images_ids ) :
 						?>
 
-						<div class="catalogue__gallery-toggle">
-							<button class="gallery-toggle"><?php esc_html_e( 'Ver catálogo', 'britaprinz-theme'); ?></button>
-						</div>
+							<div class="catalogue__gallery-toggle">
+								<button class="gallery-toggle"><?php esc_html_e( 'Ver catálogo', 'britaprinz-theme'); ?></button>
+							</div>
 
 						<?php
-						$images_ids = carbon_get_the_post_meta( 'bp_award_catalog_gallery' );
+						endif;
 
 						$gallery = $images_ids ? implode(
 							'', 
