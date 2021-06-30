@@ -13,6 +13,7 @@ function catalogueEditionHTML(payload, target, lang) {
 		title: { rendered: catalogueEdition },
 		award_catalogue: catalogueUrl,
 		award_catalog_gallery: catalogueGallery,
+		award_catalog_cover: catalogueCover,
 		id,
 	} = payload;
 
@@ -24,6 +25,7 @@ function catalogueEditionHTML(payload, target, lang) {
 			catalogueEdition,
 			catalogueGallery,
 			lang,
+			catalogueCover,
 			id,
 		})
 	}
@@ -57,6 +59,7 @@ function catalogueHTML(payload) {
 					<p>${payload.lang === 'es' ? 'Catálogo' : 'Catalogue'}</p>
 					<p>${payload.catalogueEdition}</p>
 				</h1>
+				${payload.catalogueCover ? `<figure>${payload.catalogueCover}</figure>` : ``}
 				<a href="${payload.catalogueUrl}">
 					${payload.lang === 'es' ? 'Descargar PDF' : 'Download PDF'}
 				</a>

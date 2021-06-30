@@ -33,6 +33,8 @@
 						$edition_id = get_the_ID();
 
 						$edition = carbon_get_the_post_meta( 'bp_award_edition' );
+
+						$edition_cover_image = wp_get_attachment_image( carbon_get_the_post_meta( 'bp_award_catalogue_cover' ), 'medium' );
 						?>
 
 						<div>
@@ -41,7 +43,19 @@
 								<p><?php echo esc_html( $edition ); ?></p>
 							</h1>
 
-							<?php
+							<?php 
+							if ($edition_cover_image) :
+								?>
+
+								<figure>
+
+									<?php echo $edition_cover_image; ?>
+
+								</figure>
+								
+								<?php
+							endif;
+							
 							echo sprintf(
 								'<a href="%s" title="%s" target="_blank" rel="noopener noreferrer">%s</a>',
 								esc_url( wp_get_attachment_url( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) ),

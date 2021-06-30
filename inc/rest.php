@@ -238,6 +238,16 @@ function britaprinz_rest_fields() {
 			'schema'          => null,
 		) 
 	);
+
+	register_rest_field(
+		'award',
+		'award_catalog_cover',
+		array(
+			'get_callback'    => 'britaprinz_catalog_cover_image',
+			'update_callback' => null,
+			'schema'          => null,
+		) 
+	);
 }
 add_action( 'rest_api_init', 'britaprinz_rest_fields' );
 
@@ -524,4 +534,17 @@ function britaprinz_award_catalog_gallery( $object, $field_name, $request ) {
 	}
 
 	return $gallery;
+}
+
+/**
+ * Add catalogue cover image
+ * 
+ * @param Object $object Field content.
+ * @param String $field_name Field name.
+ * @param String $request Requested URL.
+ * @return string HTML image element.
+ */
+function britaprinz_catalog_cover_image( $object, $field_name, $request ) {
+	$cover_image = wp_get_attachment_image( carbon_get_post_meta( $object['id'], 'bp_award_catalogue_cover' ), 'medium' );
+	return $cover_image;
 }
