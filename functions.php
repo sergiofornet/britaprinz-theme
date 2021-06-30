@@ -130,7 +130,7 @@ if ( ! defined( 'BRITAPRINZ_THEME_VERSION' ) ) {
  * @global int $content_width
  */
 function britaprinz_theme_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'britaprinz_theme_content_width', 640 );
+	$GLOBALS['content_width'] = apply_filters( 'britaprinz_theme_content_width', 768 );
 }
 add_action( 'after_setup_theme', 'britaprinz_theme_content_width', 0 );
 
