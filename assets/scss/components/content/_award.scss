@@ -80,96 +80,150 @@
 			border-left: 2px solid var(--color-black);
 			overflow-y: auto;
 			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
+
+			&.container__catalogue {
+				padding-top:  unquote("min(10vh, 100px)");
+			}
 		}
 		
 		@media (min-width: 64em) {
 			padding: unquote("min(6vh, 60px) 0 min(12vh, 120px) min(5vw, 55px)");
 			border-left: 1px solid var(--color-black);
+
+			&.container__catalogue {
+				padding-top:  unquote("min(15vh, 150px)");
+			}
 		}
 
 		p {
 			margin: 0;
 		}
 
-		.prizes__list, .prizes__mentions {
-			padding: 0;
-			padding-inline-start: 2.5em;
+		.award, .catalogue {
+			margin-top: 0;
 		}
 
-		.prizes__list, .prize__category, .prizes__mentions .mention {
-			margin-bottom: unquote("min(9vh, 90px)"); 
-		}
+		.award {
 
-		
-		.prizes__mentions {
-			list-style: none;
-			margin: 0;
+			.prizes__list, .prizes__mentions {
+				padding: 0;
+				padding-inline-start: 2.5em;
+			}
+
+			.prizes__list, .prize__category, .prizes__mentions .mention {
+				margin-bottom: unquote("min(9vh, 90px)"); 
+			}
+
 			
-			& .mention:last-of-type {
-				margin-bottom: 0;
+			.prizes__mentions {
+				list-style: none;
+				margin: 0;
+				
+				& .mention:last-of-type {
+					margin-bottom: 0;
+				}
+
+				.mention__title {
+					margin-bottom: 2em;
+				}
 			}
 
-			.mention__title {
-				margin-bottom: 2em;
+			.prize__category {
+				position: relative;
+				list-style: none;
+				counter-increment: category;
+
+				&::marker {
+					display: none;
+				}
+
+				&::before {
+					content: counter(category);
+					position: absolute;
+					top: 0;
+					left: -3em;
+					--diameter: 2em;
+					width: var(--diameter);
+					height: var(--diameter);
+					padding: calc(var(--diameter) / 2 - var(--font-size-default) / 2);
+					line-height: 1;
+					color: var(--color-white);
+					text-align: center;
+					font-weight: 600;
+					background-color: var(--color-black);
+					border-radius: 50%;
+					z-index: -1;
+				}
 			}
-		}
 
-		.prize__category {
-			position: relative;
-			list-style: none;
-			counter-increment: category;
-
-			&::marker {
-				display: none;
-			}
-
-			&::before {
-				content: counter(category);
-				position: absolute;
-				top: 0;
-				left: -3em;
-				--diameter: 2em;
-				width: var(--diameter);
-				height: var(--diameter);
-				padding: calc(var(--diameter) / 2 - var(--font-size-default) / 2);
+			.prize__name,
+			.prize__artist,
+			.mention__title, 
+			.award__title {
+				font-size: calc(18rem / 16);
 				line-height: 1;
-				color: var(--color-white);
-				text-align: center;
+				letter-spacing: 0.02em;
 				font-weight: 600;
-				background-color: var(--color-black);
-				border-radius: 50%;
-				z-index: -1;
+				text-align: center;
+				margin: 0;
+			}
+
+			.prize__name {
+				text-transform: uppercase;
+			}
+
+			.prize__image {
+				display: flex;
+				flex-flow: column nowrap;
+				align-items: center;
+				margin: unquote("min(6vh, 3.5rem)") 0;
+			}
+
+			.award-se {
+				list-style: none;
+				padding: 0;
 			}
 		}
 
-		.prize__name,
-		.prize__artist,
-		.mention__title, 
-		.award__title {
-			font-size: calc(18rem / 16);
-			line-height: 1;
-			letter-spacing: 0.02em;
-			font-weight: 600;
-			text-align: center;
-			margin: 0;
-		}
+		.catalogue {
+			
+			.catalogue__title, .catalogue__link {
+				text-align: center;
 
-		.prize__name {
-			text-transform: uppercase;
-		}
+			}
 
-		.prize__image {
-			display: flex;
-			flex-flow: column nowrap;
-			align-items: center;
-			margin: unquote("min(6vh, 3.5rem)") 0;
-		}
+			.catalogue__cover, .catalogue__gallery-toggle {
+				display: flex;
+				flex-flow: column nowrap;
+				align-items: center;
+			}
 
-		.award-se {
-			list-style: none;
-			padding: 0;
-		}
+			.catalogue__title {
 
+				p {
+					font-size: calc(18rem / 16);
+				}
+			}
+
+			.catalogue__link {
+				font-size: calc(18rem / 16);
+				font-weight: 600;
+
+				a {
+					text-decoration: none;
+				}
+
+				a:hover, a:focus {
+					text-decoration: underline;
+				}
+			}
+
+			.catalogue__cover {
+				margin: unquote("min(8vh, 80px) 0 min(6vh, 65px)");
+			}
+			.catalogue__gallery_toggle {}
+
+		}
 	}
 }
 
