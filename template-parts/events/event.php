@@ -43,7 +43,7 @@ if (!defined( 'ABSPATH' ) ) exit;
 	<figure class="event__featured-image">
 
 		<?php
-		the_post_thumbnail();
+		the_post_thumbnail( 'large' );
 		?>
 
 		<figcaption><?php esc_html( the_post_thumbnail_caption() ); ?></figcaption>
@@ -51,18 +51,20 @@ if (!defined( 'ABSPATH' ) ) exit;
 	<div class="event__gallery">
 
 	<?php 
-	$gallery = carbon_get_the_post_meta( 'bp_event_gallery' );
+	// $gallery = carbon_get_the_post_meta( 'bp_event_gallery' );
 
-	foreach ( $gallery as $image ) :
+	// foreach ( $gallery as $image ) :
 		?>
 
-		<figure>
-			<?php echo wp_get_attachment_image( $image, 'thumbnail' ); ?>
-		</figure>
+		<!-- <figure>
+			<?php // echo wp_get_attachment_image( $image, 'thumbnail' ); ?>
+		</figure> -->
 	
 		<?php
-	endforeach;
+	// endforeach;
 	?>
+	</div>
+	<?php echo the_content(); ?>
 
 </div><!-- .event-header -->
 <footer class="entry-footer">
