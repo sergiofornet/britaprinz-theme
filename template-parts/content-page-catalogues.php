@@ -37,36 +37,34 @@
 						$edition_cover_image = wp_get_attachment_image( carbon_get_the_post_meta( 'bp_award_catalogue_cover' ), 'medium' );
 						?>
 
-						<div>
-							<h1>
-								<p><?php esc_html_e( 'Catálogo', 'britaprinz-theme' ); ?></p>
-								<p><?php echo esc_html( $edition ); ?></p>
-							</h1>
+						<h1>
+							<p><?php esc_html_e( 'Catálogo', 'britaprinz-theme' ); ?></p>
+							<p><?php echo esc_html( $edition ); ?></p>
+						</h1>
 
-							<?php 
-							if ($edition_cover_image) :
-								?>
-
-								<figure>
-
-									<?php echo $edition_cover_image; ?>
-
-								</figure>
-								
-								<?php
-							endif;
-							
-							echo sprintf(
-								'<a href="%s" title="%s" target="_blank" rel="noopener noreferrer">%s</a>',
-								esc_url( wp_get_attachment_url( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) ),
-								esc_html( get_the_title() ),
-								esc_html__( 'Descargar PDF', 'britaprinz-theme' )
-							);
+						<?php 
+						if ($edition_cover_image) :
 							?>
 
-							<div class="">
-								<button class="catalog-gallery__toggle"><?php esc_html_e( 'Ver catálogo', 'britaprinz-theme'); ?></button>
-							</div>
+							<figure>
+
+								<?php echo $edition_cover_image; ?>
+
+							</figure>
+
+							<?php
+						endif;
+						
+						echo sprintf(
+							'<a href="%s" title="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+							esc_url( wp_get_attachment_url( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) ),
+							esc_html( get_the_title() ),
+							esc_html__( 'Descargar PDF', 'britaprinz-theme' )
+						);
+						?>
+
+						<div class="">
+							<button class="catalog-gallery__toggle"><?php esc_html_e( 'Ver catálogo', 'britaprinz-theme'); ?></button>
 						</div>
 
 						<?php
