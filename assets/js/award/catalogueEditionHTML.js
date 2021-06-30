@@ -54,19 +54,25 @@ function catalogueHTML(payload) {
 	const html =
 		payload &&
 		`<article id="post-${payload.id}">
-			<div class="entry-content">
-				<h1>
+			<div class="entry-content catalogue">
+				<h1 class="award__title">
 					<p>${payload.lang === 'es' ? 'Catálogo' : 'Catalogue'}</p>
 					<p>${payload.catalogueEdition}</p>
 				</h1>
-				${payload.catalogueCover ? `<figure>${payload.catalogueCover}</figure>` : ``}
-				<a href="${payload.catalogueUrl}">
-					${payload.lang === 'es' ? 'Descargar PDF' : 'Download PDF'}
-				</a>
+				${
+					payload.catalogueCover
+						? `<figure class="award__cover">${payload.catalogueCover}</figure>`
+						: ``
+				}
+				<div class="catalogue__link">
+					<a href="${payload.catalogueUrl}">
+						${payload.lang === 'es' ? 'Descargar PDF' : 'Download PDF'}
+					</a>
+				</div>
 				${
 					payload.catalogueGallery.length
 						? `<div class="">
-							<button class="catalog-gallery__toggle">${
+							<button class="gallery-toggle">${
 								payload.lang === 'es'
 									? 'Ver catálogo'
 									: 'View catalog'
@@ -95,7 +101,7 @@ function catalogueGalleryHTML(catalogImages, id) {
 		: '';
 
 	const galleryContainer = document.querySelector('.award-gallery');
-	const galleryToggle = document.querySelector('.catalog-gallery__toggle');
+	const galleryToggle = document.querySelector('.gallery-toggle');
 	galleryToggle.addEventListener('click', () => {
 		if (id !== parseInt(galleryContainer.dataset.edition)) {
 			console.log(typeof id, typeof galleryContainer.dataset.edition);

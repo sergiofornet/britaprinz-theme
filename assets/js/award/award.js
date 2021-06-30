@@ -106,7 +106,7 @@ if (type === 'award') {
 
 // swiper.init();
 
-// const galleryButton = document.querySelector('.catalog-gallery__toggle');
+// const galleryButton = document.querySelector('.gallery-toggle');
 // const gallery = document.querySelector('.award-gallery');
 // galleryButton.addEventListener('click', () => {
 // 	if (gallery.classList.contains('hidden')) {
