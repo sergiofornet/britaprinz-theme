@@ -134,14 +134,14 @@
 
 			a {
 				position: relative;
-				margin-block-end: 1.5em;
+				margin-block-end: 1.1em;
 
 				&::after {
 					content: "";
 					position: absolute;
 					bottom: -1.1em;
-					width: 59px;
-					height: 24px;
+					width: 45px;
+					height: 18px;
 				}
 
 				&.previous {
@@ -151,8 +151,8 @@
 					
 					&::after {
 						left: -2em;
-						width: 45px;
-						height: 18px;
+						// width: 45px;
+						// height: 18px;
 						background-image: url("assets/img/icons/bpa_arrow.svg");
 						background-repeat: no-repeat;
 						transform: translateX(0) rotate(180deg);
@@ -171,8 +171,8 @@
 					
 					&::after {
 						right: -2em;
-						width: 59px;
-						height: 24px;
+						// width: 45px;
+						// height: 18px;
 						background-image: url("assets/img/icons/bpa_arrow.svg");
 						background-repeat: no-repeat;
 						transform: translateX(0);
