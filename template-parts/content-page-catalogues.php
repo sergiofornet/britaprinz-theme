@@ -37,7 +37,7 @@
 						$edition_cover_image = wp_get_attachment_image( carbon_get_the_post_meta( 'bp_award_catalogue_cover' ), 'medium' );
 						?>
 
-						<h1 class="award__title">
+						<h1 class="catalogue__title">
 							<p><?php esc_html_e( 'Catálogo', 'britaprinz-theme' ); ?></p>
 							<p><?php echo esc_html( $edition ); ?></p>
 						</h1>
@@ -46,7 +46,7 @@
 						if ($edition_cover_image) :
 							?>
 
-							<figure class="award__cover">
+							<figure class="catalogue__cover">
 
 								<?php echo $edition_cover_image; ?>
 

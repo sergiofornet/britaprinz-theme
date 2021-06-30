@@ -55,13 +55,13 @@ function catalogueHTML(payload) {
 		payload &&
 		`<article id="post-${payload.id}">
 			<div class="entry-content catalogue">
-				<h1 class="award__title">
+				<h1 class="catalogue__title">
 					<p>${payload.lang === 'es' ? 'Catálogo' : 'Catalogue'}</p>
 					<p>${payload.catalogueEdition}</p>
 				</h1>
 				${
 					payload.catalogueCover
-						? `<figure class="award__cover">${payload.catalogueCover}</figure>`
+						? `<figure class="catalogue__cover">${payload.catalogueCover}</figure>`
 						: ``
 				}
 				<div class="catalogue__link">
@@ -71,7 +71,7 @@ function catalogueHTML(payload) {
 				</div>
 				${
 					payload.catalogueGallery.length
-						? `<div class="">
+						? `<div class="catalogue__gallery-toggle">
 							<button class="gallery-toggle">${
 								payload.lang === 'es'
 									? 'Ver catálogo'
