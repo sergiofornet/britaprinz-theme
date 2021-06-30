@@ -405,7 +405,7 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .collection .collection__artworks{border-left:1px solid var(--color-black)}
 .award-container .award-menu-container{border-right:1px solid var(--color-black)}
 .award-container .award-edition-container{padding:min(6vh,60px) 0 min(12vh,120px) min(5vw,55px);border-left:1px solid var(--color-black)}
-.award-container .award-edition-container.container__catalogue{padding-top:min(15vh,150px)}
+.award-container .award-edition-container.container__catalogue{padding:min(15vh,150px) 0 min(12vh,120px)}
 }@media(min-height:64em) and (min-width:48em){.artists__initials .initial__button{font-size:calc(18rem / 16)}
 }@media(min-width:80em){.technique-content__steps{grid-template-rows:auto auto;grid-template-columns:repeat(6,calc(100% / 6))}
 .technique-content__steps .step{padding:calc(var(--technique-gap) / 2)}
