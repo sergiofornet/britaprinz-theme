@@ -21,7 +21,7 @@ textarea {
 	border-left: var(--border-input);
 	border-radius: 0px;
 	padding: .5em;
-	// margin-bottom: 2em;
+	width: 100%;
 
 	&:focus {
 		color: $color__text-input-focus;

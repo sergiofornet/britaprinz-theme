@@ -1,0 +1,74 @@
+.wp-block-contact-form-7-contact-form-selector {
+
+	.wpcf7-form {
+		max-width: 1000px;
+	}
+
+	.form__field {
+		display: flex;
+		margin-block-end: 3em;
+
+		@media (max-width: 47.9375em) {
+			flex-flow: row wrap;
+			
+			& > * {
+				flex-basis: 100%;
+			}
+		}
+		
+		@media (min-width: 48em) {
+			flex-flow: row nowrap;
+			align-items: flex-start;
+
+			& > label {
+				flex-basis: 25%;
+			}
+
+			& > .wpcf7-form-control-wrap {
+				flex-basis: 75%;
+			}
+		}
+
+		& > label {
+			font-size: 1.5em;
+			font-weight: 600;
+			text-transform: uppercase;
+			font-size: calc(21rem / 16);
+			position: relative;
+		
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: -10px;
+				left: 0;
+				width: 31px;
+				height: 5px;
+				background-color: var(--color-black);
+			}
+			
+		}
+
+		& > .wpcf7-form-control-wrap {
+
+			input[type=text],
+			textarea,
+			input[type=email] {
+				font-size: 1em;
+			}
+		}
+
+		
+	}
+	.privacy-policy-block {
+		// font-size: calc(11rem / 16);
+		p {
+			font-size: calc(11rem / 16);
+		}
+		font-weight: 300;
+		overflow-y: scroll;
+		border: 1px solid var(--color-black);
+		padding: 0.3em .8em;
+		max-height: 150px;
+		margin-bottom: 20px;
+	}
+}

@@ -112,7 +112,7 @@ button.artist__button[data-active=true],button.edition-item__button[data-active=
 button.edition-item__button[data-active=true],input[type="button"].edition-item__button[data-active=true],input[type="reset"].edition-item__button[data-active=true],input[type="submit"].edition-item__button[data-active=true]{-webkit-transform:translateX(1em);transform:translateX(1em)}
 button.return-button,input[type="button"].return-button,input[type="reset"].return-button,input[type="submit"].return-button{position:fixed;top:-2px;left:50%;color:var(--color-white);background-color:var(--color-black);z-index:101;-webkit-transition:var(--transition-default);transition:var(--transition-default)}
 button.return-button:hover,button.return-button:focus,button.return-button:active,input[type="button"].return-button:hover,input[type="button"].return-button:focus,input[type="button"].return-button:active,input[type="reset"].return-button:hover,input[type="reset"].return-button:focus,input[type="reset"].return-button:active,input[type="submit"].return-button:hover,input[type="submit"].return-button:focus,input[type="submit"].return-button:active{background-color:var(--color-white);color:var(--color--black)}
-input[type="text"],input[type="email"],input[type="url"],input[type="password"],input[type="search"],input[type="number"],input[type="tel"],input[type="range"],input[type="date"],input[type="month"],input[type="week"],input[type="time"],input[type="datetime"],input[type="datetime-local"],input[type="color"],textarea{color:var(--color-black);--border-input:4px solid var(--color-black);border:0;border-bottom:var(--border-input);border-left:var(--border-input);border-radius:0;padding:.5em}
+input[type="text"],input[type="email"],input[type="url"],input[type="password"],input[type="search"],input[type="number"],input[type="tel"],input[type="range"],input[type="date"],input[type="month"],input[type="week"],input[type="time"],input[type="datetime"],input[type="datetime-local"],input[type="color"],textarea{color:var(--color-black);--border-input:4px solid var(--color-black);border:0;border-bottom:var(--border-input);border-left:var(--border-input);border-radius:0;padding:.5em;width:100%}
 input[type="text"]:focus,input[type="email"]:focus,input[type="url"]:focus,input[type="password"]:focus,input[type="search"]:focus,input[type="number"]:focus,input[type="tel"]:focus,input[type="range"]:focus,input[type="date"]:focus,input[type="month"]:focus,input[type="week"]:focus,input[type="time"]:focus,input[type="datetime"]:focus,input[type="datetime-local"]:focus,input[type="color"]:focus,textarea:focus{color:#111;outline:1px dashed var(--color-black)}
 select{border:1px solid #ccc}
 textarea{width:100%}
@@ -306,6 +306,13 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .projects .project h2:hover{-webkit-transform:translateX(1em);transform:translateX(1em)}
 .projects .project a{text-decoration:none}
 .projects .project a:hover{text-decoration:underline}
+.wp-block-contact-form-7-contact-form-selector .wpcf7-form{max-width:1000px}
+.wp-block-contact-form-7-contact-form-selector .form__field{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-margin-after:3em;margin-block-end:3em}
+.wp-block-contact-form-7-contact-form-selector .form__field>label{font-size:1.5em;font-weight:600;text-transform:uppercase;font-size:calc(21rem / 16);position:relative}
+.wp-block-contact-form-7-contact-form-selector .form__field>label::after{content:"";position:absolute;bottom:-10px;left:0;width:31px;height:5px;background-color:var(--color-black)}
+.wp-block-contact-form-7-contact-form-selector .form__field>.wpcf7-form-control-wrap input[type=text],.wp-block-contact-form-7-contact-form-selector .form__field>.wpcf7-form-control-wrap textarea,.wp-block-contact-form-7-contact-form-selector .form__field>.wpcf7-form-control-wrap input[type=email]{font-size:1em}
+.wp-block-contact-form-7-contact-form-selector .privacy-policy-block{font-weight:300;overflow-y:scroll;border:1px solid var(--color-black);padding:.3em .8em;max-height:150px;margin-bottom:20px}
+.wp-block-contact-form-7-contact-form-selector .privacy-policy-block p{font-size:calc(11rem / 16)}
 .comment-content a{word-wrap:break-word}
 .bypostauthor{display:block}
 .widget{margin:0 0 1.5em}
@@ -384,6 +391,9 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .footer-links{justify-self:center;grid-column:2 / 3}
 .home article.page .circle-container{font-size:calc(18rem / 16)}
 .award-container>*{-webkit-padding-before:2em;padding-block-start:2em;-webkit-padding-after:2em;padding-block-end:2em}
+.wp-block-contact-form-7-contact-form-selector .form__field{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}
+.wp-block-contact-form-7-contact-form-selector .form__field>label{-ms-flex-preferred-size:25%;flex-basis:25%}
+.wp-block-contact-form-7-contact-form-selector .form__field>.wpcf7-form-control-wrap{-ms-flex-preferred-size:75%;flex-basis:75%}
 }@media(orientation:portrait) and (min-width:48em){.home article.page{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .home article.page .circle{--circle-diameter:60vw}
 }@media(orientation:landscape) and (min-width:48em){.home article.page{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:start}
@@ -468,6 +478,8 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .footer__social-links{grid-column:2 / 3;grid-row:2 / 3}
 .home .container--home-menu{-webkit-padding-before:calc(30em / 24);padding-block-start:calc(30em / 24)}
 .home article.page .circle-container{font-size:calc(14rem / 16)}
+.wp-block-contact-form-7-contact-form-selector .form__field{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row wrap;flex-flow:row wrap}
+.wp-block-contact-form-7-contact-form-selector .form__field>*{-ms-flex-preferred-size:100%;flex-basis:100%}
 }@media(max-width:47.9375em) and (max-width:63.9375em){:not(.post-type-archive-artwork) .secondary-navigation .menu-item--title>ul.sub-menu .current-menu-item{font-weight:700}
 :not(.post-type-archive-artwork) .secondary-navigation :not(.award-menu) .menu-item--title>ul.sub-menu .current-menu-item{-webkit-margin-start:0;margin-inline-start:0;font-weight:700}
 }@media(max-width:29.9375em){ul.menu>li.menu-item--title>h1,ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{font-size:calc(20rem / 16)}
