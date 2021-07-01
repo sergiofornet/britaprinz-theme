@@ -290,7 +290,7 @@ function britaprinz_theme_get_catalogues() {
 		
 		if ( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) :
 
-			$edition            = esc_html( get_the_title() );
+			$edition            = esc_html( carbon_get_the_post_meta( 'bp_award_edition' ) );
 			$edition_id         = esc_html( get_the_ID() );
 			$catalogues_output .= "
 				<li id='award-catalogue-{$edition_id}' class='edition-item edition-item--{$edition_id}'>
