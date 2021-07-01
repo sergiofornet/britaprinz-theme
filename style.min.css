@@ -299,9 +299,9 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .page-template-page_past-events .entry-content ul.events .year .year__events .event a,.page-template-page_future-events .entry-content ul.events .year .year__events .event a{text-decoration:none;-webkit-transition:font-weight .1s ease-in-out;transition:font-weight .1s ease-in-out}
 .page-template-page_past-events .entry-content ul.events .year .year__events .event a:hover,.page-template-page_future-events .entry-content ul.events .year .year__events .event a:hover{font-weight:600}
 .single-event article.event .event__date,.page-template-page_current-events article.event .event__date{margin:0}
-.single-event article.event .entry-content d .event__featured-image,.page-template-page_current-events article.event .entry-content d .event__featured-image{margin:min(9vh,90px) 0 min(5vh,50px)}
-.single-event article.event .entry-content d .event__featured-image img,.page-template-page_current-events article.event .entry-content d .event__featured-image img{display:block}
-.single-event article.event .entry-content d .event__featured-image figcaption,.page-template-page_current-events article.event .entry-content d .event__featured-image figcaption{-webkit-margin-before:1em;margin-block-start:1em}
+.single-event article.event .entry-content .event__featured-image,.page-template-page_current-events article.event .entry-content .event__featured-image{margin:min(9vh,90px) 0 min(5vh,50px)}
+.single-event article.event .entry-content .event__featured-image img,.page-template-page_current-events article.event .entry-content .event__featured-image img{display:block}
+.single-event article.event .entry-content .event__featured-image figcaption,.page-template-page_current-events article.event .entry-content .event__featured-image figcaption{-webkit-margin-before:1em;margin-block-start:1em}
 .projects .project h2{font-size:calc(18rem / 16);margin:calc(40rem / 16) 0;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content;-webkit-transition:-webkit-transform .2s ease-in-out;transition:-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out;transition:transform .2s ease-in-out,-webkit-transform .2s ease-in-out;-webkit-transform:translateX(0);transform:translateX(0)}
 .projects .project h2:hover{-webkit-transform:translateX(1em);transform:translateX(1em)}
 .projects .project a{text-decoration:none}
