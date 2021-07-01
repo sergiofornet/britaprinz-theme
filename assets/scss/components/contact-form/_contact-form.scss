@@ -6,6 +6,7 @@
 
 	.form__field {
 		display: flex;
+		gap: 2em;
 		margin-block-end: 3em;
 
 		@media (max-width: 47.9375em) {
@@ -28,14 +29,14 @@
 				flex-basis: 75%;
 			}
 		}
-
+		
 		& > label {
 			font-size: 1.5em;
 			font-weight: 600;
 			text-transform: uppercase;
 			font-size: calc(21rem / 16);
 			position: relative;
-		
+			
 			&::after {
 				content: "";
 				position: absolute;
@@ -47,20 +48,64 @@
 			}
 			
 		}
-
+		
 		& > .wpcf7-form-control-wrap {
-
+			font-size: var(--font-size-default);
+			
 			input[type=text],
 			textarea,
 			input[type=email] {
-				font-size: 1em;
+				font-size: inherit;
 			}
+			
 		}
 
-		
+		&.form__field--submit {
+			justify-content: flex-end;
+			position: relative;
+			margin-block-end: 0;
+
+			& > * {
+				flex-basis: auto;
+			}
+
+			& > div {
+				position: relative;
+				width: fit-content;
+
+				&::after {
+					position: absolute;
+					content: "";
+					background-image: url("assets/img/icons/bpa_arrow.svg");
+					width: 45px;
+					height: 18px;
+					bottom: 0.6em;
+					right: 2em;
+					transition: right .5s ease-in-out;
+
+				}
+
+				&:hover::after {
+					right: 1em;
+				}
+			}
+
+			input[type=submit] {
+				font-size: 1.5em;
+				font-weight: 600;
+				text-transform: uppercase;
+				border: none;
+				padding: 0;
+				margin-block-end: 1.1em;
+			}
+
+			.ajax-loader {
+				margin: 0 1em;
+				pointer-events: none;
+			}
+		}
 	}
 	.privacy-policy-block {
-		// font-size: calc(11rem / 16);
 		p {
 			font-size: calc(11rem / 16);
 		}
