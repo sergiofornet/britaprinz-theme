@@ -889,10 +889,10 @@ textarea {
 
 @media (max-width: 47.9375em) {
   .no-sidebar .site-main--default {
-    -webkit-margin-before: 1em;
-            margin-block-start: 1em;
-    -webkit-margin-after: 1em;
-            margin-block-end: 1em;
+    -webkit-margin-before: 2em;
+            margin-block-start: 2em;
+    -webkit-margin-after: 2em;
+            margin-block-end: 2em;
   }
 }
 

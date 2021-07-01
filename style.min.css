@@ -455,7 +455,7 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .award-container .award-edition-container{border-left:2px solid var(--color-black);overflow-y:auto;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px))}
 }@media(max-width:59.9375em){.technique-content__steps{grid-template-columns:1fr;gap:calc(var(--technique-gap) * 2)}
 }@media(max-width:47.9375em){.no-sidebar .site{--site-padding-inline:20px}
-.no-sidebar .site-main--default{-webkit-margin-before:1em;margin-block-start:1em;-webkit-margin-after:1em;margin-block-end:1em}
+.no-sidebar .site-main--default{-webkit-margin-before:2em;margin-block-start:2em;-webkit-margin-after:2em;margin-block-end:2em}
 .no-sidebar .site-main--sidebar{-webkit-padding-after:3em;padding-block-end:3em}
 .no-sidebar .site-main--sidebar .secondary-navigation{-webkit-margin-after:1em;margin-block-end:1em}
 .no-sidebar .site-main--sidebar>article,.no-sidebar .site-main--sidebar>div{-webkit-padding-start:1em;padding-inline-start:1em;-webkit-padding-end:1em;padding-inline-end:1em}
