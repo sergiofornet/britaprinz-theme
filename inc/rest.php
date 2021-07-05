@@ -353,9 +353,11 @@ function britaprinz_artwork_image( $object, $field_name, $request ) {
 function britaprinz_artwork_gallery( $object, $field_name, $request ) {
 	$images_ids = carbon_get_post_meta( $object['id'], 'bp_artwork_gallery' );
 
+	add_filter( 'wp_get_attachment_image_attributes', 'bpa_theme_filter_gallery_attrs', 10, 2 );
+
 	$gallery = $images_ids ? array_map(
 		fn( $id ) => array(
-			'image'   => wp_get_attachment_image( $id, 'full' ),
+			'image'   => wp_get_attachment_image( $id, 'award-thumbnail' ),
 			'caption' => wp_get_attachment_caption( $id ),
 		), 
 		$images_ids
