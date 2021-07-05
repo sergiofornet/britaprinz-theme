@@ -1,15 +1,26 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /**
  * Slider prototype definition
  *
- * @param {HTMLElement} slider
- * @param {boolean} scroll
+ * @param {HTMLElement} slider Where our slider will be created.
+ * @param {boolean} scroll Have the slides a hi-res scrollable version?
+ * @param {boolean} lightbox Have we just one slide?
  */
 function Slider(slider) {
   var _this = this;
 
   var scroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var lightbox = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
   if (!(slider instanceof Element)) {
     throw new Error('No slider passed in');
@@ -19,6 +30,7 @@ function Slider(slider) {
   this.slides = slider.querySelector('.slides');
   this.slider = slider;
   this.scroll = scroll;
+  this.lightbox = lightbox;
   var prevButton = slider.querySelector('.previous-slide');
   var nextButton = slider.querySelector('.next-slide'); // when this slider is created, run the start slider function
 
@@ -37,22 +49,27 @@ function Slider(slider) {
 
 Slider.prototype.startSlider = function () {
   this.current = this.slider.querySelector('.current') || this.slides.firstElementChild;
-  this.prev = this.current.previousElementSibling || this.slides.lastElementChild;
-  this.next = this.current.nextElementSibling || this.slides.firstElementChild; // console.log(this.current, this.prev, this.next);
+
+  if (this.lightbox === false) {
+    this.prev = this.current.previousElementSibling || this.slides.lastElementChild;
+    this.next = this.current.nextElementSibling || this.slides.firstElementChild;
+  }
 };
 
 Slider.prototype.applyClasses = function () {
-  // console.log(this.current, this.prev, this.next);
   this.current.classList.add('current');
-  this.prev.classList.add('prev');
-  this.next.classList.add('next');
+
+  if (this.lightbox === false) {
+    this.prev.classList.add('prev');
+    this.next.classList.add('next');
+  }
 };
 
 Slider.prototype.move = function (direction) {
   var _this$prev$classList, _this$current$classLi, _this$next$classList;
 
-  // first strip all the classes off the current slides
-  // console.log(this.current, this.prev, this.next);
+  if (this.lightbox) return; // first strip all the classes off the current slides
+
   var classesToRemove = ['prev', 'current', 'next'];
 
   (_this$prev$classList = this.prev.classList).remove.apply(_this$prev$classList, classesToRemove);
@@ -81,45 +98,105 @@ Slider.prototype.move = function (direction) {
 };
 
 Slider.prototype.scrollImage = function () {
-  [this.next, this.prev].forEach(function (slide) {
-    slide.removeEventListener('mouseenter', enterHandler, false);
-    slide.removeEventListener('mouseleave', leaveHandler, false);
-    slide.removeEventListener('mousemove', moveHandler, false);
-  });
+  if (this.lightbox === false) {
+    [this.next, this.prev].forEach(function (slide) {
+      slide.removeEventListener('mouseenter', enterHandler, false);
+      slide.removeEventListener('mouseleave', leaveHandler, false);
+      slide.removeEventListener('mousemove', moveHandler, false);
+    });
+  }
+
   this.current.addEventListener('mouseenter', enterHandler, false);
   this.current.addEventListener('mouseleave', leaveHandler, false);
   this.current.addEventListener('mousemove', moveHandler, false);
 };
+/**
+ * Create an image asynchronously
+ *
+ * @param {string} src Our image url
+ * @return {Promise} A promise of a new image HTMLElement
+ */
 
-var enterHandler = function enterHandler(event) {
-  var _event$currentTarget$ = event.currentTarget.querySelector('img'),
-      imageWidth = _event$currentTarget$.naturalWidth,
-      imageHeight = _event$currentTarget$.naturalHeight;
 
-  var _window = window,
-      windowWidth = _window.innerWidth,
-      windowHeight = _window.innerHeight; // Check if hi-res image is bigger than screen size
+function asyncCreateImage(_x) {
+  return _asyncCreateImage.apply(this, arguments);
+}
 
-  if (imageWidth > windowWidth || imageHeight > windowHeight) {
-    // Add active state class
-    event.currentTarget.classList.add('active-scroll'); // Create a container for hi-res image
+function _asyncCreateImage() {
+  _asyncCreateImage = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(src) {
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            return _context2.abrupt("return", new Promise(function (resolve, reject) {
+              var img = new Image();
 
-    var hiResContainer = document.createElement('div');
-    hiResContainer.classList.add('slide__hi-res');
-    hiResContainer.style.width = "".concat(window.innerWidth, "px");
-    hiResContainer.style.height = "".concat(window.innerHeight, "px");
-    hiResContainer.style.opacity = '0';
-    event.currentTarget.appendChild(hiResContainer); // Create hi-res image
+              img.onload = function () {
+                return resolve(img);
+              };
 
-    var hiResImage = document.createElement('img');
-    var hiResImageUrl = event.currentTarget.querySelector('img').src;
-    hiResImage.src = hiResImageUrl;
-    hiResContainer.appendChild(hiResImage);
-    setTimeout(function () {
-      return hiResContainer.style.opacity = '1';
-    }, 50);
-  }
-};
+              img.onerror = reject;
+              img.src = src;
+            }));
+
+          case 1:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+  return _asyncCreateImage.apply(this, arguments);
+}
+
+var enterHandler = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+    var hiResImage, imageWidth, imageHeight, _window, windowWidth, windowHeight, hiResContainer;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return asyncCreateImage(event.currentTarget.querySelector('img').dataset.full);
+
+          case 2:
+            hiResImage = _context.sent;
+            imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
+            _window = window, windowWidth = _window.innerWidth, windowHeight = _window.innerHeight; // Check if hi-res image is bigger than screen size
+
+            if (imageWidth > windowWidth || imageHeight > windowHeight) {
+              // Add active state class
+              event.target.classList.add('active-scroll'); // Create a container for hi-res image
+
+              hiResContainer = document.createElement('div');
+              hiResContainer.classList.add('slide__hi-res');
+              hiResContainer.style.width = "".concat(hiResImage.width, "px");
+              hiResContainer.style.height = "".concat(hiResImage.height, "px");
+              hiResContainer.style.opacity = '0';
+              hiResContainer.style.setProperty('--hires-width', "".concat(hiResImage.width, "px"));
+              event.target.appendChild(hiResContainer); // Add width and height to hi-res image
+
+              hiResImage.style.width = "".concat(hiResImage.width, "px");
+              hiResImage.style.height = "".concat(hiResImage.height, "px");
+              hiResContainer.appendChild(hiResImage);
+              setTimeout(function () {
+                return hiResContainer.style.opacity = '1';
+              }, 50);
+            }
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function enterHandler(_x2) {
+    return _ref3.apply(this, arguments);
+  };
+}();
 
 var leaveHandler = function leaveHandler(event) {
   // Check if there is an active scrollable image
@@ -151,6 +228,9 @@ var moveHandler = function moveHandler(event) {
     hiResImage.style.transform = "translate(".concat(imageX, "px, ").concat(imageY, "px)");
   }
 };
+
+var _default = Slider;
+exports.default = _default;
 "use strict";
 
 /**

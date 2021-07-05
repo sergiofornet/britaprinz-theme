@@ -863,6 +863,230 @@
 
   var regenerator = runtime_1;
 
+  const wait = (amount = 0) => new Promise(resolve => setTimeout(resolve, amount));
+
+  var waait = wait;
+
+  /**
+   * Slider prototype definition
+   *
+   * @param {HTMLElement} slider Where our slider will be created.
+   * @param {boolean} scroll Have the slides a hi-res scrollable version?
+   * @param {boolean} lightbox Have we just one slide?
+   */
+  function Slider(slider) {
+    var _this = this;
+
+    var scroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var lightbox = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    if (!(slider instanceof Element)) {
+      throw new Error('No slider passed in');
+    } // select the elements needed for the slider
+
+
+    this.slides = slider.querySelector('.slides');
+    this.slider = slider;
+    this.scroll = scroll;
+    this.lightbox = lightbox;
+    var prevButton = slider.querySelector('.previous-slide');
+    var nextButton = slider.querySelector('.next-slide'); // when this slider is created, run the start slider function
+
+    this.startSlider();
+    this.applyClasses();
+    this.scroll && this.scrollImage(); // requestAnimationFrame(this.autoplay);
+    // Event listeners
+
+    prevButton && prevButton.addEventListener('click', function () {
+      return _this.move('back');
+    });
+    nextButton && nextButton.addEventListener('click', function () {
+      return _this.move();
+    });
+  }
+
+  Slider.prototype.startSlider = function () {
+    this.current = this.slider.querySelector('.current') || this.slides.firstElementChild;
+
+    if (this.lightbox === false) {
+      this.prev = this.current.previousElementSibling || this.slides.lastElementChild;
+      this.next = this.current.nextElementSibling || this.slides.firstElementChild;
+    }
+  };
+
+  Slider.prototype.applyClasses = function () {
+    this.current.classList.add('current');
+
+    if (this.lightbox === false) {
+      this.prev.classList.add('prev');
+      this.next.classList.add('next');
+    }
+  };
+
+  Slider.prototype.move = function (direction) {
+    var _this$prev$classList, _this$current$classLi, _this$next$classList;
+
+    if (this.lightbox) return; // first strip all the classes off the current slides
+
+    var classesToRemove = ['prev', 'current', 'next'];
+
+    (_this$prev$classList = this.prev.classList).remove.apply(_this$prev$classList, classesToRemove);
+
+    (_this$current$classLi = this.current.classList).remove.apply(_this$current$classLi, classesToRemove);
+
+    (_this$next$classList = this.next.classList).remove.apply(_this$next$classList, classesToRemove);
+
+    if (direction === 'back') {
+      // make an new array of the new values, and destructure them over and into the prev, current and next variables
+      var _ref = [// get the prev slide, if there is none, get the last slide from the entire slider for wrapping
+      this.prev.previousElementSibling || this.slides.lastElementChild, this.prev, this.current];
+      this.prev = _ref[0];
+      this.current = _ref[1];
+      this.next = _ref[2];
+    } else {
+      var _ref2 = [this.current, this.next, // get the next slide, or if it's at the end, loop around and grab the first slide
+      this.next.nextElementSibling || this.slides.firstElementChild];
+      this.prev = _ref2[0];
+      this.current = _ref2[1];
+      this.next = _ref2[2];
+    }
+
+    this.applyClasses();
+    this.scroll && this.scrollImage();
+  };
+
+  Slider.prototype.scrollImage = function () {
+    if (this.lightbox === false) {
+      [this.next, this.prev].forEach(function (slide) {
+        slide.removeEventListener('mouseenter', enterHandler, false);
+        slide.removeEventListener('mouseleave', leaveHandler, false);
+        slide.removeEventListener('mousemove', moveHandler, false);
+      });
+    }
+
+    this.current.addEventListener('mouseenter', enterHandler, false);
+    this.current.addEventListener('mouseleave', leaveHandler, false);
+    this.current.addEventListener('mousemove', moveHandler, false);
+  };
+  /**
+   * Create an image asynchronously
+   *
+   * @param {string} src Our image url
+   * @return {Promise} A promise of a new image HTMLElement
+   */
+
+
+  function asyncCreateImage(_x) {
+    return _asyncCreateImage.apply(this, arguments);
+  }
+
+  function _asyncCreateImage() {
+    _asyncCreateImage = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2(src) {
+      return regenerator.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                var img = new Image();
+
+                img.onload = function () {
+                  return resolve(img);
+                };
+
+                img.onerror = reject;
+                img.src = src;
+              }));
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _asyncCreateImage.apply(this, arguments);
+  }
+
+  var enterHandler = /*#__PURE__*/function () {
+    var _ref3 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(event) {
+      var hiResImage, imageWidth, imageHeight, _window, windowWidth, windowHeight, hiResContainer;
+
+      return regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return asyncCreateImage(event.currentTarget.querySelector('img').dataset.full);
+
+            case 2:
+              hiResImage = _context.sent;
+              imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
+              _window = window, windowWidth = _window.innerWidth, windowHeight = _window.innerHeight; // Check if hi-res image is bigger than screen size
+
+              if (imageWidth > windowWidth || imageHeight > windowHeight) {
+                // Add active state class
+                event.target.classList.add('active-scroll'); // Create a container for hi-res image
+
+                hiResContainer = document.createElement('div');
+                hiResContainer.classList.add('slide__hi-res');
+                hiResContainer.style.width = "".concat(hiResImage.width, "px");
+                hiResContainer.style.height = "".concat(hiResImage.height, "px");
+                hiResContainer.style.opacity = '0';
+                hiResContainer.style.setProperty('--hires-width', "".concat(hiResImage.width, "px"));
+                event.target.appendChild(hiResContainer); // Add width and height to hi-res image
+
+                hiResImage.style.width = "".concat(hiResImage.width, "px");
+                hiResImage.style.height = "".concat(hiResImage.height, "px");
+                hiResContainer.appendChild(hiResImage);
+                setTimeout(function () {
+                  return hiResContainer.style.opacity = '1';
+                }, 50);
+              }
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function enterHandler(_x2) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var leaveHandler = function leaveHandler(event) {
+    // Check if there is an active scrollable image
+    if (event.currentTarget.classList.contains('active-scroll')) {
+      // Remove scrollable image
+      var hiResContainer = event.currentTarget.querySelector('.slide__hi-res');
+      hiResContainer.style.opacity = '0';
+      event.currentTarget.removeChild(hiResContainer); // Remove active state class
+
+      event.currentTarget.classList.remove('active-scroll');
+    }
+  };
+
+  var moveHandler = function moveHandler(event) {
+    // Check if there is an active scrollable image
+    if (event.currentTarget.classList.contains('active-scroll')) {
+      var hiResImage = event.currentTarget.querySelector('.slide__hi-res img');
+      var _window2 = window,
+          windowWidth = _window2.innerWidth,
+          windowHeight = _window2.innerHeight;
+      var cursorX = event.clientX,
+          cursorY = event.clientY;
+      var imageWidth = hiResImage.naturalWidth,
+          imageHeight = hiResImage.naturalHeight;
+      imageWidth = imageWidth < windowWidth ? windowWidth : imageWidth;
+      imageHeight = imageHeight < windowHeight ? windowHeight : imageHeight;
+      var imageX = Math.floor((imageWidth - windowWidth) * cursorX / windowWidth) * -1;
+      var imageY = Math.floor((imageHeight - windowHeight) * cursorY / windowHeight) * -1;
+      hiResImage.style.transform = "translate(".concat(imageX, "px, ").concat(imageY, "px)");
+    }
+  };
+
   function asyncFetch(_x, _x2) {
     return _asyncFetch.apply(this, arguments);
   }
@@ -941,10 +1165,6 @@
   function getHeight(element) {
     return element.offsetHeight;
   }
-
-  const wait = (amount = 0) => new Promise(resolve => setTimeout(resolve, amount));
-
-  var waait = wait;
 
   function setCollectionHeaderHeight() {
     var collectionHeader = document.querySelector('.collection__header');
@@ -1085,12 +1305,31 @@
             artworkSlider.insertAdjacentElement('afterbegin', slidesContainer);
             var slides = jsonResponse.filter(function (item) {
               return item.id === parseInt(artwork);
-            })[0].artwork_image_gallery;
+            })[0].artwork_image_gallery; // Handle slides < 4 cases
+
+            var lightbox = false;
+
+            if (slides.length === 1) {
+              // If there is only one slide
+              // then there's nothing to slide
+              lightbox = true;
+            } else if (slides.length < 4) {
+              // Slider doesn't look great with less than 4 slides
+              // so we duplicate them
+              slides = [].concat(toConsumableArray(slides), toConsumableArray(slides));
+            } // We create and add every slide
+
+
             slides.forEach(function (slide) {
-              slidesContainer.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<figure class=\"slide\">\n\t\t\t\t\t\t\t\t".concat(slide.image, "\n\t\t\t\t\t\t\t\t").concat(jsonResponse[0].bp_artwork_multiple_artists && "<figcaption>".concat(slide.caption, "</figcaption>"), "\n\t\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t"));
-            });
-            artworkSlider.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t<div class=\"controls\">\n\t\t\t\t\t\t\t\t<button class=\"previous-slide\">\u2190</button>\n\t\t\t\t\t\t\t\t<button class=\"next-slide\">\u2192</button>\n\t\t\t\t\t\t\t</div>");
-            new Slider(artworkSlider, true); // slidesContainer.insertAdjacentHTML('afterbegin', jsonResponse.filter((item) => item.id === parseInt(artwork))[ 0 ].artwork_image_gallery.join('\n'));
+              slidesContainer.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t\t<figure class=\"slide\">\n\t\t\t\t\t\t\t\t\t".concat(slide.image, "\n\t\t\t\t\t\t\t\t\t").concat(jsonResponse[0].bp_artwork_multiple_artists ? "<figcaption>".concat(slide.caption, "</figcaption>") : "", "\n\t\t\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t"));
+            }); // Create previous and next buttons if we have slides to slide
+
+            if (lightbox === false) {
+              artworkSlider.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t\t<div class=\"controls\">\n\t\t\t\t\t\t\t\t\t<button class=\"previous-slide\">\u2190</button>\n\t\t\t\t\t\t\t\t\t<button class=\"next-slide\">\u2192</button>\n\t\t\t\t\t\t\t\t</div>");
+            } // Then create or slider or lightbox
+
+
+            new Slider(artworkSlider, true, lightbox);
           }
         });
       });
