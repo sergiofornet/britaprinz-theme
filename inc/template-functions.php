@@ -369,3 +369,16 @@ function bpa_theme_image_allowed_attrs() {
 		),
 	);
 }
+
+/**
+ * Add a full size image url via data attributes
+ * 
+ * @param Array $atts - an array of attribures.
+ * @param Post  $attachment - An image post object.
+ * @return $atts
+ */
+function bpa_theme_filter_gallery_attrs( $atts, $attachment ) {
+	$full_size         = wp_get_attachment_image_src( $attachment->ID, 'full' );
+	$atts['data-full'] = $full_size[0];
+	return $atts;
+}
