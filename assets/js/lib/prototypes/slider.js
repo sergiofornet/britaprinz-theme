@@ -15,6 +15,29 @@ function Slider(slider, scroll = false, lightbox = false) {
 	this.slider = slider;
 	this.scroll = scroll;
 	this.lightbox = lightbox;
+
+	// Handle slides < 4 cases
+	if (this.slides.childElementCount === 1) {
+		// If there is only one slide
+		// then there's nothing to slide
+		this.lightbox = true;
+	} else if (this.slides.childElementCount < 4) {
+		// Slider doesn't look great with less than 4 slides
+		// so we duplicate them
+		Array.from(this.slides.children).forEach((child) =>
+			this.slides.append(child.cloneNode(true))
+		);
+	}
+
+	// Create navigation buttons
+	if (this.lightbox === false) {
+		console.log(this.lightbox);
+		slider.insertAdjacentHTML(
+			'beforeend',
+			`<button class="previous-slide">←</button><button class="next-slide">→</button>`
+		);
+	}
+
 	const prevButton = slider.querySelector('.previous-slide');
 	const nextButton = slider.querySelector('.next-slide');
 

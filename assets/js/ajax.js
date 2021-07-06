@@ -888,7 +888,26 @@
     this.slides = slider.querySelector('.slides');
     this.slider = slider;
     this.scroll = scroll;
-    this.lightbox = lightbox;
+    this.lightbox = lightbox; // Handle slides < 4 cases
+
+    if (this.slides.childElementCount === 1) {
+      // If there is only one slide
+      // then there's nothing to slide
+      this.lightbox = true;
+    } else if (this.slides.childElementCount < 4) {
+      // Slider doesn't look great with less than 4 slides
+      // so we duplicate them
+      Array.from(this.slides.children).forEach(function (child) {
+        return _this.slides.append(child.cloneNode(true));
+      });
+    } // Create navigation buttons
+
+
+    if (this.lightbox === false) {
+      console.log(this.lightbox);
+      slider.insertAdjacentHTML('beforeend', "<button class=\"previous-slide\">\u2190</button><button class=\"next-slide\">\u2192</button>");
+    }
+
     var prevButton = slider.querySelector('.previous-slide');
     var nextButton = slider.querySelector('.next-slide'); // when this slider is created, run the start slider function
 
@@ -1305,31 +1324,13 @@
             artworkSlider.insertAdjacentElement('afterbegin', slidesContainer);
             var slides = jsonResponse.filter(function (item) {
               return item.id === parseInt(artwork);
-            })[0].artwork_image_gallery; // Handle slides < 4 cases
-
-            var lightbox = false;
-
-            if (slides.length === 1) {
-              // If there is only one slide
-              // then there's nothing to slide
-              lightbox = true;
-            } else if (slides.length < 4) {
-              // Slider doesn't look great with less than 4 slides
-              // so we duplicate them
-              slides = [].concat(toConsumableArray(slides), toConsumableArray(slides));
-            } // We create and add every slide
-
+            })[0].artwork_image_gallery; // We create and add every slide
 
             slides.forEach(function (slide) {
               slidesContainer.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t\t<figure class=\"slide\">\n\t\t\t\t\t\t\t\t\t".concat(slide.image, "\n\t\t\t\t\t\t\t\t\t").concat(jsonResponse[0].bp_artwork_multiple_artists ? "<figcaption>".concat(slide.caption, "</figcaption>") : "", "\n\t\t\t\t\t\t\t\t</figure>\n\t\t\t\t\t\t"));
-            }); // Create previous and next buttons if we have slides to slide
+            }); // Then create or slider or lightbox
 
-            if (lightbox === false) {
-              artworkSlider.insertAdjacentHTML('beforeend', "\n\t\t\t\t\t\t\t\t<div class=\"controls\">\n\t\t\t\t\t\t\t\t\t<button class=\"previous-slide\">\u2190</button>\n\t\t\t\t\t\t\t\t\t<button class=\"next-slide\">\u2192</button>\n\t\t\t\t\t\t\t\t</div>");
-            } // Then create or slider or lightbox
-
-
-            new Slider(artworkSlider, true, lightbox);
+            new Slider(artworkSlider, true);
           }
         });
       });

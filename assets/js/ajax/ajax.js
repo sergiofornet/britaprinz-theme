@@ -166,21 +166,9 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 							'afterbegin',
 							slidesContainer
 						);
-						let slides = jsonResponse.filter(
+						const slides = jsonResponse.filter(
 							(item) => item.id === parseInt(artwork)
 						)[0].artwork_image_gallery;
-
-						// Handle slides < 4 cases
-						let lightbox = false;
-						if (slides.length === 1) {
-							// If there is only one slide
-							// then there's nothing to slide
-							lightbox = true;
-						} else if (slides.length < 4) {
-							// Slider doesn't look great with less than 4 slides
-							// so we duplicate them
-							slides = [...slides, ...slides];
-						}
 
 						// We create and add every slide
 						slides.forEach((slide) => {
@@ -200,24 +188,8 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 							);
 						});
 
-						// Create previous and next buttons if we have slides to slide
-						if (lightbox === false) {
-							artworkSlider.insertAdjacentHTML(
-								'beforeend',
-								`
-								<div class="controls">
-									<button class="previous-slide">←</button>
-									<button class="next-slide">→</button>
-								</div>`
-							);
-						}
-
 						// Then create or slider or lightbox
-						const slider = new Slider(
-							artworkSlider,
-							true,
-							lightbox
-						);
+						const slider = new Slider(artworkSlider, true);
 					}
 				});
 			});
