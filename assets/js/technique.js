@@ -1036,7 +1036,7 @@
   };
 
   var sliderContainer = document.querySelector('.artwork-gallery__slider');
-  new Slider(sliderContainer);
+  var slider = new Slider(sliderContainer);
   var galleryButton = document.querySelector('.related-artworks__toggle');
   var gallery = document.querySelector('.artwork-gallery');
   galleryButton.addEventListener('click', function () {
@@ -1051,6 +1051,14 @@
     if (gallery.classList.contains('visible')) {
       if (event.key === 'Escape' || event.keyCode === 72) {
         gallery.classList.replace('visible', 'hidden');
+      }
+
+      if (event.key === 'ArrowRight' || event.keyCode === 39) {
+        slider.move();
+      }
+
+      if (event.key === 'ArrowLeft' || event.keyCode === 37) {
+        slider.move('back');
       }
     }
   });

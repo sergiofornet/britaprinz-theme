@@ -22,5 +22,11 @@ window.addEventListener('keyup', (event) => {
 		if (event.key === 'Escape' || event.keyCode === 72) {
 			gallery.classList.replace('visible', 'hidden');
 		}
+		if (event.key === 'ArrowRight' || event.keyCode === 39) {
+			slider.move();
+		}
+		if (event.key === 'ArrowLeft' || event.keyCode === 37) {
+			slider.move('back');
+		}
 	}
 });
