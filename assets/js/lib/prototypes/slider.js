@@ -178,3 +178,5 @@ const moveHandler = (event) => {
 		hiResImage.style.transform = `translate(${imageX}px, ${imageY}px)`;
 	}
 };
+
+export default Slider;

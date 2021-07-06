@@ -1,5 +1,5 @@
 import wait from 'waait';
-import Slider from '../custom/prototypes/slider';
+import Slider from '../lib/prototypes/slider';
 import { asyncFetch } from '../util/async-fetch';
 import { artworksList } from './artworks-list';
 import { getHeight } from '../util/util';
