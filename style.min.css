@@ -353,7 +353,7 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .slide.current{z-index:10;-webkit-transform:translateX(0);transform:translateX(0);opacity:100%}
 .slide.next{z-index:10;-webkit-transform:translateX(100%);transform:translateX(100%);opacity:100%}
 .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,200px));gap:2rem;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:2rem;position:absolute;z-index:1000;bottom:0}
-.previous-slide,.next-slide{position:absolute;bottom:50%;z-index:1000;font-size:calc(32rem / 16);border:0;background-color:unset;padding:0}
+.previous-slide,.next-slide{position:absolute;bottom:50%;z-index:1000;font-size:calc(32rem / 16);border:0;background-color:unset;padding:.2em .5em}
 .artwork-gallery{position:fixed;top:var(--wp-admin-bar,0);left:0;width:calc(100% - var(--scrollbar-width, 0px));height:calc(100 * var(--vh) - var(--wp-admin-bar, 0px));background-color:white;z-index:200}
 .artwork-gallery.hidden{display:none}
 .artwork-gallery .artwork-gallery__slider{position:relative;height:100%}
