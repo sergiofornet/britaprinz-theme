@@ -14,7 +14,7 @@ if ( $bpa_theme_artwork ) :
 	$bpa_theme_artwork_title = get_the_title( $bpa_theme_artwork_id );
 	$bpa_theme_artwork_year  = carbon_get_post_meta( $bpa_theme_artwork_id, 'bp_artwork_year' );
 	$bpa_theme_artwork_copy  = carbon_get_post_meta( $bpa_theme_artwork_id, 'bp_artwork_copy' );
-	$bpa_theme_artwork_image = get_the_post_thumbnail( $bpa_theme_artwork_id, 'medium' );
+	$bpa_theme_artwork_image = get_the_post_thumbnail( $bpa_theme_artwork_id, 'gallery' );
 	
 	$bpa_theme_artist      = get_the_terms( $bpa_theme_artwork_id, 'artist' );
 	$bpa_theme_artist_name = $bpa_theme_artist[0]->name;

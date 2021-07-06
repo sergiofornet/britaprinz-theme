@@ -110,6 +110,8 @@ if ( ! function_exists( 'britaprinz_theme_setup' ) ) :
 		add_image_size( 'artwork-thumbnail', 0, 240, false );
 		// Award image size.
 		add_image_size( 'award-thumbnail', 0, 500, false );
+		// Award image size.
+		add_image_size( 'gallery', 600, 600, false );
 	}
 endif;
 add_action( 'after_setup_theme', 'britaprinz_theme_setup' );

@@ -357,7 +357,7 @@ function britaprinz_artwork_gallery( $object, $field_name, $request ) {
 
 	$gallery = $images_ids ? array_map(
 		fn( $id ) => array(
-			'image'   => wp_get_attachment_image( $id, 'award-thumbnail' ),
+			'image'   => wp_get_attachment_image( $id, 'gallery' ),
 			'caption' => wp_get_attachment_caption( $id ),
 		), 
 		$images_ids
