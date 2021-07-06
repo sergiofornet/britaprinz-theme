@@ -2,15 +2,8 @@ import wait from 'waait';
 import Slider from '../lib/prototypes/slider';
 import { asyncFetch } from '../util/async-fetch';
 import { artworksList } from './artworks-list';
-import { getHeight } from '../util/util';
+import { setCollectionHeaderHeight } from './util';
 
-function setCollectionHeaderHeight() {
-	const collectionHeader = document.querySelector('.collection__header');
-	document.documentElement.style.setProperty(
-		'--collection-header-height',
-		`${getHeight(collectionHeader)}px`
-	);
-}
 setCollectionHeaderHeight();
 window.addEventListener('resize', setCollectionHeaderHeight);
 

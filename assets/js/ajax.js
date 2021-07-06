@@ -1166,14 +1166,6 @@
   }
 
   /**
-   * Handles active/inactive state on buttons
-   *
-   * @param {NodeList} buttons Buttons object
-   * @param {string} activeState Active state class
-   * @param {string} inactiveState Inactive state class
-   * @param target
-   */
-  /**
    * Get the computed size of an element
    *
    * @param {HTMLElement} element - html element
