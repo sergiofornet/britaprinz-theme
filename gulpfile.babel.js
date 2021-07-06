@@ -621,6 +621,14 @@ gulp.task('zip', () => {
  *
  * Watches for file changes and runs specific tasks.
  */
+const jsTasks = [
+	'vendorsJS',
+	'customJS',
+	'artworksJS',
+	'awardJS',
+	'techniqueJS',
+];
+
 gulp.task(
 	'default',
 	gulp.parallel(
@@ -634,6 +642,8 @@ gulp.task(
 		browsersync,
 		() => {
 			gulp.watch(config.watchPhp, reload); // Reload on PHP file changes.
+			gulp.watch(config.watchJsUtil, gulp.series([...jsTasks], reload)); // Reload on PHP file changes.
+			gulp.watch(config.watchJsLib, gulp.series([...jsTasks], reload)); // Reload on PHP file changes.
 			gulp.watch(config.watchStyles, gulp.parallel('styles')); // Reload on SCSS file changes.
 			gulp.watch(config.watchJsVendor, gulp.series('vendorsJS', reload)); // Reload on vendorsJS file changes.
 			gulp.watch(config.watchJsCustom, gulp.series('customJS', reload)); // Reload on customJS file changes.

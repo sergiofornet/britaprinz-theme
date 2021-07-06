@@ -104,6 +104,12 @@ const watchJsAward = './assets/js/award/**/*.js';
 // Path to all custom JS files.
 const watchJsTechnique = './assets/js/technique/**/*.js';
 
+// Path to JS lib.
+const watchJsLib = './assets/js/lib/**/*.js';
+
+// Path to JS util.
+const watchJsUtil = './assets/js/util/**/*.js';
+
 // Path to all PHP files.
 const watchPhp = './**/*.php';
 
@@ -211,6 +217,8 @@ module.exports = {
 	watchJs,
 	watchJsAward,
 	watchJsTechnique,
+	watchJsUtil,
+	watchJsLib,
 	watchPhp,
 	zipName,
 	zipDestination,
