@@ -42,7 +42,10 @@ const artworks = document.querySelector('.artworks');
 const artworkGallery = document.querySelector('.artwork-gallery');
 artworkGallery
 	.querySelector('.artwork-gallery__close button')
-	.addEventListener('click', () => artworkGallery.classList.toggle('hidden'));
+	.addEventListener('click', () => {
+		artworkGallery.classList.toggle('hidden');
+		document.body.classList.toggle('no-scroll');
+	});
 
 const artworkSlider = artworkGallery.querySelector('.artwork-gallery__slider');
 const initialButtons = document.querySelectorAll('.initial__button');
@@ -150,7 +153,8 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 			artworksThumbnails.forEach((thumbnail) => {
 				thumbnail.addEventListener('click', (thumbnailEvent) => {
 					thumbnailEvent.preventDefault();
-					artworkGallery.classList.toggle('hidden');
+					artworkGallery.classList.replace('hidden', 'visible');
+					document.body.classList.toggle('no-scroll');
 
 					const { artwork } = thumbnailEvent.currentTarget.dataset;
 

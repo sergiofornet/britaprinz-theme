@@ -1218,7 +1218,8 @@
   var artworks = document.querySelector('.artworks');
   var artworkGallery = document.querySelector('.artwork-gallery');
   artworkGallery.querySelector('.artwork-gallery__close button').addEventListener('click', function () {
-    return artworkGallery.classList.toggle('hidden');
+    artworkGallery.classList.toggle('hidden');
+    document.body.classList.toggle('no-scroll');
   });
   var artworkSlider = artworkGallery.querySelector('.artwork-gallery__slider');
   var initialButtons = document.querySelectorAll('.initial__button'); // Scroll to selected initial group on click
@@ -1312,7 +1313,8 @@
       artworksThumbnails.forEach(function (thumbnail) {
         thumbnail.addEventListener('click', function (thumbnailEvent) {
           thumbnailEvent.preventDefault();
-          artworkGallery.classList.toggle('hidden');
+          artworkGallery.classList.replace('hidden', 'visible');
+          document.body.classList.toggle('no-scroll');
           var artwork = thumbnailEvent.currentTarget.dataset.artwork;
 
           if (jsonResponse.some(function (item) {
