@@ -48,4 +48,19 @@ function handleVhValue() {
 	document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
 
-export { toggleButtonState, getHeight, handleVhValue };
+/**
+ * Create an image asynchronously
+ *
+ * @param {string} src Our image url
+ * @return {Promise} A promise of a new image HTMLElement
+ */
+async function asyncCreateImage(src) {
+	return new Promise((resolve, reject) => {
+		const img = new Image();
+		img.onload = () => resolve(img);
+		img.onerror = reject;
+		img.src = src;
+	});
+}
+
+export { toggleButtonState, getHeight, handleVhValue, asyncCreateImage };
