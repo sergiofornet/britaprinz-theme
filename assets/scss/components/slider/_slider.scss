@@ -91,6 +91,12 @@
 	border: none;
 	background-color: unset;
 	padding: .2em .5em;
+	transform-origin: 50% 50%;
+	transition: transform .1s;
+
+	&:hover {
+		transform: scale(1.1);
+	}
 }
 .previous-slide {
 	@media (max-width: 47.9375em) {
@@ -132,6 +138,19 @@
 		top: 0;
 		right: 0;
 		z-index: 9999;
+
+		button {
+			font-size: calc(32rem / 16);
+			background-color: unset;
+			border: none;
+			padding: .2em .5em;
+			transform-origin: 50% 50%;
+			transition: transform .1;
+
+			&:hover {
+				transform: scale(1.1);
+			}
+		}
 	}
 
 	// .admin-bar & {
