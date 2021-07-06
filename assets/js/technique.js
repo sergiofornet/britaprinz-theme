@@ -834,7 +834,7 @@
 
     if (this.lightbox === false) {
       console.log(this.lightbox);
-      slider.insertAdjacentHTML('beforeend', "<button class=\"previous-slide\">\u2190</button><button class=\"next-slide\">\u2192</button>");
+      slider.insertAdjacentHTML('beforeend', "<button class=\"previous-slide\"><</button><button class=\"next-slide\">></button>");
     }
 
     var prevButton = slider.querySelector('.previous-slide');

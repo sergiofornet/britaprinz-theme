@@ -34,7 +34,7 @@ function Slider(slider, scroll = false, lightbox = false) {
 		console.log(this.lightbox);
 		slider.insertAdjacentHTML(
 			'beforeend',
-			`<button class="previous-slide">←</button><button class="next-slide">→</button>`
+			`<button class="previous-slide"><</button><button class="next-slide">></button>`
 		);
 	}
 
