@@ -27,6 +27,8 @@ textarea {
 		color: $color__text-input-focus;
 		outline: 1px dashed var(--color-black);
 	}
+
+	-webkit-appearance: none;
 }
 
 select {
