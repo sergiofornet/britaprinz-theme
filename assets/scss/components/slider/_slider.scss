@@ -1,9 +1,10 @@
 .slides {
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	position: relative;
 	margin: 0 auto;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: hidden;
 
 	figure {
 		margin: 0;
@@ -16,7 +17,8 @@
 	height: 100%;
 	width: 100%;
 	display: grid;
-	grid-template-rows: 90vh 1fr;
+	padding: 2em;
+	grid-template-rows: 85% 1fr;
 	align-content: center;
 	align-items: center;
 	justify-content: center;
@@ -105,15 +107,20 @@
 
 .artwork-gallery {
 	position: fixed;
-	top: 0;
+	top: var(--wp-admin-bar, 0px);
 	left: 0;
-	width: 100%;
-	height: 100%;
+	width: calc(100% - var(--scrollbar-width, 0px));
+	height: calc(100 * var(--vh) - var(--wp-admin-bar, 0px));
 	background-color: white;
 	z-index: 200;
 
 	&.hidden {
 		display: none;
+	}
+
+	.artwork-gallery__slider {
+		position: relative;
+		height: 100%;
 	}
 
 	.artwork-gallery__close {
@@ -123,8 +130,8 @@
 		z-index: 9999;
 	}
 
-	.admin-bar & {
-		top: 32px;
-		height: calc(100% - 32px);
-	}
+	// .admin-bar & {
+	// 	top: var(--wp-admin-bar, 0px);
+	// 	height: calc(100% - var(--wp-admin-bar, 0px));
+	// }
 }
