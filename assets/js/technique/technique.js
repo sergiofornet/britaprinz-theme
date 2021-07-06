@@ -1,0 +1,26 @@
+import Slider from '../lib/prototypes/slider';
+
+const sliderContainer = document.querySelector('.artwork-gallery__slider');
+const slider = new Slider(sliderContainer);
+
+const galleryButton = document.querySelector('.related-artworks__toggle');
+const gallery = document.querySelector('.artwork-gallery');
+galleryButton.addEventListener('click', () => {
+	if (gallery.classList.contains('hidden')) {
+		gallery.classList.replace('hidden', 'visible');
+	}
+});
+
+gallery
+	.querySelector('.artwork-gallery__close button')
+	.addEventListener('click', () =>
+		gallery.classList.replace('visible', 'hidden')
+	);
+
+window.addEventListener('keyup', (event) => {
+	if (gallery.classList.contains('visible')) {
+		if (event.key === 'Escape' || event.keyCode === 72) {
+			gallery.classList.replace('visible', 'hidden');
+		}
+	}
+});
