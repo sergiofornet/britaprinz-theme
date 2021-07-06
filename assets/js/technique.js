@@ -1042,10 +1042,12 @@
   galleryButton.addEventListener('click', function () {
     if (gallery.classList.contains('hidden')) {
       gallery.classList.replace('hidden', 'visible');
+      document.body.classList.toggle('no-scroll');
     }
   });
   gallery.querySelector('.artwork-gallery__close button').addEventListener('click', function () {
-    return gallery.classList.replace('visible', 'hidden');
+    gallery.classList.replace('visible', 'hidden');
+    document.body.classList.toggle('no-scroll');
   });
   window.addEventListener('keyup', function (event) {
     if (gallery.classList.contains('visible')) {

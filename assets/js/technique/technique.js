@@ -8,14 +8,16 @@ const gallery = document.querySelector('.artwork-gallery');
 galleryButton.addEventListener('click', () => {
 	if (gallery.classList.contains('hidden')) {
 		gallery.classList.replace('hidden', 'visible');
+		document.body.classList.toggle('no-scroll');
 	}
 });
 
 gallery
 	.querySelector('.artwork-gallery__close button')
-	.addEventListener('click', () =>
-		gallery.classList.replace('visible', 'hidden')
-	);
+	.addEventListener('click', () => {
+		gallery.classList.replace('visible', 'hidden');
+		document.body.classList.toggle('no-scroll');
+	});
 
 window.addEventListener('keyup', (event) => {
 	if (gallery.classList.contains('visible')) {
