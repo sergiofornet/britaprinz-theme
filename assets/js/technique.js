@@ -1053,6 +1053,7 @@
     if (gallery.classList.contains('visible')) {
       if (event.key === 'Escape' || event.keyCode === 72) {
         gallery.classList.replace('visible', 'hidden');
+        document.body.classList.toggle('no-scroll');
       }
 
       if (event.key === 'ArrowRight' || event.keyCode === 39) {
