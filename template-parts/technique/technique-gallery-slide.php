@@ -24,8 +24,8 @@ if ( $bpa_theme_artwork ) :
 	if ( $bpa_theme_artwork_image ) :
 		?>
 
-		<div>
-		<figure>
+		
+		<figure class="slide">
 
 			<?php echo $bpa_theme_artwork_image; ?>
 
@@ -44,7 +44,6 @@ if ( $bpa_theme_artwork ) :
 
 			</figcaption>
 		</figure>
-		</div>
 		
 		<?php
 	endif;

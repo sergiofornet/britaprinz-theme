@@ -17,6 +17,7 @@ if ( $bpa_theme_artworks ) :
 			<button class="close">&times;</button>
 		</div>
 		<div class="artwork-gallery__slider">
+			<div class="slides">
 
 			<?php
 			foreach ( $bpa_theme_artworks as $bpa_theme_artwork ) :
@@ -24,6 +25,7 @@ if ( $bpa_theme_artworks ) :
 			endforeach;
 			?>
 
+			</div>
 		</div>
 	</div>
 
