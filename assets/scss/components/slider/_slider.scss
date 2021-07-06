@@ -81,6 +81,27 @@
 	bottom: 0;
 }
 
+.previous-slide, .next-slide {
+	position: absolute;
+	bottom: 50%;
+	z-index: 1000;
+}
+.previous-slide {
+	@media (max-width: 47.9375em) {
+		left: 5%;
+	}
+	@media (min-width: 48em) {
+		left: 25%;
+	}
+}
+.next-slide {
+	@media (max-width: 47.9375em) {
+		right: 5%;
+	}
+	@media (min-width: 48em) {
+		right: 25%;
+	}
+}
 
 .artwork-gallery {
 	position: fixed;

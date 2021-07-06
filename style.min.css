@@ -353,6 +353,7 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .slide.current{z-index:10;-webkit-transform:translateX(0);transform:translateX(0);opacity:100%}
 .slide.next{z-index:10;-webkit-transform:translateX(100%);transform:translateX(100%);opacity:100%}
 .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,200px));gap:2rem;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:2rem;position:absolute;z-index:1000;bottom:0}
+.previous-slide,.next-slide{position:absolute;bottom:50%;z-index:1000}
 .artwork-gallery{position:fixed;top:0;left:0;width:100%;height:100%;background-color:white;z-index:200}
 .artwork-gallery.hidden{display:none}
 .artwork-gallery .artwork-gallery__close{position:absolute;top:0;right:0;z-index:9999}
@@ -413,6 +414,8 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .wp-block-contact-form-7-contact-form-selector .form__field{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row nowrap;flex-flow:row nowrap;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}
 .wp-block-contact-form-7-contact-form-selector .form__field>label{-ms-flex-preferred-size:25%;flex-basis:25%}
 .wp-block-contact-form-7-contact-form-selector .form__field>.wpcf7-form-control-wrap{-ms-flex-preferred-size:75%;flex-basis:75%}
+.previous-slide{left:25%}
+.next-slide{right:25%}
 }@media(orientation:portrait) and (min-width:48em){.home article.page{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
 .home article.page .circle{--circle-diameter:60vw}
 }@media(orientation:landscape) and (min-width:48em){.home article.page{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:start}
@@ -499,6 +502,8 @@ body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.me
 .home article.page .circle-container{font-size:calc(14rem / 16)}
 .wp-block-contact-form-7-contact-form-selector .form__field{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-flow:row wrap;flex-flow:row wrap}
 .wp-block-contact-form-7-contact-form-selector .form__field>*{-ms-flex-preferred-size:100%;flex-basis:100%}
+.previous-slide{left:5%}
+.next-slide{right:5%}
 }@media(max-width:47.9375em) and (max-width:63.9375em){:not(.post-type-archive-artwork) .secondary-navigation .menu-item--title>ul.sub-menu .current-menu-item{font-weight:700}
 :not(.post-type-archive-artwork) .secondary-navigation :not(.award-menu) .menu-item--title>ul.sub-menu .current-menu-item{-webkit-margin-start:0;margin-inline-start:0;font-weight:700}
 }@media(max-width:29.9375em){ul.menu>li.menu-item--title>h1,ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{font-size:calc(20rem / 16)}
