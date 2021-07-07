@@ -40,13 +40,13 @@ const jsVendorFile = 'vendor';
 
 // JS Custom options.
 // Path to JS custom scripts folder.
-const jsCustomSRC = './assets/js/custom/**/*.js';
+const jsCustomSRC = './assets/js/custom/global.js';
 
 // Path to place the compiled JS custom scripts file.
 const jsCustomDestination = './assets/js/';
 
 // Compiled JS custom file name. Default set to custom i.e. custom.js.
-const jsCustomFile = 'custom';
+const jsCustomFile = 'global';
 
 // Artworks JS options.
 // Path to Artworks JS file.

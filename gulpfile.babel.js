@@ -271,24 +271,42 @@ gulp.task('vendorsJS', () => {
  */
 gulp.task('customJS', () => {
 	return gulp
-		.src(config.jsCustomSRC, { since: gulp.lastRun('customJS') }) // Only run on changed files.
+		.src(config.jsCustomSRC, { nodir: false }) // Only run on changed files.
 		.pipe(plumber(errorHandler))
+		.pipe(sourcemaps.init())
 		.pipe(
-			babel({
-				presets: [
-					[
-						'@babel/preset-env', // Preset to compile your modern JS to ES5.
-						{
-							targets: { browsers: config.BROWSERS_LIST }, // Target browser list to support.
-						},
+			rollup(
+				{
+					plugins: [
+						commonjs(),
+						rollupBabel({
+							presets: [
+								[
+									'@babel/preset-env', // Preset to compile your modern JS to ES5.
+									{
+										targets: {
+											browsers: config.BROWSERS_LIST,
+										}, // Target browser list to support.
+									},
+								],
+							],
+							plugins: [
+								'@babel/plugin-transform-async-to-generator',
+								'@babel/plugin-transform-runtime',
+							], // Comment out if not using async/await.
+							exclude: 'node_modules/**',
+							babelHelpers: 'runtime', // use 'bundled by default'
+						}),
+						nodeResolve(),
 					],
-				],
-			})
+				},
+				{
+					format: 'iife',
+				}
+			)
 		)
-		.pipe(remember(config.jsCustomSRC)) // Bring all files back to stream.
-		.pipe(order(['prototypes/*.js', '*.js']))
-		.pipe(concat(config.jsCustomFile + '.js'))
 		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
+		.pipe(sourcemaps.write('./'))
 		.pipe(gulp.dest(config.jsCustomDestination))
 		.pipe(
 			rename({
@@ -296,6 +314,7 @@ gulp.task('customJS', () => {
 				suffix: '.min',
 			})
 		)
+		.pipe(filter('**/*.js'))
 		.pipe(uglify())
 		.pipe(lineec()) // Consistent Line Endings for non UNIX systems.
 		.pipe(gulp.dest(config.jsCustomDestination))
