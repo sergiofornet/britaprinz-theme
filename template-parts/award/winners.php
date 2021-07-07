@@ -23,7 +23,7 @@
 				<ol class="prizes__list">
 					<?php 
 					// var_dump(carbon_get_the_post_meta('bp_award'));
-					$prizes = carbon_get_the_post_meta('bp_award'); 
+					$prizes = carbon_get_the_post_meta('bp_award');
 					foreach ( $prizes as $index => $prize ) :
 						?>
 
@@ -31,9 +31,14 @@
 							<h2 class="prize__name"><?php echo wp_kses( $prize['bp_award_category'], array( 'sup' => array() ) ); ?></h2>
 							<p class="prize__artist"><?php echo esc_html( $prize['bp_award_artist'] ); ?></p>
 							<?php /** TODO: images */ ?>
-							<figure class="prize__image">
-								<?php echo wp_get_attachment_image( $prize['bp_award_image'], 'award-thumbnail' ); ?>
-							</figure>
+							<div class="prize__image">
+								<button type="button" data-image="<?php echo esc_attr( $prize['bp_award_image'] ); ?>">
+									<figure>
+										<?php 
+										echo wp_get_attachment_image( $prize['bp_award_image'], 'award-thumbnail' ); ?>
+									</figure>
+								</button>
+							</div>
 							<p class="prize__artwork"><?php echo esc_html( $prize['bp_award_title'] ); ?></p>
 							<p class="prize__technique"><?php echo esc_html( $prize['bp_award_technique'] ); ?></p>
 							<p class="prize__size"><?php echo esc_html( $prize['bp_award_size'] ); ?></p>
