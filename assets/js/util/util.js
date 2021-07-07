@@ -49,6 +49,27 @@ function handleVhValue() {
 }
 
 /**
+ * Set a custom property containing admin bar's height
+ *
+ * @param {HTMLElement} adminBar - admin bar element
+ */
+const setAdminBarHeight = (adminBar) =>
+	document.documentElement.style.setProperty(
+		'--wp-admin-bar',
+		`${adminBar.getBoundingClientRect().height}px`
+	);
+
+/**
+ * Get the actual scrollbar width
+ *
+ */
+function getSrollbarWidth() {
+	const scrollbarWidth =
+		window.innerWidth - document.documentElement.clientWidth;
+	return scrollbarWidth;
+}
+
+/**
  * Create an image asynchronously
  *
  * @param {string} src Our image url
@@ -86,6 +107,8 @@ export {
 	toggleButtonState,
 	getHeight,
 	handleVhValue,
+	setAdminBarHeight,
+	getSrollbarWidth,
 	asyncCreateImage,
 	HandleScroll,
 };
