@@ -172,11 +172,26 @@
 				text-transform: uppercase;
 			}
 
+			
 			.prize__image {
 				display: flex;
 				flex-flow: column nowrap;
 				align-items: center;
 				margin: unquote("min(6vh, 3.5rem)") 0;
+				
+				button[type=button] {
+					border: none;
+					background-color: unset;
+					padding: 0;
+	
+					&:hover {
+						cursor: zoom-in;
+					}
+				}
+
+				figure {
+					margin: 0;
+				}
 			}
 
 			.award-se {

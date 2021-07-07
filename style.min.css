@@ -270,6 +270,9 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .award-container .award-edition-container .award .prize__name,.award-container .award-edition-container .award .prize__artist,.award-container .award-edition-container .award .mention__title,.award-container .award-edition-container .award .award__title{font-size:calc(18rem / 16);line-height:1;letter-spacing:.02em;font-weight:600;text-align:center;margin:0}
 .award-container .award-edition-container .award .prize__name{text-transform:uppercase}
 .award-container .award-edition-container .award .prize__image{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center;margin:min(6vh,3.5rem) 0}
+.award-container .award-edition-container .award .prize__image button[type=button]{border:0;background-color:unset;padding:0}
+.award-container .award-edition-container .award .prize__image button[type=button]:hover{cursor:-webkit-zoom-in;cursor:zoom-in}
+.award-container .award-edition-container .award .prize__image figure{margin:0}
 .award-container .award-edition-container .award .award-se{list-style:none;padding:0}
 .award-container .award-edition-container .catalogue .catalogue__title,.award-container .award-edition-container .catalogue .catalogue__link{text-align:center}
 .award-container .award-edition-container .catalogue .catalogue__cover,.award-container .award-edition-container .catalogue .catalogue__gallery-toggle{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
