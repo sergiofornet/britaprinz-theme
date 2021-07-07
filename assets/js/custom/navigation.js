@@ -4,7 +4,7 @@
  * Handles toggling the navigation menu for small screens and enables TAB key
  * navigation support for dropdown menus.
  */
-(function () {
+export default function navigation() {
 	const siteNavigation = document.querySelector('#site-navigation');
 	const siteHeader = document.querySelector('.site-header');
 
@@ -116,4 +116,4 @@
 	window.addEventListener('resize', () => {
 		setHeaderHeight(getHeight(siteHeader));
 	});
-})();
+}
