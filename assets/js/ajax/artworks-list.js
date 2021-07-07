@@ -17,7 +17,7 @@ function artworksList(artworks, lang) {
 				<div class="artwork__info">
 					${
 						element.artwork_image_src
-							? `<div class="artwork__thumbnail"><a href="${element.link}" data-artwork="${element.id}">${element.artwork_image_src}</a></div>`
+							? `<div class="artwork__thumbnail"><button type="button" data-artwork="${element.id}">${element.artwork_image_src}</button></div>`
 							: ''
 					}
 					<div class="artwork__year">${element.bp_artwork_year}</div>

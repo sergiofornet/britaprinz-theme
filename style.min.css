@@ -238,6 +238,8 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .collection .collection__artworks .artworks__list .artwork .artwork__info.visible{display:block}
 .collection .collection__artworks .artworks__list .artwork .artwork__info p{margin:0}
 .collection .collection__artworks .artworks__list .artwork .artwork__info .artwork__thumbnail{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-margin-before:min(4vh,38px);margin-block-start:min(4vh,38px);-webkit-margin-after:min(4vh,40px);margin-block-end:min(4vh,40px);-webkit-box-align:center;-ms-flex-align:center;align-items:center}
+.collection .collection__artworks .artworks__list .artwork .artwork__info .artwork__thumbnail button[type=button]{border:0;background-color:unset;padding:0}
+.collection .collection__artworks .artworks__list .artwork .artwork__info .artwork__thumbnail button[type=button]:hover{cursor:-webkit-zoom-in;cursor:zoom-in}
 .collection .collection__artworks .artworks__list .artwork .artwork__info .artwork__loan,.collection .collection__artworks .artworks__list .artwork .artwork__info .artwork__sale{position:relative;width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}
 .collection .collection__artworks .artworks__list .artwork .artwork__info .artwork__loan::after,.collection .collection__artworks .artworks__list .artwork .artwork__info .artwork__sale::after{position:absolute;content:"";right:-1.5em;top:calc(1em - 50%);height:1em;width:1em;background-image:url("assets/img/icons/bpa_mail.svg")}
 .home .site-main--sidebar{-webkit-padding-start:0;padding-inline-start:0;-webkit-padding-end:0;padding-inline-end:0}

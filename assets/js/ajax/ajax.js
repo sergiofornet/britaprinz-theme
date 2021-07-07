@@ -131,7 +131,7 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 				'.artworks__list .artwork'
 			);
 			const artworksThumbnails = document.querySelectorAll(
-				'.artwork__thumbnail a'
+				'.artwork__thumbnail button'
 			);
 
 			// Toggles artwork info visibility
@@ -148,7 +148,6 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 			// Shows artwork detailed images when thumbnail is clicked
 			artworksThumbnails.forEach((thumbnail) => {
 				thumbnail.addEventListener('click', (thumbnailEvent) => {
-					thumbnailEvent.preventDefault();
 					artworkGallery.classList.replace('hidden', 'visible');
 					document.body.classList.toggle('no-scroll');
 					handleScroll.enable();

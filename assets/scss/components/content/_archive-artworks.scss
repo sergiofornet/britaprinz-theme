@@ -227,6 +227,16 @@ body.post-type-archive-artwork {
 						margin-block-start: unquote("min(4vh, 38px)");
 						margin-block-end: unquote("min(4vh, 40px)");
 						align-items: center;
+
+						button[type=button] {
+							border: none;
+							background-color: unset;
+							padding: 0;
+
+							&:hover {
+								cursor: zoom-in;
+							}
+						}
 						
 						@media (max-width: 63.9375em) {
 						}

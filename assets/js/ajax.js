@@ -1186,7 +1186,7 @@
         var _element$artwork_tech = element.artwork_techniques,
             featuredTechniques = _element$artwork_tech.featured_techniques,
             otherTechniques = _element$artwork_tech.other_techniques;
-        html += "\n\t\t\t<li class=\"artwork\" key=\"artwork-".concat(element.slug, "\">\n\t\t\t\t<h3 class=\"artwork__title\"><button>").concat(element.title.rendered, "</button></h3>\n\t\t\t\t<div class=\"artwork__info\">\n\t\t\t\t\t").concat(element.artwork_image_src ? "<div class=\"artwork__thumbnail\"><a href=\"".concat(element.link, "\" data-artwork=\"").concat(element.id, "\">").concat(element.artwork_image_src, "</a></div>") : '', "\n\t\t\t\t\t<div class=\"artwork__year\">").concat(element.bp_artwork_year, "</div>\n\t\t\t\t\t<div class=\"artwork__copy\">").concat(element.bp_artwork_copy, "</div>\n\t\t\t\t\t").concat(element.bp_artwork_size_image && "<div class=\"artwork__size-image\">".concat(element.bp_artwork_size_image, "</div>"), "\n\t\t\t\t\t<div class=\"artwork__size-sheet\">").concat(element.bp_artwork_size, "</div>\n\t\t\t\t\t<div class=\"artwork__paper\">").concat(element.bp_artwork_paper, "</div>\n\t\t\t\t\t<div class=\"artwork__condition\">").concat(element.bp_artwork_condition, "</div>\n\t\t\t\t\t").concat(element.artwork_info ? "<div class=\"artwork__description\">".concat(element.artwork_info, "</div>") : '', "\n\t\t\t\t\t<div class=\"artwork__techniques\">\n\t\t\t\t\t\t").concat(featuredTechniques.map(function (technique) {
+        html += "\n\t\t\t<li class=\"artwork\" key=\"artwork-".concat(element.slug, "\">\n\t\t\t\t<h3 class=\"artwork__title\"><button>").concat(element.title.rendered, "</button></h3>\n\t\t\t\t<div class=\"artwork__info\">\n\t\t\t\t\t").concat(element.artwork_image_src ? "<div class=\"artwork__thumbnail\"><button type=\"button\" data-artwork=\"".concat(element.id, "\">").concat(element.artwork_image_src, "</button></div>") : '', "\n\t\t\t\t\t<div class=\"artwork__year\">").concat(element.bp_artwork_year, "</div>\n\t\t\t\t\t<div class=\"artwork__copy\">").concat(element.bp_artwork_copy, "</div>\n\t\t\t\t\t").concat(element.bp_artwork_size_image && "<div class=\"artwork__size-image\">".concat(element.bp_artwork_size_image, "</div>"), "\n\t\t\t\t\t<div class=\"artwork__size-sheet\">").concat(element.bp_artwork_size, "</div>\n\t\t\t\t\t<div class=\"artwork__paper\">").concat(element.bp_artwork_paper, "</div>\n\t\t\t\t\t<div class=\"artwork__condition\">").concat(element.bp_artwork_condition, "</div>\n\t\t\t\t\t").concat(element.artwork_info ? "<div class=\"artwork__description\">".concat(element.artwork_info, "</div>") : '', "\n\t\t\t\t\t<div class=\"artwork__techniques\">\n\t\t\t\t\t\t").concat(featuredTechniques.map(function (technique) {
           return "<a class=\"technique\" href=\"".concat(technique[1], "\">").concat(technique[0], "</a>");
         }).join('\n'), "\n\t\t\t\t\t\t").concat(otherTechniques && "<span>".concat(otherTechniques, "</span>"), "\n\t\t\t\t\t</div>\n\t\t\t\t\t").concat(element.artwork_loan ? "<div class=\"artwork__loan\"><a href=\"mailto:arte@britaprinzarte.com\">".concat(element.artwork_loan, "</a></div>") : '', "\n\t\t\t\t\t").concat(element.artwork_sale ? "<div class=\"artwork__sale\"><a href=\"mailto:arte@britaprinzarte.com\">".concat(element.artwork_sale, "</a></div>") : '', "\n\t\t\t\t</div>\n\t\t\t</li>\n\t\t\t");
       });
@@ -1315,7 +1315,7 @@
       var html = artworksList(jsonResponse, currentLang);
       target.insertAdjacentHTML('beforeend', html);
       var artworkList = document.querySelectorAll('.artworks__list .artwork');
-      var artworksThumbnails = document.querySelectorAll('.artwork__thumbnail a'); // Toggles artwork info visibility
+      var artworksThumbnails = document.querySelectorAll('.artwork__thumbnail button'); // Toggles artwork info visibility
 
       artworkList.forEach(function (artwork) {
         var artworkInfo = artwork.querySelector('.artwork__info');
@@ -1327,7 +1327,6 @@
 
       artworksThumbnails.forEach(function (thumbnail) {
         thumbnail.addEventListener('click', function (thumbnailEvent) {
-          thumbnailEvent.preventDefault();
           artworkGallery.classList.replace('hidden', 'visible');
           document.body.classList.toggle('no-scroll');
           handleScroll.enable();
