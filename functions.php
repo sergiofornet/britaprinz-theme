@@ -191,7 +191,7 @@ function britaprinz_theme_scripts() {
 	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri( 'assets/js/vendor.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 
 	// Main custom script.
-	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri( 'assets/js/custom.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
+	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri( 'assets/js/global.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 	
 	if ( is_post_type_archive( 'artwork' ) ) {
 		$query_artist = get_query_var( 'display_artist' );
