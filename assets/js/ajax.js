@@ -1143,6 +1143,39 @@
     return _asyncFetch.apply(this, arguments);
   }
 
+  /**
+   * Get the computed size of an element
+   *
+   * @param {HTMLElement} element - html element
+   * @return {number} element computed height
+   */
+
+
+  function getHeight(element) {
+    return element.offsetHeight;
+  }
+
+  function HandleScroll() {
+    this.body = document.querySelector('body');
+    this.scrollPosition = 0;
+  }
+
+  HandleScroll.prototype.enable = function () {
+    this.scrollPosition = window.pageYOffset;
+    this.body.style.overflow = 'hidden';
+    this.body.style.position = 'fixed';
+    this.body.style.top = "-".concat(this.scrollPosition, "px");
+    this.body.style.width = '100%';
+  };
+
+  HandleScroll.prototype.disable = function () {
+    this.body.style.removeProperty('overflow');
+    this.body.style.removeProperty('position');
+    this.body.style.removeProperty('top');
+    this.body.style.removeProperty('width');
+    window.scrollTo(0, this.scrollPosition);
+  };
+
   function artworksList(artworks, lang) {
     console.log(lang);
     var html = '';
@@ -1163,18 +1196,6 @@
     }
 
     return html;
-  }
-
-  /**
-   * Get the computed size of an element
-   *
-   * @param {HTMLElement} element - html element
-   * @return {number} element computed height
-   */
-
-
-  function getHeight(element) {
-    return element.offsetHeight;
   }
 
   function setCollectionHeaderHeight() {
@@ -1209,9 +1230,11 @@
   });
   var artworks = document.querySelector('.artworks');
   var artworkGallery = document.querySelector('.artwork-gallery');
+  var handleScroll = new HandleScroll();
   artworkGallery.querySelector('.artwork-gallery__close button').addEventListener('click', function () {
     artworkGallery.classList.toggle('hidden');
     document.body.classList.toggle('no-scroll');
+    handleScroll.disable();
   });
   var artworkSlider = artworkGallery.querySelector('.artwork-gallery__slider');
   var initialButtons = document.querySelectorAll('.initial__button'); // Scroll to selected initial group on click
@@ -1307,6 +1330,7 @@
           thumbnailEvent.preventDefault();
           artworkGallery.classList.replace('hidden', 'visible');
           document.body.classList.toggle('no-scroll');
+          handleScroll.enable();
           var artwork = thumbnailEvent.currentTarget.dataset.artwork;
 
           if (jsonResponse.some(function (item) {

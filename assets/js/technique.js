@@ -1035,25 +1035,50 @@
     }
   };
 
+  function HandleScroll() {
+    this.body = document.querySelector('body');
+    this.scrollPosition = 0;
+  }
+
+  HandleScroll.prototype.enable = function () {
+    this.scrollPosition = window.pageYOffset;
+    this.body.style.overflow = 'hidden';
+    this.body.style.position = 'fixed';
+    this.body.style.top = "-".concat(this.scrollPosition, "px");
+    this.body.style.width = '100%';
+  };
+
+  HandleScroll.prototype.disable = function () {
+    this.body.style.removeProperty('overflow');
+    this.body.style.removeProperty('position');
+    this.body.style.removeProperty('top');
+    this.body.style.removeProperty('width');
+    window.scrollTo(0, this.scrollPosition);
+  };
+
   var sliderContainer = document.querySelector('.artwork-gallery__slider');
   var slider = new Slider(sliderContainer);
+  var handleScroll = new HandleScroll();
   var galleryButton = document.querySelector('.related-artworks__toggle');
   var gallery = document.querySelector('.artwork-gallery');
   galleryButton.addEventListener('click', function () {
     if (gallery.classList.contains('hidden')) {
       gallery.classList.replace('hidden', 'visible');
       document.body.classList.toggle('no-scroll');
+      handleScroll.enable();
     }
   });
   gallery.querySelector('.artwork-gallery__close button').addEventListener('click', function () {
     gallery.classList.replace('visible', 'hidden');
     document.body.classList.toggle('no-scroll');
+    handleScroll.disable();
   });
   window.addEventListener('keyup', function (event) {
     if (gallery.classList.contains('visible')) {
       if (event.key === 'Escape' || event.keyCode === 72) {
         gallery.classList.replace('visible', 'hidden');
         document.body.classList.toggle('no-scroll');
+        handleScroll.disable();
       }
 
       if (event.key === 'ArrowRight' || event.keyCode === 39) {

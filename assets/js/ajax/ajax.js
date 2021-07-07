@@ -1,6 +1,7 @@
 import wait from 'waait';
 import Slider from '../lib/prototypes/slider';
 import { asyncFetch } from '../util/async-fetch';
+import { HandleScroll } from '../util/util';
 import { artworksList } from './artworks-list';
 import { setCollectionHeaderHeight } from './util';
 
@@ -33,11 +34,13 @@ const groupObserver = new IntersectionObserver(initialsCallback, {
 
 const artworks = document.querySelector('.artworks');
 const artworkGallery = document.querySelector('.artwork-gallery');
+const handleScroll = new HandleScroll();
 artworkGallery
 	.querySelector('.artwork-gallery__close button')
 	.addEventListener('click', () => {
 		artworkGallery.classList.toggle('hidden');
 		document.body.classList.toggle('no-scroll');
+		handleScroll.disable();
 	});
 
 const artworkSlider = artworkGallery.querySelector('.artwork-gallery__slider');
@@ -148,6 +151,7 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 					thumbnailEvent.preventDefault();
 					artworkGallery.classList.replace('hidden', 'visible');
 					document.body.classList.toggle('no-scroll');
+					handleScroll.enable();
 
 					const { artwork } = thumbnailEvent.currentTarget.dataset;
 
