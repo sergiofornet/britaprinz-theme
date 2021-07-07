@@ -1,4 +1,5 @@
 import { handleReturnButton } from './awardHandlers';
+import { galleryImage } from './galleryImage';
 
 /**
  * @param {Object} payload A JSON object
@@ -62,6 +63,9 @@ function awardEditionHTML(payload, target, lang) {
 	target.innerHTML = '';
 	target.insertAdjacentHTML('afterbegin', html);
 
+	// Do gallery images stuff
+	galleryImage(awardPrizes);
+
 	const returnButton = document.createElement('button');
 	returnButton.classList.add('award-edition-container__return-button');
 	returnButton.classList.add('return-button');
@@ -87,7 +91,11 @@ function prizesListHTML(payload) {
 			}">
 			<h2 class="prize__name">${prize.bp_award_category}</h2>
 			<p class="prize__artist">${prize.bp_award_artist}</p>
-			<figure class="prize__image">${prize.bp_award_image_thumbnail}</figure>
+			<div class="prize__image">
+				<button type="button" data-image="${prize.bp_award_image}">
+					<figure>${prize.bp_award_image_thumbnail}</figure>
+				</button>
+			</div>
 			<p class="prize__artwork">${prize.bp_award_title}</p>
 			<p class="prize__technique">${prize.bp_award_technique}</p>
 			<p class="prize__size">${prize.bp_award_size}</p>
@@ -120,4 +128,4 @@ function specialEditionHTML(payload) {
 	return html;
 }
 
-export { awardEditionHTML };
+export { awardEditionHTML, galleryImage };

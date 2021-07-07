@@ -976,6 +976,323 @@
   }
 
   /**
+   * Slider prototype definition
+   *
+   * @param {HTMLElement} slider Where our slider will be created.
+   * @param {boolean} scroll Have the slides a hi-res scrollable version?
+   * @param {boolean} lightbox Have we just one slide?
+   */
+  function Slider(slider) {
+    var _this = this;
+
+    var scroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var lightbox = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    if (!(slider instanceof Element)) {
+      throw new Error('No slider passed in');
+    } // select the elements needed for the slider
+
+
+    this.slides = slider.querySelector('.slides');
+    this.slider = slider;
+    this.scroll = scroll;
+    this.lightbox = lightbox; // Handle slides < 4 cases
+
+    if (this.slides.childElementCount === 1) {
+      // If there is only one slide
+      // then there's nothing to slide
+      this.lightbox = true;
+    } else if (this.slides.childElementCount < 4) {
+      // Slider doesn't look great with less than 4 slides
+      // so we duplicate them
+      Array.from(this.slides.children).forEach(function (child) {
+        return _this.slides.append(child.cloneNode(true));
+      });
+    } // Create navigation buttons
+
+
+    if (this.lightbox === false) {
+      console.log(this.lightbox);
+      slider.insertAdjacentHTML('beforeend', "<button class=\"previous-slide\"><</button><button class=\"next-slide\">></button>");
+    }
+
+    var prevButton = slider.querySelector('.previous-slide');
+    var nextButton = slider.querySelector('.next-slide'); // when this slider is created, run the start slider function
+
+    this.startSlider();
+    this.applyClasses();
+    this.scroll && this.scrollImage(); // requestAnimationFrame(this.autoplay);
+    // Event listeners
+
+    prevButton && prevButton.addEventListener('click', function () {
+      return _this.move('back');
+    });
+    nextButton && nextButton.addEventListener('click', function () {
+      return _this.move();
+    });
+  }
+
+  Slider.prototype.startSlider = function () {
+    this.current = this.slider.querySelector('.current') || this.slides.firstElementChild;
+
+    if (this.lightbox === false) {
+      this.prev = this.current.previousElementSibling || this.slides.lastElementChild;
+      this.next = this.current.nextElementSibling || this.slides.firstElementChild;
+    }
+  };
+
+  Slider.prototype.applyClasses = function () {
+    this.current.classList.add('current');
+
+    if (this.lightbox === false) {
+      this.prev.classList.add('prev');
+      this.next.classList.add('next');
+    }
+  };
+
+  Slider.prototype.move = function (direction) {
+    var _this$prev$classList, _this$current$classLi, _this$next$classList;
+
+    if (this.lightbox) return; // first strip all the classes off the current slides
+
+    var classesToRemove = ['prev', 'current', 'next'];
+
+    (_this$prev$classList = this.prev.classList).remove.apply(_this$prev$classList, classesToRemove);
+
+    (_this$current$classLi = this.current.classList).remove.apply(_this$current$classLi, classesToRemove);
+
+    (_this$next$classList = this.next.classList).remove.apply(_this$next$classList, classesToRemove);
+
+    if (direction === 'back') {
+      // make an new array of the new values, and destructure them over and into the prev, current and next variables
+      var _ref = [// get the prev slide, if there is none, get the last slide from the entire slider for wrapping
+      this.prev.previousElementSibling || this.slides.lastElementChild, this.prev, this.current];
+      this.prev = _ref[0];
+      this.current = _ref[1];
+      this.next = _ref[2];
+    } else {
+      var _ref2 = [this.current, this.next, // get the next slide, or if it's at the end, loop around and grab the first slide
+      this.next.nextElementSibling || this.slides.firstElementChild];
+      this.prev = _ref2[0];
+      this.current = _ref2[1];
+      this.next = _ref2[2];
+    }
+
+    this.applyClasses();
+    this.scroll && this.scrollImage();
+  };
+
+  Slider.prototype.scrollImage = function () {
+    if (this.lightbox === false) {
+      [this.next, this.prev].forEach(function (slide) {
+        slide.removeEventListener('mouseenter', enterHandler, false);
+        slide.removeEventListener('mouseleave', leaveHandler, false);
+        slide.removeEventListener('mousemove', moveHandler, false);
+      });
+    }
+
+    this.current.addEventListener('mouseenter', enterHandler, false);
+    this.current.addEventListener('mouseleave', leaveHandler, false);
+    this.current.addEventListener('mousemove', moveHandler, false);
+  };
+  /**
+   * Create an image asynchronously
+   *
+   * @param {string} src Our image url
+   * @return {Promise} A promise of a new image HTMLElement
+   */
+
+
+  function asyncCreateImage(_x) {
+    return _asyncCreateImage.apply(this, arguments);
+  }
+
+  function _asyncCreateImage() {
+    _asyncCreateImage = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2(src) {
+      return regenerator.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                var img = new Image();
+
+                img.onload = function () {
+                  return resolve(img);
+                };
+
+                img.onerror = reject;
+                img.src = src;
+              }));
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    return _asyncCreateImage.apply(this, arguments);
+  }
+
+  var enterHandler = /*#__PURE__*/function () {
+    var _ref3 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(event) {
+      var hiResImage, imageWidth, imageHeight, _window, windowWidth, windowHeight, hiResContainer;
+
+      return regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return asyncCreateImage(event.currentTarget.querySelector('img').dataset.full);
+
+            case 2:
+              hiResImage = _context.sent;
+              imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
+              _window = window, windowWidth = _window.innerWidth, windowHeight = _window.innerHeight; // Check if hi-res image is bigger than screen size
+
+              if (imageWidth > windowWidth || imageHeight > windowHeight) {
+                // Add active state class
+                event.target.classList.add('active-scroll'); // Create a container for hi-res image
+
+                hiResContainer = document.createElement('div');
+                hiResContainer.classList.add('slide__hi-res');
+                hiResContainer.style.width = "".concat(hiResImage.width, "px");
+                hiResContainer.style.height = "".concat(hiResImage.height, "px");
+                hiResContainer.style.opacity = '0';
+                hiResContainer.style.setProperty('--hires-width', "".concat(hiResImage.width, "px"));
+                event.target.appendChild(hiResContainer); // Add width and height to hi-res image
+
+                hiResImage.style.width = "".concat(hiResImage.width, "px");
+                hiResImage.style.height = "".concat(hiResImage.height, "px");
+                hiResContainer.appendChild(hiResImage);
+                setTimeout(function () {
+                  return hiResContainer.style.opacity = '1';
+                }, 50);
+              }
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function enterHandler(_x2) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var leaveHandler = function leaveHandler(event) {
+    // Check if there is an active scrollable image
+    if (event.currentTarget.classList.contains('active-scroll')) {
+      // Remove scrollable image
+      var hiResContainer = event.currentTarget.querySelector('.slide__hi-res');
+      hiResContainer.style.opacity = '0';
+      event.currentTarget.removeChild(hiResContainer); // Remove active state class
+
+      event.currentTarget.classList.remove('active-scroll');
+    }
+  };
+
+  var moveHandler = function moveHandler(event) {
+    // Check if there is an active scrollable image
+    if (event.currentTarget.classList.contains('active-scroll')) {
+      var hiResImage = event.currentTarget.querySelector('.slide__hi-res img');
+      var _window2 = window,
+          windowWidth = _window2.innerWidth,
+          windowHeight = _window2.innerHeight;
+      var cursorX = event.clientX,
+          cursorY = event.clientY;
+      var imageWidth = hiResImage.naturalWidth,
+          imageHeight = hiResImage.naturalHeight;
+      imageWidth = imageWidth < windowWidth ? windowWidth : imageWidth;
+      imageHeight = imageHeight < windowHeight ? windowHeight : imageHeight;
+      var imageX = Math.floor((imageWidth - windowWidth) * cursorX / windowWidth) * -1;
+      var imageY = Math.floor((imageHeight - windowHeight) * cursorY / windowHeight) * -1;
+      hiResImage.style.transform = "translate(".concat(imageX, "px, ").concat(imageY, "px)");
+    }
+  };
+
+  function HandleScroll() {
+    this.body = document.querySelector('body');
+    this.scrollPosition = 0;
+  }
+
+  HandleScroll.prototype.enable = function () {
+    this.scrollPosition = window.pageYOffset;
+    this.body.style.overflow = 'hidden';
+    this.body.style.position = 'fixed';
+    this.body.style.top = "-".concat(this.scrollPosition, "px");
+    this.body.style.width = '100%';
+  };
+
+  HandleScroll.prototype.disable = function () {
+    this.body.style.removeProperty('overflow');
+    this.body.style.removeProperty('position');
+    this.body.style.removeProperty('top');
+    this.body.style.removeProperty('width');
+    window.scrollTo(0, this.scrollPosition);
+  };
+
+  function showAwardGallery(payload) {
+  	if (payload === null) return;
+
+  	const { event, images } = payload;
+  	const { image: imageId } = event.currentTarget.dataset;
+  	console.log(
+  		imageId,
+  		images,
+  		images
+  			.filter((image) => image.id === imageId)
+  			.map((image) => image.rendered)[0]
+  	);
+
+  	const handleScroll = new HandleScroll();
+
+  	const target = document.querySelector('.artwork-gallery');
+  	const targetSlider = target.querySelector('.artwork-gallery__slider');
+  	targetSlider.innerHTML = '';
+  	targetSlider.insertAdjacentHTML(
+  		'afterbegin',
+  		`
+		<div class="slides">
+		<figure class="slide">${
+			images
+				.filter((image) => image.id === imageId)
+				.map((image) => image.rendered)[0]
+		}</figure>
+		</div>
+		`
+  	);
+
+  	new Slider(targetSlider, false, true);
+
+  	document.body.classList.toggle('no-scroll');
+  	handleScroll.enable();
+  	target.classList.toggle('hidden');
+  }
+
+  function galleryImage(payload) {
+    if (payload === null) return;
+    var images = payload.map(function (prize) {
+      return {
+        id: prize.bp_award_image,
+        rendered: prize.bp_award_image_rendered
+      };
+    });
+    var imageTriggers = document.querySelectorAll('.prize__image button');
+    imageTriggers.forEach(function (trigger) {
+      return trigger.addEventListener('click', function (event) {
+        return showAwardGallery({
+          event: event,
+          images: images
+        });
+      });
+    });
+  }
+
+  /**
    * @param {Object} payload A JSON object
    * @param {HTMLElement} target - DOM Element where the info will be displayed
    * @param {string} lang
@@ -1001,7 +1318,9 @@
 
     var html = "\n\t<article id=\"post-".concat(id, "\">\n\t\t<div class=\"entry-content award\">\n\t\t\t").concat(title && "<div class=\"award__title\">\n\t\t\t\t\t<h1>".concat(title, "</h1>\n\t\t\t\t</div>"), "\n\t\t\t").concat(isSpecialEdition ? "\n\t\t\t\t\t<ul id=\"award-se\" class=\"award-se\">\n\t\t\t\t\t\t".concat(specialEditionHTML(specialEdition), "\n\t\t\t\t\t</ul>\n\t\t\t\t\t") : "\t\n\t\t\t\t\t".concat(awardPrizes ? "\n\t\t\t\t\t\t<div class=\"award__prizes\">\n\t\t\t\t\t\t\t<ol class=\"prizes__list\">".concat(prizesListHTML(awardPrizes), "</ol>\n\t\t\t\t\t\t\t").concat(mentions && mentionsHTML, "\n\t\t\t\t\t\t</div>") : ""), "\n\t\t</div>\n\t</article>");
     target.innerHTML = '';
-    target.insertAdjacentHTML('afterbegin', html);
+    target.insertAdjacentHTML('afterbegin', html); // Do gallery images stuff
+
+    galleryImage(awardPrizes);
     var returnButton = document.createElement('button');
     returnButton.classList.add('award-edition-container__return-button');
     returnButton.classList.add('return-button');
@@ -1018,7 +1337,7 @@
 
     if (payload) {
       payload.forEach(function (prize, index) {
-        html += "\n\t\t<li id=\"prize-".concat(index + 1, "\" class=\"prize__category prize__category-").concat(index + 1, "\">\n\t\t\t<h2 class=\"prize__name\">").concat(prize.bp_award_category, "</h2>\n\t\t\t<p class=\"prize__artist\">").concat(prize.bp_award_artist, "</p>\n\t\t\t<figure class=\"prize__image\">").concat(prize.bp_award_image_thumbnail, "</figure>\n\t\t\t<p class=\"prize__artwork\">").concat(prize.bp_award_title, "</p>\n\t\t\t<p class=\"prize__technique\">").concat(prize.bp_award_technique, "</p>\n\t\t\t<p class=\"prize__size\">").concat(prize.bp_award_size, "</p>\n\t\t\t<p class=\"prize__year\">").concat(prize.bp_award_year, "</p>\n\t\t</li>\n\t\t");
+        html += "\n\t\t<li id=\"prize-".concat(index + 1, "\" class=\"prize__category prize__category-").concat(index + 1, "\">\n\t\t\t<h2 class=\"prize__name\">").concat(prize.bp_award_category, "</h2>\n\t\t\t<p class=\"prize__artist\">").concat(prize.bp_award_artist, "</p>\n\t\t\t<div class=\"prize__image\">\n\t\t\t\t<button type=\"button\" data-image=\"").concat(prize.bp_award_image, "\">\n\t\t\t\t\t<figure>").concat(prize.bp_award_image_thumbnail, "</figure>\n\t\t\t\t</button>\n\t\t\t</div>\n\t\t\t<p class=\"prize__artwork\">").concat(prize.bp_award_title, "</p>\n\t\t\t<p class=\"prize__technique\">").concat(prize.bp_award_technique, "</p>\n\t\t\t<p class=\"prize__size\">").concat(prize.bp_award_size, "</p>\n\t\t\t<p class=\"prize__year\">").concat(prize.bp_award_year, "</p>\n\t\t</li>\n\t\t");
       });
     }
 
@@ -1099,8 +1418,6 @@
     return html;
   }
 
-  // import Swiper from 'swiper';
-  // import { tns } from '../../../node_modules/tiny-slider/src/tiny-slider';
   // Data received from php.
 
   var _awardPayload = awardPayload,
@@ -1108,8 +1425,8 @@
       awardUrl = _awardPayload.awardUrl,
       type = _awardPayload.type,
       lang = _awardPayload.lang; // eslint-disable-line no-undef
+  // console.log(awardPayload);
 
-  console.log(awardPayload);
   var returnButton = document.querySelector('.award-edition-container__return-button'); // Where AJAX data will be displawed
 
   var editionContainer = document.querySelector('.award-edition-container'); // Make first button active
@@ -1152,12 +1469,15 @@
     handleReturnButton(returnButton, editionContainer);
   }, false);
   editionContainer.insertAdjacentElement('afterbegin', returnButton); // Where gallery images will be displayed
-  // const awardGallery = document.querySelector('.award-gallery');
-  // awardGallery
-  // 	.querySelector('.award-gallery__close button')
-  // 	.addEventListener('click', () => awardGallery.classList.toggle('hidden'));
-  // const awardSlider = awardGallery.querySelector('.award-gallery__slider');
-  // console.log(awardUrl);
+
+  var awardGallery = document.querySelector('.artwork-gallery');
+  var handleScroll = new HandleScroll();
+  awardGallery.querySelector('.artwork-gallery__close button').addEventListener('click', function () {
+    awardGallery.classList.toggle('hidden');
+    document.body.classList.toggle('no-scroll');
+    handleScroll.disable();
+  });
+  awardGallery.querySelector('.artwork-gallery__slider'); // console.log(awardUrl);
 
   if (type === 'award') {
     showAwardInfo(buttons, editionContainer, awardUrl, lang, asyncFetchOptions(nonce, 'get'), awardEditionHTML);

@@ -4,13 +4,12 @@ import { showAwardInfo } from './showAwardInfo';
 import { awardEditionHTML } from './awardEditionHTML';
 import { catalogueEditionHTML } from './catalogueEditionHTML';
 import { handleReturnButton } from './awardHandlers';
-// import SwiperCore, { Navigation } from 'swiper/core';
-// import Swiper from 'swiper';
+import { HandleScroll } from '../util/util';
 
 // import { tns } from '../../../node_modules/tiny-slider/src/tiny-slider';
 // Data received from php.
 const { nonce, awardUrl, type, lang } = awardPayload; // eslint-disable-line no-undef
-console.log(awardPayload);
+// console.log(awardPayload);
 const returnButton = document.querySelector(
 	'.award-edition-container__return-button'
 );
@@ -41,12 +40,17 @@ returnButton.addEventListener(
 editionContainer.insertAdjacentElement('afterbegin', returnButton);
 
 // Where gallery images will be displayed
-// const awardGallery = document.querySelector('.award-gallery');
-// awardGallery
-// 	.querySelector('.award-gallery__close button')
-// 	.addEventListener('click', () => awardGallery.classList.toggle('hidden'));
+const awardGallery = document.querySelector('.artwork-gallery');
+const handleScroll = new HandleScroll();
+awardGallery
+	.querySelector('.artwork-gallery__close button')
+	.addEventListener('click', () => {
+		awardGallery.classList.toggle('hidden');
+		document.body.classList.toggle('no-scroll');
+		handleScroll.disable();
+	});
 
-// const awardSlider = awardGallery.querySelector('.award-gallery__slider');
+const awardSlider = awardGallery.querySelector('.artwork-gallery__slider');
 
 // console.log(awardUrl);
 if (type === 'award') {
