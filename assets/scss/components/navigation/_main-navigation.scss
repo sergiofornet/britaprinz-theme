@@ -1,13 +1,13 @@
 .main-navigation {
 	display: block;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	z-index: 200;
 	background-color: white;
 	padding-block-start: var(--header-height, 150px);
-	padding-block-end: 1em;
+	padding-block-end: var(--header-height, 150px);
 	height: calc(100vh - var(--wp-admin-bar, 0px));
 	
 	transform: translateY(-300%);
@@ -76,7 +76,12 @@
 			flex-flow: column wrap;
 			
 			@media (max-width: 63.9375em) {
+				margin-bottom: 2em;
 				align-items: left;
+				
+				&:last-child {
+					margin-bottom: 0;
+				}
 			}
 			
 			@media (min-width: 64em) {

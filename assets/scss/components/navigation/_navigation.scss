@@ -12,11 +12,11 @@ ul.menu {
 	
 	& > li.menu-item--title {
 		
-		.main-navigation & {
-			@media (max-width: 63.9375em) {
-				margin-bottom: 2em;
-			}
-		}
+		// .main-navigation & {
+		// 	@media (max-width: 63.9375em) {
+		// 		margin-bottom: 2em;
+		// 	}
+		// }
 
 		& .sub-menu li {
 			transform: translateX(0);
