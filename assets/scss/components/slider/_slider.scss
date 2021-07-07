@@ -15,7 +15,8 @@
 	display: grid;
 	padding: 2em;
 	margin: 0;
-	grid-template-rows: 85% 1fr;
+	grid-template-rows: 75% 1fr;
+	row-gap: 1em;
 	align-content: center;
 	align-items: center;
 	justify-content: center;
@@ -32,6 +33,11 @@
 		max-height: 100%;
 		width: auto;
 		object-fit: contain;
+		align-self: flex-end;
+	}
+	
+	& > figcaption {
+		align-self: flex-start;
 	}
 
 	.slide__hi-res {
