@@ -838,8 +838,13 @@
 
 	  if (!menu.classList.contains('nav-menu')) {
 	    menu.classList.add('nav-menu');
-	  } // Toggle the .toggled class and the aria-expanded value each time the button is clicked.
+	  } // Get all the link elements within the menu.
 
+
+	  var links = menu.getElementsByTagName('a');
+	  Array.from(links).forEach(function (link) {
+	    return link.setAttribute('tabindex', '-1');
+	  }); // Toggle the .toggled class and the aria-expanded value each time the button is clicked.
 
 	  button.addEventListener('click', function () {
 	    siteNavigation.classList.toggle('toggled');
@@ -850,9 +855,15 @@
 	    if (button.getAttribute('aria-expanded') === 'true') {
 	      button.setAttribute('aria-expanded', 'false');
 	      handleScroll.disable();
+	      Array.from(links).forEach(function (link) {
+	        return link.setAttribute('tabindex', '-1');
+	      });
 	    } else {
 	      button.setAttribute('aria-expanded', 'true');
 	      handleScroll.enable();
+	      Array.from(links).forEach(function (link) {
+	        return link.setAttribute('tabindex', '1');
+	      });
 	    }
 	  }); // Remove the .toggled class and set aria-expanded to false when the user clicks outside the navigation.
 	  // document.addEventListener( 'click', function( event ) {
@@ -862,9 +873,7 @@
 	  // 		button.setAttribute( 'aria-expanded', 'false' );
 	  // 	}
 	  // } );
-	  // Get all the link elements within the menu.
-
-	  var links = menu.getElementsByTagName('a'); // Get all the link elements with children within the menu.
+	  // Get all the link elements with children within the menu.
 
 	  var linksWithChildren = menu.querySelectorAll('.menu-item-has-children > a, .page_item_has_children > a'); // Toggle focus each time a menu link is focused or blurred.
 

@@ -34,6 +34,10 @@ export default function navigation() {
 		menu.classList.add('nav-menu');
 	}
 
+	// Get all the link elements within the menu.
+	const links = menu.getElementsByTagName('a');
+	Array.from(links).forEach((link) => link.setAttribute('tabindex', '-1'));
+
 	// Toggle the .toggled class and the aria-expanded value each time the button is clicked.
 	button.addEventListener('click', function () {
 		siteNavigation.classList.toggle('toggled');
@@ -44,9 +48,15 @@ export default function navigation() {
 		if (button.getAttribute('aria-expanded') === 'true') {
 			button.setAttribute('aria-expanded', 'false');
 			handleScroll.disable();
+			Array.from(links).forEach((link) =>
+				link.setAttribute('tabindex', '-1')
+			);
 		} else {
 			button.setAttribute('aria-expanded', 'true');
 			handleScroll.enable();
+			Array.from(links).forEach((link) =>
+				link.setAttribute('tabindex', '1')
+			);
 		}
 	});
 
@@ -59,9 +69,6 @@ export default function navigation() {
 	// 		button.setAttribute( 'aria-expanded', 'false' );
 	// 	}
 	// } );
-
-	// Get all the link elements within the menu.
-	const links = menu.getElementsByTagName('a');
 
 	// Get all the link elements with children within the menu.
 	const linksWithChildren = menu.querySelectorAll(
