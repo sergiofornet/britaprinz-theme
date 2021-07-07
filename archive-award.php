@@ -40,11 +40,11 @@ get_header();
 			'bpa_theme_gallery_markup',
 			function() use ( $edition_id ) {
 				$markup = "
-					<div class='award-gallery hidden' data-edition='{$edition_id}'>
-						<div class='award-gallery__close'>
+					<div class='artwork-gallery hidden' data-edition='{$edition_id}'>
+						<div class='artwork-gallery__close'>
 							<button class='close'>&times;</button>
 						</div>
-						<div class='award-gallery__slider'></div>
+						<div class='artwork-gallery__slider'></div>
 					</div><!--.edition-gallery -->
 				";
 				echo $markup;
