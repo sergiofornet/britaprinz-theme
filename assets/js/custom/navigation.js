@@ -1,3 +1,6 @@
+import { HandleScroll } from '../util/util';
+
+const handleScroll = new HandleScroll();
 /**
  * File navigation.js.
  *
@@ -40,8 +43,10 @@ export default function navigation() {
 
 		if (button.getAttribute('aria-expanded') === 'true') {
 			button.setAttribute('aria-expanded', 'false');
+			handleScroll.disable();
 		} else {
 			button.setAttribute('aria-expanded', 'true');
+			handleScroll.enable();
 		}
 	});
 
