@@ -851,131 +851,6 @@
   }
 
   /**
-   * Outputs Award info.
-   *
-   * @param {NodeList} triggers An object containing button triggers.
-   * @param {Node} target Where the info will be printed in.
-   * @param {string} ajaxUrl The REST API endpoint
-   * @param {Object} options
-   * @param {string} lang
-   * @param {callback} callback The function that will generate the content
-   * @return {string} Returns HTML string containing Award edition info.
-   */
-
-  function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
-    var awardHtml = '';
-    triggers.forEach(function (button) {
-      button.addEventListener('click', /*#__PURE__*/function () {
-        var _ref = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(event) {
-          return regenerator.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  if (!(event.currentTarget.dataset.active === 'false')) {
-                    _context.next = 9;
-                    break;
-                  }
-
-                  target.dataset.state = 'loading';
-                  target.parentElement.dataset.state = 'loaded'; // Search for an active button
-
-                  if (document.querySelector('.edition-item__button[data-active="true"]')) {
-                    // Make active button inactive
-                    document.querySelector('.edition-item__button[data-active="true"]').dataset.active = false;
-                  } // Fetch AJAX data
-
-
-                  asyncFetch("".concat(ajaxUrl, "/").concat(event.currentTarget.dataset.edition), options).then(function (jsonResponse) {
-                    callback(jsonResponse, target, lang); // Toggle target loading state
-
-                    target.dataset.state = 'loaded';
-                  }); // Make current button active
-
-                  event.currentTarget.dataset.active = true;
-                  button.setAttribute('aria-pressed', 'true');
-                  _context.next = 18;
-                  break;
-
-                case 9:
-                  // If pressed button is already active
-                  // Make it inactive
-                  event.currentTarget.dataset.active = false;
-                  button.setAttribute('aria-pressed', 'false'); // Change target loading state
-
-                  target.dataset.state = 'unloading';
-                  target.parentElement.dataset.state = 'unloading'; // Wait half a second
-
-                  _context.next = 15;
-                  return waait(500);
-
-                case 15:
-                  // Change target loading state
-                  target.dataset.state = 'unloaded';
-                  target.parentElement.dataset.state = 'unloaded'; // Empty target container
-
-                  target.innerHTML = '';
-
-                case 18:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee);
-        }));
-
-        return function (_x) {
-          return _ref.apply(this, arguments);
-        };
-      }(), false);
-    });
-    return awardHtml;
-  }
-
-  function handleReturnButton(_x, _x2) {
-    return _handleReturnButton.apply(this, arguments);
-  }
-
-  function _handleReturnButton() {
-    _handleReturnButton = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(button, target) {
-      var activeButton;
-      return regenerator.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              activeButton = document.querySelector('.edition-item__button[data-active="true"]');
-
-              if (activeButton) {
-                activeButton.dataset.active = false;
-                activeButton.setAttribute('aria-pressed', 'false');
-              }
-
-              if (button.getAttribute('aria-pressed') === 'true') {
-                button.setAttribute('aria-pressed', 'false');
-              } else {
-                button.setAttribute('aria-pressed', 'true');
-              }
-
-              target.dataset.state = 'unloading';
-              target.parentElement.dataset.state = 'unloading';
-              _context.next = 7;
-              return waait(500);
-
-            case 7:
-              target.dataset.state = 'unloaded';
-              target.parentElement.dataset.state = 'unloaded';
-              target.innerHTML = '';
-
-            case 10:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-    return _handleReturnButton.apply(this, arguments);
-  }
-
-  /**
    * Slider prototype definition
    *
    * @param {HTMLElement} slider Where our slider will be created.
@@ -1240,11 +1115,6 @@
     var event = payload.event,
         images = payload.images;
     var imageId = event.currentTarget.dataset.image;
-    console.log(imageId, images, images.filter(function (image) {
-      return image.id === imageId;
-    }).map(function (image) {
-      return image.rendered;
-    })[0]);
     var handleScroll = new HandleScroll();
     var target = document.querySelector('.artwork-gallery');
     var targetSlider = target.querySelector('.artwork-gallery__slider');
@@ -1260,7 +1130,7 @@
     target.classList.toggle('hidden');
   }
 
-  function galleryImage(payload) {
+  function awardGalleryImage(payload) {
     if (payload === null) return;
     var images = payload.map(function (prize) {
       return {
@@ -1277,6 +1147,140 @@
         });
       });
     });
+  }
+
+  /**
+   * Outputs Award info.
+   *
+   * @param {NodeList} triggers An object containing button triggers.
+   * @param {Node} target Where the info will be printed in.
+   * @param {string} ajaxUrl The REST API endpoint
+   * @param {Object} options
+   * @param {string} lang
+   * @param {callback} callback The function that will generate the content
+   * @return {string} Returns HTML string containing Award edition info.
+   */
+
+  function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
+    // Add event listeners to prize images on first load
+    window.addEventListener('load', function () {
+      var edition = document.querySelector('.artwork-gallery').dataset.edition;
+      asyncFetch("".concat(ajaxUrl, "/").concat(edition), options).then(function (jsonResponse) {
+        var award = jsonResponse.award;
+        awardGalleryImage(award);
+      });
+    }); // Add event listeners to edition buttons and handle gallery toggling on and off
+
+    var awardHtml = '';
+    triggers.forEach(function (button) {
+      button.addEventListener('click', /*#__PURE__*/function () {
+        var _ref = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(event) {
+          return regenerator.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  if (!(event.currentTarget.dataset.active === 'false')) {
+                    _context.next = 9;
+                    break;
+                  }
+
+                  target.dataset.state = 'loading';
+                  target.parentElement.dataset.state = 'loaded'; // Search for an active button
+
+                  if (document.querySelector('.edition-item__button[data-active="true"]')) {
+                    // Make active button inactive
+                    document.querySelector('.edition-item__button[data-active="true"]').dataset.active = false;
+                  } // Fetch AJAX data
+
+
+                  asyncFetch("".concat(ajaxUrl, "/").concat(event.currentTarget.dataset.edition), options).then(function (jsonResponse) {
+                    callback(jsonResponse, target, lang); // Toggle target loading state
+
+                    target.dataset.state = 'loaded';
+                  }); // Make current button active
+
+                  event.currentTarget.dataset.active = true;
+                  button.setAttribute('aria-pressed', 'true');
+                  _context.next = 18;
+                  break;
+
+                case 9:
+                  // If pressed button is already active
+                  // Make it inactive
+                  event.currentTarget.dataset.active = false;
+                  button.setAttribute('aria-pressed', 'false'); // Change target loading state
+
+                  target.dataset.state = 'unloading';
+                  target.parentElement.dataset.state = 'unloading'; // Wait half a second
+
+                  _context.next = 15;
+                  return waait(500);
+
+                case 15:
+                  // Change target loading state
+                  target.dataset.state = 'unloaded';
+                  target.parentElement.dataset.state = 'unloaded'; // Empty target container
+
+                  target.innerHTML = '';
+
+                case 18:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function (_x) {
+          return _ref.apply(this, arguments);
+        };
+      }(), false);
+    });
+    return awardHtml;
+  }
+
+  function handleReturnButton(_x, _x2) {
+    return _handleReturnButton.apply(this, arguments);
+  }
+
+  function _handleReturnButton() {
+    _handleReturnButton = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(button, target) {
+      var activeButton;
+      return regenerator.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              activeButton = document.querySelector('.edition-item__button[data-active="true"]');
+
+              if (activeButton) {
+                activeButton.dataset.active = false;
+                activeButton.setAttribute('aria-pressed', 'false');
+              }
+
+              if (button.getAttribute('aria-pressed') === 'true') {
+                button.setAttribute('aria-pressed', 'false');
+              } else {
+                button.setAttribute('aria-pressed', 'true');
+              }
+
+              target.dataset.state = 'unloading';
+              target.parentElement.dataset.state = 'unloading';
+              _context.next = 7;
+              return waait(500);
+
+            case 7:
+              target.dataset.state = 'unloaded';
+              target.parentElement.dataset.state = 'unloaded';
+              target.innerHTML = '';
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+    return _handleReturnButton.apply(this, arguments);
   }
 
   /**
@@ -1305,9 +1309,9 @@
 
     var html = "\n\t<article id=\"post-".concat(id, "\">\n\t\t<div class=\"entry-content award\">\n\t\t\t").concat(title && "<div class=\"award__title\">\n\t\t\t\t\t<h1>".concat(title, "</h1>\n\t\t\t\t</div>"), "\n\t\t\t").concat(isSpecialEdition ? "\n\t\t\t\t\t<ul id=\"award-se\" class=\"award-se\">\n\t\t\t\t\t\t".concat(specialEditionHTML(specialEdition), "\n\t\t\t\t\t</ul>\n\t\t\t\t\t") : "\t\n\t\t\t\t\t".concat(awardPrizes ? "\n\t\t\t\t\t\t<div class=\"award__prizes\">\n\t\t\t\t\t\t\t<ol class=\"prizes__list\">".concat(prizesListHTML(awardPrizes), "</ol>\n\t\t\t\t\t\t\t").concat(mentions && mentionsHTML, "\n\t\t\t\t\t\t</div>") : ""), "\n\t\t</div>\n\t</article>");
     target.innerHTML = '';
-    target.insertAdjacentHTML('afterbegin', html); // Do gallery images stuff
+    target.insertAdjacentHTML('afterbegin', html); // Handle gallery toggling on and off
 
-    galleryImage(awardPrizes);
+    awardGalleryImage(awardPrizes);
     var returnButton = document.createElement('button');
     returnButton.classList.add('award-edition-container__return-button');
     returnButton.classList.add('return-button');
@@ -1330,15 +1334,9 @@
 
     return html;
   }
-  /**
-   * TODO:
-   * images
-   */
-
 
   function specialEditionHTML(payload) {
-    var html = ""; // console.log(payload);
-
+    var html = "";
     payload.forEach(function (edition) {
       console.log(edition.bp_award_se_year);
       html += "\n\t\t<li id=\"award-se-".concat(edition.bp_award_se_year, "\" class=\"award-se__edition\">\n\t\t\t<div class=\"edition__year\">\n\t\t\t\t<p>").concat(edition.bp_award_se_year, "</p>\n\t\t\t</div>\n\t\t\t<div class=\"edition__winners\">").concat(edition.bp_award_se_winners, "</div>\n\t\t</li>\n\t\t");
@@ -1463,8 +1461,7 @@
     awardGallery.classList.toggle('hidden');
     document.body.classList.toggle('no-scroll');
     handleScroll.disable();
-  });
-  awardGallery.querySelector('.artwork-gallery__slider'); // console.log(awardUrl);
+  }); // console.log(awardUrl);
 
   if (type === 'award') {
     showAwardInfo(buttons, editionContainer, awardUrl, lang, asyncFetchOptions(nonce, 'get'), awardEditionHTML);

@@ -6,13 +6,6 @@ function showAwardGallery(payload) {
 
 	const { event, images } = payload;
 	const { image: imageId } = event.currentTarget.dataset;
-	console.log(
-		imageId,
-		images,
-		images
-			.filter((image) => image.id === imageId)
-			.map((image) => image.rendered)[0]
-	);
 
 	const handleScroll = new HandleScroll();
 

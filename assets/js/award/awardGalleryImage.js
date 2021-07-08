@@ -1,6 +1,6 @@
 import { showAwardGallery } from './showAwardGallery';
 
-function galleryImage(payload) {
+function awardGalleryImage(payload) {
 	if (payload === null) return;
 
 	const images = payload.map((prize) => ({
@@ -17,4 +17,4 @@ function galleryImage(payload) {
 	);
 }
 
-export { galleryImage };
+export { awardGalleryImage };

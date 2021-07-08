@@ -1,5 +1,6 @@
 import wait from 'waait';
 import { asyncFetch } from '../util/async-fetch';
+import { awardGalleryImage } from './awardGalleryImage';
 
 /**
  * Outputs Award info.
@@ -13,6 +14,16 @@ import { asyncFetch } from '../util/async-fetch';
  * @return {string} Returns HTML string containing Award edition info.
  */
 function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
+	// Add event listeners to prize images on first load
+	window.addEventListener('load', () => {
+		const { edition } = document.querySelector('.artwork-gallery').dataset;
+		asyncFetch(`${ajaxUrl}/${edition}`, options).then((jsonResponse) => {
+			const { award } = jsonResponse;
+			awardGalleryImage(award);
+		});
+	});
+
+	// Add event listeners to edition buttons and handle gallery toggling on and off
 	const awardHtml = '';
 	triggers.forEach((button) => {
 		button.addEventListener(

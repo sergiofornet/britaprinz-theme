@@ -1,5 +1,5 @@
 import { handleReturnButton } from './awardHandlers';
-import { galleryImage } from './galleryImage';
+import { awardGalleryImage } from './awardGalleryImage';
 
 /**
  * @param {Object} payload A JSON object
@@ -63,8 +63,8 @@ function awardEditionHTML(payload, target, lang) {
 	target.innerHTML = '';
 	target.insertAdjacentHTML('afterbegin', html);
 
-	// Do gallery images stuff
-	galleryImage(awardPrizes);
+	// Handle gallery toggling on and off
+	awardGalleryImage(awardPrizes);
 
 	const returnButton = document.createElement('button');
 	returnButton.classList.add('award-edition-container__return-button');
@@ -106,14 +106,9 @@ function prizesListHTML(payload) {
 	}
 	return html;
 }
-/**
- * TODO:
- * images
- */
 
 function specialEditionHTML(payload) {
 	let html = ``;
-	// console.log(payload);
 	payload.forEach((edition) => {
 		console.log(edition.bp_award_se_year);
 		html += `
@@ -128,4 +123,4 @@ function specialEditionHTML(payload) {
 	return html;
 }
 
-export { awardEditionHTML, galleryImage };
+export { awardEditionHTML };

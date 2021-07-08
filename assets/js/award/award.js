@@ -50,8 +50,6 @@ awardGallery
 		handleScroll.disable();
 	});
 
-const awardSlider = awardGallery.querySelector('.artwork-gallery__slider');
-
 // console.log(awardUrl);
 if (type === 'award') {
 	showAwardInfo(
