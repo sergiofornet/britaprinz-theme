@@ -1236,41 +1236,28 @@
   };
 
   function showAwardGallery(payload) {
-  	if (payload === null) return;
-
-  	const { event, images } = payload;
-  	const { image: imageId } = event.currentTarget.dataset;
-  	console.log(
-  		imageId,
-  		images,
-  		images
-  			.filter((image) => image.id === imageId)
-  			.map((image) => image.rendered)[0]
-  	);
-
-  	const handleScroll = new HandleScroll();
-
-  	const target = document.querySelector('.artwork-gallery');
-  	const targetSlider = target.querySelector('.artwork-gallery__slider');
-  	targetSlider.innerHTML = '';
-  	targetSlider.insertAdjacentHTML(
-  		'afterbegin',
-  		`
-		<div class="slides">
-		<figure class="slide">${
-			images
-				.filter((image) => image.id === imageId)
-				.map((image) => image.rendered)[0]
-		}</figure>
-		</div>
-		`
-  	);
-
-  	new Slider(targetSlider, false, true);
-
-  	document.body.classList.toggle('no-scroll');
-  	handleScroll.enable();
-  	target.classList.toggle('hidden');
+    if (payload === null) return;
+    var event = payload.event,
+        images = payload.images;
+    var imageId = event.currentTarget.dataset.image;
+    console.log(imageId, images, images.filter(function (image) {
+      return image.id === imageId;
+    }).map(function (image) {
+      return image.rendered;
+    })[0]);
+    var handleScroll = new HandleScroll();
+    var target = document.querySelector('.artwork-gallery');
+    var targetSlider = target.querySelector('.artwork-gallery__slider');
+    targetSlider.innerHTML = '';
+    targetSlider.insertAdjacentHTML('afterbegin', "\n\t\t<div class=\"slides\">\n\t\t<figure class=\"slide\">".concat(images.filter(function (image) {
+      return image.id === imageId;
+    }).map(function (image) {
+      return image.rendered;
+    })[0], "</figure>\n\t\t</div>\n\t\t"));
+    new Slider(targetSlider, false, true);
+    document.body.classList.toggle('no-scroll');
+    handleScroll.enable();
+    target.classList.toggle('hidden');
   }
 
   function galleryImage(payload) {
