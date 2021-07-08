@@ -787,18 +787,20 @@
 	}
 
 	HandleScroll.prototype.enable = function () {
+	  // Store current scroll position
 	  this.scrollPosition = window.pageYOffset;
 	  this.body.style.overflow = 'hidden';
 	  this.body.style.position = 'fixed';
 	  this.body.style.top = "-".concat(this.scrollPosition, "px");
-	  this.body.style.width = '100%';
+	  this.body.style.width = 'calc(100% - var(--scrollbar-width, 11px))';
 	};
 
 	HandleScroll.prototype.disable = function () {
 	  this.body.style.removeProperty('overflow');
 	  this.body.style.removeProperty('position');
 	  this.body.style.removeProperty('top');
-	  this.body.style.removeProperty('width');
+	  this.body.style.removeProperty('width'); // Restore scropp position
+
 	  window.scrollTo(0, this.scrollPosition);
 	};
 
