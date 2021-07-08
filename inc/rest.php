@@ -485,7 +485,7 @@ function britaprinz_award( $object, $field_name, $request ) {
 	$award = carbon_get_post_meta( $object['id'], 'bp_award' );
 	foreach ( $award as &$prize ) {
 		$prize_img_thumbnail               = wp_get_attachment_image( $prize['bp_award_image'], 'award-thumbnail' );
-		$prize_img                         = wp_get_attachment_image( $prize['bp_award_image'], 'full' );
+		$prize_img                         = wp_get_attachment_image( $prize['bp_award_image'], 'gallery' );
 		$prize['bp_award_image_thumbnail'] = wp_kses( $prize_img_thumbnail, bpa_theme_image_allowed_attrs() );
 		$prize['bp_award_image_rendered']  = wp_kses( $prize_img, bpa_theme_image_allowed_attrs() );
 		$prize['bp_award_category']        = wp_kses( $prize['bp_award_category'], array( 'sup' => array() ) );
