@@ -363,6 +363,8 @@ function britaprinz_artwork_gallery( $object, $field_name, $request ) {
 		$images_ids
 	) : null;
 
+	remove_filter( 'wp_get_attachment_image_attributes', 'bpa_theme_filter_gallery_attrs', 10 );
+
 	return $gallery;
 }
 
