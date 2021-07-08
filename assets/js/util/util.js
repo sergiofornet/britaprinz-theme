@@ -97,7 +97,7 @@ HandleScroll.prototype.enable = function () {
 	this.scrollPosition = window.pageYOffset;
 	this.body.style.overflow = 'hidden';
 	this.body.style.position = 'fixed';
-	this.body.style.top = `-${this.scrollPosition}px`;
+	this.body.style.top = `calc(${this.scrollPosition}px * -1 + var(--wp-admin-bar, 0px))`;
 	this.body.style.width = 'calc(100% - var(--scrollbar-width, 11px))';
 };
 HandleScroll.prototype.disable = function () {
