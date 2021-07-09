@@ -8,7 +8,7 @@
 	background-color: white;
 	padding-block-start: var(--header-height, 150px);
 	padding-block-end: var(--header-height, 150px);
-	height: calc(100vh - var(--wp-admin-bar, 0px));
+	height: 100vh;
 	
 	transform: translateY(-300%);
 	transition: transform .5s ease-in-out;
