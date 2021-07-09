@@ -34,18 +34,31 @@ function setCatalogueGallery(selector) {
 		items: 2,
 		slideBy: 1,
 		mouseDrag: false,
-		Arrowkeys: true,
 		swipeAngle: false,
 		speed: 500,
 		autoplay: false,
 		arrowKeys: true,
 		rewind: true,
-		fixedWidth: 250,
+		fixedWidth: 280,
 		prevButton,
 		nextButton,
 		nav: false,
+		touch: false,
 		responsive: {
 			480: {
+				fixedWidth: 350,
+			},
+			640: {
+				fixedWidth: 500,
+			},
+			768: {
+				center: true,
+			},
+			1024: {
+				fixedWidth: 450,
+				center: false,
+			},
+			1280: {
 				fixedWidth: 500,
 			},
 		},
