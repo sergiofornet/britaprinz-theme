@@ -1,12 +1,10 @@
-// import { tns } from '../../../node_modules/tiny-slider/src/tiny-slider';
-
 import { handleReturnButton } from './awardHandlers';
+import { catalogueGalleryHTML, setCatalogueGallery } from './catalogueGallery';
 
 /**
  * @param {Object} payload A JSON object
- * @param target
+ * @param {HTMLElement} target
  * @param {string} lang Current language
- * @return {string} HTML string
  */
 function catalogueEditionHTML(payload, target, lang) {
 	const {
@@ -47,7 +45,8 @@ function catalogueEditionHTML(payload, target, lang) {
 		false
 	);
 	target.insertAdjacentElement('afterbegin', returnButton);
-	// catalogueGalleryHTML(catalogueGallery, id);
+
+	setCatalogueGallery('.catalogue__gallery');
 }
 
 function catalogueHTML(payload) {
@@ -80,56 +79,10 @@ function catalogueHTML(payload) {
 						</div>`
 						: ``
 				}
+				${catalogueGalleryHTML(payload.catalogueGallery)}
 			</div>
 		</article>`;
 	return html;
-}
-
-function catalogueGalleryHTML(catalogImages, id) {
-	if (catalogImages.length === 0) {
-		console.log('no images');
-		return;
-	}
-	let images = '';
-	catalogImages.forEach((image) => {
-		images += `<div><figure>${image}</figure></div>`;
-	});
-	const html = catalogImages
-		? `
-		<div class="award-gallery__slider">${images}</div>
-		`
-		: '';
-
-	const galleryContainer = document.querySelector('.award-gallery');
-	const galleryToggle = document.querySelector('.gallery-toggle');
-	galleryToggle.addEventListener('click', () => {
-		if (id !== parseInt(galleryContainer.dataset.edition)) {
-			console.log(typeof id, typeof galleryContainer.dataset.edition);
-			console.log('change');
-			galleryContainer.dataset.edition = id;
-			galleryContainer.querySelector('.tns-outer').remove();
-			galleryContainer.insertAdjacentHTML('beforeend', html);
-			// const slider = tns({
-			// 	container: '.award-gallery__slider',
-			// 	items: 1,
-			// 	slideBy: 1,
-			// 	mouseDrag: true,
-			// 	swipeAngle: false,
-			// 	speed: 400,
-			// 	autoplay: false,
-			// 	arrowKeys: true,
-			// 	center: true,
-			// 	// autoHeight: true,
-			// 	responsive: {
-			// 		480: {
-			// 			items: 2,
-			// 		},
-			// 	},
-			// });
-			// console.log(slider.getInfo());
-		}
-		galleryContainer.classList.replace('hidden', 'visible');
-	});
 }
 
 export { catalogueEditionHTML };

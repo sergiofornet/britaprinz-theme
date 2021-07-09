@@ -18,7 +18,6 @@
 		<div class="entry-content catalogue">
 
 			<?php
-			// the_content();
 			$award_query = new WP_Query( $args );
 
 			if ( $award_query->have_posts() ) :
@@ -45,12 +44,12 @@
 						</h1>
 
 						<?php 
-						if ($edition_cover_image) :
+						if ( $edition_cover_image ) :
 							?>
 
 							<figure class="catalogue__cover">
 
-								<?php echo $edition_cover_image; ?>
+								<?php echo wp_kses( $edition_cover_image, bpa_theme_image_allowed_attrs() ); ?>
 
 							</figure>
 
@@ -65,46 +64,30 @@
 						);
 
 						if ( $images_ids ) :
-						?>
+							$gallery = $images_ids ? implode(
+								'', 
+								array_map(
+									fn( $id ) =>  '<div class="tns-slide"><figure>' . wp_get_attachment_image( $id, 'award-thumbnail' ) . '</figure></div>', 
+									$images_ids
+								) 
+							) : null;
+							?>
 
-							<div class="catalogue__gallery-toggle">
-								<button class="gallery-toggle"><?php esc_html_e( 'Ver catálogo', 'britaprinz-theme'); ?></button>
+							<div class="catalogue-container">
+								<button class="previous-slide"><</button>
+								<button class="next-slide">></button>
+								<div class="catalogue__gallery">
+									
+									<?php
+									echo wp_kses( $gallery, bpa_theme_image_allowed_attrs() );
+									?>
+
+								</div>
 							</div>
 
-						<?php
+							<?php
 						endif;
 
-						$gallery = $images_ids ? implode(
-							'', 
-							array_map(
-								fn( $id ) =>  '<div class="swiper-slide"><figure>' . wp_get_attachment_image( $id, 'large' ) . '</figure></div>', 
-								$images_ids
-							) 
-						) : null;
-
-						/** TODO:
-						 * Gallery:
-						 * 1. think
-						 * 2. test
-						 */
-						// add_action(
-						// 	'bpa_theme_gallery_markup',
-						// 	function() use ( $gallery, $edition_id ) {
-						// 		$markup = "
-						// 			<div class='award-gallery swiper-container hidden' data-edition='{$edition_id}'>
-						// 				<div class='award-gallery__close'>
-						// 					<button class='close'>&times;</button>
-						// 				</div>
-						// 				<div class='award-gallery__slider swiper-wrapper'>{$gallery}</div>
-						// 				<div class='swiper-button-prev'></div>
-						// 				<div class='swiper-button-next'></div>
-						// 			</div><!--.edition-gallery -->
-						// 		";
-						// 		echo $markup;
-						// 	}, 
-						// 	10,
-						// 	2
-						// );
 
 					endif;
 

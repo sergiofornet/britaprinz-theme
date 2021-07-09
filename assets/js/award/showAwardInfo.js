@@ -1,6 +1,7 @@
 import wait from 'waait';
 import { asyncFetch } from '../util/async-fetch';
 import { awardGalleryImage } from './awardGalleryImage';
+import { setCatalogueGallery } from './catalogueGallery';
 
 /**
  * Outputs Award info.
@@ -11,17 +12,33 @@ import { awardGalleryImage } from './awardGalleryImage';
  * @param {Object} options
  * @param {string} lang
  * @param {callback} callback The function that will generate the content
+ * @param type
  * @return {string} Returns HTML string containing Award edition info.
  */
-function showAwardInfo(triggers, target, ajaxUrl, lang, options, callback) {
-	// Add event listeners to prize images on first load
-	window.addEventListener('load', () => {
-		const { edition } = document.querySelector('.artwork-gallery').dataset;
-		asyncFetch(`${ajaxUrl}/${edition}`, options).then((jsonResponse) => {
-			const { award } = jsonResponse;
-			awardGalleryImage(award);
+function showAwardInfo(
+	triggers,
+	target,
+	ajaxUrl,
+	lang,
+	options,
+	callback,
+	type
+) {
+	if (type === 'award') {
+		// Add event listeners to prize images on first load
+		window.addEventListener('load', () => {
+			const { edition } =
+				document.querySelector('.artwork-gallery').dataset;
+			asyncFetch(`${ajaxUrl}/${edition}`, options).then(
+				(jsonResponse) => {
+					const { award } = jsonResponse;
+					awardGalleryImage(award);
+				}
+			);
 		});
-	});
+	} else if (type === 'catalogues') {
+		setCatalogueGallery('.catalogue__gallery');
+	}
 
 	// Add event listeners to edition buttons and handle gallery toggling on and off
 	const awardHtml = '';
