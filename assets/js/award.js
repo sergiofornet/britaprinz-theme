@@ -4360,7 +4360,7 @@
     catalogImages.forEach(function (image) {
       images += "<div class=\"tns-slide\"><figure>".concat(image, "</figure></div>");
     });
-    var html = catalogImages ? "\n\t\t<div class=\"catalogue-container\">\n\t\t\t<button class=\"previous-slide\"><</button>\n\t\t\t<button class=\"next-slide\">></button>\n\t\t\t<div class=\"catalogue__gallery\">\n\t\t\t\t".concat(images, "\n\t\t\t</div>\n\t\t</div>\n\t\t") : '';
+    var html = catalogImages ? "\n\t\t<div class=\"catalogue__gallery-container\">\n\t\t\t<button class=\"previous-slide\"><</button>\n\t\t\t<button class=\"next-slide\">></button>\n\t\t\t<div class=\"catalogue__gallery\">\n\t\t\t\t".concat(images, "\n\t\t\t</div>\n\t\t</div>\n\t\t") : '';
     return html;
   }
 

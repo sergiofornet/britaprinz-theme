@@ -12,7 +12,7 @@ function catalogueGalleryHTML(catalogImages) {
 	});
 	const html = catalogImages
 		? `
-		<div class="catalogue-container">
+		<div class="catalogue__gallery-container">
 			<button class="previous-slide"><</button>
 			<button class="next-slide">></button>
 			<div class="catalogue__gallery">

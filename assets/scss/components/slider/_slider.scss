@@ -97,8 +97,12 @@
 	transform-origin: 50% 50%;
 	transition: transform .1s;
 
-	&:hover {
+	&:hover, &:focus {
 		transform: scale(1.1);
+	}
+
+	&:focus {
+		outline: none;
 	}
 }
 .previous-slide {

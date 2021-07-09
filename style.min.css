@@ -275,23 +275,19 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .award-container .award-edition-container .award .prize__image button[type=button]:hover{cursor:-webkit-zoom-in;cursor:zoom-in}
 .award-container .award-edition-container .award .prize__image figure{margin:0}
 .award-container .award-edition-container .award .award-se{list-style:none;padding:0}
-.award-container .award-edition-container .catalogue .catalogue__title,.award-container .award-edition-container .catalogue .catalogue__link{text-align:center}
-.award-container .award-edition-container .catalogue .catalogue__cover,.award-container .award-edition-container .catalogue .catalogue__gallery-toggle{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
-.award-container .award-edition-container .catalogue .catalogue__title p{font-size:calc(18rem / 16)}
-.award-container .award-edition-container .catalogue .catalogue__link{font-size:calc(18rem / 16);font-weight:600}
-.award-container .award-edition-container .catalogue .catalogue__link a{text-decoration:none}
-.award-container .award-edition-container .catalogue .catalogue__link a:hover,.award-container .award-edition-container .catalogue .catalogue__link a:focus{text-decoration:underline}
-.award-container .award-edition-container .catalogue .catalogue__cover{margin:min(8vh,80px) 0 min(6vh,65px)}
-.award-container .award-edition-container .catalogue .catalogue__gallery-toggle{margin:2em 0}
-.award-container .award-edition-container .catalogue .catalogue__gallery-toggle .gallery-toggle{border:0;position:relative;text-align:left;padding:0;-webkit-margin-start:1.1em;margin-inline-start:1.1em;-webkit-margin-end:1.1em;margin-inline-end:1.1em;-webkit-margin-after:.9em;margin-block-end:.9em;font-size:calc(21rem / 16);font-weight:500;text-transform:none}
-.award-container .award-edition-container .catalogue .catalogue__gallery-toggle .gallery-toggle::after{content:"";position:absolute;bottom:-0.9em;right:-1.1em;width:45px;height:18px;background-image:url("assets/img/icons/bpa_arrow.svg");background-repeat:no-repeat;-webkit-transform:translateX(0);transform:translateX(0);-webkit-transition:-webkit-transform .5s ease-in-out;transition:-webkit-transform .5s ease-in-out;transition:transform .5s ease-in-out;transition:transform .5s ease-in-out,-webkit-transform .5s ease-in-out}
-.award-container .award-edition-container .catalogue .catalogue__gallery-toggle .gallery-toggle:hover::after,.award-container .award-edition-container .catalogue .catalogue__gallery-toggle .gallery-toggle:focus::after,.award-container .award-edition-container .catalogue .catalogue__gallery-toggle .gallery-toggle:focus-visible::after{-webkit-transform:translateX(0.5em);transform:translateX(0.5em)}
 .award-gallery{position:fixed;top:0;left:0;z-index:900}
 .award-gallery.hidden{display:none}
-.catalogue-container{position:relative}
-.catalogue-container .next-slide,.catalogue-container .previous-slide{bottom:calc(50% - 45px / 2)}
-.catalogue-container .next-slide{right:0}
-.catalogue-container .previous-slide{left:0}
+.award-container .catalogue .catalogue__title,.award-container .catalogue .catalogue__link{text-align:center}
+.award-container .catalogue .catalogue__cover,.award-container .catalogue .catalogue__gallery-toggle{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-align:center;-ms-flex-align:center;align-items:center}
+.award-container .catalogue .catalogue__title p{font-size:calc(18rem / 16)}
+.award-container .catalogue .catalogue__link{font-size:calc(18rem / 16);font-weight:600;-webkit-margin-after:2em;margin-block-end:2em}
+.award-container .catalogue .catalogue__link a{text-decoration:none}
+.award-container .catalogue .catalogue__link a:hover,.award-container .catalogue .catalogue__link a:focus{text-decoration:underline}
+.award-container .catalogue .catalogue__cover{margin:min(8vh,80px) 0 min(6vh,65px)}
+.award-container .catalogue .catalogue__gallery-container{position:relative}
+.award-container .catalogue .catalogue__gallery-container .next-slide,.award-container .catalogue .catalogue__gallery-container .previous-slide{bottom:calc(50% - 45px / 2)}
+.award-container .catalogue .catalogue__gallery-container .next-slide{right:0}
+.award-container .catalogue .catalogue__gallery-container .previous-slide{left:0}
 .technique-content__steps{--technique-gap:1em;display:grid}
 .technique-content__steps .step{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:center;-ms-flex-align:center;align-items:center;gap:calc(var(--technique-gap) / 2);margin:0;counter-increment:figcaption}
 .technique-content__steps .step figcaption{margin-top:auto;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;display:list-item;list-style-position:inside;list-style-type:decimal;max-width:300px}
@@ -365,7 +361,8 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .slide.next{z-index:10;-webkit-transform:translateX(100%);transform:translateX(100%);opacity:100%}
 .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,200px));gap:2rem;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:2rem;position:absolute;z-index:1000;bottom:0}
 .previous-slide,.next-slide{position:absolute;bottom:50%;z-index:1000;font-size:calc(32rem / 16);border:0;background-color:unset;padding:.2em .5em;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transition:-webkit-transform .1s;transition:-webkit-transform .1s;transition:transform .1s;transition:transform .1s,-webkit-transform .1s}
-.previous-slide:hover,.next-slide:hover{-webkit-transform:scale(1.1);transform:scale(1.1)}
+.previous-slide:hover,.previous-slide:focus,.next-slide:hover,.next-slide:focus{-webkit-transform:scale(1.1);transform:scale(1.1)}
+.previous-slide:focus,.next-slide:focus{outline:0}
 .artwork-gallery{position:fixed;top:var(--wp-admin-bar,0);left:0;width:calc(100% - var(--scrollbar-width, 0px));height:calc(100 * var(--vh) - var(--wp-admin-bar, 0px));background-color:white;z-index:200}
 .artwork-gallery.hidden{display:none}
 .artwork-gallery .artwork-gallery__slider{position:relative;height:100%}
