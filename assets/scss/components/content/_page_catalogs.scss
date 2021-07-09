@@ -8,3 +8,19 @@
 	left: 0;
 	z-index: 900;
 }
+
+.catalogue-container {
+	position:relative;
+
+	.next-slide, .previous-slide {
+		bottom: calc(50% - 45px / 2);
+	}
+
+	.next-slide {
+		right: 0;
+	}
+
+	.previous-slide {
+		left: 0;
+	}
+}
