@@ -68,17 +68,6 @@ function catalogueHTML(payload) {
 						${payload.lang === 'es' ? 'Descargar PDF' : 'Download PDF'}
 					</a>
 				</div>
-				${
-					payload.catalogueGallery.length
-						? `<div class="catalogue__gallery-toggle">
-							<button class="gallery-toggle">${
-								payload.lang === 'es'
-									? 'Ver catálogo'
-									: 'View catalog'
-							}</button>
-						</div>`
-						: ``
-				}
 				${catalogueGalleryHTML(payload.catalogueGallery)}
 			</div>
 		</article>`;
