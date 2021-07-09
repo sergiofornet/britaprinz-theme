@@ -274,7 +274,10 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .award-container .award-edition-container .award .prize__image button[type=button]{border:0;background-color:unset;padding:0}
 .award-container .award-edition-container .award .prize__image button[type=button]:hover{cursor:-webkit-zoom-in;cursor:zoom-in}
 .award-container .award-edition-container .award .prize__image figure{margin:0}
-.award-container .award-edition-container .award .award-se{list-style:none;padding:0}
+.award-container .award-edition-container .award .award-se{list-style:none;padding:0 0 0 2.5em}
+.award-container .award-edition-container .award .award-se .award-se__edition{margin-bottom:2em}
+.award-container .award-edition-container .award .award-se .award-se__edition:last-of-type{margin-bottom:0}
+.award-container .award-edition-container .award .award-se .award-se__edition .edition__year{font-weight:600;-webkit-margin-start:1em;margin-inline-start:1em;-webkit-margin-before:1em;margin-block-start:1em}
 .award-gallery{position:fixed;top:0;left:0;z-index:900}
 .award-gallery.hidden{display:none}
 .award-container .catalogue .catalogue__title,.award-container .catalogue .catalogue__link{text-align:center}

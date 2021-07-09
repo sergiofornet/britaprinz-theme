@@ -201,7 +201,21 @@
 
 			.award-se {
 				list-style: none;
-				padding: 0;
+				padding: 0 0 0 2.5em;
+
+				.award-se__edition {
+					margin-bottom: 2em;
+
+					&:last-of-type {
+						margin-bottom: 0;
+					}
+
+					.edition__year {
+						font-weight: 600;
+						margin-inline-start: 1em;
+						margin-block-start: 1em;
+					}
+				}
 			}
 		}
 	}
