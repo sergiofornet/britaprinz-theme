@@ -73,6 +73,11 @@
 		
 		@media (max-width: 29.9375em) {
 			padding: 5vh 4vw;
+
+
+			&.container__catalogue {
+				padding: 5vh 0;
+			}
 		}
 		
 		@media (min-width: 30em) and (max-width: 63.9375em) {
@@ -82,7 +87,7 @@
 			height: calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));
 
 			&.container__catalogue {
-				padding-top:  unquote("min(10vh, 100px)");
+				padding: unquote("min(6vh, 60px)") 0;
 			}
 		}
 		

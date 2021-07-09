@@ -399,7 +399,7 @@ ul.menu ul li{font-size:calc(18rem / 16);-webkit-margin-after:2em;margin-block-e
 }@media(orientation:landscape) and (min-width:30em) and (max-width:47.9375em){.home article.page{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-padding-before:1em;padding-block-start:1em;-webkit-padding-after:1em;padding-block-end:1em}
 .home article.page .circle{--circle-diameter:60vw}
 }@media(min-width:30em) and (max-width:63.9375em){.award-container .award-edition-container{padding:min(6vh,60px) min(11vw,120px);border-left:2px solid var(--color-black);overflow-y:auto;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px))}
-.award-container .award-edition-container.container__catalogue{padding-top:min(10vh,100px)}
+.award-container .award-edition-container.container__catalogue{padding:min(6vh,60px) 0}
 }@media(min-width:47.9375em){button.artist__button,input[type="button"].artist__button,input[type="reset"].artist__button,input[type="submit"].artist__button{-webkit-transform:translateX(0);transform:translateX(0)}
 button.artist__button[disabled],input[type="button"].artist__button[disabled],input[type="reset"].artist__button[disabled],input[type="submit"].artist__button[disabled]{cursor:progress}
 button.artist__button[data-active=false]:not([disabled]):hover,input[type="button"].artist__button[data-active=false]:not([disabled]):hover,input[type="reset"].artist__button[data-active=false]:not([disabled]):hover,input[type="submit"].artist__button[data-active=false]:not([disabled]):hover{-webkit-transform:translateX(2em);transform:translateX(2em)}
@@ -523,6 +523,7 @@ ul.menu ul li{font-size:calc(14rem / 16);-webkit-margin-after:1.5em;margin-block
 .main-navigation .nav-menu{-webkit-padding-before:4vh;padding-block-start:4vh;-webkit-padding-after:3vh;padding-block-end:3vh}
 .header__menu-toggle{font-size:calc(20rem / 16)}
 .award-container .award-edition-container{padding:5vh 4vw}
+.award-container .award-edition-container.container__catalogue{padding:5vh 0}
 }@media(orientation:portrait) and (max-width:29.9375em){.home article.page{-webkit-padding-before:1em;padding-block-start:1em;-webkit-padding-after:1em;padding-block-end:1em;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}
 .home article.page .circle{--circle-diameter:75vw}
 }@media(orientation:landscape) and (max-width:29.9375em){.home article.page{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}
