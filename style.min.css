@@ -157,6 +157,7 @@ ul.menu a:hover{text-decoration:underline}
 .main-navigation ul.menu>li.menu-item--title .sub-menu li:not(.current-menu-item):hover,.main-navigation ul.menu>li.menu-item--title .sub-menu li:not(.current-menu-item):focus{-webkit-transform:translateX(5%);transform:translateX(5%)}
 .main-navigation ul.menu a{display:block}
 .secondary-navigation ul.sidebar-menu .current-menu-item:not(.menu-item--title){-webkit-margin-start:2em;margin-inline-start:2em}
+.secondary-navigation ul.sidebar-menu .menu-item-has-children>ul.sub-menu{padding-left:1.2em}
 .secondary-navigation ul.sidebar-menu .catalogues-submenu,.secondary-navigation ul.sidebar-menu .winners-submenu{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-flow:column nowrap;flex-flow:column nowrap;width:40%;-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end;-webkit-margin-start:2em;margin-inline-start:2em;-webkit-padding-before:1em;padding-block-start:1em;-webkit-margin-after:0;margin-block-end:0}
 .secondary-navigation ul.sidebar-menu .catalogues-submenu li:hover,.secondary-navigation ul.sidebar-menu .winners-submenu li:hover{-webkit-transform:translateX(0);transform:translateX(0)}
 .secondary-navigation .menu-item--title{position:relative}

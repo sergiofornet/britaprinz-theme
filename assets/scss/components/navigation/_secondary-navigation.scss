@@ -25,6 +25,10 @@
 		.current-menu-item:not(.menu-item--title) {
 			margin-inline-start: 2em;
 		}
+
+		.menu-item-has-children > ul.sub-menu {
+			padding-left: 1.2em;
+		}
 		
 		.catalogues-submenu,
 		.winners-submenu {
