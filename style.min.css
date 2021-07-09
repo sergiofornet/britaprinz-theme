@@ -287,8 +287,6 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .award-container .award-edition-container .catalogue .catalogue__gallery-toggle .gallery-toggle:hover::after,.award-container .award-edition-container .catalogue .catalogue__gallery-toggle .gallery-toggle:focus::after,.award-container .award-edition-container .catalogue .catalogue__gallery-toggle .gallery-toggle:focus-visible::after{-webkit-transform:translateX(0.5em);transform:translateX(0.5em)}
 .award-gallery{position:fixed;top:0;left:0;z-index:900}
 .award-gallery.hidden{display:none}
-.award-gallery{position:fixed;top:0;left:0;z-index:900}
-.award-gallery.hidden{display:none}
 .catalogue-container{position:relative}
 .catalogue-container .next-slide,.catalogue-container .previous-slide{bottom:calc(50% - 45px / 2)}
 .catalogue-container .next-slide{right:0}
