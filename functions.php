@@ -190,8 +190,8 @@ function britaprinz_theme_scripts() {
 		wp_enqueue_script( 'comment-reply' );
 	}
 	
-	// Vendor scripts.
-	wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri( 'assets/js/vendor.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
+	// // Vendor scripts.
+	// wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri( 'assets/js/vendor.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 
 	// Main custom script.
 	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri( 'assets/js/global.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
