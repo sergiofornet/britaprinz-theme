@@ -71,6 +71,7 @@ h2{font-size:1rem;margin:calc(17rem / 16) 0}
 .site-main--default h2{font-size:calc(21rem / 16);position:relative;-webkit-margin-after:calc(37rem / 16);margin-block-end:calc(37rem / 16)}
 .site-main--default h2::after{content:"";position:absolute;bottom:-10px;left:0;width:31px;height:5px;background-color:var(--color-black)}
 .site-main--sidebar h2{font-size:calc(18rem / 16);font-weight:600;text-transform:none}
+.blog h2{margin:0}
 .site-main--default p+h2{-webkit-margin-before:calc(37rem / 16);margin-block-start:calc(37rem / 16)}
 p{margin:calc(17rem / 16) 0;line-height:1.24;letter-spacing:.01em;font-size:var(--font-size-default)}
 p:last-child{-webkit-margin-after:0;margin-block-end:0}
@@ -319,6 +320,9 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .projects .project h2:hover{-webkit-transform:translateX(1em);transform:translateX(1em)}
 .projects .project a{text-decoration:none}
 .projects .project a:hover{text-decoration:underline}
+.blog .entry-meta,.single-post .entry-meta{font-size:var(--font-size-default)}
+.blog .entry-header a,.single-post .entry-header a{text-decoration:none}
+.blog .entry-header a:hover,.single-post .entry-header a:hover{text-decoration:underline}
 .wp-block-contact-form-7-contact-form-selector .wpcf7-form{max-width:1000px}
 .wp-block-contact-form-7-contact-form-selector .form__field{display:-webkit-box;display:-ms-flexbox;display:flex;gap:2em;-webkit-margin-after:3em;margin-block-end:3em}
 .wp-block-contact-form-7-contact-form-selector .form__field>label{font-size:1.5em;font-weight:600;text-transform:uppercase;font-size:calc(21rem / 16);position:relative}
