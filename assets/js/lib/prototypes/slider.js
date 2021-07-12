@@ -31,7 +31,6 @@ function Slider(slider, scroll = false, lightbox = false) {
 
 	// Create navigation buttons
 	if (this.lightbox === false) {
-		console.log(this.lightbox);
 		slider.insertAdjacentHTML(
 			'beforeend',
 			`<button class="previous-slide"><</button><button class="next-slide">></button>`
@@ -107,12 +106,20 @@ Slider.prototype.scrollImage = function () {
 			slide.removeEventListener('mouseenter', enterHandler, false);
 			slide.removeEventListener('mouseleave', leaveHandler, false);
 			slide.removeEventListener('mousemove', moveHandler, false);
+			slide.removeEventListener('touchstart', touchStartHandler, false);
+			slide.removeEventListener('touchend', touchEndHandler, false);
+			slide.removeEventListener('touchmove', touchMoveHandler, false);
+			slide.removeEventListener('touchcancel', touchCancelHandler, false);
 		});
 	}
 
 	this.current.addEventListener('mouseenter', enterHandler, false);
 	this.current.addEventListener('mouseleave', leaveHandler, false);
 	this.current.addEventListener('mousemove', moveHandler, false);
+	this.current.addEventListener('touchstart', touchStartHandler, false);
+	this.current.addEventListener('touchmove', touchMoveHandler, false);
+	this.current.addEventListener('touchend', touchEndHandler, false);
+	this.current.addEventListener('touchcancel', touchCancelHandler, false);
 };
 
 /**
@@ -130,6 +137,29 @@ async function asyncCreateImage(src) {
 	});
 }
 
+/**
+ * Returns computed image coordinates based on cursor/touch and image and screen sizes.
+ *
+ * @param {Object} imageSize - Image dimensions - { imageWidth, imageHeight }
+ * @param {Object} cursorPosition - Cursor / touch coordinates { cursorX, cursorY }
+ * @return {Object} Image coordinates { imageX, imageY }
+ */
+function imagePosition(imageSize, cursorPosition) {
+	const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
+	let { imageWidth, imageHeight } = imageSize;
+	const { cursorX, cursorY } = cursorPosition;
+	imageWidth = imageWidth < windowWidth ? windowWidth : imageWidth;
+	imageHeight = imageHeight < windowHeight ? windowHeight : imageHeight;
+
+	const imageX =
+		Math.floor(((imageWidth - windowWidth) * cursorX) / windowWidth) * -1;
+	const imageY =
+		Math.floor(((imageHeight - windowHeight) * cursorY) / windowHeight) *
+		-1;
+
+	return { imageX, imageY };
+}
+
 const enterHandler = async (event) => {
 	// Create a hi-res image asynchronously
 	const hiResImage = await asyncCreateImage(
@@ -137,6 +167,7 @@ const enterHandler = async (event) => {
 	);
 	const { naturalWidth: imageWidth, naturalHeight: imageHeight } = hiResImage;
 	const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
+	const { clientX: cursorX, clientY: cursorY } = event;
 
 	// Check if hi-res image is bigger than screen size
 	if (imageWidth > windowWidth || imageHeight > windowHeight) {
@@ -155,12 +186,68 @@ const enterHandler = async (event) => {
 		);
 		event.target.appendChild(hiResContainer);
 
+		// Set image position based on touch coordinates
+		const { imageX, imageY } = imagePosition(
+			{ imageWidth, imageHeight },
+			{ cursorX, cursorY }
+		);
+
+		hiResImage.style.transform = `translate(${imageX}px, ${imageY}px)`;
+
+		// Add width and height to hi-res image
+		hiResImage.style.width = `${hiResImage.width}px`;
+		hiResImage.style.height = `${hiResImage.height}px`;
+		hiResImage.style.transitiion = `transform .2s ease-in-out`;
+
+		hiResContainer.appendChild(hiResImage);
+		setTimeout(() => (hiResContainer.style.opacity = '1'), 50);
+	}
+};
+
+const touchStartHandler = async (event) => {
+	event.preventDefault();
+
+	const target = event.currentTarget;
+
+	// Create a hi-res image asynchronously
+	const hiResImage = await asyncCreateImage(
+		target.querySelector('img').dataset.full
+	);
+	const { naturalWidth: imageWidth, naturalHeight: imageHeight } = hiResImage;
+	const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
+	const { clientX: cursorX, clientY: cursorY } = event.changedTouches[0];
+
+	// Check if hi-res image is bigger than screen size
+	if (imageWidth > windowWidth || imageHeight > windowHeight) {
+		// Add active state class
+		target.classList.add('active-scroll');
+
+		// Create a container for hi-res image
+		const hiResContainer = document.createElement('div');
+		hiResContainer.classList.add('slide__hi-res');
+		hiResContainer.style.width = `${hiResImage.width}px`;
+		hiResContainer.style.height = `${hiResImage.height}px`;
+		hiResContainer.style.opacity = '0';
+		hiResContainer.style.setProperty(
+			'--hires-width',
+			`${hiResImage.width}px`
+		);
+		target.appendChild(hiResContainer);
+
+		// Set image position based on touch coordinates
+		const { imageX, imageY } = imagePosition(
+			{ imageWidth, imageHeight },
+			{ cursorX, cursorY }
+		);
+
+		hiResImage.style.transform = `translate(${imageX}px, ${imageY}px)`;
+
 		// Add width and height to hi-res image
 		hiResImage.style.width = `${hiResImage.width}px`;
 		hiResImage.style.height = `${hiResImage.height}px`;
 
 		hiResContainer.appendChild(hiResImage);
-		setTimeout(() => (hiResContainer.style.opacity = '1'), 50);
+		setTimeout(() => (hiResContainer.style.opacity = '1'), 250);
 	}
 };
 
@@ -177,29 +264,67 @@ const leaveHandler = (event) => {
 		event.currentTarget.classList.remove('active-scroll');
 	}
 };
+
+const touchEndHandler = (event) => {
+	event.preventDefault();
+
+	const target = event.currentTarget;
+
+	// Check if there is an active scrollable image
+	if (target.classList.contains('active-scroll')) {
+		// Remove scrollable image
+		const hiResContainer = target.querySelector('.slide__hi-res');
+		// hiResContainer.style.opacity = '0';
+		setTimeout(() => (hiResContainer.style.opacity = '0'), 500);
+		target.removeChild(hiResContainer);
+
+		// Remove active state class
+		target.classList.remove('active-scroll');
+	}
+};
+
 const moveHandler = (event) => {
 	// Check if there is an active scrollable image
 	if (event.currentTarget.classList.contains('active-scroll')) {
 		const hiResImage =
 			event.currentTarget.querySelector('.slide__hi-res img');
-		const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
 		const { clientX: cursorX, clientY: cursorY } = event;
-		let { naturalWidth: imageWidth, naturalHeight: imageHeight } =
+		const { naturalWidth: imageWidth, naturalHeight: imageHeight } =
 			hiResImage;
 
-		imageWidth = imageWidth < windowWidth ? windowWidth : imageWidth;
-		imageHeight = imageHeight < windowHeight ? windowHeight : imageHeight;
-
-		const imageX =
-			Math.floor(((imageWidth - windowWidth) * cursorX) / windowWidth) *
-			-1;
-		const imageY =
-			Math.floor(
-				((imageHeight - windowHeight) * cursorY) / windowHeight
-			) * -1;
+		// Set image position based on touch coordinates
+		const { imageX, imageY } = imagePosition(
+			{ imageWidth, imageHeight },
+			{ cursorX, cursorY }
+		);
 
 		hiResImage.style.transform = `translate(${imageX}px, ${imageY}px)`;
 	}
+};
+
+const touchMoveHandler = (event) => {
+	event.preventDefault();
+
+	const target = event.currentTarget;
+	// Check if there is an active scrollable image
+	if (target.classList.contains('active-scroll')) {
+		const hiResImage = target.querySelector('.slide__hi-res img');
+		const { clientX: cursorX, clientY: cursorY } = event.changedTouches[0];
+		const { naturalWidth: imageWidth, naturalHeight: imageHeight } =
+			hiResImage;
+
+		const { imageX, imageY } = imagePosition(
+			{ imageWidth, imageHeight },
+			{ cursorX, cursorY }
+		);
+
+		hiResImage.style.transform = `translate(${imageX}px, ${imageY}px)`;
+	}
+};
+
+const touchCancelHandler = (event) => {
+	event.preventDefault();
+	console.log('touch event cancelled');
 };
 
 export default Slider;

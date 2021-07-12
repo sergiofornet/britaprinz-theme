@@ -887,7 +887,6 @@
 
 
     if (this.lightbox === false) {
-      console.log(this.lightbox);
       slider.insertAdjacentHTML('beforeend', "<button class=\"previous-slide\"><</button><button class=\"next-slide\">></button>");
     }
 
@@ -963,12 +962,20 @@
         slide.removeEventListener('mouseenter', enterHandler, false);
         slide.removeEventListener('mouseleave', leaveHandler, false);
         slide.removeEventListener('mousemove', moveHandler, false);
+        slide.removeEventListener('touchstart', touchStartHandler, false);
+        slide.removeEventListener('touchend', touchEndHandler, false);
+        slide.removeEventListener('touchmove', touchMoveHandler, false);
+        slide.removeEventListener('touchcancel', touchCancelHandler, false);
       });
     }
 
     this.current.addEventListener('mouseenter', enterHandler, false);
     this.current.addEventListener('mouseleave', leaveHandler, false);
     this.current.addEventListener('mousemove', moveHandler, false);
+    this.current.addEventListener('touchstart', touchStartHandler, false);
+    this.current.addEventListener('touchmove', touchMoveHandler, false);
+    this.current.addEventListener('touchend', touchEndHandler, false);
+    this.current.addEventListener('touchcancel', touchCancelHandler, false);
   };
   /**
    * Create an image asynchronously
@@ -981,14 +988,22 @@
   function asyncCreateImage(_x) {
     return _asyncCreateImage.apply(this, arguments);
   }
+  /**
+   * Returns computed image coordinates based on cursor/touch and image and screen sizes.
+   *
+   * @param {Object} imageSize - Image dimensions - { imageWidth, imageHeight }
+   * @param {Object} cursorPosition - Cursor / touch coordinates { cursorX, cursorY }
+   * @return {Object} Image coordinates { imageX, imageY }
+   */
+
 
   function _asyncCreateImage() {
-    _asyncCreateImage = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2(src) {
-      return regenerator.wrap(function _callee2$(_context2) {
+    _asyncCreateImage = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3(src) {
+      return regenerator.wrap(function _callee3$(_context3) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context3.prev = _context3.next) {
             case 0:
-              return _context2.abrupt("return", new Promise(function (resolve, reject) {
+              return _context3.abrupt("return", new Promise(function (resolve, reject) {
                 var img = new Image();
 
                 img.onload = function () {
@@ -1001,17 +1016,35 @@
 
             case 1:
             case "end":
-              return _context2.stop();
+              return _context3.stop();
           }
         }
-      }, _callee2);
+      }, _callee3);
     }));
     return _asyncCreateImage.apply(this, arguments);
   }
 
+  function imagePosition(imageSize, cursorPosition) {
+    var _window = window,
+        windowWidth = _window.innerWidth,
+        windowHeight = _window.innerHeight;
+    var imageWidth = imageSize.imageWidth,
+        imageHeight = imageSize.imageHeight;
+    var cursorX = cursorPosition.cursorX,
+        cursorY = cursorPosition.cursorY;
+    imageWidth = imageWidth < windowWidth ? windowWidth : imageWidth;
+    imageHeight = imageHeight < windowHeight ? windowHeight : imageHeight;
+    var imageX = Math.floor((imageWidth - windowWidth) * cursorX / windowWidth) * -1;
+    var imageY = Math.floor((imageHeight - windowHeight) * cursorY / windowHeight) * -1;
+    return {
+      imageX: imageX,
+      imageY: imageY
+    };
+  }
+
   var enterHandler = /*#__PURE__*/function () {
     var _ref3 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(event) {
-      var hiResImage, imageWidth, imageHeight, _window, windowWidth, windowHeight, hiResContainer;
+      var hiResImage, imageWidth, imageHeight, _window2, windowWidth, windowHeight, cursorX, cursorY, hiResContainer, _imagePosition, imageX, imageY;
 
       return regenerator.wrap(function _callee$(_context) {
         while (1) {
@@ -1023,7 +1056,8 @@
             case 2:
               hiResImage = _context.sent;
               imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
-              _window = window, windowWidth = _window.innerWidth, windowHeight = _window.innerHeight; // Check if hi-res image is bigger than screen size
+              _window2 = window, windowWidth = _window2.innerWidth, windowHeight = _window2.innerHeight;
+              cursorX = event.clientX, cursorY = event.clientY; // Check if hi-res image is bigger than screen size
 
               if (imageWidth > windowWidth || imageHeight > windowHeight) {
                 // Add active state class
@@ -1035,17 +1069,27 @@
                 hiResContainer.style.height = "".concat(hiResImage.height, "px");
                 hiResContainer.style.opacity = '0';
                 hiResContainer.style.setProperty('--hires-width', "".concat(hiResImage.width, "px"));
-                event.target.appendChild(hiResContainer); // Add width and height to hi-res image
+                event.target.appendChild(hiResContainer); // Set image position based on touch coordinates
+
+                _imagePosition = imagePosition({
+                  imageWidth: imageWidth,
+                  imageHeight: imageHeight
+                }, {
+                  cursorX: cursorX,
+                  cursorY: cursorY
+                }), imageX = _imagePosition.imageX, imageY = _imagePosition.imageY;
+                hiResImage.style.transform = "translate(".concat(imageX, "px, ").concat(imageY, "px)"); // Add width and height to hi-res image
 
                 hiResImage.style.width = "".concat(hiResImage.width, "px");
                 hiResImage.style.height = "".concat(hiResImage.height, "px");
+                hiResImage.style.transitiion = "transform .2s ease-in-out";
                 hiResContainer.appendChild(hiResImage);
                 setTimeout(function () {
                   return hiResContainer.style.opacity = '1';
                 }, 50);
               }
 
-            case 6:
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -1055,6 +1099,68 @@
 
     return function enterHandler(_x2) {
       return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var touchStartHandler = /*#__PURE__*/function () {
+    var _ref4 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2(event) {
+      var target, hiResImage, imageWidth, imageHeight, _window3, windowWidth, windowHeight, _event$changedTouches, cursorX, cursorY, hiResContainer, _imagePosition2, imageX, imageY;
+
+      return regenerator.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              event.preventDefault();
+              target = event.currentTarget; // Create a hi-res image asynchronously
+
+              _context2.next = 4;
+              return asyncCreateImage(target.querySelector('img').dataset.full);
+
+            case 4:
+              hiResImage = _context2.sent;
+              imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
+              _window3 = window, windowWidth = _window3.innerWidth, windowHeight = _window3.innerHeight;
+              _event$changedTouches = event.changedTouches[0], cursorX = _event$changedTouches.clientX, cursorY = _event$changedTouches.clientY; // Check if hi-res image is bigger than screen size
+
+              if (imageWidth > windowWidth || imageHeight > windowHeight) {
+                // Add active state class
+                target.classList.add('active-scroll'); // Create a container for hi-res image
+
+                hiResContainer = document.createElement('div');
+                hiResContainer.classList.add('slide__hi-res');
+                hiResContainer.style.width = "".concat(hiResImage.width, "px");
+                hiResContainer.style.height = "".concat(hiResImage.height, "px");
+                hiResContainer.style.opacity = '0';
+                hiResContainer.style.setProperty('--hires-width', "".concat(hiResImage.width, "px"));
+                target.appendChild(hiResContainer); // Set image position based on touch coordinates
+
+                _imagePosition2 = imagePosition({
+                  imageWidth: imageWidth,
+                  imageHeight: imageHeight
+                }, {
+                  cursorX: cursorX,
+                  cursorY: cursorY
+                }), imageX = _imagePosition2.imageX, imageY = _imagePosition2.imageY;
+                hiResImage.style.transform = "translate(".concat(imageX, "px, ").concat(imageY, "px)"); // Add width and height to hi-res image
+
+                hiResImage.style.width = "".concat(hiResImage.width, "px");
+                hiResImage.style.height = "".concat(hiResImage.height, "px");
+                hiResContainer.appendChild(hiResImage);
+                setTimeout(function () {
+                  return hiResContainer.style.opacity = '1';
+                }, 250);
+              }
+
+            case 9:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function touchStartHandler(_x3) {
+      return _ref4.apply(this, arguments);
     };
   }();
 
@@ -1070,23 +1176,75 @@
     }
   };
 
+  var touchEndHandler = function touchEndHandler(event) {
+    event.preventDefault();
+    var target = event.currentTarget; // Check if there is an active scrollable image
+
+    if (target.classList.contains('active-scroll')) {
+      // Remove scrollable image
+      var hiResContainer = target.querySelector('.slide__hi-res'); // hiResContainer.style.opacity = '0';
+
+      setTimeout(function () {
+        return hiResContainer.style.opacity = '0';
+      }, 500);
+      target.removeChild(hiResContainer); // Remove active state class
+
+      target.classList.remove('active-scroll');
+    }
+  };
+
   var moveHandler = function moveHandler(event) {
     // Check if there is an active scrollable image
     if (event.currentTarget.classList.contains('active-scroll')) {
       var hiResImage = event.currentTarget.querySelector('.slide__hi-res img');
-      var _window2 = window,
-          windowWidth = _window2.innerWidth,
-          windowHeight = _window2.innerHeight;
       var cursorX = event.clientX,
           cursorY = event.clientY;
       var imageWidth = hiResImage.naturalWidth,
-          imageHeight = hiResImage.naturalHeight;
-      imageWidth = imageWidth < windowWidth ? windowWidth : imageWidth;
-      imageHeight = imageHeight < windowHeight ? windowHeight : imageHeight;
-      var imageX = Math.floor((imageWidth - windowWidth) * cursorX / windowWidth) * -1;
-      var imageY = Math.floor((imageHeight - windowHeight) * cursorY / windowHeight) * -1;
+          imageHeight = hiResImage.naturalHeight; // Set image position based on touch coordinates
+
+      var _imagePosition3 = imagePosition({
+        imageWidth: imageWidth,
+        imageHeight: imageHeight
+      }, {
+        cursorX: cursorX,
+        cursorY: cursorY
+      }),
+          imageX = _imagePosition3.imageX,
+          imageY = _imagePosition3.imageY;
+
       hiResImage.style.transform = "translate(".concat(imageX, "px, ").concat(imageY, "px)");
     }
+  };
+
+  var touchMoveHandler = function touchMoveHandler(event) {
+    event.preventDefault();
+    var target = event.currentTarget; // Check if there is an active scrollable image
+
+    if (target.classList.contains('active-scroll')) {
+      var hiResImage = target.querySelector('.slide__hi-res img');
+      var _event$changedTouches2 = event.changedTouches[0],
+          cursorX = _event$changedTouches2.clientX,
+          cursorY = _event$changedTouches2.clientY;
+      var imageWidth = hiResImage.naturalWidth,
+          imageHeight = hiResImage.naturalHeight;
+
+      var _imagePosition4 = imagePosition({
+        imageWidth: imageWidth,
+        imageHeight: imageHeight
+      }, {
+        cursorX: cursorX,
+        cursorY: cursorY
+      }),
+          imageX = _imagePosition4.imageX,
+          imageY = _imagePosition4.imageY;
+
+      hiResImage.style.transform = "translate(".concat(imageX, "px, ").concat(imageY, "px)");
+    }
+  };
+
+  var touchCancelHandler = function touchCancelHandler(event) {
+    event.preventDefault();
+    console.log('touch event cancelled');
   };
 
   function HandleScroll() {
