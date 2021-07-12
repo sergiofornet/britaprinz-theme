@@ -200,7 +200,7 @@ const enterHandler = async (event) => {
 		hiResImage.style.transitiion = `transform .2s ease-in-out`;
 
 		hiResContainer.appendChild(hiResImage);
-		setTimeout(() => (hiResContainer.style.opacity = '1'), 50);
+		setTimeout(() => (hiResContainer.style.opacity = '1'), 100);
 	}
 };
 
@@ -247,7 +247,7 @@ const touchStartHandler = async (event) => {
 		hiResImage.style.height = `${hiResImage.height}px`;
 
 		hiResContainer.appendChild(hiResImage);
-		setTimeout(() => (hiResContainer.style.opacity = '1'), 250);
+		setTimeout(() => (hiResContainer.style.opacity = '1'), 100);
 	}
 };
 

@@ -1086,7 +1086,7 @@
                 hiResContainer.appendChild(hiResImage);
                 setTimeout(function () {
                   return hiResContainer.style.opacity = '1';
-                }, 50);
+                }, 100);
               }
 
             case 7:
@@ -1148,7 +1148,7 @@
                 hiResContainer.appendChild(hiResImage);
                 setTimeout(function () {
                   return hiResContainer.style.opacity = '1';
-                }, 250);
+                }, 100);
               }
 
             case 9:
