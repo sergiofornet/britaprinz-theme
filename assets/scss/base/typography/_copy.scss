@@ -64,3 +64,13 @@ ins {
 big {
 	font-size: 125%;
 }
+
+::selection {
+	background-color: var(--color-black);
+	color: var(--color-white);
+}
+
+::-moz-selection { 
+	background-color: var(--color-black);
+	color: var(--color-white);
+}

@@ -85,6 +85,9 @@ code,kbd,tt,var{font-family:monaco,consolas,"Andale Mono","DejaVu Sans Mono",mon
 abbr,acronym{border-bottom:1px dotted #666;cursor:help}
 mark,ins{background:#fff9c0;text-decoration:none}
 big{font-size:125%}
+::-moz-selection{background-color:var(--color-black);color:var(--color-white)}
+::selection{background-color:var(--color-black);color:var(--color-white)}
+::-moz-selection{background-color:var(--color-black);color:var(--color-white)}
 ::-webkit-scrollbar-track{background-color:var(--color-white)}
 ::-webkit-scrollbar{width:11px;background-color:var(--color-white)}
 ::-webkit-scrollbar-thumb{background-color:var(--color-black)}
