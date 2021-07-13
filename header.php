@@ -71,7 +71,7 @@
 
 		</div><!-- .header__logo -->
 
-		<button class="header__menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="menu"><?php esc_html_e( 'Menú', 'britaprinz-theme' ); ?></button>
+		<button class="header__menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Menú', 'britaprinz-theme' ); ?>"><?php esc_html_e( 'Menú', 'britaprinz-theme' ); ?></button>
 
 		<?php do_action( 'wpml_add_language_selector' ); ?>
 
