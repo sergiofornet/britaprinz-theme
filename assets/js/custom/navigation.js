@@ -59,7 +59,7 @@ export default function navigation() {
 			siteNavigation.setAttribute('aria-hidden', false);
 			handleScroll.enable();
 			Array.from(links).forEach((link) =>
-				link.setAttribute('tabindex', '1')
+				link.setAttribute('tabindex', '0')
 			);
 		}
 	});

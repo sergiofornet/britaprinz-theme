@@ -867,7 +867,7 @@
 	      siteNavigation.setAttribute('aria-hidden', false);
 	      handleScroll.enable();
 	      Array.from(links).forEach(function (link) {
-	        return link.setAttribute('tabindex', '1');
+	        return link.setAttribute('tabindex', '0');
 	      });
 	    }
 	  }); // Remove the .toggled class and set aria-expanded to false when the user clicks outside the navigation.
