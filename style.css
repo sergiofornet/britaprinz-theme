@@ -1285,10 +1285,10 @@ ul.menu a:hover {
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
-  -webkit-padding-start: calc(var(--site-padding-inline, 20px) + 1px);
-          padding-inline-start: calc(var(--site-padding-inline, 20px) + 1px);
-  -webkit-padding-end: calc(var(--site-padding-inline, 20px) + 1px);
-          padding-inline-end: calc(var(--site-padding-inline, 20px) + 1px);
+  -webkit-padding-start: calc(var(--site-padding-inline, 20px) + 4px);
+          padding-inline-start: calc(var(--site-padding-inline, 20px) + 4px);
+  -webkit-padding-end: calc(var(--site-padding-inline, 20px) + 4px);
+          padding-inline-end: calc(var(--site-padding-inline, 20px) + 4px);
   background-color: var(--color-white);
 }
 

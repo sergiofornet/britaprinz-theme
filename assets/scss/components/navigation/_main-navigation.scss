@@ -36,8 +36,8 @@
 	.nav-menu {
 		display: flex;
 		flex-flow: column nowrap;
-		padding-inline-start: calc(var(--site-padding-inline, 20px) + 1px);
-		padding-inline-end: calc(var(--site-padding-inline, 20px) + 1px);
+		padding-inline-start: calc(var(--site-padding-inline, 20px) + 4px);
+		padding-inline-end: calc(var(--site-padding-inline, 20px) + 4px);
 		background-color: var(--color-white);
 		
 		@media (max-width: 29.9375em) {
