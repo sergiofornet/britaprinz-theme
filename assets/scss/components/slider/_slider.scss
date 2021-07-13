@@ -166,6 +166,9 @@
 		}
 	}
 
+	.active-scroll {
+		cursor: crosshair;
+	}
 	// .admin-bar & {
 	// 	top: var(--wp-admin-bar, 0px);
 	// 	height: calc(100% - var(--wp-admin-bar, 0px));
