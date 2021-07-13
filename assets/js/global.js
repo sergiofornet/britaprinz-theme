@@ -825,6 +825,7 @@
 	    return;
 	  }
 
+	  siteNavigation.setAttribute('aria-hidden', true);
 	  var button = document.querySelector('.header__menu-toggle'); // Return early if the button don't exist.
 
 	  if ('undefined' === typeof button) {
@@ -856,12 +857,14 @@
 
 	    if (button.getAttribute('aria-expanded') === 'true') {
 	      button.setAttribute('aria-expanded', 'false');
+	      siteNavigation.setAttribute('aria-hidden', true);
 	      handleScroll.disable();
 	      Array.from(links).forEach(function (link) {
 	        return link.setAttribute('tabindex', '-1');
 	      });
 	    } else {
 	      button.setAttribute('aria-expanded', 'true');
+	      siteNavigation.setAttribute('aria-hidden', false);
 	      handleScroll.enable();
 	      Array.from(links).forEach(function (link) {
 	        return link.setAttribute('tabindex', '1');
