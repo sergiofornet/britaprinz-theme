@@ -32,7 +32,11 @@ defined( 'ABSPATH' ) || exit;
 		do_action( 'wpmm_head' );
 		?>
 
-<style>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet"> 
+
+		<style>
 			/* http://meyerweb.com/eric/tools/css/reset/ 
 			v2.0 | 20110126
 			License: none (public domain)
@@ -147,6 +151,7 @@ defined( 'ABSPATH' ) || exit;
 			body, button, input, select, optgroup, textarea {
 				color: var(--color-text-main);
 				font-family: var(--font-main);
+				font-weight: 400;
 				font-size: 1rem;
 				line-height: 1.5;
 			}
@@ -328,7 +333,7 @@ defined( 'ABSPATH' ) || exit;
 
 			.home article.page .circle-container p {
 				margin: 0;
-				font-weight: 500;
+				font-weight: 600;
 			}
 
 			@media (max-width: 47.9375em) {
