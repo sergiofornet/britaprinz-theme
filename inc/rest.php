@@ -439,7 +439,7 @@ function britaprinz_artwork_sale( $object, $field_name, $request ) {
  * @return string HTML content
  */
 function britaprinz_artwork_info( $object, $field_name, $request ) {
-	$info = wpautop( carbon_get_post_meta( $object['id'], 'bp_artwork_info' ) );
+	$info = wp_kses_post( wpautop( carbon_get_post_meta( $object['id'], 'bp_artwork_info' ) ) );
 	if ( $info ) {
 		return $info;
 	}
@@ -454,7 +454,7 @@ function britaprinz_artwork_info( $object, $field_name, $request ) {
  * @return string HTML content
  */
 function britaprinz_artist_bio( $object, $field_name, $request ) {
-	$bio = wpautop( carbon_get_term_meta( get_term( $object['id'] )->term_id, 'bp_artist_bio' ));
+	$bio = wp_kses_post( wpautop( carbon_get_term_meta( get_term( $object['id'] )->term_id, 'bp_artist_bio' ) ) );
 	if ( $bio ) {
 		return $bio;
 	}
@@ -516,7 +516,7 @@ function britaprinz_award_special_edition( $object, $field_name, $request ) {
 		$award_se = carbon_get_post_meta( $object['id'], 'bp_award_se' );
 		foreach ( $award_se as &$edition ) {
 			$edition['bp_award_se_year']    = esc_html( $edition['bp_award_se_year'] );
-			$edition['bp_award_se_winners'] = wpautop( $edition['bp_award_se_winners'] );
+			$edition['bp_award_se_winners'] = wp_kses_post( wpautop( $edition['bp_award_se_winners'] ) );
 		}
 		return $award_se;
 	}

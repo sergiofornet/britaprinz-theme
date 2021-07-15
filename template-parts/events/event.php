@@ -37,7 +37,7 @@ if (!defined( 'ABSPATH' ) ) exit;
 <div class="entry-content">
 	<div class="event__info">
 
-		<?php echo wpautop( carbon_get_the_post_meta( 'bp_event_info' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php echo wp_kses_post( wpautop( carbon_get_the_post_meta( 'bp_event_info' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 	</div>
 	<figure class="event__featured-image">
