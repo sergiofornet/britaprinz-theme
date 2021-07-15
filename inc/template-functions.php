@@ -382,3 +382,31 @@ function bpa_theme_filter_gallery_attrs( $atts, $attachment ) {
 	$atts['data-full'] = $full_size[0];
 	return $atts;
 }
+
+/**
+ * Disable search results and trigger a 404 error
+ * 
+ * @param String  $query - The search query.
+ * @param Boolean $error - True if no search results.
+ */
+function bpa_theme_filter_query( $query, $error = true ) {
+	if ( is_search() ) {
+		$query->is_search       = false;
+		$query->query_vars['s'] = false;
+		$query->query['s']      = false;
+
+		if ( true === $error ) {
+			$query->is_404 = true;
+		}
+	}
+}
+add_action( 'parse_query', 'bpa_theme_filter_query' );
+add_filter( 'get_search_form', '__return_null' );
+
+/**
+ * Disable search widget
+ */
+function bpa_theme_disable_search_widget() {
+	unregister_widget( 'WP_Widget_Search' );
+}
+add_action( 'widgets_init', 'bpa_theme_disable_search_widget' );
