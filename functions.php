@@ -362,3 +362,40 @@ function bpa_theme_disable_plugin_options( $actions, $plugin_file, $plugin_data,
 	return $actions;
 }
 add_filter( 'plugin_action_links', 'bpa_theme_disable_plugin_options', 10, 4 );
+
+/** 
+ * Customize login form logo.
+ */
+function bpa_theme_login_logo() { 
+	?>
+
+	<style type="text/css">
+		#login h1 a, .login h1 a {
+			background-image: url(<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/img/logo/bpa_logo.svg);
+			height:90px;
+			width:275px;
+			background-size: 275px 90px;
+			background-repeat: no-repeat;
+			margin-bottom: 0;
+		}
+	</style>
+
+	<?php
+}
+add_action( 'login_enqueue_scripts', 'bpa_theme_login_logo' );
+
+/** 
+ * Customize login form logo url.
+ */
+function bpa_theme_login_logo_url() {
+	return home_url();
+}
+add_filter( 'login_headerurl', 'bpa_theme_login_logo_url' );
+
+/** 
+ * Customize login form url.
+ */
+function bpa_theme_login_logo_url_title() {
+	return 'turismo vérité';
+}
+add_filter( 'login_headertext', 'bpa_theme_login_logo_url_title' );
