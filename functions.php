@@ -336,3 +336,29 @@ function filter_event_classes($classes) {
 	}
 	return $classes;
 }
+
+/**
+ * Disable MU plugins' actions
+ * 
+ * @param Array|String $actions - An array of plugin action links.
+ * @param String       $plugin_file - Path to the plugin file relative to the plugins directory.
+ * @param Array        $plugin_data - An array of plugin data.
+ * @param String       $context - The plugin context.
+ */
+function bpa_theme_disable_plugin_options( $actions, $plugin_file, $plugin_data, $context ) {
+
+	foreach ( array( 'delete', 'activate', 'deactivate' ) as $key ) {
+		if ( array_key_exists( $key, $actions ) && in_array(
+			$plugin_file,
+			array(
+				'britaprinz-core/britaprinz-core.php',
+				'britaprinz-custom-fields/britaprinz-custom-fields.php',
+			) 
+		) ) {
+			unset( $actions[ $key ] );
+		}
+	}
+
+	return $actions;
+}
+add_filter( 'plugin_action_links', 'bpa_theme_disable_plugin_options', 10, 4 );
