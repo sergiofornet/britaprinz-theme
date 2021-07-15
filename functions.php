@@ -173,7 +173,7 @@ add_filter( 'query_vars', 'britaprinz_theme_custom_query_vars_filter' );
  */
 function britaprinz_theme_scripts() {
 	// Google fonts.
-	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap', array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap', array(), BRITAPRINZ_THEME_VERSION );
 
 	// Tyny Slider where necessary.
 	if ( true === is_page_template( 'page_catalogues.php' ) ) {
