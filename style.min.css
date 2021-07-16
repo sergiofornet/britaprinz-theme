@@ -162,6 +162,7 @@ ul.menu>li.menu-item--title .sub-menu li.current-menu-item .catalogues-submenu l
 ul.menu>li.menu-item--title>h1,ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{display:block;line-height:calc(29 / 24);font-weight:300}
 ul.menu ul{list-style:none;margin:0;padding-left:0;margin-bottom:.5em;padding-left:1em}
 ul.menu ul li{position:relative;line-height:calc(21 / 18);font-weight:500}
+ul.menu ul li.menu-item:not(.menu-item--award){width:-webkit-fit-content;width:-moz-fit-content;width:fit-content}
 ul.menu ul li::before{content:">";position:absolute;left:-1em;-webkit-transform:translateX(0);transform:translateX(0);opacity:100%;-webkit-transition:opacity .2s,-webkit-transform .2s ease-in-out;transition:opacity .2s,-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out,opacity .2s;transition:transform .2s ease-in-out,opacity .2s,-webkit-transform .2s ease-in-out}
 ul.menu ul li:not(.current-menu-item):hover::before,ul.menu ul li:not(.current-menu-item):focus::before{-webkit-transform:translateX(-400%);transform:translateX(-400%);opacity:0}
 ul.menu ul li:last-of-type{-webkit-margin-after:0;margin-block-end:0}
@@ -443,6 +444,7 @@ button.artist__button[data-active=true]:hover,input[type="button"].artist__butto
 .no-sidebar .site-main--sidebar .posts-navigation .nav-links .nav-next{justify-self:start}
 ul.menu>li.menu-item--title>h1 :not(.post-type-archive-artwork),ul.menu>li.menu-item--title>a :not(.post-type-archive-artwork),ul.menu>li.menu-item--title>span :not(.post-type-archive-artwork){max-width:180px}
 body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>a,body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>h1,body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu>li.menu-item--title>span{display:block;margin-bottom:3em;max-width:180px}
+body:not(.post-type-archive-artwork) .secondary-navigation ul.sidebar-menu .sub-menu .menu-item:not(.menu-item--award){max-width:200px}
 .site-header{grid-template-columns:1fr 1fr auto;grid-template-rows:repeat(2,auto);-webkit-box-align:center;-ms-flex-align:center;align-items:center}
 .header__logo{grid-column:1 / 2;grid-row:2 / 3;z-index:200}
 .header__menu-toggle{grid-column:2 / 3;grid-row:2 / 3;-webkit-margin-end:1.5em;margin-inline-end:1.5em;font-size:calc(48rem / 16)}

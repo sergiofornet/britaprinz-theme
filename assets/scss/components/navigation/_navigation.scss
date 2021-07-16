@@ -74,6 +74,10 @@ ul.menu {
 			position: relative;
 			line-height: calc(21 / 18);
 			font-weight: 500;
+
+			&.menu-item:not(.menu-item--award) {
+				width: fit-content;
+			}
 			
 			&::before {
 				content: ">";

@@ -36,9 +36,16 @@ class Bpa_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 		if ( 0 === $depth ) {
 			$classes[] = 'menu-item--title';
-		}
+		} 
 
 		$main_menu         = ( isset( $args->theme_location ) && 'menu-1' === $args->theme_location );
+
+		if ( true === is_archive( 'award' ) && __( 'Ganadores', 'britaprinz-theme' ) === $item->title && false === $main_menu ) {
+			$classes[] = 'menu-item--award';
+		} elseif ( true === is_page_template( 'page_catalogues.php' ) && __( 'Catálogos', 'britaprinz-theme' ) === $item->title && false === $main_menu ) {
+			$classes[] = 'menu-item--award';
+		}
+
 		$current_menu_item = in_array( 'current-menu-item', $classes, true );
 		
 		/**
@@ -179,7 +186,7 @@ class Bpa_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 		
 		if ( true === is_archive( 'award' ) && __( 'Ganadores', 'britaprinz-theme' ) === $item->title ) {
-
+			
 			/**
 			 * Filters 'Ganadores/Winners' menu item's output when we are on Award archive page.
 			 * 
