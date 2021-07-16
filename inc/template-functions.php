@@ -410,3 +410,17 @@ function bpa_theme_disable_search_widget() {
 	unregister_widget( 'WP_Widget_Search' );
 }
 add_action( 'widgets_init', 'bpa_theme_disable_search_widget' );
+
+/**
+ * Add critical font preload
+ */
+function bpa_theme_font_preload() {
+	?>
+
+	<!-- Preload critical fonts -->
+	<link rel="preload" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/fonts/raleway-v22-latin-regular.woff2" crossorigin="anonymous" as="font" type="font/woff2">
+	<link rel="preload" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/fonts/raleway-v22-latin-500.woff2" crossorigin="anonymous" as="font" type="font/woff2">
+
+	<?php
+}
+add_action( 'wp_head', 'bpa_theme_font_preload', 8 );
