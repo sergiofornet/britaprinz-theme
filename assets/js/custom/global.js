@@ -82,17 +82,5 @@ import {
 	// 	}
 	// });
 
-	const menuTitle = document.querySelector(
-		'.sidebar-menu li.menu-item--title span'
-	);
-
-	if (menuTitle) {
-		menuTitle.addEventListener('click', (event) => {
-			event.currentTarget.parentElement.classList.toggle(
-				'menu-item--title--toggled'
-			);
-		});
-	}
-
 	navigation();
 })();

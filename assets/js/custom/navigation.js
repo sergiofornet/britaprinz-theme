@@ -129,6 +129,18 @@ export default function navigation() {
 	const headerHeight = getHeight(siteHeader);
 	setHeaderHeight(headerHeight);
 
+	const menuTitle = document.querySelector(
+		'.sidebar-menu li.menu-item--title span'
+	);
+
+	if (menuTitle) {
+		menuTitle.addEventListener('click', (event) => {
+			event.currentTarget.parentElement.classList.toggle(
+				'menu-item--title--toggled'
+			);
+		});
+	}
+
 	window.addEventListener('resize', () => {
 		setHeaderHeight(getHeight(siteHeader));
 	});
