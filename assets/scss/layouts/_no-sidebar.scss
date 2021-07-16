@@ -42,10 +42,14 @@
 		padding: 0;
 		position: relative;
 
-		// @media (min-width: 64em) {
-		// 	margin: 0 2em;
-		// }
+		
+	}
 
+	&.post-type-archive-award .site-main--half,
+	&.page-template-page_catalogues .site-main--half {
+		@media (min-width: 64em) {
+			margin: 0 0 0 2em;
+		}
 	}
 
 	.site-main--sidebar {
