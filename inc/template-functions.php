@@ -427,3 +427,15 @@ function bpa_theme_font_preload() {
 	<?php
 }
 add_action( 'wp_head', 'bpa_theme_font_preload', 10 );
+
+/**
+ * Disable wpcf7 load globally and enable only it on contact pages.
+ */ 
+function bpa_theme_disable_wpcf7() {
+	if ( false === is_page( array( 'contact', 'contacto' ) ) ) {
+		add_filter( 'wpcf7_load_js', '__return_false' );
+		add_filter( 'wpcf7_load_css', '__return_false' );
+	}
+}
+
+add_action( 'wp', 'bpa_theme_disable_wpcf7' );
