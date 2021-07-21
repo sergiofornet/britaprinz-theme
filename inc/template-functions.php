@@ -429,7 +429,7 @@ function bpa_theme_font_preload() {
 add_action( 'wp_head', 'bpa_theme_font_preload', 10 );
 
 /**
- * Disable wpcf7 load globally and enable only it on contact pages.
+ * Disable wpcf7 load globally and enable it only on contact pages.
  */ 
 function bpa_theme_disable_wpcf7() {
 	if ( false === is_page( array( 'contact', 'contacto' ) ) ) {
@@ -439,3 +439,14 @@ function bpa_theme_disable_wpcf7() {
 }
 
 add_action( 'wp', 'bpa_theme_disable_wpcf7' );
+
+/**
+ * Disable recaptcha scripts globally and enable them only on contact pages
+ */
+function bpa_theme_dequeue_recaptcha() {
+	if ( false === is_page( array( 'contact', 'contacto' ) ) ) {
+		wp_dequeue_script( 'google-recaptcha' );
+		wp_dequeue_script( 'wpcf7-recaptcha' );
+	}
+}
+add_action( 'wp_print_scripts', 'bpa_theme_dequeue_recaptcha' );
