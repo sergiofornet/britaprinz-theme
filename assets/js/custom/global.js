@@ -83,4 +83,18 @@ import {
 	// });
 
 	navigation();
+
+	/**
+	 * Hide Borlabs Cookie test environment message
+	 * MUST BE DELETED AFTER LICENCE ACTIVATION
+	 */
+	const borlabsCookie = document.querySelector('.BorlabsCookie')
+		? document.querySelector('.BorlabsCookie')
+		: null;
+	if (borlabsCookie) {
+		const borlabsTest = borlabsCookie.nextSibling;
+		window.addEventListener('load', () => {
+			borlabsCookie.parentElement.removeChild(borlabsTest);
+		});
+	}
 })();

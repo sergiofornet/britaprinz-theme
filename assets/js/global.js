@@ -1046,6 +1046,19 @@
 	  // });
 
 	  navigation();
+	  /**
+	   * Hide Borlabs Cookie test environment message
+	   * MUST BE DELETED AFTER LICENCE ACTIVATION
+	   */
+
+	  var borlabsCookie = document.querySelector('.BorlabsCookie') ? document.querySelector('.BorlabsCookie') : null;
+
+	  if (borlabsCookie) {
+	    var borlabsTest = borlabsCookie.nextSibling;
+	    window.addEventListener('load', function () {
+	      borlabsCookie.parentElement.removeChild(borlabsTest);
+	    });
+	  }
 	})();
 
 }());
