@@ -132,8 +132,7 @@
 		}
 	
 		&:hover::after,
-		&:focus::after,
-		&:focus-visible::after {
+		&:focus::after{
 			transform: translateX(0.5em);
 		}
 	}

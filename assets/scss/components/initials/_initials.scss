@@ -50,33 +50,37 @@
 			transition: background-color .2s ease-in-out;
 		}
 
-		&:hover {
-			color: white;
-			font-weight: 500;
+		// &:hover {
+		// 	color: white;
+		// 	font-weight: 500;
 
-			&::after {
-				background-color: black;
-			}
-		}
+		// 	&::after {
+		// 		background-color: black;
+		// 	}
+		// }
 
-		&[data-active=true] {
+		&[data-active="true"] {
 			color: white;
 			
 			&::after {
 				background-color: black;
 			}
 			
-			&:hover {
+			&:hover, &:focus {
 				filter: invert(100%);
+				
+				&::after {
+					border: 1px white solid;
+				}
 			}
 		}
 
 
-		&:focus {
+		&:hover, &:focus {
 			outline: none;
 
 			&::after {
-				border: 1px black dotted;
+				border: 1px black solid;
 			}
 		}
 

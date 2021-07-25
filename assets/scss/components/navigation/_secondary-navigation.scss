@@ -46,8 +46,12 @@
 			padding-block-start: 1em;
 			margin-block-end:0;
 
-			& li:hover {
-				transform: translateX(0);
+			// & li:hover,  {
+			// 	transform: translateX(0);
+			// }
+
+			& li button:focus {
+				outline: none;
 			}
 		}
 	}

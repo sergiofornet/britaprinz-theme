@@ -16,8 +16,18 @@ ul.menu {
 			transform: translateX(0);
 			transition: transform .2s ease-in-out;
 
-			&:not(.current-menu-item):hover, &:not(.current-menu-item):focus {
+			&:not(.current-menu-item):hover, &:not(.current-menu-item):focus-within {
 				transform: translateX(1em);
+			}
+
+			& a:focus {
+				// outline: none;
+			}
+			& a:focus:not(:focus-visible) {
+				outline: none;
+			}
+			& a:focus-visible {
+				outline: none;
 			}
 		}
 
@@ -30,7 +40,7 @@ ul.menu {
 			.catalogues-submenu,
 			.winners-submenu {
 
-				& li:hover {
+				& li:hover, & li:focus-within {
 					transform: translateX(0);
 				}
 
@@ -79,20 +89,7 @@ ul.menu {
 				width: fit-content;
 			}
 			
-			&::before {
-				content: ">";
-				position: absolute;
-				left: -1em;
-				transform: translateX(0);
-				opacity: 100%;
-				transition: transform .2s ease-in-out, opacity .2s;
-			}
-
-			&:not(.current-menu-item):hover::before,
-			&:not(.current-menu-item):focus::before {
-				transform: translateX(-400%);
-				opacity: 0;
-			}
+			@include list-item-bullet;
 			
 			@media (max-width: 29.9375em) {
 				font-size: calc(14rem / 16);
@@ -116,7 +113,7 @@ ul.menu {
 		display: block;
 		text-decoration: none;
 	
-		&:hover {
+		&:hover, &:focus {
 			text-decoration: underline;
 		}
 	}

@@ -143,6 +143,7 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 				);
 				artworkTitle.addEventListener('click', (artworkEvent) => {
 					artworkInfo.classList.toggle('visible');
+					artwork.classList.toggle('open');
 				});
 			});
 

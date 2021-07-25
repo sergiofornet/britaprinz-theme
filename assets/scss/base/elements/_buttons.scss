@@ -37,21 +37,30 @@ input[type="submit"] {
 		display: block;
 		font-size: inherit;
 		font-weight: 400;
-		transition: all .5s ease-in-out, font-weight .1s ease-in-out;
+		transition: transform .5s ease-in-out, font-weight .1s ease-in-out;
 		text-align: left;
 
-		&[data-active=true] {
+		&[data-active="true"] {
 			font-weight: 600;
 
 			&:focus {
-				outline: none;
+				// outline: none;
 			}
 		}
 	}
-	
+
 	&.edition-item__button {
-		&[data-active=true] {
+
+		&[data-active="true"] {
 			transform: translateX(1em);
+		}
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+		&:focus-visible {
+			text-decoration: underline;
 		}
 	}
 	
@@ -64,14 +73,42 @@ input[type="submit"] {
 				cursor: progress;
 			}
 
-			&[data-active=false]:not([disabled]):hover {
+			&[data-active="false"]:not([disabled]):hover {
 				transform: translateX(2em);
 			}
 			
-			&[data-active=true] {
+			&[data-active="false"]:not([disabled]):focus {
+				// transform: translateX(2em);
+			}
+			
+			&[data-active="false"]:not([disabled]):focus:not(:focus-visible) {
+				outline: none;
+			}
+			
+			&[data-active="false"]:not([disabled]):focus-visible {
+				outline: none;
+				transform: translateX(2em);
+			}
+			
+			
+			&[data-active="true"] {
 				transform: translateX(calc(15vw - 50%));
+				
 				&:hover {
-					transform: translateX(calc(15vw - 50%));
+					transform: translateX(calc(15vw - 80%));
+				}
+				
+				&:focus {
+					// transform: translateX(calc(15vw - 80%));
+				}
+
+				&:focus:not(:focus-visible) {
+					outline: none;
+				}
+
+				&:focus-visible {
+					outline: none;
+					transform: translateX(calc(15vw - 80%));
 				}
 			}
 		}

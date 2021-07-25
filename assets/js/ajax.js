@@ -1705,6 +1705,7 @@
         var artworkTitle = artwork.querySelector('.artwork__title button');
         artworkTitle.addEventListener('click', function (artworkEvent) {
           artworkInfo.classList.toggle('visible');
+          artwork.classList.toggle('open');
         });
       }); // Shows artwork detailed images when thumbnail is clicked
 

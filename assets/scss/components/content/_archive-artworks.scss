@@ -189,9 +189,12 @@ body.post-type-archive-artwork {
 			}
 			
 			.artwork {
+				position: relative;
 				margin-bottom: unquote("min(2vh, 20px)");
 
+				
 				.artwork__title {
+					width: fit-content;
 					
 					button {
 						border: none;
@@ -202,11 +205,37 @@ body.post-type-archive-artwork {
 						text-transform: none;
 						text-decoration: underline;
 						text-align: left;
-					
+						transition: transform .5s ease-in-out, font-weight .1s ease-in-out;
+						
+						@include list-item-bullet;
+						
 						&:hover {
+							transform: translateX(1em);
 							text-decoration: none;
 						}
+
+						&:focus {
+							// transform: translateX(1em);
+							// text-decoration: none;
+						}
+
+						&:focus:not(:focus-visible) {
+							outline: none;
+						}
+						
+						&:focus-visible {
+							outline: none;
+							transform: translateX(1em);
+							text-decoration: none;
+						}
+
 					}
+				}
+				
+				&.open .artwork__title button {
+					// transform: translateX(1em);
+					text-decoration: none;
+					font-weight: 600;
 				}
 
 				.artwork__info {
