@@ -1,7 +1,7 @@
 function artworksList(artworks, lang) {
 	console.log(lang);
 	let html = '';
-	if (typeof artworks === 'object') {
+	if (typeof artworks === 'object' && artworks.length >= 1) {
 		html += `
 		${lang === `es` ? `<h2>Obras</h2>` : `<h2>Artworks</h2>`}
 		<ul class="artworks__list">

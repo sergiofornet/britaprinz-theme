@@ -1563,7 +1563,7 @@
     console.log(lang);
     var html = '';
 
-    if (_typeof_1(artworks) === 'object') {
+    if (_typeof_1(artworks) === 'object' && artworks.length >= 1) {
       html += "\n\t\t".concat(lang === "es" ? "<h2>Obras</h2>" : "<h2>Artworks</h2>", "\n\t\t<ul class=\"artworks__list\">\n\t\t");
       artworks.forEach(function (element) {
         var _element$artwork_tech = element.artwork_techniques,
