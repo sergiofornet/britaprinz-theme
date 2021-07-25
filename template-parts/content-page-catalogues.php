@@ -49,7 +49,7 @@
 
 							<figure class="catalogue__cover">
 
-								<?php echo wp_kses( $edition_cover_image, bpa_theme_image_allowed_attrs() ); ?>
+								<?php echo wp_kses( $edition_cover_image, bpa_theme_image_allowed_html() ); ?>
 
 							</figure>
 
@@ -79,7 +79,7 @@
 								<div class="catalogue__gallery">
 									
 									<?php
-									echo wp_kses( $gallery, bpa_theme_image_allowed_attrs() );
+									echo wp_kses( $gallery, bpa_theme_image_allowed_html() );
 									?>
 
 								</div>

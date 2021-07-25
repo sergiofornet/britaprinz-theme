@@ -353,9 +353,9 @@ function bpa_theme_previous_posts_link_attributes() {
  * 
  * @return array
  */
-function bpa_theme_image_allowed_attrs() {
+function bpa_theme_image_allowed_html() {
 	return array(
-		'img' => array(
+		'img'    => array(
 			'src'     => true,
 			'srcset'  => true,
 			'sizes'   => true,
@@ -367,6 +367,8 @@ function bpa_theme_image_allowed_attrs() {
 			'align'   => true,
 			'loading' => true,
 		),
+		'figure' => array(),
+		'div'    => array(),
 	);
 }
 
