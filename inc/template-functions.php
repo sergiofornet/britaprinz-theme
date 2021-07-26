@@ -208,10 +208,23 @@ function britaprinz_modify_queries( $query ) {
 			)
 		);
 	}
-		
-	if ( is_post_type_archive( 'project' ) ) {
-		$query->set( 'order', 'ASC' );
-		$query->set( 'orderby', 'title' );
+
+	if ( ! is_admin() && $query->is_main_query() && is_post_type_archive( 'project' ) ) {
+		$query->set(
+			'orderby',
+			array(
+				'date'  => 'DESC',
+				'title' => 'ASC',
+			)
+		);
+		$query->set( 
+			'meta_query',
+			array(
+				'date' => array(
+					'key' => 'bp_project_date',
+				),
+			)
+		);
 		$query->set( 'posts_per_page', 15 );
 		$query->set(
 			'paged',
