@@ -867,19 +867,16 @@
 
   var waait = wait;
 
-  /*!
-   * MoveTo - A lightweight scroll animation javascript library without any dependency.
-   * Version 1.8.2 (28-06-2019 14:30)
-   * Licensed under MIT
-   * Copyright 2019 Hasan Aydoğdu <hsnaydd@gmail.com>
+  /**
+   * TEMPORARY FIX
+   * Must delete this file and import moveTo from node_modules when package is updated
    */
-
-  var moveTo = createCommonjsModule(function (module) {
 
   var MoveTo = function () {
     /**
      * Defaults
-     * @type {object}
+     *
+     * @type {Object}
      */
     var defaults = {
       tolerance: 0,
@@ -890,6 +887,7 @@
     };
     /**
      * easeOutQuart Easing Function
+     *
      * @param  {number} t - current time
      * @param  {number} b - start value
      * @param  {number} c - change in value
@@ -905,9 +903,9 @@
     /**
      * Merge two object
      *
-     * @param  {object} obj1
-     * @param  {object} obj2
-     * @return {object} merged object
+     * @param  {Object} obj1
+     * @param  {Object} obj2
+     * @return {Object} merged object
      */
 
 
@@ -923,9 +921,11 @@
     }
     /**
      * Converts camel case to kebab case
+     *
      * @param  {string} val the value to be converted
      * @return {string} the converted value
      */
+
 
     function kebabCase(val) {
       return val.replace(/([A-Z])/g, function ($1) {
@@ -934,9 +934,11 @@
     }
     /**
      * Count a number of item scrolled top
+     *
      * @param  {Window|HTMLElement} container
      * @return {number}
      */
+
 
     function countScrollTop(container) {
       if (container instanceof HTMLElement) {
@@ -947,9 +949,11 @@
     }
     /**
      * MoveTo Constructor
-     * @param {object} options Options
-     * @param {object} easeFunctions Custom ease functions
+     *
+     * @param {Object} options Options
+     * @param {Object} easeFunctions Custom ease functions
      */
+
 
     function MoveTo() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -961,9 +965,10 @@
     }
     /**
      * Register a dom element as trigger
+     *
      * @param  {HTMLElement} dom Dom trigger element
-     * @param  {function} callback Callback function
-     * @return {function|void} unregister function
+     * @param  {Function} callback Callback function
+     * @return {Function | void} unregister function
      */
 
 
@@ -997,8 +1002,9 @@
     /**
      * Move
      * Scrolls to given element by using easeOutQuart function
+     *
      * @param  {HTMLElement|number} target Target element to be scrolled or target position
-     * @param  {object} options Custom options
+     * @param  {Object} options Custom options
      */
 
 
@@ -1012,7 +1018,8 @@
       }
 
       options = mergeObject(this.options, options);
-      var distance = typeof target === 'number' ? target : target.getBoundingClientRect().top;
+      var containerDistance = options.container === window ? target.getBoundingClientRect().top : target.getBoundingClientRect().top - options.container.getBoundingClientRect().top;
+      var distance = typeof target === 'number' ? target : containerDistance;
       var from = countScrollTop(options.container);
       var startTime = null;
       var lastYOffset;
@@ -1054,8 +1061,9 @@
     };
     /**
      * Adds custom ease function
+     *
      * @param {string}   name Ease function name
-     * @param {function} fn   Ease function
+     * @param {Function} fn   Ease function
      */
 
 
@@ -1064,16 +1072,17 @@
     };
     /**
      * Returns options which created from trigger dom element
+     *
      * @param  {HTMLElement} dom Trigger dom element
-     * @param  {object} options The instance's options
-     * @return {object} The options which created from trigger dom element
+     * @param  {Object} options The instance's options
+     * @return {Object} The options which created from trigger dom element
      */
 
 
     function _getOptionsFromTriggerDom(dom, options) {
       var domOptions = {};
       Object.keys(options).forEach(function (key) {
-        var value = dom.getAttribute("data-mt-".concat(kebabCase(key)));
+        var value = dom.getAttribute('data-mt-'.concat(kebabCase(key)));
 
         if (value) {
           domOptions[key] = isNaN(value) ? value : parseInt(value, 10);
@@ -1083,12 +1092,7 @@
     }
 
     return MoveTo;
-  }();
-
-  {
-    module.exports = MoveTo;
-  }
-  });
+  }(); // if (typeof module !== 'undefined') {
 
   /**
    * Slider prototype definition
@@ -1623,7 +1627,7 @@
   var initialButtons = document.querySelectorAll('.initial__button'); // Scroll to selected initial group on click
 
   initialButtons.forEach(function (initial) {
-    var moveTo$1 = new moveTo({
+    var moveTo = new MoveTo({
       tolerance: 10,
       duration: 500,
       easing: 'easeOutQuart',
@@ -1632,7 +1636,7 @@
     initial.addEventListener('click', function () {
       var target = initial.dataset.target;
       var scrollTo = document.querySelector("[data-initial=".concat(target.toLowerCase(), "]"));
-      moveTo$1.move(scrollTo);
+      moveTo.move(scrollTo);
     });
   });
   /**

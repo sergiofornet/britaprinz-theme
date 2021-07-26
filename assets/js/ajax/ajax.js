@@ -1,5 +1,5 @@
 import wait from 'waait';
-import MoveTo from 'moveto';
+import MoveTo from '../util/moveTo'; // temporary fix
 import Slider from '../lib/prototypes/slider';
 import { asyncFetch } from '../util/async-fetch';
 import { HandleScroll } from '../util/util';
