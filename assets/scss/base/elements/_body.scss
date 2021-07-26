@@ -13,7 +13,13 @@
 
 html, body {
 	scrollbar-color: var(--color-black) var(--color-white);
-	scrollbar-width: thin;
+	
+}
+
+body {
+	&, * {
+		scrollbar-width: thin;
+	}
 }
 
 body, html {
