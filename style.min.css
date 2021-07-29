@@ -220,7 +220,7 @@ ul.menu a:hover,ul.menu a:focus{text-decoration:underline}
 .footer-info .footer-info__title{font-size:clamp(calc(12rem / 16), 2.5vw, calc(18rem / 16));text-transform:uppercase;font-weight:600;line-height:calc(21.13 / 18)}
 .footer-info .footer-info__address{font-style:normal;font-size:clamp(calc(12rem / 16), 2.5vw, calc(14rem / 16));line-height:calc(17 / 14)}
 .footer-info .footer-info__address p{margin:initial}
-.footer-links{font-size:clamp(calc(14rem / 16), 2.5vw, calc(18rem / 16));text-transform:uppercase;font-weight:600;text-align:left;grid-row:1 / 2}
+.footer-links{font-size:clamp(calc(14rem / 16), 2.5vw, calc(18rem / 16));text-transform:uppercase;font-weight:600;text-align:left;grid-row:1 / 2;-webkit-padding-start:1em;padding-inline-start:1em}
 .footer-links .footer-links__link{position:relative;-webkit-transform:translateX(0);transform:translateX(0);-webkit-transition:-webkit-transform .2s ease-in-out;transition:-webkit-transform .2s ease-in-out;transition:transform .2s ease-in-out;transition:transform .2s ease-in-out,-webkit-transform .2s ease-in-out}
 .footer-links .footer-links__link:hover,.footer-links .footer-links__link:focus{-webkit-transform:translateX(1em);transform:translateX(1em)}
 .footer-links .footer-links__link:hover::before,.footer-links .footer-links__link:focus::before{opacity:0;-webkit-transform:translateX(-400%);transform:translateX(-400%)}
