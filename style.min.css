@@ -375,13 +375,13 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .wp-block-contact-form-7-contact-form-selector .privacy-policy-block p{font-size:calc(11rem / 16)}
 .BorlabsCookie+.wp-block-contact-form-7-contact-form-selector{position:relative;-webkit-filter:blur(1.5px);filter:blur(1.5px);opacity:60%;pointer-events:none}
 .BorlabsCookie+.wp-block-contact-form-7-contact-form-selector::after{content:"";position:absolute;width:100%;height:100%;background-color:rgba(0,0,0,0.5);top:0;left:0}
-.entry-content{position:relative}
-.entry-content .BorlabsCookie{position:absolute;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:100%;z-index:100}
-.entry-content .BorlabsCookie ._brlbs-content-blocker ._brlbs-default{background-color:rgba(0,0,0,0.8);color:var(--color-white)}
-.entry-content .BorlabsCookie ._brlbs-content-blocker ._brlbs-default a{color:var(--color-white)}
-.entry-content .BorlabsCookie ._brlbs-content-blocker ._brlbs-default a:hover{color:var(--color-white)}
-.entry-content .BorlabsCookie ._brlbs-content-blocker ._brlbs-default a._brlbs-btn{color:var(--color-black);background-color:var(--color-white)}
-.entry-content .recaptcha-response{display:none}
+.contact .entry-content{position:relative}
+.contact .entry-content .BorlabsCookie{position:absolute;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);width:100%;z-index:100}
+.contact .entry-content .BorlabsCookie ._brlbs-content-blocker ._brlbs-default{background-color:rgba(0,0,0,0.8);color:var(--color-white)}
+.contact .entry-content .BorlabsCookie ._brlbs-content-blocker ._brlbs-default a{color:var(--color-white)}
+.contact .entry-content .BorlabsCookie ._brlbs-content-blocker ._brlbs-default a:hover{color:var(--color-white)}
+.contact .entry-content .BorlabsCookie ._brlbs-content-blocker ._brlbs-default a._brlbs-btn{color:var(--color-black);background-color:var(--color-white)}
+.contact .entry-content .recaptcha-response{display:none}
 .comment-content a{word-wrap:break-word}
 .bypostauthor{display:block}
 .widget{margin:0 0 1.5em}

@@ -22,6 +22,11 @@ function britaprinz_theme_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
+	// Adds a class of "contact" on contact pages
+	if ( true === is_page( array( 'contact', 'contacto' ) ) ) {
+		$classes[] = 'contact';
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'britaprinz_theme_body_classes' );
