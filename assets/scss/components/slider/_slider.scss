@@ -106,26 +106,10 @@
 	}
 }
 .previous-slide {
-	@media (max-width: 47.9375em) {
-		left: 5%;
-	}
-	@media (min-width: 48em) and (max-width: 63.9375em){
-		left: 15%;
-	}
-	@media (min-width: 64em) {
-		left: 20%;
-	}
+	left: 5%;
 }
 .next-slide {
-	@media (max-width: 47.9375em) {
-		right: 5%;
-	}
-	@media (min-width: 48em) and (max-width: 63.9375em){
-		right: 15%;
-	}
-	@media (min-width: 64em) {
-		right: 20%;
-	}
+	right: 5%;
 }
 
 .artwork-gallery {
