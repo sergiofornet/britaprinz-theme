@@ -328,14 +328,16 @@ add_action( 'after_setup_theme', 'britaprinz_theme_walker_loader' );
 
 /**
  * Add classes to post types and pages
+ * 
+ * @param Array - $classes - Array of classes.
  */
-add_filter( 'post_class', 'filter_event_classes', 10, 2 ); 
-function filter_event_classes($classes) {
-	if ( true === is_page_template('page_current-events.php') || true === is_singular( 'event' ) ) {
+function bpa_theme_filter_event_classes( $classes ) {
+	if ( true === is_page_template( 'page_current-events.php' ) || true === is_singular( 'event' ) ) {
 		$classes[] = 'event';
 	}
 	return $classes;
 }
+add_filter( 'post_class', 'bpa_theme_filter_event_classes', 10, 2 ); 
 
 /**
  * Disable MU plugins' actions
