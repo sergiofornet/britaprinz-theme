@@ -3,6 +3,8 @@
 # Ignore all directories called node_modules in current folder and any subfolders.
 node_modules/
 /node_modules/
+package-lock.json
+package.json
 
 # Packages #
 ############
@@ -42,6 +44,7 @@ Thumbs.db
 **/.sass-cache
 **/.sass-cache/*
 **/.map
+assets/scss
 
 # Composer #
 ##########
@@ -67,3 +70,38 @@ assets/bower_components/*
 .idea/
 library/vendors/composer
 assets/img/.DS_Store
+
+# VSCode #
+######
+.vscode/
+
+# JS #
+######
+assets/js/ajax
+assets/js/award
+assets/js/custom
+assets/js/lib
+assets/js/technique
+assets/js/util
+assets/js/vendor
+
+# ESLint #
+##########
+.eslintignore
+.eslintrc.js
+
+# nvm #
+#######
+.nvmrc
+
+# stylelint #
+#############
+.stylelintrc.json
+
+# phpcs #
+phpcs.xml.dist
+
+# Gulp #
+########
+gulpfile.babel.js
+wpgulp.config.js
