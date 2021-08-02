@@ -182,7 +182,7 @@ function britaprinz_theme_scripts() {
 
 
 	// Main stylesheet.
-	wp_enqueue_style( 'britaprinz-theme-style', get_stylesheet_uri(), array(), BRITAPRINZ_THEME_VERSION );
+	wp_enqueue_style( 'britaprinz-theme-style', get_stylesheet_directory_uri() . '/style.min.css', array(), BRITAPRINZ_THEME_VERSION );
 	wp_style_add_data( 'britaprinz-theme-style', 'rtl', 'replace' );
 
 	// Comments script.
@@ -194,7 +194,7 @@ function britaprinz_theme_scripts() {
 	// wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri( 'assets/js/vendor.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 
 	// Main custom script.
-	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri( 'assets/js/global.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
+	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri( 'assets/js/global.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 	
 	if ( is_post_type_archive( 'artwork' ) ) {
 		$query_artist = get_query_var( 'display_artist' );
@@ -208,7 +208,7 @@ function britaprinz_theme_scripts() {
 		}
 
 		// AJAX script.
-		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri( 'assets/js/ajax.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
+		wp_enqueue_script( 'britaprinz-ajax', get_theme_file_uri( 'assets/js/ajax.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 		
 		wp_localize_script( 
 			'britaprinz-ajax', 
@@ -239,7 +239,7 @@ function britaprinz_theme_scripts() {
 		$type = is_post_type_archive( 'award' ) ? 'award' : 'catalogues';
 
 		// AJAX script.
-		wp_enqueue_script( 'britaprinz-award', get_theme_file_uri( 'assets/js/award.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
+		wp_enqueue_script( 'britaprinz-award', get_theme_file_uri( 'assets/js/award.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 		
 		wp_localize_script( 
 			'britaprinz-award', 
@@ -256,7 +256,7 @@ function britaprinz_theme_scripts() {
 	// Technique script.
 	if ( is_singular( 'technique' ) ) {
 
-		wp_enqueue_script( 'britaprinz-award', get_theme_file_uri( 'assets/js/technique.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
+		wp_enqueue_script( 'britaprinz-award', get_theme_file_uri( 'assets/js/technique.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'britaprinz_theme_scripts' );
