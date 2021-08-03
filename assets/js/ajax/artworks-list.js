@@ -1,5 +1,4 @@
 function artworksList(artworks, lang) {
-	console.log(lang);
 	let html = '';
 	if (typeof artworks === 'object' && artworks.length >= 1) {
 		html += `

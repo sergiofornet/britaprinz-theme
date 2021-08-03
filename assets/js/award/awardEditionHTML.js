@@ -110,7 +110,6 @@ function prizesListHTML(payload) {
 function specialEditionHTML(payload) {
 	let html = ``;
 	payload.forEach((edition) => {
-		console.log(edition.bp_award_se_year);
 		html += `
 		<li id="award-se-${edition.bp_award_se_year}" class="award-se__edition">
 			<div class="edition__year">

@@ -11,7 +11,6 @@ window.addEventListener('resize', setCollectionHeaderHeight);
 
 const { nonce } = ajax_var;
 const { lang, searchUrl, artistId } = ajax_var;
-console.log(ajax_var);
 
 const headers = new Headers({
 	'Content-Type': 'application/json',
@@ -96,7 +95,6 @@ function initialsCallback(entries) {
  * @param {number} id - An optional artist id
  */
 const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
-	console.log(ajax);
 	let artist;
 	if (id) {
 		artist = id;
@@ -123,7 +121,6 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 	// Fetch artworks asynchronously
 	asyncFetch(artworksUrl, options)
 		.then((jsonResponse) => {
-			console.log(artworksUrl);
 			const html = artworksList(jsonResponse, currentLang);
 
 			target.insertAdjacentHTML('beforeend', html);
@@ -206,7 +203,6 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 	// Fetch artist info asynchronously
 	asyncFetch(artistUrl, options)
 		.then((jsonResponse) => {
-			console.log(artistUrl);
 			let html;
 			const { name, artist_bio: artistBio } = jsonResponse;
 
@@ -255,7 +251,6 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
  */
 const filterArtists = (url, options, target, currentLang) => {
 	const fixedUrl = `${currentLang ? `${url}?lang=${currentLang}` : `${url}`}`;
-	console.log(fixedUrl);
 
 	target.dataset.state = 'loading';
 	asyncFetch(fixedUrl, options)
@@ -330,7 +325,6 @@ const filterArtists = (url, options, target, currentLang) => {
 									event.currentTarget.dataset.active = true;
 									collection.dataset.state = 'open';
 								} else {
-									console.log('else');
 									event.currentTarget.dataset.active = false;
 									collection.dataset.state = 'closing';
 									artworks.dataset.state = 'unloading';
