@@ -17,9 +17,11 @@ get_header();
 
 			if ( is_home() && ! is_front_page() ) :
 				?>
+
 				<header>
 					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
 				</header>
+
 				<?php
 			endif;
 
@@ -35,7 +37,7 @@ get_header();
 				array(
 					'prev_text'          => __( 'Anterior', 'britaprinz-theme' ),
 					'next_text'          => __( 'Siguiente', 'britaprinz-theme' ),
-					'screen_reader_text' => __( 'Posts navigation', 'britaprinz-theme' )
+					'screen_reader_text' => __( 'Posts navigation', 'britaprinz-theme' ),
 				)
 			);
 

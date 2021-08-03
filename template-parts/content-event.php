@@ -12,7 +12,6 @@ $bpa_theme_event_post_type = get_post_type();
 if ( is_singular() ) :
 	get_template_part( 'template-parts/nav/secondary', '', "{$bpa_theme_event_post_type}-menu" );
 endif;
-
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

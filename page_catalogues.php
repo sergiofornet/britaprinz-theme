@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.NotHyphenatedLowercase
 /**
  * Template Name: Catálogos
  *
@@ -18,7 +18,7 @@ get_header();
 			
 			the_post();
 
-			$args = array(
+			$bpa_theme_args = array(
 				'post_type'      => 'award',
 				'order'          => 'DESC',
 				'orderby'        => 'edition',
@@ -31,7 +31,7 @@ get_header();
 				),
 			);
 
-			get_template_part( 'template-parts/content', 'page-catalogues', $args );
+			get_template_part( 'template-parts/content', 'page-catalogues', $bpa_theme_args );
 
 		endwhile; // End of the loop.
 		?>

@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.NotHyphenatedLowercase
 /**
  * Template Name: Técnicas de grabado
  *
@@ -17,13 +17,13 @@ get_header();
 			
 			the_post();
 
-			$args = array(
+			$bpa_theme_args = array(
 				'post_type'   => 'technique',
 				'order'       => 'ASC',
 				'orderby'     => 'title',
 			);
 
-			get_template_part( 'template-parts/content', 'page-techniques', $args );
+			get_template_part( 'template-parts/content', 'page-techniques', $bpa_theme_args );
 
 		endwhile; // End of the loop.
 		?>

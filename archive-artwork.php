@@ -16,9 +16,9 @@ get_header();
 
 			<div class="collection" data-state="closed">
 				<header class="page-header collection__header">
-					
+
 					<?php
-					get_template_part( 'template-parts/nav/secondary', '', 'artwork-menu' );	
+					get_template_part( 'template-parts/nav/secondary', '', 'artwork-menu' );
 					?>
 
 					<div class="collection__search-container">
@@ -41,7 +41,7 @@ get_header();
 						foreach ( $bpa_theme_post_terms as $bpa_theme_post_term ) :
 							$bpa_theme_term_id    = $bpa_theme_post_term->term_id;
 							$bpa_theme_artist     = carbon_get_term_meta( $bpa_theme_term_id, 'bp_artist_order_name' );
-							$bpa_theme_initials[] = strtolower( trim( $bpa_theme_artist )[0] );
+							$bpa_theme_initials[] = strtolower( trim( $bpa_theme_artist )[0] ); // phpcs:ignore PHPCompatibility.Syntax.NewFunctionArrayDereferencing.Found
 						endforeach;
 
 						$bpa_theme_unique_initials = array_unique( $bpa_theme_initials );
@@ -67,7 +67,7 @@ get_header();
 			<?php
 			add_action(
 				'bpa_theme_gallery_markup',
-				function() {
+				function() { // phpcs:ignore PHPCompatibility.FunctionDeclarations.NewClosure.Found
 					$markup = "
 						<div class='artwork-gallery hidden'>
 							<div class='artwork-gallery__close'>
@@ -76,8 +76,8 @@ get_header();
 							<div class='artwork-gallery__slider'></div>
 						</div>
 					";
-					echo $markup;
-				}, 
+					echo wp_kses_post( $markup );
+				},
 				10,
 				2
 			);

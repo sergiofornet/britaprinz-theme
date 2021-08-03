@@ -27,15 +27,15 @@ wp_nav_menu(
 		<div class="circle">
 
 				<?php 
-				$featured_content = carbon_get_the_post_meta( 'bp_home_featured' );
+				$bpa_theme_featured_content = carbon_get_the_post_meta( 'bp_home_featured' );
 
-				foreach ( $featured_content as $content ) :
+				foreach ( $bpa_theme_featured_content as $bpa_theme_content ) :
 
-					if ( $content['bp_home_featured_post'] ) :
-						$content_url   = get_permalink( $content['bp_home_featured_post'][0]['id'] );
-						$content_label = $content['bp_home_featured_label'] ?
-							$content['bp_home_featured_label'] :
-							get_the_title( $content['bp_home_featured_post'][0]['id'] );
+					if ( $bpa_theme_content['bp_home_featured_post'] ) :
+						$bpa_theme_content_url   = get_permalink( $bpa_theme_content['bp_home_featured_post'][0]['id'] );
+						$bpa_theme_content_label = $bpa_theme_content['bp_home_featured_label'] ?
+							$bpa_theme_content['bp_home_featured_label'] :
+							get_the_title( $bpa_theme_content['bp_home_featured_post'][0]['id'] );
 						?>
 
 						<div class="circle__item">
@@ -43,8 +43,8 @@ wp_nav_menu(
 							<?php
 							echo sprintf(
 								'<a href="%s">%s</a>',
-								esc_url( $content_url ),
-								esc_html( $content_label )
+								esc_url( $bpa_theme_content_url ),
+								esc_html( $bpa_theme_content_label )
 							);
 							?>
 

@@ -28,4 +28,3 @@ if ( 'undefined' !== $args && has_nav_menu( $args ) ) :
 
 	<?php
 endif;
-

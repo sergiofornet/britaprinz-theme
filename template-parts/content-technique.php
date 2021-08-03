@@ -50,7 +50,7 @@ get_template_part( 'template-parts/nav/secondary', '', 'technique-menu' );
 			<?php
 			add_action(
 				'bpa_theme_gallery_markup',
-				function() use ( $bpa_theme_artworks ) {
+				function() use ( $bpa_theme_artworks ) { // phpcs:ignore PHPCompatibility.FunctionDeclarations.NewClosure.Found
 					get_template_part( 'template-parts/technique/technique', 'gallery', $bpa_theme_artworks );
 				}, 
 				10,

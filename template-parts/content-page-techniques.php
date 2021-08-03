@@ -5,10 +5,7 @@
  * @package Brita_Prinz_Theme
  */
 
-?>
-
-<?php 
-	get_template_part( 'template-parts/nav/secondary', '', carbon_get_the_post_meta( 'bp_page_menu' ) );
+get_template_part( 'template-parts/nav/secondary', '', carbon_get_the_post_meta( 'bp_page_menu' ) );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -17,21 +14,20 @@
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 
 	</header><!-- .entry-header -->
-
 	<div class="entry-content">
 
 		<?php 
 		the_content();
-		$date_query = new WP_Query( $args );
+		$bpa_theme_date_query = new WP_Query( $args );
 
-		if ( $date_query->have_posts() ) :
+		if ( $bpa_theme_date_query->have_posts() ) :
 			?>
 
 			<ul>
 
 			<?php
-			while ( $date_query->have_posts() ) :
-				$date_query->the_post();
+			while ( $bpa_theme_date_query->have_posts() ) :
+				$bpa_theme_date_query->the_post();
 				?>
 
 				<li>
@@ -57,8 +53,8 @@
 
 			<?php
 		endif;
-		$date_query->wp_reset_postdata();
+		$bpa_theme_date_query->wp_reset_postdata();
 		?>
-	</div><!-- .entry-content -->
 
+	</div><!-- .entry-content -->
 </article><!-- #post-<?php the_ID(); ?> -->

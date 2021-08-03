@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.NotHyphenatedLowercase
 /**
  * Template Name: Exposiciones pasadas
  *
@@ -17,9 +17,9 @@ get_header();
 			
 			the_post();
 
-			$today = date( 'Y-m-d' );
+			$bpa_theme_today = date( 'Y-m-d' );
 
-			$args = array(
+			$bpa_theme_args = array(
 				'posts_per_page' => 15,
 				'post_type'      => 'event',
 				'order'          => 'DESC',
@@ -28,14 +28,14 @@ get_header();
 				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 					'end_date' => array(
 						'key'     => 'bp_event_end',
-						'value'   => $today,
+						'value'   => $bpa_theme_today,
 						'compare' => '<',
 						'type'    => 'DATE',
 					),
 				),
 			);
 
-			get_template_part( 'template-parts/content', 'page-events', $args );
+			get_template_part( 'template-parts/content', 'page-events', $bpa_theme_args );
 
 		endwhile; // End of the loop.
 		?>

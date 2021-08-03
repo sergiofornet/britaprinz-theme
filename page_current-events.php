@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.NotHyphenatedLowercase
 /**
  * Template Name: Exposiciones actuales
  * 
@@ -16,9 +16,9 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 
-			$today = date( 'Y-m-d' );
+			$bpa_theme_today = date( 'Y-m-d' );
 
-			$args = array(
+			$bpa_theme_args = array(
 				'post_type'  => 'event',
 				'order'      => 'DESC',
 				'orderby'    => 'start_date',
@@ -26,20 +26,20 @@ get_header();
 					'relation'   => 'AND',
 					'start_date' => array(
 						'key'     => 'bp_event_start',
-						'value'   => $today,
+						'value'   => $bpa_theme_today,
 						'compare' => '<=',
 						'type'    => 'DATE',
 					),
 					'end_date'   => array(
 						'key'     => 'bp_event_end',
-						'value'   => $today,
+						'value'   => $bpa_theme_today,
 						'compare' => '>=',
 						'type'    => 'DATE',
 					),
 				),
 			);
 
-			get_template_part( 'template-parts/content', 'page-current-event', $args );
+			get_template_part( 'template-parts/content', 'page-current-event', $bpa_theme_args );
 
 		endwhile; // End of the loop.
 		?>

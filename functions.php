@@ -48,7 +48,7 @@ if ( ! function_exists( 'britaprinz_theme_setup' ) ) :
 				'award-menu'     => esc_html__( 'Premio Carmen Arozena', 'britaprinz-theme' ),
 				'technique-menu' => esc_html__( 'Técnicas', 'britaprinz-theme' ),
 				'news-menu'      => esc_html__( 'Noticias', 'britaprinz-theme' ),
-				'home-menu'      => esc_html__( 'Home', 'britaprinz-theme' )
+				'home-menu'      => esc_html__( 'Home', 'britaprinz-theme' ),
 			)
 		);
 
@@ -211,11 +211,12 @@ function britaprinz_theme_scripts() {
 			) 
 		);
 			
-		// phpcs:ignore Generic.Commenting.DocComment.MissingShort
 		/**
-		 * @hooked britaprinz_artwork_redirect - 10 
+		 * Handle redirection to artworks archive page when queried artist does not exist.
+		 * 
+		 * @hooked britaprinz_artwork_redirect - 10
 		 */
-		do_action( 'artwork_redirect', $query_artist, $artist_id );
+		do_action( 'bpa_theme_artwork_redirect_hook', $query_artist, $artist_id );
 	}
 
 	if ( is_post_type_archive( 'award' ) || is_page( __( 'Catálogos', 'britaprinz-theme' ) ) ) {
@@ -331,7 +332,8 @@ function bpa_theme_disable_plugin_options( $actions, $plugin_file, $plugin_data,
 			array(
 				'britaprinz-core/britaprinz-core.php',
 				'britaprinz-custom-fields/britaprinz-custom-fields.php',
-			) 
+			), 
+			true
 		) ) {
 			unset( $actions[ $key ] );
 		}

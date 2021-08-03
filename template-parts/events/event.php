@@ -7,7 +7,9 @@
  * @package Brita_Prinz_Theme
  */
 
-if (!defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 ?>
 
 <header class="entry-header">
@@ -24,13 +26,14 @@ if (!defined( 'ABSPATH' ) ) exit;
 
 	</h1>
 	<p class="event__date">
-	<?php
-			echo sprintf( 
-				'<span>%s</span> – <span>%s</span>', 
-				esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ), 
-				esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) )
-			);
-	?>
+
+		<?php
+		echo sprintf( 
+			'<span>%s</span> – <span>%s</span>', 
+			esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ), 
+			esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) )
+		);
+		?>
 
 	</p>
 </header><!-- .event-header -->
@@ -48,10 +51,7 @@ if (!defined( 'ABSPATH' ) ) exit;
 
 		<figcaption><?php esc_html( the_post_thumbnail_caption() ); ?></figcaption>
 	</figure>
-	
-	<?php echo the_content(); ?>
 
-</div><!-- .event-header -->
-<footer class="entry-footer">
+	<?php the_content(); ?>
 
-</footer><!-- .event-footer -->
+</div><!-- .entry-content -->

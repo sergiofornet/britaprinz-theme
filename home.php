@@ -13,7 +13,7 @@ get_header();
 	<main id="primary" class="site-main site-main--sidebar">
 
 		<?php
-		get_template_part( 'template-parts/nav/secondary', '', "news-menu" );
+		get_template_part( 'template-parts/nav/secondary', '', 'news-menu' );
 		?>
 
 		<div>
@@ -39,7 +39,7 @@ get_header();
 
 		endif;
 		?>
-		
+
 		</div>
 
 		<?php

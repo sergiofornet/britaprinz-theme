@@ -41,7 +41,7 @@ get_header();
 				array(
 					'prev_text'          => __( 'Anterior', 'britaprinz-theme' ),
 					'next_text'          => __( 'Siguiente', 'britaprinz-theme' ),
-					'screen_reader_text' => __( 'Posts navigation', 'britaprinz-theme' )
+					'screen_reader_text' => __( 'Posts navigation', 'britaprinz-theme' ),
 				)
 			);
 
