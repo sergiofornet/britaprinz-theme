@@ -44,7 +44,6 @@ const rtlcss = require('gulp-rtlcss'); // Generates RTL stylesheet.
 // JS related plugins.
 const rollup = require('@rbnlffl/gulp-rollup');
 const concat = require('gulp-concat'); // Concatenates JS files.
-const order = require('gulp-order'); // Orders JS concatenation
 const uglify = require('gulp-uglify-es').default; // Minifies JS files.
 const babel = require('gulp-babel'); // Compiles ESNext to browser compatible JS.
 const { babel: rollupBabel } = require('@rollup/plugin-babel');
