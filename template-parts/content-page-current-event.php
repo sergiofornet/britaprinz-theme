@@ -5,42 +5,47 @@
  * @package Brita_Prinz_Theme
  */
 
-// Secondary nav
+// Secondary nav.
 get_template_part( 'template-parts/nav/secondary', '', 'event-menu' ); 
 
-// Event template
+// Event template.
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 		<?php
-		$date_query = new WP_Query( $args );
+		$bpa_theme_date_query = new WP_Query( $args );
 		
-		if ( $date_query->have_posts() ) :
+		if ( $bpa_theme_date_query->have_posts() ) :
 			?>
 
 			<?php
-			while ( $date_query->have_posts() ) :
+			while ( $bpa_theme_date_query->have_posts() ) :
 				
-				$date_query->the_post();
+				$bpa_theme_date_query->the_post();
 				
 				get_template_part( 'template-parts/events/event', '' );
 
 			endwhile; // End of the loop.
 
 			
-		else:
+		else :
 			?>
 			<div class="entry-content">
 
 				<?php
-				echo apply_filters( 'the_content', ( britaprinz_get_i18n_theme_option( 'bp_event_none' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo wp_kses_post(
+					apply_filters(
+						'the_content', // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+						bpa_theme_get_i18n_theme_option( 'bp_event_none' )
+					)
+				);
 				?>
 
 			</div>
-			
+
 			<?php
 		endif;
-		$date_query->wp_reset_postdata();
+		$bpa_theme_date_query->wp_reset_postdata();
 		?>
 
 </article><!-- #post-<?php the_ID(); ?> -->

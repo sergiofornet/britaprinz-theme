@@ -24,10 +24,9 @@ if ( $bpa_theme_artwork ) :
 	if ( $bpa_theme_artwork_image ) :
 		?>
 
-		
 		<figure class="slide">
 
-			<?php echo $bpa_theme_artwork_image; ?>
+			<?php echo wp_kses( $bpa_theme_artwork_image, bpa_theme_image_allowed_html() ); ?>
 
 			<figcaption>
 
@@ -44,7 +43,7 @@ if ( $bpa_theme_artwork ) :
 
 			</figcaption>
 		</figure>
-		
+
 		<?php
 	endif;
 endif;

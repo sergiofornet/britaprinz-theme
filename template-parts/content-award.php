@@ -43,18 +43,18 @@
 				<ul class="award__special-edition">
 
 				<?php
-				foreach ( carbon_get_the_post_meta( 'bp_award_se' ) as $edition ) :
+				foreach ( carbon_get_the_post_meta( 'bp_award_se' ) as $bpa_theme_edition ) :
 					?>
 
 					<li class="special-edition">
 						<div class="special-edition__year">
 
-							<?php echo esc_html( $edition['bp_award_se_year'] ); ?>
+							<?php echo esc_html( $bpa_theme_edition['bp_award_se_year'] ); ?>
 
 						</div>
 						<div class="special-edition__winners">
 
-							<?php echo wpautop( esc_html( $edition['bp_award_se_winners'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<?php echo wpautop( esc_html( $bpa_theme_edition['bp_award_se_winners'] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 
 						</div>
 					</li>
@@ -70,15 +70,15 @@
 
 				if ( carbon_get_the_post_meta( 'bp_award' ) ) :
 
-					foreach ( carbon_get_the_post_meta( 'bp_award' ) as $index => $award ) :
+					foreach ( carbon_get_the_post_meta( 'bp_award' ) as $bpa_theme_index => $bpa_theme_award ) :
 						?>
 
-						<div class="award__category award__category-<?php echo esc_attr( $index + 1 ); ?>">
-							<p class="category__name"><?php echo esc_html( $award['bp_award_category'] ); ?></p>
-							<p class="category__artwork"><?php echo esc_html( $award['bp_award_title'] ); ?></p>
-							<p class="category__artist"><?php echo esc_html( $award['bp_award_artist'] ); ?></p>
-							<p class="category__size"><?php echo esc_html( $award['bp_award_size'] ); ?></p>
-							<p class="category__technique"><?php echo esc_html( $award['bp_award_technique'] ); ?></p>
+						<div class="award__category award__category-<?php echo esc_attr( $bpa_theme_index + 1 ); ?>">
+							<p class="category__name"><?php echo esc_html( $bpa_theme_award['bp_award_category'] ); ?></p>
+							<p class="category__artwork"><?php echo esc_html( $bpa_theme_award['bp_award_title'] ); ?></p>
+							<p class="category__artist"><?php echo esc_html( $bpa_theme_award['bp_award_artist'] ); ?></p>
+							<p class="category__size"><?php echo esc_html( $bpa_theme_award['bp_award_size'] ); ?></p>
+							<p class="category__technique"><?php echo esc_html( $bpa_theme_award['bp_award_technique'] ); ?></p>
 						</div>
 
 						<?php

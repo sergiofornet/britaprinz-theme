@@ -7,7 +7,9 @@
  * @package Brita_Prinz_Theme
  */
 
-if (!defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 ?>
 
 <header class="entry-header">
@@ -24,13 +26,14 @@ if (!defined( 'ABSPATH' ) ) exit;
 
 	</h1>
 	<p class="event__date">
-	<?php
-			echo sprintf( 
-				'<span>%s</span> – <span>%s</span>', 
-				esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ), 
-				esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) )
-			);
-	?>
+
+		<?php
+		echo sprintf( 
+			'<span>%s</span> – <span>%s</span>', 
+			esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_start' ) ) ) ), 
+			esc_html( date_i18n( __( 'd F Y', 'britaprinz-theme' ), strtotime( carbon_get_the_post_meta( 'bp_event_end' ) ) ) )
+		);
+		?>
 
 	</p>
 </header><!-- .event-header -->
@@ -48,25 +51,7 @@ if (!defined( 'ABSPATH' ) ) exit;
 
 		<figcaption><?php esc_html( the_post_thumbnail_caption() ); ?></figcaption>
 	</figure>
-	<div class="event__gallery">
 
-	<?php 
-	// $gallery = carbon_get_the_post_meta( 'bp_event_gallery' );
+	<?php the_content(); ?>
 
-	// foreach ( $gallery as $image ) :
-		?>
-
-		<!-- <figure>
-			<?php // echo wp_get_attachment_image( $image, 'thumbnail' ); ?>
-		</figure> -->
-	
-		<?php
-	// endforeach;
-	?>
-	</div>
-	<?php echo the_content(); ?>
-
-</div><!-- .event-header -->
-<footer class="entry-footer">
-
-</footer><!-- .event-footer -->
+</div><!-- .entry-content -->

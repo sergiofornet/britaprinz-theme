@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:ignore WordPress.Files.FileName.NotHyphenatedLowercase
 /**
  * Template Name: Exposiciones futuras
  *
@@ -16,25 +16,25 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 
-			$today = date( 'Y-m-d' );
+			$bpa_theme_today = date( 'Y-m-d' );
 
-			$args = array(
+			$bpa_theme_args = array(
 				'posts_per_page' => 15,
-				'post_type'   => 'event',
-				'order'       => 'ASC',
-				'orderby'     => 'start_date',
+				'post_type'      => 'event',
+				'order'          => 'ASC',
+				'orderby'        => 'start_date',
 				'paged'          => get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1,
-				'meta_query'  => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 					'start_date' => array(
 						'key'     => 'bp_event_start',
-						'value'   => $today,
+						'value'   => $bpa_theme_today,
 						'compare' => '>',
 						'type'    => 'DATE',
 					),
 				),
 			);
 
-			get_template_part( 'template-parts/content', 'page-events', $args );
+			get_template_part( 'template-parts/content', 'page-events', $bpa_theme_args );
 
 		endwhile; // End of the loop.
 		?>

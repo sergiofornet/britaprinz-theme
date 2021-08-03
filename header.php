@@ -1,9 +1,7 @@
 <?php
 /**
  * The header for our theme
- *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
+ * 
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
  * @package Brita_Prinz_Theme
@@ -38,9 +36,9 @@
 				<h1 class="site-title">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" title="<?php esc_attr( bloginfo( 'name' ) ); ?>">
 						<span class="screen-reader-text"><?php bloginfo( 'name' ); ?></span>
-				
+
 						<?php get_template_part( 'template-parts/svg/bpa', 'logo' ); ?>
-				
+
 					</a>
 				</h1>
 
@@ -51,7 +49,7 @@
 				<p class="site-title">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" title="<?php bloginfo( 'name' ); ?>">
 						<span class="screen-reader-text"><?php bloginfo( 'name' ); ?></span>
-					
+
 					<?php get_template_part( 'template-parts/svg/bpa', 'logo' ); ?>
 
 					</a>
@@ -73,7 +71,7 @@
 
 		<button class="header__menu-toggle" aria-controls="primary-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Menú', 'britaprinz-theme' ); ?>"><?php esc_html_e( 'Menú', 'britaprinz-theme' ); ?></button>
 
-		<?php do_action( 'wpml_add_language_selector' ); ?>
+		<?php do_action( 'wpml_add_language_selector' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound ?>
 
 	</header><!-- #masthead -->
 	<nav id="site-navigation" class="main-navigation">

@@ -1564,7 +1564,6 @@
   };
 
   function artworksList(artworks, lang) {
-    console.log(lang);
     var html = '';
 
     if (_typeof_1(artworks) === 'object' && artworks.length >= 1) {
@@ -1598,7 +1597,6 @@
       lang = _ajax_var2.lang,
       searchUrl = _ajax_var2.searchUrl,
       artistId = _ajax_var2.artistId;
-  console.log(ajax_var);
   var headers = new Headers({
     'Content-Type': 'application/json',
     'X-WP-Nonce': nonce
@@ -1673,7 +1671,6 @@
 
   var artistArtworks = function artistArtworks(event, ajax, target, currentLang, options) {
     var id = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '';
-    console.log(ajax);
     var artist;
 
     if (id) {
@@ -1698,7 +1695,6 @@
     }); // Fetch artworks asynchronously
 
     asyncFetch(artworksUrl, options).then(function (jsonResponse) {
-      console.log(artworksUrl);
       var html = artworksList(jsonResponse, currentLang);
       target.insertAdjacentHTML('beforeend', html);
       var artworkList = document.querySelectorAll('.artworks__list .artwork');
@@ -1748,7 +1744,6 @@
     }); // Fetch artist info asynchronously
 
     asyncFetch(artistUrl, options).then(function (jsonResponse) {
-      console.log(artistUrl);
       var html;
       var name = jsonResponse.name,
           artistBio = jsonResponse.artist_bio;
@@ -1809,7 +1804,6 @@
 
   var filterArtists = function filterArtists(url, options, target, currentLang) {
     var fixedUrl = "".concat(currentLang ? "".concat(url, "?lang=").concat(currentLang) : "".concat(url));
-    console.log(fixedUrl);
     target.dataset.state = 'loading';
     asyncFetch(fixedUrl, options).then(function (jsonResponse) {
       target.innerHTML = '';
@@ -1862,23 +1856,22 @@
                         artistArtworks(event, ajax_var, artworks, currentLang, fetchOptions);
                         event.currentTarget.dataset.active = true;
                         collection.dataset.state = 'open';
-                        _context2.next = 17;
+                        _context2.next = 16;
                         break;
 
                       case 8:
-                        console.log('else');
                         event.currentTarget.dataset.active = false;
                         collection.dataset.state = 'closing';
                         artworks.dataset.state = 'unloading';
-                        _context2.next = 14;
+                        _context2.next = 13;
                         return waait(500);
 
-                      case 14:
+                      case 13:
                         collection.dataset.state = 'closed';
                         artworks.dataset.state = 'unloaded';
                         artworks.innerHTML = '';
 
-                      case 17:
+                      case 16:
                       case "end":
                         return _context2.stop();
                     }

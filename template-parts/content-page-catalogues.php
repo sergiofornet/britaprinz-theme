@@ -5,11 +5,8 @@
  * @package Brita_Prinz_Theme
  */
 
-?>
-
-<?php
-	add_filter( 'nav_menu_items_catalogues', 'britaprinz_theme_get_catalogues' );
-	get_template_part( 'template-parts/nav/secondary', 'award', 'award-menu' );	
+add_filter( 'nav_menu_items_catalogues', 'bpa_theme_get_catalogues' );
+get_template_part( 'template-parts/nav/secondary', 'award', 'award-menu' );
 ?>
 
 <div class="award-edition-container container__catalogue" data-state="loaded">
@@ -18,38 +15,38 @@
 		<div class="entry-content catalogue">
 
 			<?php
-			$award_query = new WP_Query( $args );
+			$bpa_theme_award_query = new WP_Query( $args );
 
-			if ( $award_query->have_posts() ) :
+			if ( $bpa_theme_award_query->have_posts() ) :
 				?>
 
 				<?php
-				while ( $award_query->have_posts() ) :
-					$award_query->the_post();
+				while ( $bpa_theme_award_query->have_posts() ) :
+					$bpa_theme_award_query->the_post();
 					
 					if ( carbon_get_the_post_meta( 'bp_award_catalogue' ) ) :
 						
-						$edition_id = get_the_ID();
+						$bpa_theme_edition_id = get_the_ID();
 
-						$edition = carbon_get_the_post_meta( 'bp_award_edition' );
+						$bpa_theme_edition = carbon_get_the_post_meta( 'bp_award_edition' );
 
-						$edition_cover_image = wp_get_attachment_image( carbon_get_the_post_meta( 'bp_award_catalogue_cover' ), 'medium' );
+						$bpa_theme_edition_cover_image = wp_get_attachment_image( carbon_get_the_post_meta( 'bp_award_catalogue_cover' ), 'medium' );
 
-						$images_ids = carbon_get_the_post_meta( 'bp_award_catalog_gallery' );
+						$bpa_theme_images_ids = carbon_get_the_post_meta( 'bp_award_catalog_gallery' );
 						?>
 
 						<h1 class="catalogue__title">
 							<p><?php esc_html_e( 'Catálogo', 'britaprinz-theme' ); ?></p>
-							<p><?php echo esc_html( $edition ); ?></p>
+							<p><?php echo esc_html( $bpa_theme_edition ); ?></p>
 						</h1>
 
 						<?php 
-						if ( $edition_cover_image ) :
+						if ( $bpa_theme_edition_cover_image ) :
 							?>
 
 							<figure class="catalogue__cover">
 
-								<?php echo wp_kses( $edition_cover_image, bpa_theme_image_allowed_html() ); ?>
+								<?php echo wp_kses( $bpa_theme_edition_cover_image, bpa_theme_image_allowed_html() ); ?>
 
 							</figure>
 
@@ -63,12 +60,12 @@
 							esc_html__( 'Descargar PDF', 'britaprinz-theme' )
 						);
 
-						if ( $images_ids ) :
-							$gallery = $images_ids ? implode(
+						if ( $bpa_theme_images_ids ) :
+							$bpa_theme_gallery = $bpa_theme_images_ids ? implode(
 								'', 
 								array_map(
 									fn( $id ) =>  '<div class="tns-slide"><figure>' . wp_get_attachment_image( $id, 'award-thumbnail' ) . '</figure></div>', 
-									$images_ids
+									$bpa_theme_images_ids
 								) 
 							) : null;
 							?>
@@ -77,9 +74,9 @@
 								<button class="previous-slide"><</button>
 								<button class="next-slide">></button>
 								<div class="catalogue__gallery">
-									
+
 									<?php
-									echo wp_kses( $gallery, bpa_theme_image_allowed_html() );
+									echo wp_kses( $bpa_theme_gallery, bpa_theme_image_allowed_html() );
 									?>
 
 								</div>
@@ -96,7 +93,7 @@
 
 				<?php
 			endif;
-			$award_query->wp_reset_postdata();
+			$bpa_theme_award_query->wp_reset_postdata();
 			?>
 		</div><!-- .entry-content -->
 	</article><!-- #post-<?php the_ID(); ?> -->

@@ -7,10 +7,7 @@
  * @package Brita_Prinz_Theme
  */
 
-?>
-
-<?php 
-	get_template_part( 'template-parts/nav/secondary', '', $args['sidebar'] );
+get_template_part( 'template-parts/nav/secondary', '', $args['sidebar'] );
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -28,7 +25,4 @@
 		<?php the_content(); ?>
 
 	</div><!-- .entry-content -->
-	<footer class="entry-footer">
-
-	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

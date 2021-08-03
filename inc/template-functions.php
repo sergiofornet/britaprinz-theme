@@ -11,7 +11,7 @@
  * @param array $classes Classes for the body element.
  * @return array
  */
-function britaprinz_theme_body_classes( $classes ) {
+function bpa_theme_body_classes( $classes ) {
 	// Adds a class of hfeed to non-singular pages.
 	if ( ! is_singular() ) {
 		$classes[] = 'hfeed';
@@ -22,24 +22,24 @@ function britaprinz_theme_body_classes( $classes ) {
 		$classes[] = 'no-sidebar';
 	}
 
-	// Adds a class of "contact" on contact pages
+	// Adds a class of "contact" on contact pages.
 	if ( true === is_page( array( 'contact', 'contacto' ) ) ) {
 		$classes[] = 'contact';
 	}
 
 	return $classes;
 }
-add_filter( 'body_class', 'britaprinz_theme_body_classes' );
+add_filter( 'body_class', 'bpa_theme_body_classes' );
 
 /**
  * Add a pingback url auto-discovery header for single posts, pages, or attachments.
  */
-function britaprinz_theme_pingback_header() {
+function bpa_theme_pingback_header() {
 	if ( is_singular() && pings_open() ) {
 		printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
 	}
 }
-add_action( 'wp_head', 'britaprinz_theme_pingback_header' );
+add_action( 'wp_head', 'bpa_theme_pingback_header' );
 
 /**
  * Get i18n theme option
@@ -47,7 +47,7 @@ add_action( 'wp_head', 'britaprinz_theme_pingback_header' );
  * @param String $option_name Field name.
  * @return any Field content
  */
-function britaprinz_get_i18n_theme_option( $option_name ) {
+function bpa_theme_get_i18n_theme_option( $option_name ) {
 	$suffix = britaprinz_get_i18n_suffix();
 	return carbon_get_theme_option( $option_name . $suffix );
 }
@@ -55,7 +55,7 @@ function britaprinz_get_i18n_theme_option( $option_name ) {
 /**
  * Disable support for comments and trackbacks in post types.
  */ 
-function britaprinz_disable_comments_post_types_support() {
+function bpa_theme_disable_comments_post_types_support() {
 	$post_types = get_post_types();
 	foreach ( $post_types as $post_type ) {
 		if ( post_type_supports( $post_type, 'comments' ) ) {
@@ -64,75 +64,75 @@ function britaprinz_disable_comments_post_types_support() {
 		}
 	}
 }
-add_action( 'admin_init', 'britaprinz_disable_comments_post_types_support' );
+add_action( 'admin_init', 'bpa_theme_disable_comments_post_types_support' );
 
 /**
  * Close comments on the front-end.
  */ 
-function britaprinz_disable_comments_status() {
+function bpa_theme_disable_comments_status() {
 	return false;
 }
-add_filter( 'comments_open', 'britaprinz_disable_comments_status', 20, 2 );
-add_filter( 'pings_open', 'britaprinz_disable_comments_status', 20, 2 );
+add_filter( 'comments_open', 'bpa_theme_disable_comments_status', 20, 2 );
+add_filter( 'pings_open', 'bpa_theme_disable_comments_status', 20, 2 );
 
 /**
  * Hide existing comments.
  * 
  * @param Array $comments Comments array.
  */ 
-function britaprinz_disable_comments_hide_existing_comments( $comments ) {
+function bpa_theme_disable_comments_hide_existing_comments( $comments ) {
 	$comments = array();
 	return $comments;
 }
-add_filter( 'comments_array', 'britaprinz_disable_comments_hide_existing_comments', 10, 2 );
+add_filter( 'comments_array', 'bpa_theme_disable_comments_hide_existing_comments', 10, 2 );
 
 /**
  * Remove comments page in menu.
  */
-function britaprinz_disable_comments_admin_menu() {
+function bpa_theme_disable_comments_admin_menu() {
 	remove_menu_page( 'edit-comments.php' );
 }
-add_action( 'admin_menu', 'britaprinz_disable_comments_admin_menu' );
+add_action( 'admin_menu', 'bpa_theme_disable_comments_admin_menu' );
 
 /**
  * Remove comments page in admin bar.
  */
-function britaprinz_disable_admin_bar_comments() {
+function bpa_theme_disable_admin_bar_comments() {
 	global $wp_admin_bar;
 	$wp_admin_bar->remove_menu( 'comments' );
 }
-add_action( 'wp_before_admin_bar_render', 'britaprinz_disable_admin_bar_comments' );
+add_action( 'wp_before_admin_bar_render', 'bpa_theme_disable_admin_bar_comments' );
 
 /**
  * Redirect any user trying to access comments page.
  */
-function britaprinz_disable_comments_admin_menu_redirect() {
+function bpa_theme_disable_comments_admin_menu_redirect() {
 	global $pagenow;
 
 	if ( 'edit-comments.php' === $pagenow ) {
-		wp_redirect( admin_url() );
+		wp_safe_redirect( admin_url() );
 		exit;
 	}
 }
-add_action( 'admin_init', 'britaprinz_disable_comments_admin_menu_redirect' );
+add_action( 'admin_init', 'bpa_theme_disable_comments_admin_menu_redirect' );
 
 /**
  * Remove comments metabox from dashboard.
  */
-function britaprinz_disable_comments_dashboard() {
+function bpa_theme_disable_comments_dashboard() {
 	remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
 }
-add_action( 'admin_init', 'britaprinz_disable_comments_dashboard' );
+add_action( 'admin_init', 'bpa_theme_disable_comments_dashboard' );
 
 /**
  * Remove comments links from admin bar.
  */
-function britaprinz_disable_comments_admin_bar() {
+function bpa_theme_disable_comments_admin_bar() {
 	if ( is_admin_bar_showing() ) {
 		remove_action( 'admin_bar_menu', 'wp_admin_bar_comments_menu', 60 );
 	}
 }
-add_action( 'init', 'britaprinz_disable_comments_admin_bar' );
+add_action( 'init', 'bpa_theme_disable_comments_admin_bar' );
 
 /**
  * Disable html in comments.
@@ -155,23 +155,23 @@ remove_action( 'wp_head', 'feed_links_extra', 3 );
 /**
  * Disable login hints.
  */
-function britaprinz_login_errors() {
+function bpa_theme_login_errors() {
 	return 'nop';
 }
-add_filter( 'login_errors', 'britaprinz_login_errors' );
+add_filter( 'login_errors', 'bpa_theme_login_errors' );
 
 /** 
  * Disable url guess.
  * 
  * @param String $url URL.
  */
-function britaprinz_stop_guessing( $url ) {
+function bpa_theme_stop_guessing( $url ) {
 	if ( is_404() ) {
 		return false;
 	}
 	return $url;
 }
-add_filter( 'redirect_canonical', 'britaprinz_stop_guessing' );
+add_filter( 'redirect_canonical', 'bpa_theme_stop_guessing' );
 
 /**
  * Remove WP emojis.
@@ -182,7 +182,7 @@ remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 /**
  * Disable access to author pages
  */
-function britaprinz_disable_author_page() {
+function bpa_theme_disable_author_page() {
 	global $wp_query;
 	
 	if ( is_author() ) {
@@ -192,14 +192,14 @@ function britaprinz_disable_author_page() {
 
 	}
 }
-add_action( 'template_redirect', 'britaprinz_disable_author_page' );
+add_action( 'template_redirect', 'bpa_theme_disable_author_page' );
 
 /**
  * Modify default queries
  * 
  * @param WPQuery $query WP Query.
  */
-function britaprinz_modify_queries( $query ) {
+function bpa_theme_modify_queries( $query ) {
 	if ( ! is_admin() && $query->is_main_query() && is_post_type_archive( 'award' ) ) {
 		$query->set( 'posts_per_page', -1 );
 		$query->set( 'order', 'DESC' );
@@ -243,17 +243,17 @@ function britaprinz_modify_queries( $query ) {
 	}
 };
 	
-add_action( 'pre_get_posts', 'britaprinz_modify_queries' );
+add_action( 'pre_get_posts', 'bpa_theme_modify_queries' );
 
 /**
  * Set Yoast metabox priority to 'low'
  */
-function britaprinz_theme_yoast_priority() { 
+function bpa_theme_yoast_priority() { 
 	return 'low';
 }
 
 if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
-	add_filter( 'wpseo_metabox_prio', 'britaprinz_theme_yoast_priority' );
+	add_filter( 'wpseo_metabox_prio', 'bpa_theme_yoast_priority' );
 }
 
 /**
@@ -261,7 +261,7 @@ if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
  * 
  * @return string $winners_output  An HTML string containing winners subitem.
  */
-function britaprinz_theme_get_winners() {
+function bpa_theme_get_winners() {
 	$winners_output = '<ul class="winners-submenu">';
 
 	// Must use inside the loop.
@@ -288,7 +288,7 @@ function britaprinz_theme_get_winners() {
  * 
  * @return string $catalogues_output  An HTML string containnin catalogues subitem.
  */
-function britaprinz_theme_get_catalogues() {
+function bpa_theme_get_catalogues() {
 	$args = array(
 		'post_type'  => 'award',
 		'order'      => 'DESC',
@@ -331,7 +331,7 @@ function britaprinz_theme_get_catalogues() {
  * @param string $title - the archive title.
  * @return string $title  
  */
-function britaprinz_theme_archive_title( $title ) {
+function bpa_theme_archive_title( $title ) {
 	if ( is_category() ) {
 		$title = single_cat_title( '', false );
 	} elseif ( is_tag() ) {
@@ -346,7 +346,7 @@ function britaprinz_theme_archive_title( $title ) {
 
 	return $title;
 }
-add_filter( 'get_the_archive_title', 'britaprinz_theme_archive_title' );
+add_filter( 'get_the_archive_title', 'bpa_theme_archive_title' );
 
 /**
  * Add attributes to next posts links

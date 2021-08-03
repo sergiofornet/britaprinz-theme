@@ -16,7 +16,7 @@ if ( $bpa_theme_technique_steps ) :
 
 		<?php
 		foreach ( $bpa_theme_technique_steps as $bpa_theme_step ) :
-			$bpa_theme_step_text = $bpa_theme_step['bp_technique_steps_text'];
+			$bpa_theme_step_text     = $bpa_theme_step['bp_technique_steps_text'];
 			$bpa_theme_step_image_id = $bpa_theme_step['bp_technique_steps_image'];
 			?>
 

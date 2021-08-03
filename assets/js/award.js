@@ -4758,7 +4758,6 @@
   function specialEditionHTML(payload) {
     var html = "";
     payload.forEach(function (edition) {
-      console.log(edition.bp_award_se_year);
       html += "\n\t\t<li id=\"award-se-".concat(edition.bp_award_se_year, "\" class=\"award-se__edition\">\n\t\t\t<div class=\"edition__year\">\n\t\t\t\t<p>").concat(edition.bp_award_se_year, "</p>\n\t\t\t</div>\n\t\t\t<div class=\"edition__winners\">").concat(edition.bp_award_se_winners, "</div>\n\t\t</li>\n\t\t");
     });
     return html;
