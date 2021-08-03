@@ -48,22 +48,7 @@ if (!defined( 'ABSPATH' ) ) exit;
 
 		<figcaption><?php esc_html( the_post_thumbnail_caption() ); ?></figcaption>
 	</figure>
-	<div class="event__gallery">
-
-	<?php 
-	// $gallery = carbon_get_the_post_meta( 'bp_event_gallery' );
-
-	// foreach ( $gallery as $image ) :
-		?>
-
-		<!-- <figure>
-			<?php // echo wp_get_attachment_image( $image, 'thumbnail' ); ?>
-		</figure> -->
 	
-		<?php
-	// endforeach;
-	?>
-	</div>
 	<?php echo the_content(); ?>
 
 </div><!-- .event-header -->

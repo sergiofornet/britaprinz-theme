@@ -10,10 +10,6 @@
 if ( ! function_exists( 'britaprinz_theme_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
-	 *
-	 * Note that this function is hooked into the after_setup_theme hook, which
-	 * runs before the init hook. The init hook is too late for some features, such
-	 * as indicating support for post thumbnails.
 	 */
 	function britaprinz_theme_setup() {
 		/*
@@ -172,10 +168,7 @@ add_filter( 'query_vars', 'britaprinz_theme_custom_query_vars_filter' );
  * Enqueue scripts and styles.
  */
 function britaprinz_theme_scripts() {
-	// Google fonts.
-	// wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap', array(), BRITAPRINZ_THEME_VERSION );
-
-	// Tyny Slider where necessary.
+	// Enqueue Tiny Slider styles where necessary.
 	if ( true === is_page_template( 'page_catalogues.php' ) ) {
 		wp_enqueue_style( 'tiny-slider', 'https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.css', array(), BRITAPRINZ_THEME_VERSION );
 	}
@@ -189,9 +182,6 @@ function britaprinz_theme_scripts() {
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
-	
-	// // Vendor scripts.
-	// wp_enqueue_script( 'britaprinz-vendor', get_theme_file_uri( 'assets/js/vendor.min.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
 
 	// Main custom script.
 	wp_enqueue_script( 'britaprinz-custom', get_theme_file_uri( 'assets/js/global.js' ), array(), BRITAPRINZ_THEME_VERSION, true );
@@ -200,9 +190,7 @@ function britaprinz_theme_scripts() {
 		$query_artist = get_query_var( 'display_artist' );
 		$artist_id    = $query_artist ? get_term_by( 'slug', $query_artist, 'artist' )->term_id : '';
 		$lang         = '';
-		// if ( is_user_logged_in() && current_user_can( 'edit_posts' ) && defined( 'ICL_LANGUAGE_CODE' ) ) {
-		// 	$lang = ICL_LANGUAGE_CODE;
-		// }
+		
 		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
 			$lang = ICL_LANGUAGE_CODE;
 		}
@@ -272,11 +260,6 @@ function britaprinz_theme_admin_scripts() {
 add_action( 'admin_enqueue_scripts', 'britaprinz_theme_admin_scripts' );
 
 /**
- * Implement the Custom Header feature.
- */
-require get_template_directory() . '/inc/custom-header.php';
-
-/**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
@@ -290,13 +273,6 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
-
-/**
- * Load Jetpack compatibility file.
- */
-if ( defined( 'JETPACK__VERSION' ) ) {
-	require get_template_directory() . '/inc/jetpack.php';
-}
 
 /**
  * Redirections.

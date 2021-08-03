@@ -63,12 +63,6 @@ endif;
 				?>
 			</div><!-- .entry-content -->
 
-			<!-- <footer class="entry-footer"> -->
-				<?php
-				// britaprinz_theme_entry_footer(); 
-				// britaprinz_theme_posted_by();
-				?>
-			<!-- </footer>.entry-footer -->
 		<?php
 	endif;
 	?>

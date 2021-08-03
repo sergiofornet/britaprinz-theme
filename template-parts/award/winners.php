@@ -7,7 +7,6 @@
  * @package Brita_Prinz_Theme
  */
 
-// the_title();
 ?>
 <button class="award-edition-container__return-button return-button" aria-pressed="false"><</button>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -22,7 +21,6 @@
 			
 				<ol class="prizes__list">
 					<?php 
-					// var_dump(carbon_get_the_post_meta('bp_award'));
 					$prizes = carbon_get_the_post_meta('bp_award');
 					foreach ( $prizes as $index => $prize ) :
 						?>
@@ -30,7 +28,6 @@
 						<li id="prize-<?php echo esc_html( $index + 1 ); ?>" class="prize__category prize__category-<?php echo esc_attr( $index + 1 );?>" >
 							<h2 class="prize__name"><?php echo wp_kses( $prize['bp_award_category'], array( 'sup' => array() ) ); ?></h2>
 							<p class="prize__artist"><?php echo esc_html( $prize['bp_award_artist'] ); ?></p>
-							<?php /** TODO: images */ ?>
 							<div class="prize__image">
 								<button type="button" data-image="<?php echo esc_attr( $prize['bp_award_image'] ); ?>">
 									<figure>
