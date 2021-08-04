@@ -7,6 +7,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $bpa_theme_social       = carbon_get_theme_option( 'bp_theme_social' );
 $bpa_theme_links        = bpa_theme_get_i18n_theme_option( 'bp_theme_footer_links' );
 $bpa_theme_footer_links = array();

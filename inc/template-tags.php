@@ -7,6 +7,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'britaprinz_theme_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.

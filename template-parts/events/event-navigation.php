@@ -5,6 +5,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $bpa_theme_date_query = $args['date_query'];
 $bpa_theme_order      = $args['order'];
 

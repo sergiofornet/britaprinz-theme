@@ -7,6 +7,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 // $args -> menu theme location passed in by get_template_part 
 if ( 'undefined' !== $args && has_nav_menu( $args ) ) :
 		wp_nav_menu(

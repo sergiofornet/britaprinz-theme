@@ -7,6 +7,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 ?>
 <button class="award-edition-container__return-button return-button" aria-pressed="false"><</button>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

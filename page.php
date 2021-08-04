@@ -7,6 +7,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 get_header();
 
 $bpa_theme_sidebar = carbon_get_the_post_meta( 'bp_page_menu' ) === 'undefined' ? null : carbon_get_the_post_meta( 'bp_page_menu' );
