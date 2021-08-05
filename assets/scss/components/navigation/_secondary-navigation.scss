@@ -121,6 +121,23 @@
 					cursor: pointer;
 				}
 				
+				& > span::before {
+					content: "";
+					position: absolute;
+					height: 1px;
+					width: 0%;
+					bottom: 0;
+					right: 0;
+					background-color: transparent;
+					transition: all .2s ease-in-out;
+				}
+				&:not(.menu-item--title--toggled) > span::before {
+					width: 100%;
+					left: 0;
+					background-color: black;
+					transition-delay: .8s;
+				}
+				
 				& > span::after {
 					content: ">";
 					position: absolute;
@@ -141,7 +158,7 @@
 					padding-inline-end: 2em;
 					width: 100%;
 					
-					transition: transform .5s ease-in-out;
+					transition: transform .5s .2s ease-in-out;
 					
 					background-color: white;
 					transform: translateY(-200%);
