@@ -1,15 +1,26 @@
 .secondary-navigation {
+	@media (max-width: 29.9375em) {
+		& {
+			--secondary-nav-padding: calc(20rem / 16);
+		}
+	}
+
+	@media (min-width: 30em) {
+		& {
+			--secondary-nav-padding: calc(24rem / 16);
+		}
+	}
 
 	ul.sidebar-menu {
 		
 		@media(max-width: 47.9375em) {
 			& > li.menu-item--title  {
-				padding-block-end: 1em;
+				// padding-block-end: 1em;
 			}
 		}
 		
 		body:not(.post-type-archive-artwork) & {
-
+			
 			@media(min-width: 48em) {
 				& > li.menu-item--title > a,
 				& > li.menu-item--title > h1,
@@ -18,22 +29,22 @@
 					margin-bottom: 3em;
 					max-width: 180px;
 				}
-
+				
 				.sub-menu .menu-item:not(.menu-item--award) {
 					max-width: 200px;
 				}
 			}
-
-						
 			
 		}
 		
 		.current-menu-item:not(.menu-item--title) {
 			margin-inline-start: 2em;
 		}
-
-		.menu-item-has-children > ul.sub-menu {
-			padding-left: 1.2em;
+		
+		@media(min-width: 48em) {
+			body:not(.post-type-archive-artwork) & .menu-item-has-children > ul.sub-menu {
+				padding-left: 1.2em;
+			}
 		}
 		
 		.catalogues-submenu,
@@ -61,9 +72,13 @@
 		
 	}
 
-	@media(max-width: 47.9375em) {
-		:not(.post-type-archive-artwork) & {
-			--secondary-nav-padding: calc(24rem / 16);
+	body:not(.post-type-archive-artwork) & :not(.award-menu) .menu-item--title > ul.sub-menu {
+		padding-inline-start: calc(1em + var(--secondary-nav-padding, 0px));
+	}
+
+	@media (max-width: 47.9375em) {
+		body:not(.post-type-archive-artwork) & {
+			// --secondary-nav-padding: calc(24rem / 16);
 
 			.menu-item--title {
 				& > span, & > a, & > h1 {
@@ -99,16 +114,17 @@
 				width: 100%;
 				
 				& > span, & > a, & > h1 {
-					padding-inline-start: 1em;
-					padding-inline-end: 1em;
-					padding-block-start: 1em;
+					// padding-inline-start: 1em;
+					// padding-inline-end: 1em;
+					// padding-block-start: 1em;
+					padding: 1em;
 					cursor: pointer;
 				}
 				
 				& > span::after {
 					content: ">";
 					position: absolute;
-					bottom: 0;
+					// bottom: 0;
 					right: 1em;
 					transition: transform .5s ease-in-out;
 					transform: rotate(90deg);
@@ -119,9 +135,9 @@
 					position: absolute;
 					z-index: 1;
 					left: 0;
-					padding-block-start: 1em;
+					padding-block-start: .25em;
 					padding-block-end: 1em;
-					padding-inline-start: 2em;
+					
 					padding-inline-end: 2em;
 					width: 100%;
 					
@@ -129,7 +145,7 @@
 					
 					background-color: white;
 					transform: translateY(-200%);
-					border-block-end: 1px solid black;
+					border-block-end: 2px solid black;
 
 					& .current-menu-item {
 						@media (max-width: 63.9375em) {
