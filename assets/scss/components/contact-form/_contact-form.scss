@@ -109,9 +109,25 @@
 		}
 	}
 	.privacy-policy-block {
-		p {
+		p, h2 {
+			margin: 1em 0;
+		}
+		
+		h2 {
+			
+			&::after {
+				content: none;
+			}
+		}
+		
+		p, li, h2, table {
 			font-size: calc(11rem / 16);
 		}
+
+		table, figure {
+			margin: 0;
+		}
+
 		font-weight: 300;
 		overflow-y: scroll;
 		border: 1px solid var(--color-black);
