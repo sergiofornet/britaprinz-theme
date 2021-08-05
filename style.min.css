@@ -248,8 +248,9 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .collection{max-height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px));overflow-y:hidden;overflow-x:visible;-webkit-transform:translateX(0);transform:translateX(0);background-color:var(--color-white);position:relative;-webkit-transition:-webkit-transform .5s ease-in-out;transition:-webkit-transform .5s ease-in-out;transition:transform .5s ease-in-out;transition:transform .5s ease-in-out,-webkit-transform .5s ease-in-out;display:grid;grid-template-rows:var(--collection-header-height) auto}
 .collection .collection__header{grid-column:1 / 2;grid-row:1 / 2;border-right:1px solid var(--color-black)}
 .collection .collection__search-container{position:relative}
-.collection .collection__search-container::after{content:"";position:absolute;top:4px;left:6px;width:calc(2.5em);height:calc(100% - 8px);background-image:url("assets/img/icons/bpa_search.svg");background-repeat:no-repeat}
-.collection .collection__search-container input.collection__search{border:2px solid var(--color-black);-webkit-transform:translateX(2px);transform:translateX(2px);border-radius:0;width:100%;padding-left:calc(2.5em)}
+.collection .collection__search-container::after{content:"";position:absolute;top:4px;left:6px;width:calc(2.8em);height:calc(100% - 8px);background-image:url("assets/img/icons/bpa_search.svg");background-repeat:no-repeat}
+.collection .collection__search-container input.collection__search{border:2px solid var(--color-black);border-right:0;border-radius:0;width:100%;padding-left:calc(3em)}
+.collection .collection__search-container input.collection__search:focus{outline:0}
 .collection .collection__artists{grid-column:1 / 2;grid-row:2 / 3;position:relative;height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px))}
 .collection .collection__artists .artists__list{height:calc(var(--vh, 1vh) * 90 - var(--wp-admin-bar, 0px) - var(--collection-header-height, 0px));overflow-y:auto;overflow-x:hidden;padding:.5rem .5rem calc(19rem / 16);-ms-overflow-style:none;scrollbar-width:none}
 .collection .collection__artists .artists__list::-webkit-scrollbar{display:none}
