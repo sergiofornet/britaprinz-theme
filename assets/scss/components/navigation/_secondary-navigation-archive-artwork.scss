@@ -37,14 +37,18 @@
 				cursor: pointer;
 			}
 			
-			& > span::after {
-				content: ">";
-				position: absolute;
-				// bottom: 0;
-				right: 1em;
-				transition: transform .5s ease-in-out;
-				transform: rotate(90deg);
-				transform-origin: 50% 60%;
+			& > span {
+				transition: background-color .2s ease-in-out, color .2s ease-in-out;
+				
+				&::after {
+					content: ">";
+					position: absolute;
+					// bottom: 0;
+					right: 1em;
+					transition: transform .5s ease-in-out;
+					transform: rotate(90deg);
+					transform-origin: 50% 60%;
+				}
 			}
 			
 			& > ul.sub-menu {
@@ -67,6 +71,13 @@
 					margin-inline-start: 0;
 					font-weight: 700;
 				}
+			}
+		}
+
+		& li:not(.menu-item--title--toggled) {
+			& > span:hover {
+				background-color: black;
+				color: white;
 			}
 		}
 		
