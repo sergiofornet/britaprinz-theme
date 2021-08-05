@@ -122,6 +122,8 @@ input[type="submit"] {
 		background-color: var(--color-black);
 		z-index: 101;
 		transition: var(--transition-default);
+		font-weight: 600;
+		font-size: 1em;
 		
 		&:hover, &:focus, &:active {
 			background-color: var(--color-white);
