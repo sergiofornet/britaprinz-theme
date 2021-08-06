@@ -74,7 +74,7 @@
 			}
 		}
 
-		& li:not(.menu-item--title--toggled) {
+		& li.menu-item--title:not(.menu-item--title--toggled) {
 			@media (hover: hover) {
 				& > span:hover {
 					background-color: black;

@@ -447,7 +447,7 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .alignleft{float:left;margin-right:1.5em;margin-bottom:1.5em}
 .alignright{float:right;margin-left:1.5em;margin-bottom:1.5em}
 .aligncenter{clear:both;display:block;margin-left:auto;margin-right:auto;margin-bottom:1.5em}
-@media(hover:hover){.post-type-archive-artwork .secondary-navigation li:not(.menu-item--title--toggled)>span:hover{background-color:black;color:white}
+@media(hover:hover){.post-type-archive-artwork .secondary-navigation li.menu-item--title:not(.menu-item--title--toggled)>span:hover{background-color:black;color:white}
 }@media(min-width:30em){ul.menu>li.menu-item--title>h1,ul.menu>li.menu-item--title>a,ul.menu>li.menu-item--title>span{font-size:calc(24rem / 16)}
 ul.menu ul li{font-size:calc(18rem / 16);-webkit-margin-after:2em;margin-block-end:2em}
 .main-navigation .nav-menu{-webkit-padding-before:3rem;padding-block-start:3rem;-webkit-padding-after:2rem;padding-block-end:2rem}
