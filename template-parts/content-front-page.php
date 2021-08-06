@@ -7,6 +7,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 wp_nav_menu(
 	array(
 		'theme_location'  => 'home-menu',

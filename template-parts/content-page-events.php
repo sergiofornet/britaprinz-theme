@@ -5,6 +5,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 get_template_part( 'template-parts/nav/secondary', '', 'event-menu' );
 ?>
 

@@ -5,6 +5,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 add_filter( 'nav_menu_items_catalogues', 'bpa_theme_get_catalogues' );
 get_template_part( 'template-parts/nav/secondary', 'award', 'award-menu' );
 ?>

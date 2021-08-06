@@ -5,6 +5,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $bpa_theme_technique_steps = carbon_get_the_post_meta( 'bp_technique_steps' );
 $bpa_theme_artworks = carbon_get_the_post_meta( 'bp_technique_artwork' ) ? carbon_get_the_post_meta( 'bp_technique_artwork' ) : null;
 $bpa_theme_artworks_link = carbon_get_the_post_meta( 'bp_technique_related_text' ) ? carbon_get_the_post_meta( 'bp_technique_related_text' ) : null;

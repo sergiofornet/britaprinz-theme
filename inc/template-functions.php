@@ -5,6 +5,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Adds custom classes to the array of body classes.
  *
@@ -290,10 +294,11 @@ function bpa_theme_get_winners() {
  */
 function bpa_theme_get_catalogues() {
 	$args = array(
-		'post_type'  => 'award',
-		'order'      => 'DESC',
-		'orderby'    => 'edition',
-		'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+		'post_type'      => 'award',
+		'order'          => 'DESC',
+		'orderby'        => 'edition',
+		'posts_per_page' => -1, 
+		'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			'edition' => array(
 				'key' => 'bp_award_edition',
 			),

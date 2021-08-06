@@ -7,6 +7,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! function_exists( 'britaprinz_theme_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.

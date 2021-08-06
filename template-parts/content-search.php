@@ -7,6 +7,9 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

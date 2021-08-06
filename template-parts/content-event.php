@@ -7,6 +7,10 @@
  * @package Brita_Prinz_Theme
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 $bpa_theme_event_post_type = get_post_type();
 
 if ( is_singular() ) :
