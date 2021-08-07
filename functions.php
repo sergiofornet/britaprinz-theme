@@ -192,7 +192,7 @@ function britaprinz_theme_scripts() {
 	
 	if ( is_post_type_archive( 'artwork' ) ) {
 		$query_artist = get_query_var( 'display_artist' );
-		$artist_id    = $query_artist ? get_term_by( 'slug', $query_artist, 'artist' )->term_id : '';
+		$artist_id    = get_term_by( 'slug', $query_artist, 'artist' ) ? get_term_by( 'slug', $query_artist, 'artist' )->term_id : '';
 		$lang         = '';
 		
 		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
