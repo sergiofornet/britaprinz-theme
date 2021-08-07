@@ -192,7 +192,7 @@ function britaprinz_theme_scripts() {
 	
 	if ( is_post_type_archive( 'artwork' ) ) {
 		$query_artist = get_query_var( 'display_artist' );
-		$artist_id    = $query_artist ? get_term_by( 'slug', $query_artist, 'artist' )->term_id : '';
+		$artist_id    = get_term_by( 'slug', $query_artist, 'artist' ) ? get_term_by( 'slug', $query_artist, 'artist' )->term_id : '';
 		$lang         = '';
 		
 		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
@@ -293,7 +293,7 @@ require_once get_template_directory() . '/inc/rest.php';
  * Load Carbon Fields Yoast
  */
 function britaprinz_theme_initialize_carbon_yoast() {
-	include_once __DIR__ . '/vendor/autoload.php'; // phpcs:ignore PHPCompatibility.Keywords.NewKeywords.t_dirFound
+	include_once ABSPATH . '/vendor/autoload.php'; // phpcs:ignore PHPCompatibility.Keywords.NewKeywords.t_dirFound
 	
 	new \Carbon_Fields_Yoast\Carbon_Fields_Yoast(); // phpcs:ignore PHPCompatibility.LanguageConstructs.NewLanguageConstructs.t_ns_separatorFound
 }
