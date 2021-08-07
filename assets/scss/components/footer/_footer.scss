@@ -117,10 +117,7 @@
 		padding: initial;
 		list-style: none;
 		display: flex;
-
-		@supports ( gap: 4px) {
-			gap: 4px;
-		}
+		gap: 4px;
 	}
 	
 	.social-links__item {

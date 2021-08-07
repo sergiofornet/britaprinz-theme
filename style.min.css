@@ -234,7 +234,7 @@ body:not(.post-type-archive-artwork) .secondary-navigation :not(.award-menu) .me
 .footer-links .footer-links__link a:focus-visible{outline:0;text-decoration:underline}
 .footer-links .footer-links__link a:hover{text-decoration:underline}
 .footer__social-links{justify-self:flex-end;-webkit-margin-end:11px;margin-inline-end:11px}
-.footer__social-links ul{margin:initial;padding:initial;list-style:none;display:-webkit-box;display:-ms-flexbox;display:flex}
+.footer__social-links ul{margin:initial;padding:initial;list-style:none;display:-webkit-box;display:-ms-flexbox;display:flex;gap:4px}
 .footer__social-links .social-links__item a,.footer__social-links .social-links__item svg{display:block}
 .footer__social-links svg{fill:var(--color-black);width:clamp(calc(28rem / 16), 7.7vw, calc(35rem / 16))}
 .sticky{display:block}
