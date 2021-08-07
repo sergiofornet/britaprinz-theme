@@ -143,6 +143,7 @@ textarea{width:100%}
 .no-sidebar .site{-webkit-padding-start:var(--site-padding-inline,20px);padding-inline-start:var(--site-padding-inline,20px);-webkit-padding-end:var(--site-padding-inline,20px);padding-inline-end:var(--site-padding-inline,20px);max-width:calc(1235px + var(--site-padding-inline) * 2);margin:0 auto;position:relative;z-index:0}
 .no-sidebar .site-main{position:relative;z-index:100}
 .no-sidebar .site-main--half{background-color:white;overflow-x:hidden;overflow-y:visible;padding:0;position:relative}
+.no-sidebar.post-type-archive-award .site-main--half,.no-sidebar.page-template-page_catalogues .site-main--half{padding:0}
 .no-sidebar .site-main--sidebar .posts-navigation{font-size:var(--font-size-default)}
 .no-sidebar .site-main--sidebar .posts-navigation .nav-links{display:grid}
 .no-sidebar .site-main--sidebar .posts-navigation .nav-links .nav-previous{grid-column:1 / 2}

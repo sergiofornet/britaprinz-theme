@@ -41,12 +41,12 @@
 		overflow-y: visible;
 		padding: 0;
 		position: relative;
-
-		
 	}
 
 	&.post-type-archive-award .site-main--half,
 	&.page-template-page_catalogues .site-main--half {
+		padding: 0;
+		
 		@media (min-width: 64em) {
 			margin: 0 0 0 2em;
 		}
