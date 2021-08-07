@@ -25,6 +25,16 @@ defined( 'ABSPATH' ) || exit;
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta name="description" content="">
 		<meta name="robots" content="<?php echo esc_attr( $robots ); ?>" />
+		<meta property="og:type" content="company">
+		<meta property="og:description" content="Brita Prinz Arte. Contemporary Graphic Art">
+		<meta property="og:url" content="http://www.britaprinzarte.com/index_en.php">
+		<meta property="og:site_name" content="Brita Prinz Arte">
+		<meta property="og:image" content="http://www.britaprinzarte.com/img/logo_facebook2.jpg">
+		<meta property="fb:admins" content="167050073314227">
+
+		<meta name="title" content="Brita Prinz Arte. Contemporary Graphic Art">
+		<meta name="keywords" content="Brita Prinz, Arte, Graphic Art, Contemporary, exhibitions, showroom, aeards, carmen arozena, printing art, artists, woodcut, etching, litography, silkscreen">
+		<meta name="description" content="Brita Prinz Arte. Contemporary Graphic Art">
 
 		<?php
 		// do some actions.
