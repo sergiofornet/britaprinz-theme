@@ -244,6 +244,10 @@ function bpa_theme_modify_queries( $query ) {
 	if ( is_post_type_archive( 'artwork' ) ) {
 		$query->set( 'order', 'ASC' );
 		$query->set( 'orderby', 'title' );
+
+		// Remove next/prev links created by Yoast.
+		add_filter( 'wpseo_next_rel_link', '__return_false' );
+		add_filter( 'wpseo_prev_rel_link', '__return_false' );
 	}
 };
 	
