@@ -999,12 +999,12 @@
 
 
   function _asyncCreateImage() {
-    _asyncCreateImage = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee4(src) {
-      return regenerator.wrap(function _callee4$(_context4) {
+    _asyncCreateImage = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee5(src) {
+      return regenerator.wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
-              return _context4.abrupt("return", new Promise(function (resolve, reject) {
+              return _context5.abrupt("return", new Promise(function (resolve, reject) {
                 var img = new Image();
 
                 img.onload = function () {
@@ -1017,10 +1017,10 @@
 
             case 1:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
-      }, _callee4);
+      }, _callee5);
     }));
     return _asyncCreateImage.apply(this, arguments);
   }
@@ -1061,16 +1061,24 @@
               return _context.abrupt("return");
 
             case 3:
-              if (target.querySelector('.slide__hi-res')) {
-                target.removeChild(target.querySelector('.slide__hi-res'));
-                console.log('child removed');
-              } // Create a hi-res image asynchronously
+              if (!target.querySelector('.slide__hi-res')) {
+                _context.next = 9;
+                break;
+              }
 
+              target.querySelector('.slide__hi-res').style.opacity = '0';
+              _context.next = 7;
+              return waait(300);
 
-              _context.next = 6;
+            case 7:
+              target.removeChild(target.querySelector('.slide__hi-res'));
+              console.log('child removed');
+
+            case 9:
+              _context.next = 11;
               return asyncCreateImage(target.querySelector('img').dataset.full);
 
-            case 6:
+            case 11:
               hiResImage = _context.sent;
               imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
               _window2 = window, windowWidth = _window2.innerWidth, windowHeight = _window2.innerHeight;
@@ -1106,7 +1114,7 @@
                 }, 100);
               }
 
-            case 11:
+            case 16:
             case "end":
               return _context.stop();
           }
@@ -1139,16 +1147,24 @@
               return _context2.abrupt("return");
 
             case 5:
-              if (target.querySelector('.slide__hi-res')) {
-                target.removeChild(target.querySelector('.slide__hi-res'));
-                console.log('child removed');
-              } // Create a hi-res image asynchronously
+              if (!target.querySelector('.slide__hi-res')) {
+                _context2.next = 11;
+                break;
+              }
 
+              target.querySelector('.slide__hi-res').style.opacity = '0';
+              _context2.next = 9;
+              return waait(300);
 
-              _context2.next = 8;
+            case 9:
+              target.removeChild(target.querySelector('.slide__hi-res'));
+              console.log('child removed');
+
+            case 11:
+              _context2.next = 13;
               return asyncCreateImage(target.querySelector('img').dataset.full);
 
-            case 8:
+            case 13:
               hiResImage = _context2.sent;
               imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
               _window3 = window, windowWidth = _window3.innerWidth, windowHeight = _window3.innerHeight;
@@ -1183,7 +1199,7 @@
                 }, 100);
               }
 
-            case 13:
+            case 18:
             case "end":
               return _context2.stop();
           }
@@ -1203,29 +1219,29 @@
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              // Check if there is an active scrollable image
-              target = event.currentTarget;
+              target = event.currentTarget; // Check if there is an active scrollable image
 
               if (!target.classList.contains('active-scroll')) {
                 _context3.next = 7;
                 break;
               }
 
-              // Remove scrollable image
-              hiResContainer = target.querySelector('.slide__hi-res');
-              hiResContainer.style.opacity = '0'; // target.classList.remove('active-scroll');
+              hiResContainer = target.querySelector('.slide__hi-res'); // Fade out hi-res image
+
+              hiResContainer.style.opacity = '0'; // wait a little
 
               _context3.next = 6;
-              return waait(250);
+              return waait(300);
 
             case 6:
               try {
+                // Remove scrollable image
                 target.removeChild(hiResContainer); // Remove active state class
 
                 target.classList.remove('active-scroll');
               } catch (error) {
                 console.log('No child to remove');
-                console.error(error);
+                console.warn(error);
               }
 
             case 7:
@@ -1241,22 +1257,51 @@
     };
   }();
 
-  var touchEndHandler = function touchEndHandler(event) {
-    event.preventDefault();
-    var target = event.currentTarget; // Check if there is an active scrollable image
+  var touchEndHandler = /*#__PURE__*/function () {
+    var _ref6 = asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee4(event) {
+      var target, hiResContainer;
+      return regenerator.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              event.preventDefault();
+              target = event.currentTarget; // Check if there is an active scrollable image
 
-    if (target.classList.contains('active-scroll')) {
-      // Remove scrollable image
-      var hiResContainer = target.querySelector('.slide__hi-res'); // hiResContainer.style.opacity = '0';
+              if (!target.classList.contains('active-scroll')) {
+                _context4.next = 8;
+                break;
+              }
 
-      setTimeout(function () {
-        return hiResContainer.style.opacity = '0';
-      }, 500);
-      target.removeChild(hiResContainer); // Remove active state class
+              hiResContainer = target.querySelector('.slide__hi-res'); // Fade out hi-res image
 
-      target.classList.remove('active-scroll');
-    }
-  };
+              hiResContainer.style.opacity = '0'; // wait a little
+
+              _context4.next = 7;
+              return waait(300);
+
+            case 7:
+              try {
+                // Remove scrollable image
+                target.removeChild(hiResContainer); // Remove active state class
+
+                target.classList.remove('active-scroll');
+              } catch (error) {
+                console.log('No child to remove');
+                console.warn(error);
+              }
+
+            case 8:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function touchEndHandler(_x5) {
+      return _ref6.apply(this, arguments);
+    };
+  }();
 
   var moveHandler = function moveHandler(event) {
     // Check if there is an active scrollable image

@@ -169,6 +169,8 @@ const enterHandler = async (event) => {
 	}
 
 	if (target.querySelector('.slide__hi-res')) {
+		target.querySelector('.slide__hi-res').style.opacity = '0';
+		await wait(300);
 		target.removeChild(target.querySelector('.slide__hi-res'));
 		console.log('child removed');
 	}
@@ -226,6 +228,8 @@ const touchStartHandler = async (event) => {
 	}
 
 	if (target.querySelector('.slide__hi-res')) {
+		target.querySelector('.slide__hi-res').style.opacity = '0';
+		await wait(300);
 		target.removeChild(target.querySelector('.slide__hi-res'));
 		console.log('child removed');
 	}
@@ -273,40 +277,48 @@ const touchStartHandler = async (event) => {
 };
 
 const leaveHandler = async (event) => {
-	// Check if there is an active scrollable image
 	const target = event.currentTarget;
+
+	// Check if there is an active scrollable image
 	if (target.classList.contains('active-scroll')) {
-		// Remove scrollable image
 		const hiResContainer = target.querySelector('.slide__hi-res');
+		// Fade out hi-res image
 		hiResContainer.style.opacity = '0';
-		// target.classList.remove('active-scroll');
-		await wait(250);
+		// wait a little
+		await wait(300);
 		try {
+			// Remove scrollable image
 			target.removeChild(hiResContainer);
 			// Remove active state class
 			target.classList.remove('active-scroll');
 		} catch (error) {
 			console.log('No child to remove');
-			console.error(error);
+			console.warn(error);
 		}
 	}
 };
 
-const touchEndHandler = (event) => {
+const touchEndHandler = async (event) => {
 	event.preventDefault();
 
 	const target = event.currentTarget;
 
 	// Check if there is an active scrollable image
 	if (target.classList.contains('active-scroll')) {
-		// Remove scrollable image
 		const hiResContainer = target.querySelector('.slide__hi-res');
-		// hiResContainer.style.opacity = '0';
-		setTimeout(() => (hiResContainer.style.opacity = '0'), 500);
-		target.removeChild(hiResContainer);
-
-		// Remove active state class
-		target.classList.remove('active-scroll');
+		// Fade out hi-res image
+		hiResContainer.style.opacity = '0';
+		// wait a little
+		await wait(300);
+		try {
+			// Remove scrollable image
+			target.removeChild(hiResContainer);
+			// Remove active state class
+			target.classList.remove('active-scroll');
+		} catch (error) {
+			console.log('No child to remove');
+			console.warn(error);
+		}
 	}
 };
 
