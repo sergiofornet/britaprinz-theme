@@ -4,7 +4,7 @@ Theme URI: https://github.com/sergiofornet/britaprinz-theme
 Author: Betty Symington
 Author URI: https://betty-symington.xyz
 Description: Theme for Brita Prinz Arte
-Version: 1.0.5
+Version: 1.0.6
 Tested up to: 5.7.2
 Requires PHP: 7.2
 License: GNU General Public License v2 or later
@@ -419,9 +419,10 @@ body.post-type-archive-artwork.no-sidebar .site-main{background-color:var(--colo
 .slide.current{z-index:10;-webkit-transform:translateX(0);transform:translateX(0);opacity:100%}
 .slide.next{z-index:10;-webkit-transform:translateX(100%);transform:translateX(100%);opacity:100%}
 .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,200px));gap:2rem;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding:2rem;position:absolute;z-index:1000;bottom:0}
-.previous-slide,.next-slide{position:absolute;bottom:50%;z-index:1000;font-size:calc(32rem / 16);border:0;background-color:unset;padding:.2em .5em;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transition:-webkit-transform .1s;transition:-webkit-transform .1s;transition:transform .1s;transition:transform .1s,-webkit-transform .1s}
+.previous-slide,.next-slide{position:absolute;bottom:50%;z-index:1000;font-size:calc(32rem / 16);border:0;background-color:unset;padding:.2em .5em;-webkit-transform-origin:50% 50%;transform-origin:50% 50%;-webkit-transition:opacity .3s ease-in-out,-webkit-transform .1s;transition:opacity .3s ease-in-out,-webkit-transform .1s;transition:transform .1s,opacity .3s ease-in-out;transition:transform .1s,opacity .3s ease-in-out,-webkit-transform .1s}
 .previous-slide:hover,.previous-slide:focus,.next-slide:hover,.next-slide:focus{-webkit-transform:scale(1.1);transform:scale(1.1)}
 .previous-slide:focus,.next-slide:focus{outline:0}
+.previous-slide[disabled],.next-slide[disabled]{opacity:.2;cursor:not-allowed}
 .previous-slide{left:5%}
 .next-slide{right:5%}
 .artwork-gallery{position:fixed;top:var(--wp-admin-bar,0);left:0;width:calc(100% - var(--scrollbar-width, 0px));height:calc(100 * var(--vh) - var(--wp-admin-bar, 0px));background-color:white;z-index:200}

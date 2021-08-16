@@ -11,7 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$bpa_theme_artwork = $args;
+$bpa_theme_artwork       = $args[0];
+$bpa_theme_artwork_index = $args[1];
 
 if ( $bpa_theme_artwork ) : 
 	$bpa_theme_artwork_id    = $bpa_theme_artwork['id'];
@@ -28,7 +29,7 @@ if ( $bpa_theme_artwork ) :
 	if ( $bpa_theme_artwork_image ) :
 		?>
 
-		<figure class="slide">
+		<figure class="slide" data-index="<?php echo esc_attr( $bpa_theme_artwork_index + 1 ); ?>">
 
 			<?php echo wp_kses( $bpa_theme_artwork_image, bpa_theme_image_allowed_html() ); ?>
 
