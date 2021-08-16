@@ -1062,7 +1062,8 @@
 
             case 3:
               if (target.querySelector('.slide__hi-res')) {
-                console.log(target.children);
+                target.removeChild(target.querySelector('.slide__hi-res'));
+                console.log('child removed');
               } // Create a hi-res image asynchronously
 
 
@@ -1139,7 +1140,8 @@
 
             case 5:
               if (target.querySelector('.slide__hi-res')) {
-                console.log(target.children);
+                target.removeChild(target.querySelector('.slide__hi-res'));
+                console.log('child removed');
               } // Create a hi-res image asynchronously
 
 
