@@ -1,3 +1,5 @@
+import wait from 'waait';
+
 /**
  * Slider prototype definition
  *
@@ -161,9 +163,21 @@ function imagePosition(imageSize, cursorPosition) {
 }
 
 const enterHandler = async (event) => {
+	const target = event.currentTarget;
+	if (target.classList.contains('active-scroll')) {
+		return;
+	}
+
+	if (target.querySelector('.slide__hi-res')) {
+		target.querySelector('img').style.opacity = '1';
+		target.querySelector('.slide__hi-res').style.opacity = '0';
+		await wait(300);
+		target.removeChild(target.querySelector('.slide__hi-res'));
+	}
+
 	// Create a hi-res image asynchronously
 	const hiResImage = await asyncCreateImage(
-		event.currentTarget.querySelector('img').dataset.full
+		target.querySelector('img').dataset.full
 	);
 	const { naturalWidth: imageWidth, naturalHeight: imageHeight } = hiResImage;
 	const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
@@ -200,7 +214,10 @@ const enterHandler = async (event) => {
 		hiResImage.style.transitiion = `transform .2s ease-in-out`;
 
 		hiResContainer.appendChild(hiResImage);
-		setTimeout(() => (hiResContainer.style.opacity = '1'), 100);
+		setTimeout(() => {
+			hiResContainer.style.opacity = '1';
+			target.querySelector('img').style.opacity = '0';
+		}, 100);
 	}
 };
 
@@ -208,6 +225,16 @@ const touchStartHandler = async (event) => {
 	event.preventDefault();
 
 	const target = event.currentTarget;
+	if (target.classList.contains('active-scroll')) {
+		return;
+	}
+
+	if (target.querySelector('.slide__hi-res')) {
+		target.querySelector('img').style.opacity = '1';
+		target.querySelector('.slide__hi-res').style.opacity = '0';
+		await wait(300);
+		target.removeChild(target.querySelector('.slide__hi-res'));
+	}
 
 	// Create a hi-res image asynchronously
 	const hiResImage = await asyncCreateImage(
@@ -251,43 +278,56 @@ const touchStartHandler = async (event) => {
 	}
 };
 
-const leaveHandler = (event) => {
-	// Check if there is an active scrollable image
-	if (event.currentTarget.classList.contains('active-scroll')) {
-		// Remove scrollable image
-		const hiResContainer =
-			event.currentTarget.querySelector('.slide__hi-res');
-		hiResContainer.style.opacity = '0';
-		event.currentTarget.removeChild(hiResContainer);
+const leaveHandler = async (event) => {
+	const target = event.currentTarget;
 
-		// Remove active state class
-		event.currentTarget.classList.remove('active-scroll');
+	// Check if there is an active scrollable image
+	if (target.classList.contains('active-scroll')) {
+		const hiResContainer = target.querySelector('.slide__hi-res');
+		// Fade out hi-res image
+		hiResContainer.style.opacity = '0';
+		target.querySelector('img').style.opacity = '1';
+		// wait a little
+		await wait(300);
+		try {
+			// Remove scrollable image
+			target.removeChild(hiResContainer);
+			// Remove active state class
+			target.classList.remove('active-scroll');
+		} catch (error) {
+			// Fail silently
+		}
 	}
 };
 
-const touchEndHandler = (event) => {
+const touchEndHandler = async (event) => {
 	event.preventDefault();
 
 	const target = event.currentTarget;
 
 	// Check if there is an active scrollable image
 	if (target.classList.contains('active-scroll')) {
-		// Remove scrollable image
 		const hiResContainer = target.querySelector('.slide__hi-res');
-		// hiResContainer.style.opacity = '0';
-		setTimeout(() => (hiResContainer.style.opacity = '0'), 500);
-		target.removeChild(hiResContainer);
-
-		// Remove active state class
-		target.classList.remove('active-scroll');
+		// Fade out hi-res image
+		hiResContainer.style.opacity = '0';
+		// wait a little
+		await wait(300);
+		try {
+			// Remove scrollable image
+			target.removeChild(hiResContainer);
+			// Remove active state class
+			target.classList.remove('active-scroll');
+		} catch (error) {
+			// Fail silently
+		}
 	}
 };
 
 const moveHandler = (event) => {
 	// Check if there is an active scrollable image
-	if (event.currentTarget.classList.contains('active-scroll')) {
-		const hiResImage =
-			event.currentTarget.querySelector('.slide__hi-res img');
+	const target = event.currentTarget;
+	if (target.classList.contains('active-scroll')) {
+		const hiResImage = target.querySelector('.slide__hi-res img');
 		const { clientX: cursorX, clientY: cursorY } = event;
 		const { naturalWidth: imageWidth, naturalHeight: imageHeight } =
 			hiResImage;

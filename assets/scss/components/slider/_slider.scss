@@ -34,6 +34,7 @@
 		width: auto;
 		object-fit: contain;
 		align-self: flex-end;
+		transition: opacity .3s ease-in-out;
 	}
 	
 	& > figcaption {
@@ -46,7 +47,7 @@
 		left: 0;
 		overflow: hidden;
 		background-color: white;
-		transition: opacity .25s ease-in-out;
+		transition: opacity .3s ease-in-out;
 		
 		img {
 			max-width: initial;
