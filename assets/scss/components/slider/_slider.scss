@@ -96,7 +96,7 @@
 	background-color: unset;
 	padding: .2em .5em;
 	transform-origin: 50% 50%;
-	transition: transform .1s;
+	transition: transform .1s, opacity .3s ease-in-out;
 
 	&:hover, &:focus {
 		transform: scale(1.1);
@@ -104,6 +104,11 @@
 
 	&:focus {
 		outline: none;
+	}
+
+	&[disabled] {
+		opacity: .2;
+		cursor: not-allowed;
 	}
 }
 .previous-slide {

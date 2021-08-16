@@ -14,16 +14,17 @@ function Slider(slider, scroll = false, lightbox = false) {
 
 	// select the elements needed for the slider
 	this.slides = slider.querySelector('.slides');
+	this.totalSlides = this.slides.childElementCount;
 	this.slider = slider;
 	this.scroll = scroll;
 	this.lightbox = lightbox;
 
 	// Handle slides < 4 cases
-	if (this.slides.childElementCount === 1) {
+	if (this.totalSlides === 1) {
 		// If there is only one slide
 		// then there's nothing to slide
 		this.lightbox = true;
-	} else if (this.slides.childElementCount < 4) {
+	} else if (this.totalSlides < 4) {
 		// Slider doesn't look great with less than 4 slides
 		// so we duplicate them
 		Array.from(this.slides.children).forEach((child) =>
@@ -42,15 +43,23 @@ function Slider(slider, scroll = false, lightbox = false) {
 	const prevButton = slider.querySelector('.previous-slide');
 	const nextButton = slider.querySelector('.next-slide');
 
+	this.prevButton = prevButton;
+	this.nextButton = nextButton;
+
 	// when this slider is created, run the start slider function
 	this.startSlider();
 	this.applyClasses();
 	this.scroll && this.scrollImage();
+	if (this.prevButton || this.nextButton) {
+		this.handleButtonState();
+	}
 	// requestAnimationFrame(this.autoplay);
 
 	// Event listeners
-	prevButton && prevButton.addEventListener('click', () => this.move('back'));
-	nextButton && nextButton.addEventListener('click', () => this.move());
+	this.prevButton &&
+		this.prevButton.addEventListener('click', () => this.move('back'));
+	this.nextButton &&
+		this.nextButton.addEventListener('click', () => this.move());
 }
 
 Slider.prototype.startSlider = function () {
@@ -100,6 +109,19 @@ Slider.prototype.move = function (direction) {
 
 	this.applyClasses();
 	this.scroll && this.scrollImage();
+	this.handleButtonState();
+};
+
+Slider.prototype.handleButtonState = function () {
+	if (this.current.dataset.index === this.totalSlides.toString()) {
+		this.nextButton.setAttribute('disabled', true);
+	} else if (this.current.dataset.index === '1') {
+		this.prevButton.setAttribute('disabled', true);
+	} else {
+		[this.prevButton, this.nextButton].forEach((button) =>
+			button.removeAttribute('disabled')
+		);
+	}
 };
 
 Slider.prototype.scrollImage = function () {

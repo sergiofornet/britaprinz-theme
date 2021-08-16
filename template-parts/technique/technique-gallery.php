@@ -24,8 +24,15 @@ if ( $bpa_theme_artworks ) :
 			<div class="slides">
 
 			<?php
-			foreach ( $bpa_theme_artworks as $bpa_theme_artwork ) :
-				get_template_part( 'template-parts/technique/technique', 'gallery-slide', $bpa_theme_artwork );
+			foreach ( $bpa_theme_artworks as $bpa_theme_artwork_index => $bpa_theme_artwork ) :
+				get_template_part(
+					'template-parts/technique/technique',
+					'gallery-slide',
+					array(
+						$bpa_theme_artwork,
+						$bpa_theme_artwork_index,
+					) 
+				);
 			endforeach;
 			?>
 

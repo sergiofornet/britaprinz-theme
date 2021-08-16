@@ -170,11 +170,11 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 						)[0].artwork_image_gallery;
 
 						// We create and add every slide
-						slides.forEach((slide) => {
+						slides.forEach((slide, slideIndex) => {
 							slidesContainer.insertAdjacentHTML(
 								'beforeend',
 								`
-								<figure class="slide">
+								<figure class="slide" data-index="${slideIndex + 1}">
 									${slide.image}
 									${
 										jsonResponse[0]
