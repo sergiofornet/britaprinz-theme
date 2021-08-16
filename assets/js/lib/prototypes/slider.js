@@ -115,8 +115,10 @@ Slider.prototype.move = function (direction) {
 Slider.prototype.handleButtonState = function () {
 	if (this.current.dataset.index === this.totalSlides.toString()) {
 		this.nextButton.setAttribute('disabled', true);
+		this.prevButton.removeAttribute('disabled');
 	} else if (this.current.dataset.index === '1') {
 		this.prevButton.setAttribute('disabled', true);
+		this.nextButton.removeAttribute('disabled');
 	} else {
 		[this.prevButton, this.nextButton].forEach((button) =>
 			button.removeAttribute('disabled')
