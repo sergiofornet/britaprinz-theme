@@ -173,7 +173,6 @@ const enterHandler = async (event) => {
 		target.querySelector('.slide__hi-res').style.opacity = '0';
 		await wait(300);
 		target.removeChild(target.querySelector('.slide__hi-res'));
-		console.log('child removed');
 	}
 
 	// Create a hi-res image asynchronously
@@ -227,7 +226,6 @@ const touchStartHandler = async (event) => {
 
 	const target = event.currentTarget;
 	if (target.classList.contains('active-scroll')) {
-		console.log('active scroll');
 		return;
 	}
 
@@ -236,7 +234,6 @@ const touchStartHandler = async (event) => {
 		target.querySelector('.slide__hi-res').style.opacity = '0';
 		await wait(300);
 		target.removeChild(target.querySelector('.slide__hi-res'));
-		console.log('child removed');
 	}
 
 	// Create a hi-res image asynchronously
@@ -298,8 +295,7 @@ const leaveHandler = async (event) => {
 			// Remove active state class
 			target.classList.remove('active-scroll');
 		} catch (error) {
-			console.log('No child to remove');
-			console.warn(error);
+			// Fail silently
 		}
 	}
 };
@@ -322,8 +318,7 @@ const touchEndHandler = async (event) => {
 			// Remove active state class
 			target.classList.remove('active-scroll');
 		} catch (error) {
-			console.log('No child to remove');
-			console.warn(error);
+			// Fail silently
 		}
 	}
 };

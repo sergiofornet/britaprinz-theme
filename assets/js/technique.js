@@ -1012,7 +1012,7 @@
 
             case 3:
               if (!target.querySelector('.slide__hi-res')) {
-                _context.next = 10;
+                _context.next = 9;
                 break;
               }
 
@@ -1023,13 +1023,12 @@
 
             case 8:
               target.removeChild(target.querySelector('.slide__hi-res'));
-              console.log('child removed');
 
-            case 10:
-              _context.next = 12;
+            case 9:
+              _context.next = 11;
               return asyncCreateImage(target.querySelector('img').dataset.full);
 
-            case 12:
+            case 11:
               hiResImage = _context.sent;
               imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
               _window2 = window, windowWidth = _window2.innerWidth, windowHeight = _window2.innerHeight;
@@ -1066,7 +1065,7 @@
                 }, 100);
               }
 
-            case 17:
+            case 16:
             case "end":
               return _context.stop();
           }
@@ -1091,33 +1090,31 @@
               target = event.currentTarget;
 
               if (!target.classList.contains('active-scroll')) {
-                _context2.next = 5;
+                _context2.next = 4;
                 break;
               }
 
-              console.log('active scroll');
               return _context2.abrupt("return");
 
-            case 5:
+            case 4:
               if (!target.querySelector('.slide__hi-res')) {
-                _context2.next = 12;
+                _context2.next = 10;
                 break;
               }
 
               target.querySelector('img').style.opacity = '1';
               target.querySelector('.slide__hi-res').style.opacity = '0';
-              _context2.next = 10;
+              _context2.next = 9;
               return waait(300);
 
-            case 10:
+            case 9:
               target.removeChild(target.querySelector('.slide__hi-res'));
-              console.log('child removed');
 
-            case 12:
-              _context2.next = 14;
+            case 10:
+              _context2.next = 12;
               return asyncCreateImage(target.querySelector('img').dataset.full);
 
-            case 14:
+            case 12:
               hiResImage = _context2.sent;
               imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
               _window3 = window, windowWidth = _window3.innerWidth, windowHeight = _window3.innerHeight;
@@ -1152,7 +1149,7 @@
                 }, 100);
               }
 
-            case 19:
+            case 17:
             case "end":
               return _context2.stop();
           }
@@ -1193,9 +1190,7 @@
                 target.removeChild(hiResContainer); // Remove active state class
 
                 target.classList.remove('active-scroll');
-              } catch (error) {
-                console.log('No child to remove');
-                console.warn(error);
+              } catch (error) {// Fail silently
               }
 
             case 8:
@@ -1239,9 +1234,7 @@
                 target.removeChild(hiResContainer); // Remove active state class
 
                 target.classList.remove('active-scroll');
-              } catch (error) {
-                console.log('No child to remove');
-                console.warn(error);
+              } catch (error) {// Fail silently
               }
 
             case 8:
