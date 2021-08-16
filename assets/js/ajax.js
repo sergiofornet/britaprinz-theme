@@ -1319,12 +1319,10 @@
               console.log('child removed');
 
             case 9:
-              target.querySelector('img').style.opacity = '0'; // Create a hi-res image asynchronously
-
-              _context.next = 12;
+              _context.next = 11;
               return asyncCreateImage(target.querySelector('img').dataset.full);
 
-            case 12:
+            case 11:
               hiResImage = _context.sent;
               imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
               _window2 = window, windowWidth = _window2.innerWidth, windowHeight = _window2.innerHeight;
@@ -1356,11 +1354,12 @@
                 hiResImage.style.transitiion = "transform .2s ease-in-out";
                 hiResContainer.appendChild(hiResImage);
                 setTimeout(function () {
-                  return hiResContainer.style.opacity = '1';
+                  hiResContainer.style.opacity = '1';
+                  target.querySelector('img').style.opacity = '0';
                 }, 100);
               }
 
-            case 17:
+            case 16:
             case "end":
               return _context.stop();
           }

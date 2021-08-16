@@ -175,8 +175,6 @@ const enterHandler = async (event) => {
 		console.log('child removed');
 	}
 
-	target.querySelector('img').style.opacity = '0';
-
 	// Create a hi-res image asynchronously
 	const hiResImage = await asyncCreateImage(
 		target.querySelector('img').dataset.full
@@ -216,7 +214,10 @@ const enterHandler = async (event) => {
 		hiResImage.style.transitiion = `transform .2s ease-in-out`;
 
 		hiResContainer.appendChild(hiResImage);
-		setTimeout(() => (hiResContainer.style.opacity = '1'), 100);
+		setTimeout(() => {
+			hiResContainer.style.opacity = '1';
+			target.querySelector('img').style.opacity = '0';
+		}, 100);
 	}
 };
 
