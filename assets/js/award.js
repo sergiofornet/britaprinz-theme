@@ -1075,10 +1075,12 @@
               console.log('child removed');
 
             case 9:
-              _context.next = 11;
+              target.querySelector('img').style.opacity = '0'; // Create a hi-res image asynchronously
+
+              _context.next = 12;
               return asyncCreateImage(target.querySelector('img').dataset.full);
 
-            case 11:
+            case 12:
               hiResImage = _context.sent;
               imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
               _window2 = window, windowWidth = _window2.innerWidth, windowHeight = _window2.innerHeight;
@@ -1114,7 +1116,7 @@
                 }, 100);
               }
 
-            case 16:
+            case 17:
             case "end":
               return _context.stop();
           }
@@ -1222,18 +1224,19 @@
               target = event.currentTarget; // Check if there is an active scrollable image
 
               if (!target.classList.contains('active-scroll')) {
-                _context3.next = 7;
+                _context3.next = 8;
                 break;
               }
 
               hiResContainer = target.querySelector('.slide__hi-res'); // Fade out hi-res image
 
-              hiResContainer.style.opacity = '0'; // wait a little
+              hiResContainer.style.opacity = '0';
+              target.querySelector('img').style.opacity = '1'; // wait a little
 
-              _context3.next = 6;
+              _context3.next = 7;
               return waait(300);
 
-            case 6:
+            case 7:
               try {
                 // Remove scrollable image
                 target.removeChild(hiResContainer); // Remove active state class
@@ -1244,7 +1247,7 @@
                 console.warn(error);
               }
 
-            case 7:
+            case 8:
             case "end":
               return _context3.stop();
           }

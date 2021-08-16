@@ -175,6 +175,8 @@ const enterHandler = async (event) => {
 		console.log('child removed');
 	}
 
+	target.querySelector('img').style.opacity = '0';
+
 	// Create a hi-res image asynchronously
 	const hiResImage = await asyncCreateImage(
 		target.querySelector('img').dataset.full
@@ -284,6 +286,7 @@ const leaveHandler = async (event) => {
 		const hiResContainer = target.querySelector('.slide__hi-res');
 		// Fade out hi-res image
 		hiResContainer.style.opacity = '0';
+		target.querySelector('img').style.opacity = '1';
 		// wait a little
 		await wait(300);
 		try {
