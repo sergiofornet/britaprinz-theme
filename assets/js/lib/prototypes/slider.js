@@ -169,6 +169,7 @@ const enterHandler = async (event) => {
 	}
 
 	if (target.querySelector('.slide__hi-res')) {
+		target.querySelector('img').style.opacity = '1';
 		target.querySelector('.slide__hi-res').style.opacity = '0';
 		await wait(300);
 		target.removeChild(target.querySelector('.slide__hi-res'));
@@ -231,6 +232,7 @@ const touchStartHandler = async (event) => {
 	}
 
 	if (target.querySelector('.slide__hi-res')) {
+		target.querySelector('img').style.opacity = '1';
 		target.querySelector('.slide__hi-res').style.opacity = '0';
 		await wait(300);
 		target.removeChild(target.querySelector('.slide__hi-res'));

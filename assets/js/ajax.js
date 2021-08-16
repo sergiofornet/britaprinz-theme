@@ -1306,23 +1306,24 @@
 
             case 3:
               if (!target.querySelector('.slide__hi-res')) {
-                _context.next = 9;
+                _context.next = 10;
                 break;
               }
 
+              target.querySelector('img').style.opacity = '1';
               target.querySelector('.slide__hi-res').style.opacity = '0';
-              _context.next = 7;
+              _context.next = 8;
               return waait(300);
 
-            case 7:
+            case 8:
               target.removeChild(target.querySelector('.slide__hi-res'));
               console.log('child removed');
 
-            case 9:
-              _context.next = 11;
+            case 10:
+              _context.next = 12;
               return asyncCreateImage(target.querySelector('img').dataset.full);
 
-            case 11:
+            case 12:
               hiResImage = _context.sent;
               imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
               _window2 = window, windowWidth = _window2.innerWidth, windowHeight = _window2.innerHeight;
@@ -1359,7 +1360,7 @@
                 }, 100);
               }
 
-            case 16:
+            case 17:
             case "end":
               return _context.stop();
           }
@@ -1393,23 +1394,24 @@
 
             case 5:
               if (!target.querySelector('.slide__hi-res')) {
-                _context2.next = 11;
+                _context2.next = 12;
                 break;
               }
 
+              target.querySelector('img').style.opacity = '1';
               target.querySelector('.slide__hi-res').style.opacity = '0';
-              _context2.next = 9;
+              _context2.next = 10;
               return waait(300);
 
-            case 9:
+            case 10:
               target.removeChild(target.querySelector('.slide__hi-res'));
               console.log('child removed');
 
-            case 11:
-              _context2.next = 13;
+            case 12:
+              _context2.next = 14;
               return asyncCreateImage(target.querySelector('img').dataset.full);
 
-            case 13:
+            case 14:
               hiResImage = _context2.sent;
               imageWidth = hiResImage.naturalWidth, imageHeight = hiResImage.naturalHeight;
               _window3 = window, windowWidth = _window3.innerWidth, windowHeight = _window3.innerHeight;
@@ -1444,7 +1446,7 @@
                 }, 100);
               }
 
-            case 18:
+            case 19:
             case "end":
               return _context2.stop();
           }
