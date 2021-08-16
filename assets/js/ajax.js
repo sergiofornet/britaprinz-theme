@@ -1841,6 +1841,11 @@
             }); // Then create or slider or lightbox
 
             new Slider(artworkSlider, true);
+            artworkGallery.querySelector('.slides').addEventListener('click', function () {
+              artworkGallery.classList.toggle('hidden');
+              document.body.classList.toggle('no-scroll');
+              handleScroll.disable();
+            });
           }
         });
       });

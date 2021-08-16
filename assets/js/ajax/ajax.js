@@ -189,6 +189,14 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 
 						// Then create or slider or lightbox
 						const slider = new Slider(artworkSlider, true);
+
+						artworkGallery
+							.querySelector('.slides')
+							.addEventListener('click', () => {
+								artworkGallery.classList.toggle('hidden');
+								document.body.classList.toggle('no-scroll');
+								handleScroll.disable();
+							});
 					}
 				});
 			});
