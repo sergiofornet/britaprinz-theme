@@ -1,3 +1,5 @@
+import wait from 'waait';
+
 /**
  * Slider prototype definition
  *
@@ -161,9 +163,18 @@ function imagePosition(imageSize, cursorPosition) {
 }
 
 const enterHandler = async (event) => {
+	const target = event.currentTarget;
+	if (target.classList.contains('active-scroll')) {
+		return;
+	}
+
+	if (target.querySelector('.slide__hi-res')) {
+		console.log(target.children);
+	}
+
 	// Create a hi-res image asynchronously
 	const hiResImage = await asyncCreateImage(
-		event.currentTarget.querySelector('img').dataset.full
+		target.querySelector('img').dataset.full
 	);
 	const { naturalWidth: imageWidth, naturalHeight: imageHeight } = hiResImage;
 	const { innerWidth: windowWidth, innerHeight: windowHeight } = window;
@@ -208,6 +219,14 @@ const touchStartHandler = async (event) => {
 	event.preventDefault();
 
 	const target = event.currentTarget;
+	if (target.classList.contains('active-scroll')) {
+		console.log('active scroll');
+		return;
+	}
+
+	if (target.querySelector('.slide__hi-res')) {
+		console.log(target.children);
+	}
 
 	// Create a hi-res image asynchronously
 	const hiResImage = await asyncCreateImage(
@@ -251,17 +270,23 @@ const touchStartHandler = async (event) => {
 	}
 };
 
-const leaveHandler = (event) => {
+const leaveHandler = async (event) => {
 	// Check if there is an active scrollable image
-	if (event.currentTarget.classList.contains('active-scroll')) {
+	const target = event.currentTarget;
+	if (target.classList.contains('active-scroll')) {
 		// Remove scrollable image
-		const hiResContainer =
-			event.currentTarget.querySelector('.slide__hi-res');
+		const hiResContainer = target.querySelector('.slide__hi-res');
 		hiResContainer.style.opacity = '0';
-		event.currentTarget.removeChild(hiResContainer);
-
-		// Remove active state class
-		event.currentTarget.classList.remove('active-scroll');
+		// target.classList.remove('active-scroll');
+		await wait(250);
+		try {
+			target.removeChild(hiResContainer);
+			// Remove active state class
+			target.classList.remove('active-scroll');
+		} catch (error) {
+			console.log('No child to remove');
+			console.error(error);
+		}
 	}
 };
 
@@ -285,9 +310,9 @@ const touchEndHandler = (event) => {
 
 const moveHandler = (event) => {
 	// Check if there is an active scrollable image
-	if (event.currentTarget.classList.contains('active-scroll')) {
-		const hiResImage =
-			event.currentTarget.querySelector('.slide__hi-res img');
+	const target = event.currentTarget;
+	if (target.classList.contains('active-scroll')) {
+		const hiResImage = target.querySelector('.slide__hi-res img');
 		const { clientX: cursorX, clientY: cursorY } = event;
 		const { naturalWidth: imageWidth, naturalHeight: imageHeight } =
 			hiResImage;
