@@ -5,6 +5,7 @@
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
  * @package Brita_Prinz_Theme
+ * @phpcs:disable PHPCompatibility.Syntax.NewFunctionArrayDereferencing
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -192,7 +193,8 @@ function britaprinz_theme_scripts() {
 	
 	if ( is_post_type_archive( 'artwork' ) ) {
 		$query_artist = get_query_var( 'display_artist' );
-		$artist_id    = get_term_by( 'slug', $query_artist, 'artist' ) ? get_term_by( 'slug', $query_artist, 'artist' )->term_id : '';
+		$artist_term  = get_term_by( 'slug', $query_artist, 'artist' ) ? get_term_by( 'slug', $query_artist, 'artist' ) : '';
+		$artist_id    = $artist_term ? $artist_term->term_id : '';
 		$lang         = '';
 		
 		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
@@ -214,6 +216,25 @@ function britaprinz_theme_scripts() {
 				'artistId'   => $artist_id,
 			) 
 		);
+
+		// Handle SEO stuff if we access some Artist directly.
+		if ( $artist_id ) {
+
+			// Custom SEO titles have precedence over the default one.
+			$artist_seo_title =
+				isset( get_option( 'wpseo_taxonomy_meta' )['artist'][ $artist_id ]['wpseo_title'] ) ? 
+				wpseo_replace_vars( get_option( 'wpseo_taxonomy_meta' )['artist'][ $artist_id ]['wpseo_title'], $artist_term ) : 
+				wpseo_replace_vars( get_option( 'wpseo_titles' )['title-tax-artist'], $artist_term );
+			
+			// Check wether the artist has a SEO description or not.
+			$artist_seo_description =
+				isset( get_option( 'wpseo_taxonomy_meta' )['artist'][ $artist_id ]['wpseo_desc'] ) ?
+				get_option( 'wpseo_taxonomy_meta' )['artist'][ $artist_id ]['wpseo_desc'] :
+				'';
+
+			// Modify SEO title and description.
+			bpa_theme_artist_seo( $artist_seo_title, $artist_seo_description );
+		}
 			
 		/**
 		 * Handle redirection to artworks archive page when queried artist does not exist.
@@ -222,7 +243,7 @@ function britaprinz_theme_scripts() {
 		 */
 		do_action( 'bpa_theme_artwork_redirect_hook', $query_artist, $artist_id );
 	}
-
+	
 	if ( is_post_type_archive( 'award' ) || is_page( __( 'Catálogos', 'britaprinz-theme' ) ) ) {
 		$lang = '';
 		if ( defined( 'ICL_LANGUAGE_CODE' ) ) {
