@@ -479,3 +479,53 @@ function bpa_theme_dequeue_recaptcha() {
 	}
 }
 add_action( 'wp_print_scripts', 'bpa_theme_dequeue_recaptcha' );
+
+/**
+ * Modify Artists SEO titles and descriptions if accessed directly
+ * 
+ * @param String $artist_seo_title - Artist's SEO title.
+ * @param String $artist_seo_description - Artist's SEO meta description.
+ */
+function bpa_theme_artist_seo( $artist_seo_title, $artist_seo_description ) {
+	if ( $artist_seo_title ) {
+
+		// Use Artist's Open Graph title instead of archive's.
+		add_filter(
+			'wpseo_title',
+			function( $title ) use ( $artist_seo_title ) { // phpcs:ignore PHPCompatibility.FunctionDeclarations.NewClosure.Found
+				$title = $artist_seo_title;
+				return $title;
+			}
+		);
+
+		// Use Artist's Open Graph title instead of archive's.
+		add_filter(
+			'wpseo_opengraph_title',
+			function( $title ) use ( $artist_seo_title ) { // phpcs:ignore PHPCompatibility.FunctionDeclarations.NewClosure.Found
+				$title = $artist_seo_title;
+				return $title;
+			}
+		);
+	}
+
+	if ( $artist_seo_description ) {
+
+		// Use Artist's meta description instead of archive's.
+		add_filter(
+			'wpseo_metadesc',
+			function( $desc ) use ( $artist_seo_description ) { // phpcs:ignore PHPCompatibility.FunctionDeclarations.NewClosure.Found
+				$desc = $artist_seo_description;
+				return $desc;
+			}
+		);
+		
+		// Use Artist's Open Graph description instead of archive's.
+		add_filter(
+			'wpseo_opengraph_desc',
+			function( $desc ) use ( $artist_seo_description ) { // phpcs:ignore PHPCompatibility.FunctionDeclarations.NewClosure.Found
+				$desc = $artist_seo_description;
+				return $desc;
+			}
+		);
+	}
+}
