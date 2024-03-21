@@ -12,18 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Set up artists search endpoint
  */
-function britaprinz_artists_search_endpoint() {
+function britaprinz_theme_artists_search_endpoint() {
 	register_rest_route( 
 		'britaprinz/v1',
 		'/artists/search(?:/(?P<id>([a-zA-Z0-9]|%20)+)+)?',
 		array(
 			'methods'             => WP_REST_Server::READABLE,
-			'callback'            => 'britaprinz_get_artists',
+			'callback'            => 'britaprinz_theme_get_artists',
 			'permission_callback' => '__return_true',
 		)
 	); 
 }
-add_action( 'rest_api_init', 'britaprinz_artists_search_endpoint' );
+add_action( 'rest_api_init', 'britaprinz_theme_artists_search_endpoint' );
 
 /**
  * Set up artist search query
@@ -31,7 +31,7 @@ add_action( 'rest_api_init', 'britaprinz_artists_search_endpoint' );
  * @param String $request Requested URL.
  * @return array|Error an array of terms or a 404 error if no terms found
  */
-function britaprinz_get_artists( $request ) {
+function britaprinz_theme_get_artists( $request ) {
 	$search = urldecode( $request['id'] );
 
 	$args = array(
@@ -71,12 +71,12 @@ function britaprinz_get_artists( $request ) {
 /**
  * Register REST fields
  */
-function britaprinz_rest_fields() {
+function britaprinz_theme_rest_fields() {
 	register_rest_field(
 		'artwork',
 		'bp_artwork_year',
 		array(
-			'get_callback'    => 'britaprinz_artwork_year',
+			'get_callback'    => 'britaprinz_theme_artwork_year',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -86,7 +86,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'bp_artwork_copy',
 		array(
-			'get_callback'    => 'britaprinz_artwork_copy',
+			'get_callback'    => 'britaprinz_theme_artwork_copy',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -96,7 +96,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'bp_artwork_paper',
 		array(
-			'get_callback'    => 'britaprinz_artwork_paper',
+			'get_callback'    => 'britaprinz_theme_artwork_paper',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -106,7 +106,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'bp_artwork_condition',
 		array(
-			'get_callback'    => 'britaprinz_artwork_condition',
+			'get_callback'    => 'britaprinz_theme_artwork_condition',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -116,7 +116,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'bp_artwork_size',
 		array(
-			'get_callback'    => 'britaprinz_artwork_size',
+			'get_callback'    => 'britaprinz_theme_artwork_size',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -127,7 +127,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'bp_artwork_size_image',
 		array(
-			'get_callback'    => 'britaprinz_artwork_size_image',
+			'get_callback'    => 'britaprinz_theme_artwork_size_image',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -137,7 +137,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'artwork_image_src',
 		array(
-			'get_callback'    => 'britaprinz_artwork_image',
+			'get_callback'    => 'britaprinz_theme_artwork_image',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -147,7 +147,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'artwork_image_gallery',
 		array(
-			'get_callback'    => 'britaprinz_artwork_gallery',
+			'get_callback'    => 'britaprinz_theme_artwork_gallery',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -157,7 +157,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'artwork_techniques',
 		array(
-			'get_callback'    => 'britaprinz_artwork_techniques',
+			'get_callback'    => 'britaprinz_theme_artwork_techniques',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -167,7 +167,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'artwork_loan',
 		array(
-			'get_callback'    => 'britaprinz_artwork_loan',
+			'get_callback'    => 'britaprinz_theme_artwork_loan',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -177,7 +177,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'artwork_sale',
 		array(
-			'get_callback'    => 'britaprinz_artwork_sale',
+			'get_callback'    => 'britaprinz_theme_artwork_sale',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -187,7 +187,7 @@ function britaprinz_rest_fields() {
 		'artwork',
 		'artwork_info',
 		array(
-			'get_callback'    => 'britaprinz_artwork_info',
+			'get_callback'    => 'britaprinz_theme_artwork_info',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -197,7 +197,7 @@ function britaprinz_rest_fields() {
 		'artist',
 		'artist_bio',
 		array(
-			'get_callback'    => 'britaprinz_artist_bio',
+			'get_callback'    => 'britaprinz_theme_artist_bio',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -207,7 +207,7 @@ function britaprinz_rest_fields() {
 		'award',
 		'award_catalogue',
 		array(
-			'get_callback'    => 'britaprinz_award_catalogue',
+			'get_callback'    => 'britaprinz_theme_award_catalogue',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -217,7 +217,7 @@ function britaprinz_rest_fields() {
 		'award',
 		'award',
 		array(
-			'get_callback'    => 'britaprinz_award',
+			'get_callback'    => 'britaprinz_theme_award',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -227,7 +227,7 @@ function britaprinz_rest_fields() {
 		'award',
 		'award_se',
 		array(
-			'get_callback'    => 'britaprinz_award_special_edition',
+			'get_callback'    => 'britaprinz_theme_award_special_edition',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -237,7 +237,7 @@ function britaprinz_rest_fields() {
 		'award',
 		'award_catalog_gallery',
 		array(
-			'get_callback'    => 'britaprinz_award_catalog_gallery',
+			'get_callback'    => 'britaprinz_theme_award_catalog_gallery',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
@@ -247,13 +247,13 @@ function britaprinz_rest_fields() {
 		'award',
 		'award_catalog_cover',
 		array(
-			'get_callback'    => 'britaprinz_catalog_cover_image',
+			'get_callback'    => 'britaprinz_theme_catalog_cover_image',
 			'update_callback' => null,
 			'schema'          => null,
 		) 
 	);
 }
-add_action( 'rest_api_init', 'britaprinz_rest_fields' );
+add_action( 'rest_api_init', 'britaprinz_theme_rest_fields' );
 
 /**
  * Add artwork year
@@ -263,7 +263,7 @@ add_action( 'rest_api_init', 'britaprinz_rest_fields' );
  * @param String $request Requested URL.
  * @return string Artwork year.
  */
-function britaprinz_artwork_year( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_year( $object, $field_name, $request ) {
 	$year = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_year' ) );
 	return $year;
 }
@@ -276,7 +276,7 @@ function britaprinz_artwork_year( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string Artwork copy.
  */
-function britaprinz_artwork_copy( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_copy( $object, $field_name, $request ) {
 	$copy = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_copy' ) );
 	return $copy;
 }
@@ -289,7 +289,7 @@ function britaprinz_artwork_copy( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string Artwork paper.
  */
-function britaprinz_artwork_paper( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_paper( $object, $field_name, $request ) {
 	$paper = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_paper' ) );
 	return $paper;
 }
@@ -302,7 +302,7 @@ function britaprinz_artwork_paper( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string Artwork condition.
  */
-function britaprinz_artwork_condition( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_condition( $object, $field_name, $request ) {
 	$condition = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_condition' ) );
 	return $condition;
 }
@@ -315,7 +315,7 @@ function britaprinz_artwork_condition( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string Artwork size.
  */
-function britaprinz_artwork_size( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_size( $object, $field_name, $request ) {
 	$size = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_size' ) );
 	return $size;
 }
@@ -328,7 +328,7 @@ function britaprinz_artwork_size( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string Artwork size image.
  */
-function britaprinz_artwork_size_image( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_size_image( $object, $field_name, $request ) {
 	$size_image = esc_html( carbon_get_post_meta( $object['id'], 'bp_artwork_size_image' ) );
 	return $size_image;
 }
@@ -341,7 +341,7 @@ function britaprinz_artwork_size_image( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string HTML image element.
  */
-function britaprinz_artwork_image( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_image( $object, $field_name, $request ) {
 	$image = wp_get_attachment_image( $object['featured_media'], 'artwork-thumbnail' );
 	return $image;
 }
@@ -354,7 +354,7 @@ function britaprinz_artwork_image( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return array An array of html image elements.
  */
-function britaprinz_artwork_gallery( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_gallery( $object, $field_name, $request ) {
 	$images_ids = carbon_get_post_meta( $object['id'], 'bp_artwork_gallery' );
 
 	add_filter( 'wp_get_attachment_image_attributes', 'bpa_theme_filter_gallery_attrs', 10, 2 );
@@ -380,7 +380,7 @@ function britaprinz_artwork_gallery( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return array An array of techniques.
  */
-function britaprinz_artwork_techniques( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_techniques( $object, $field_name, $request ) {
 	$techniques          = carbon_get_post_meta( $object['id'], 'bp_artwork_technique' );
 	$featured_techniques = array();
 	$other_techniques    = '';
@@ -410,7 +410,7 @@ function britaprinz_artwork_techniques( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string A translatable string.
  */
-function britaprinz_artwork_loan( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_loan( $object, $field_name, $request ) {
 	$loan = carbon_get_post_meta( $object['id'], 'bp_artwork_loan' );
 	if ( $loan ) {
 		$loan_string = __( 'Disponible para préstamo', 'britaprinz-theme' );
@@ -426,7 +426,7 @@ function britaprinz_artwork_loan( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string A translatable string.
  */
-function britaprinz_artwork_sale( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_sale( $object, $field_name, $request ) {
 	$sale = carbon_get_post_meta( $object['id'], 'bp_artwork_sale' );
 	if ( $sale ) {
 		$sale_string = __( 'Disponible para venta', 'britaprinz-theme' );
@@ -442,7 +442,7 @@ function britaprinz_artwork_sale( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string HTML content
  */
-function britaprinz_artwork_info( $object, $field_name, $request ) {
+function britaprinz_theme_artwork_info( $object, $field_name, $request ) {
 	$info = wp_kses_post( wpautop( carbon_get_post_meta( $object['id'], 'bp_artwork_info' ) ) );
 	if ( $info ) {
 		return $info;
@@ -457,7 +457,7 @@ function britaprinz_artwork_info( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string HTML content
  */
-function britaprinz_artist_bio( $object, $field_name, $request ) {
+function britaprinz_theme_artist_bio( $object, $field_name, $request ) {
 	$bio = wp_kses_post( wpautop( carbon_get_term_meta( get_term( $object['id'] )->term_id, 'bp_artist_bio' ) ) );
 	if ( $bio ) {
 		return $bio;
@@ -472,7 +472,7 @@ function britaprinz_artist_bio( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string HTML content
  */
-function britaprinz_award_catalogue( $object, $field_name, $request ) {
+function britaprinz_theme_award_catalogue( $object, $field_name, $request ) {
 	$pdf = wp_get_attachment_url( carbon_get_post_meta( $object['id'], 'bp_award_catalogue' ) );
 	if ( $pdf ) {
 		return esc_url( $pdf );
@@ -487,7 +487,7 @@ function britaprinz_award_catalogue( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string HTML content
  */
-function britaprinz_award( $object, $field_name, $request ) {
+function britaprinz_theme_award( $object, $field_name, $request ) {
 	$award = carbon_get_post_meta( $object['id'], 'bp_award' );
 	foreach ( $award as &$prize ) {
 		$prize_img_thumbnail               = wp_get_attachment_image( $prize['bp_award_image'], 'award-thumbnail' );
@@ -514,7 +514,7 @@ function britaprinz_award( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string HTML content
  */
-function britaprinz_award_special_edition( $object, $field_name, $request ) {
+function britaprinz_theme_award_special_edition( $object, $field_name, $request ) {
 	$is_special_edition = carbon_get_post_meta( $object['id'], 'bp_award_se_toggle' );
 	if ( $is_special_edition ) {
 		$award_se = carbon_get_post_meta( $object['id'], 'bp_award_se' );
@@ -534,7 +534,7 @@ function britaprinz_award_special_edition( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return array An array of html image elements.
  */
-function britaprinz_award_catalog_gallery( $object, $field_name, $request ) {
+function britaprinz_theme_award_catalog_gallery( $object, $field_name, $request ) {
 	$gallery_ids = carbon_get_post_meta( $object['id'], 'bp_award_catalog_gallery' );
 	$gallery     = array();
 	foreach ( $gallery_ids as $id ) {
@@ -552,7 +552,7 @@ function britaprinz_award_catalog_gallery( $object, $field_name, $request ) {
  * @param String $request Requested URL.
  * @return string HTML image element.
  */
-function britaprinz_catalog_cover_image( $object, $field_name, $request ) {
+function britaprinz_theme_catalog_cover_image( $object, $field_name, $request ) {
 	$cover_image = wp_get_attachment_image( carbon_get_post_meta( $object['id'], 'bp_award_catalogue_cover' ), 'medium' );
 	return $cover_image;
 }
