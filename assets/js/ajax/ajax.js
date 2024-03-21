@@ -103,7 +103,7 @@ const artistArtworks = (event, ajax, target, currentLang, options, id = '') => {
 		artist = event.target.dataset.artist;
 	}
 
-	const artworksUrl = `${ajax.artworkUrl}?artist=${artist}&order=asc&orderby=slug`;
+	const artworksUrl = `${ajax.artworkUrl}?artist=${artist}&order=asc&orderby=slug&per_page=100`;
 	const artistUrl = `${ajax.artistUrl}/${artist}`;
 
 	target.innerHTML = ''; // empty artworks container
