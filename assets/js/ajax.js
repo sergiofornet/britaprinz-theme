@@ -1812,7 +1812,7 @@
       artist = event.target.dataset.artist;
     }
 
-    var artworksUrl = "".concat(ajax.artworkUrl, "?artist=").concat(artist, "&order=asc&orderby=slug");
+    var artworksUrl = "".concat(ajax.artworkUrl, "?artist=").concat(artist, "&order=asc&orderby=slug&per_page=100");
     var artistUrl = "".concat(ajax.artistUrl, "/").concat(artist);
     target.innerHTML = ''; // empty artworks container
 
